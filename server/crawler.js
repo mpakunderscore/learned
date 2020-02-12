@@ -7,7 +7,7 @@ let globalWords = {
     }
 };
 
-// so, here we need the full graph (?) of wiki word pages?
+// so, here we need the full js (?) of wiki word pages?
 // after it..
 
 // words fill categories for 100%
