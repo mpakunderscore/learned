@@ -6,48 +6,23 @@ const isMobile = screenWidth < 600;
 let borderRatio = localStorage.getItem('borderRatio') || 0.5;
 let width = screenWidth * (isMobile ? 1 : borderRatio);
 let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
-document.getElementById('content').style.width = (99.5 - 100 * borderRatio) + '%'
-// document.getElementById('graph-container').style.width = 100 * borderRatio + '%';
 
-// console.log(width)
-// console.log(height)
 
-document.getElementById('border').onmousedown = dragMouseDown;
+let content = document.getElementById('content');
+content.style.width = (99.5 - 100 * borderRatio) + '%';
 
-function dragMouseDown(e) {
-  e = e || window.event;
-  e.preventDefault();
-  document.onmouseup = closeDragElement;
-  document.onmousemove = elementDrag;
-}
-
-function elementDrag(e) {
-  e = e || window.event;
-  e.preventDefault();
-
-  borderRatio = e.clientX/screenWidth;
-  localStorage.setItem('borderRatio', borderRatio);
-  width = screen.width * (isMobile ? 1 : borderRatio);
-  height = document.body.clientHeight * (isMobile ? borderRatio : 1);
-
-  if (borderRatio !== 0) {
-    document.getElementById('content').style.width = (99.5 - 100 * borderRatio) + '%';
-    document.getElementById('graph').style.width = 100 * borderRatio + '%';
-    initSimulation();
-  }
-}
-
-function closeDragElement() {
-  // stop moving when mouse button is released:
-  document.onmouseup = null;
-  document.onmousemove = null;
-}
+let svg = d3.select('#graph').append('svg')
+    .attr('id', 'graph-svg')
+    .attr('width', width)
+    .attr('height', height);
 
 
 
 
 
-// TODO graph
+
+
+// TODO
 
 const circleRadius = isMobile ? 12 : 6;
 const textPadding = isMobile ? 18 : 12;
@@ -59,9 +34,14 @@ let links_data = [];
 let mainCategory = {id: '', main: true};
 nodes_data.push(mainCategory);
 
+
+
+
+
+
 // TODO MENU DATA
 
-menuItem({id: 'Links'})
+// menuItem({id: 'Links'})
 menuItem({id: 'Random'})
 menuItem({id: 'Wiki', active: false})
 menuItem({id: 'Language'})
@@ -77,24 +57,17 @@ function menuItem(item) {
 }
 
 
-let svg = d3.select('main')
 
-    .append('svg')
-    .attr('id', 'graph')
-    .attr('width', width)
-    .attr('height', height);
 
-const graph = document.getElementById('graph');
 
-// svg.call(d3.zoom()
-//     .extent([[0, 0], [width, height]])
-//     .scaleExtent([1, 8])
-//     .on("zoom", zoomed));
-//
-// function zoomed() {
-//   const {transform} = d3.event;
-//   // node.attr("transform", d => `translate(${transform.apply(d)})`);
-// }
+
+
+
+
+
+
+
+
 
 let link = svg.selectAll('line');
 let node = svg.selectAll('node');
