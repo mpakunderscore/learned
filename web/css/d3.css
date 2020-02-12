@@ -1,3 +1,7 @@
+#graph-container {
+    background-color: red;
+}
+
 #graph {
     /*background-color: lightcoral;*/
 }
@@ -5,7 +9,7 @@
 #graph.scaled {
     /*transform: scale(0.8); !* Equal to scaleX(0.7) scaleY(0.7) *!*/
     /*background-color: pink;*/
-    -webkit-transform: scale(.5);
+    -webkit-transform: scale(.66);
     -webkit-transform-origin: 0 0;
     /*width: 142%;*/
 }
@@ -27,7 +31,7 @@ circle {
 
 circle.active {
     stroke: #007200;
-    fill: #00cb00;
+    fill: #00e200;
 }
 
 circle.main {

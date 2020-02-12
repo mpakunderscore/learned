@@ -1,10 +1,10 @@
 html, body {
     margin: 0;
 
-    --font-size-main: 16px;
+    --font-size-main: 12px;
     --font-size-small: 12px;
     --color-blue: #16b9e7;
-    --color-blue-dark: #1299bf;
+    --color-blue-dark: #108bad;
 }
 
 body {
@@ -33,4 +33,24 @@ input::placeholder {
 
 :focus {
     outline: none;
+}
+
+/*TODO move*/
+#zoomButton {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
 }

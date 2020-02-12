@@ -7,6 +7,7 @@ let borderRatio = localStorage.getItem('borderRatio') || 0.5;
 let width = screenWidth * (isMobile ? 1 : borderRatio);
 let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 document.getElementById('content').style.width = (99.5 - 100 * borderRatio) + '%'
+// document.getElementById('graph-container').style.width = 100 * borderRatio + '%';
 
 // console.log(width)
 // console.log(height)
@@ -76,7 +77,9 @@ function menuItem(item) {
 }
 
 
-let svg = d3.select('main').append('svg')
+let svg = d3.select('main')
+
+    .append('svg')
     .attr('id', 'graph')
     .attr('width', width)
     .attr('height', height);
@@ -164,8 +167,6 @@ function initView() {
   link.exit().remove();
 }
 
-let graphZoomed = false;
-
 function addNode(circleElement, d, random) {
 
   console.log('addNode')
@@ -183,38 +184,6 @@ function addNode(circleElement, d, random) {
     title = 'Wiki';
     random = true;
   }
-
-
-
-
-
-  //TODO MOVE ZOOM FUNCTION OUT
-  if (title === '') {
-    if (!graphZoomed) {
-      graph.classList.add('scaled');
-      width *= 2;
-      height *= 2;
-      // graph.setAttribute('width', width);
-      // graph.style.width =  width + 'px';
-      graph.style.height =  height + 'px';
-      initSimulation()
-    } else {
-      graph.classList.remove('scaled');
-      width *= 0.5;
-      height *= 0.5;
-      // graph.style.width =  width + 'px';
-      graph.style.height =  height + 'px';
-      initSimulation()
-    }
-
-    graphZoomed = !graphZoomed;
-    return;
-  }
-
-
-
-
-
 
   let titleNode = nodes_data.find(element => element.id === title);
   titleNode.active = true;

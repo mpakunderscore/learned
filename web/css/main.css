@@ -50,14 +50,14 @@ main #border:hover > input {
 
 @media only screen and (max-width: 600px) {
 
-    main {
-        flex-direction: column-reverse;
-    }
-    main #content {
-        width: 100%;
-        box-sizing: border-box;
-        /*height: var(--content-width);*/
-        border-left: none;
-        border-top: 1px dashed gray;
-    }
+    /*main {*/
+    /*    flex-direction: column-reverse;*/
+    /*}*/
+    /*main #content {*/
+    /*    width: 100%;*/
+    /*    box-sizing: border-box;*/
+    /*    !*height: var(--content-width);*!*/
+    /*    border-left: none;*/
+    /*    border-top: 1px dashed gray;*/
+    /*}*/
 }
