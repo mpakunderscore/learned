@@ -1,5 +1,6 @@
 const screenWidth = window.innerWidth;
 // const screenWidth = screen.width;
+
 const isMobile = screenWidth < 600;
 
 // console.log(localStorage.getItem('borderRatio'))
@@ -7,16 +8,14 @@ let borderRatio = localStorage.getItem('borderRatio') || 0.5;
 let width = screenWidth * (isMobile ? 1 : borderRatio);
 let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 
-
-let content = document.getElementById('content');
-content.style.width = (99.5 - 100 * borderRatio) + '%';
-
 let svg = d3.select('#graph').append('svg')
     .attr('id', 'graph-svg')
     .attr('width', width)
     .attr('height', height);
 
-
+let content = document.getElementById('content');
+content.style.width = (99.5 - 100 * borderRatio) + '%';
+graph.style.width = 100 * borderRatio + '%';
 
 
 
@@ -244,8 +243,9 @@ function initSimulation() {
       .distance(function (d) {
         return d.value;
       }));
+  console.log(graphZoomed)
   simulation.force('charge', d3.forceManyBody())
-  simulation.force('center', d3.forceCenter(width / 2, height / 2));
+  simulation.force('center', d3.forceCenter(width * (!graphZoomed ? 1 : ratio) / 2, height * (!graphZoomed ? 1 : ratio) / 2));
   simulation.alpha(1).restart();
 }
 

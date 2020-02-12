@@ -34,3 +34,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
     console.log(error);
   }
 }
+
+let getWikiCategoryPage = async function (title, lang = 'en') {
+
+}

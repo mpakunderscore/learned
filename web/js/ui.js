@@ -20,7 +20,7 @@ function elementDrag(e) {
 
   borderRatio = e.clientX/screenWidth;
   localStorage.setItem('borderRatio', borderRatio);
-  width = screen.width * (isMobile ? 1 : borderRatio);
+  width = screenWidth * (isMobile ? 1 : borderRatio);
   height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 
   if (borderRatio !== 0) {
@@ -39,27 +39,33 @@ function closeDragElement() {
 
 let graphZoomed = false;
 
+let ratio = 1.51515152;
+
 let zoom = () => {
 
   const graphSvg = document.getElementById('graph-svg');
 
   if (!graphZoomed) {
     graphSvg.classList.add('scaled');
-    width *= 1.5;
-    height *= 1.5;
-    graphSvg.setAttribute('width', width);
+    // width *= 1.5;
+    // height *= 1.5;
+    graphSvg.setAttribute('width', width * ratio);
+    graphSvg.setAttribute('height', height * ratio);
+    // graphSvg.style.width =  width * zzz + 'px';
     // graph.style.width =  width + 'px';
     // graph.style.height =  height + 'px';
-    // initSimulation()
   } else {
     graphSvg.classList.remove('scaled');
-    width /= 1.5;
-    height /= 1.5;
+    // width /= 1.5;
+    // height /= 1.5;
     graphSvg.setAttribute('width', width);
+    graphSvg.setAttribute('height', height);
+    // graphSvg.style.width =  width + 'px';
     // graph.style.width =  width + 'px';
     // graph.style.height =  height + 'px';
-    // initSimulation()
+
   }
 
   graphZoomed = !graphZoomed;
+  initSimulation()
 };
