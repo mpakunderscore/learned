@@ -6,12 +6,12 @@ main {
 }
 
 main #graph {
-    background-color: rgba(255, 0, 0, 0.13);
+    background-color: ghostwhite;
     overflow: hidden;
 }
 
 main #graph-svg {
-    background-color: rgba(135, 206, 250, 0.45);
+    /*background-color: rgba(135, 206, 250, 0.45);*/
 }
 
 main #content {

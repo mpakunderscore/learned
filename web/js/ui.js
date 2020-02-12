@@ -26,7 +26,7 @@ function elementDrag(e) {
   if (borderRatio !== 0) {
     content.style.width = (99.5 - 100 * borderRatio) + '%';
     graph.style.width = 100 * borderRatio + '%';
-    graphSvg.setAttribute('width', width);
+    graphSvg.setAttribute('width', width * (!graphZoomed ? 1 : ratio));
     initSimulation();
   }
 }
