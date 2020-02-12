@@ -1,0 +1,61 @@
+#graph {
+    /*background-color: lightcoral;*/
+}
+
+line {
+    pointer-events: none;
+    stroke: #999;
+    stroke-opacity: 0.1;
+}
+
+g {
+}
+
+circle {
+    fill: white;
+    stroke: #b8b8b8;
+    stroke-width: 1px;
+}
+
+circle.active {
+    stroke: #007200;
+    fill: #00cb00;
+}
+
+circle.main {
+    stroke: #1299bf;
+    fill: #16b9e7;
+}
+
+circle:hover {
+    cursor: pointer;
+    stroke: #008e00;
+    fill: rgba(0, 203, 0, 0.52);
+}
+
+circle.active:hover {
+    stroke: #8e5d04;
+    fill: rgba(203, 159, 8, 0.52);
+}
+
+circle:hover + text {
+    fill-opacity: 1;
+    z-index: 2;
+}
+
+text {
+    position: relative;
+    fill: black;
+    fill-opacity: 0.1;
+    /*visibility: hidden;*/
+    pointer-events: none;
+    z-index: 1;
+}
+
+text.main {
+    fill-opacity: 1;
+}
+
+text.active {
+    fill-opacity: 1;
+}

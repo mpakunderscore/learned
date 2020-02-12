@@ -1,0 +1,19 @@
+{
+    "name": "crawler",
+    "version": "1.0.0",
+    "description": "",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.0",
+        "cheerio": "^1.0.0-rc.3",
+        "d3-force": "^2.0.1",
+        "express": "^4.17.1",
+        "sequelize": "^5.21.4"
+    }
+}
