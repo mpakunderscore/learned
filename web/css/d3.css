@@ -2,6 +2,11 @@
     /*background-color: lightcoral;*/
 }
 
+#graph.scaled {
+    transform: scale(0.5); /* Equal to scaleX(0.7) scaleY(0.7) */
+    background-color: pink;
+}
+
 line {
     pointer-events: none;
     stroke: #999;
@@ -23,8 +28,8 @@ circle.active {
 }
 
 circle.main {
-    stroke: #1299bf;
-    fill: #16b9e7;
+    stroke: var(--color-blue-dark);
+    fill: var(--color-blue);
 }
 
 circle:hover {

@@ -1,0 +1,57 @@
+main {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+main #graph {
+    background-color: ghostwhite;
+}
+
+main #content {
+    font-size: 12px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+main #content div, input {
+    padding: 10px;
+}
+
+main #content input {
+    margin-top: auto;
+}
+
+main #content div:hover {
+    background-color: ghostwhite;
+}
+
+main #border {
+
+    width: .5%;
+    height: 100%;
+    background-color: lightgray;
+
+    cursor: pointer;
+}
+
+main #border:hover {
+    background-color: var(--color-blue);
+}
+
+@media only screen and (max-width: 600px) {
+
+    main {
+        flex-direction: column-reverse;
+    }
+    main #content {
+        width: 100%;
+        box-sizing: border-box;
+        /*height: var(--content-width);*/
+        border-left: none;
+        border-top: 1px dashed gray;
+    }
+}
