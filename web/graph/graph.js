@@ -1,10 +1,69 @@
 const isMobile = screen.width < 600;
-const borderRatio = 0.75;
-const width = screen.width * (isMobile ? 1 : borderRatio);
-const height = document.body.clientHeight * (isMobile ? borderRatio : 1);
+let borderRatio = 0.5;
+let width = screen.width * (isMobile ? 1 : borderRatio);
+let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
+document.getElementById('content').style.width = 100 * borderRatio + '%'
 
 console.log(width)
 console.log(height)
+
+function drag(ev) {
+
+  borderRatio = ev.screenX/screen.width;
+  width = screen.width * (isMobile ? 1 : borderRatio);
+  height = document.body.clientHeight * (isMobile ? borderRatio : 1);
+
+  console.log(100 * borderRatio)
+
+  if (borderRatio !== 0) {
+    document.getElementById('content').style.width = (100 - 100 * borderRatio) + '%';
+    document.getElementById('graph').style.width = 100 * borderRatio + '%'
+    initSimulation();
+  }
+}
+
+document.getElementById('border').onmousedown = dragMouseDown;
+
+function dragMouseDown(e) {
+  e = e || window.event;
+  e.preventDefault();
+  // get the mouse cursor position at startup:
+  // pos3 = e.clientX;
+  // pos4 = e.clientY;
+  document.onmouseup = closeDragElement;
+  document.onmousemove = elementDrag;
+}
+
+function elementDrag(e) {
+  e = e || window.event;
+  e.preventDefault();
+  // calculate the new cursor position:
+  // pos1 = pos3 - e.clientX;
+  // pos2 = pos4 - e.clientY;
+  // pos3 = e.clientX;
+  // pos4 = e.clientY;
+  // // set the element's new position:
+  // elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+  // elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+
+  borderRatio = e.clientX/screen.width;
+  width = screen.width * (isMobile ? 1 : borderRatio);
+  height = document.body.clientHeight * (isMobile ? borderRatio : 1);
+
+  console.log(100 * borderRatio)
+
+  if (borderRatio !== 0) {
+    document.getElementById('content').style.width = (100 - 100 * borderRatio) + '%';
+    document.getElementById('graph').style.width = 100 * borderRatio + '%'
+    initSimulation();
+  }
+}
+
+function closeDragElement() {
+  // stop moving when mouse button is released:
+  document.onmouseup = null;
+  document.onmousemove = null;
+}
 
 
 const circleRadius = isMobile ? 12 : 6;
@@ -14,8 +73,8 @@ const textHeight = isMobile ? '.4em' : '.33em';
 let nodes_data = [];
 let links_data = [];
 
-let mainCategory = {id: 'Menu', main: true};
-nodes_data.push(mainCategory)
+let mainCategory = {id: '', main: true};
+nodes_data.push(mainCategory);
 
 
 menuItem({id: 'Random'})
@@ -28,12 +87,13 @@ let lang = 'en';
 // let lang = 'ru';
 
 function menuItem(item) {
-  nodes_data.push(item)
+  nodes_data.push(item);
   links_data.push({source: mainCategory, target: item, value: 100});
 }
 
 
-const svg = d3.select('main').append('svg')
+let svg = d3.select('main').append('svg')
+    .attr('id', 'graph')
     .attr('width', width)
     .attr('height', height);
 
@@ -184,6 +244,7 @@ function addNode(circleElement, d, random) {
         links_data.push({source: categoryJson, target: titleNode, value: 100})
 
       } else {
+
         // if (!links_data.find(element => element.source === category)) {
         //   console.log(titleNode)
         // }
@@ -207,7 +268,7 @@ function setContent(pages) {
   let html = '';
   document.getElementById('content').innerHTML = '';
   for (let i = 0; i < pages.length; i++) {
-    html += '<div><a href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id + '" target="_blank">' + pages[i].id + '</a></div>';
+    html += '<div><a href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
   }
   document.getElementById('content').innerHTML += html;
 }

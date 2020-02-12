@@ -9,7 +9,7 @@ body {
     display: flex;
     justify-content: center;
 
-    --content-width: 25%;
+    /*--content-width: 25%;*/
 }
 
 main {
@@ -22,7 +22,7 @@ main {
 
 main #content {
     /*width: 50%;*/
-    width: var(--content-width);
+    /*width: var(--content-width);*/
     font-size: 12px;
     background-color: white;
 }
@@ -44,7 +44,7 @@ a {
     display: flex;
     flex-direction: column;
     /*box-shadow: -10px 0px 10px 1px #aaaaaa;*/
-    border-left: 1px dashed gray;
+    /*border-left: 1px dashed gray;*/
     overflow: scroll;
 }
 
@@ -54,6 +54,17 @@ main #content div {
 
 main #content div:hover {
     background-color: ghostwhite;
+}
+
+main #border {
+
+    width: 10px;
+    height: 100%;
+    background-color: lightgray;
+    box-shadow: 0px 10px 10px #000;
+    /*min-height: 5px;*/
+
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
