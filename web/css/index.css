@@ -22,8 +22,13 @@ a {
 
 input {
     font-size: var(--font-size-small);
+    margin: 0;
     border: none;
     background-color: lightgray;
+}
+
+input::placeholder {
+    color: var(--color-blue-dark)
 }
 
 :focus {

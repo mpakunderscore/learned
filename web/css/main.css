@@ -15,6 +15,8 @@ main #content {
     display: flex;
     flex-direction: column;
     overflow: scroll;
+
+    min-width: 110px;
 }
 
 main #content div, input {
@@ -40,6 +42,10 @@ main #border {
 
 main #border:hover {
     background-color: var(--color-blue);
+}
+
+main #border:hover > input {
+    /*background-color: var(--color-blue);*/
 }
 
 @media only screen and (max-width: 600px) {

@@ -3,8 +3,11 @@
 }
 
 #graph.scaled {
-    transform: scale(0.5); /* Equal to scaleX(0.7) scaleY(0.7) */
-    background-color: pink;
+    /*transform: scale(0.8); !* Equal to scaleX(0.7) scaleY(0.7) *!*/
+    /*background-color: pink;*/
+    -webkit-transform: scale(.5);
+    -webkit-transform-origin: 0 0;
+    /*width: 142%;*/
 }
 
 line {

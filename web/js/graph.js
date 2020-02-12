@@ -1,24 +1,21 @@
-const isMobile = screen.width < 600;
+const screenWidth = window.innerWidth;
+// const screenWidth = screen.width;
+const isMobile = screenWidth < 600;
 
-console.log(screen)
-
-console.log(localStorage.getItem('borderRatio'))
+// console.log(localStorage.getItem('borderRatio'))
 let borderRatio = localStorage.getItem('borderRatio') || 0.5;
-let width = screen.width * (isMobile ? 1 : borderRatio);
+let width = screenWidth * (isMobile ? 1 : borderRatio);
 let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 document.getElementById('content').style.width = (99.5 - 100 * borderRatio) + '%'
 
-console.log(width)
-console.log(height)
+// console.log(width)
+// console.log(height)
 
 document.getElementById('border').onmousedown = dragMouseDown;
 
 function dragMouseDown(e) {
   e = e || window.event;
   e.preventDefault();
-  // get the mouse cursor position at startup:
-  // pos3 = e.clientX;
-  // pos4 = e.clientY;
   document.onmouseup = closeDragElement;
   document.onmousemove = elementDrag;
 }
@@ -26,25 +23,15 @@ function dragMouseDown(e) {
 function elementDrag(e) {
   e = e || window.event;
   e.preventDefault();
-  // calculate the new cursor position:
-  // pos1 = pos3 - e.clientX;
-  // pos2 = pos4 - e.clientY;
-  // pos3 = e.clientX;
-  // pos4 = e.clientY;
-  // // set the element's new position:
-  // elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
-  // elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
 
-  borderRatio = e.clientX/screen.width;
+  borderRatio = e.clientX/screenWidth;
   localStorage.setItem('borderRatio', borderRatio);
   width = screen.width * (isMobile ? 1 : borderRatio);
   height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 
-  // console.log(100 * borderRatio)
-
   if (borderRatio !== 0) {
     document.getElementById('content').style.width = (99.5 - 100 * borderRatio) + '%';
-    document.getElementById('graph').style.width = 100 * borderRatio + '%'
+    document.getElementById('graph').style.width = 100 * borderRatio + '%';
     initSimulation();
   }
 }
@@ -56,6 +43,11 @@ function closeDragElement() {
 }
 
 
+
+
+
+// TODO graph
+
 const circleRadius = isMobile ? 12 : 6;
 const textPadding = isMobile ? 18 : 12;
 const textHeight = isMobile ? '.4em' : '.33em';
@@ -66,7 +58,9 @@ let links_data = [];
 let mainCategory = {id: '', main: true};
 nodes_data.push(mainCategory);
 
+// TODO MENU DATA
 
+menuItem({id: 'Links'})
 menuItem({id: 'Random'})
 menuItem({id: 'Wiki', active: false})
 menuItem({id: 'Language'})
@@ -86,6 +80,8 @@ let svg = d3.select('main').append('svg')
     .attr('id', 'graph')
     .attr('width', width)
     .attr('height', height);
+
+const graph = document.getElementById('graph');
 
 // svg.call(d3.zoom()
 //     .extent([[0, 0], [width, height]])
@@ -168,6 +164,8 @@ function initView() {
   link.exit().remove();
 }
 
+let graphZoomed = false;
+
 function addNode(circleElement, d, random) {
 
   console.log('addNode')
@@ -185,6 +183,38 @@ function addNode(circleElement, d, random) {
     title = 'Wiki';
     random = true;
   }
+
+
+
+
+
+  //TODO MOVE ZOOM FUNCTION OUT
+  if (title === '') {
+    if (!graphZoomed) {
+      graph.classList.add('scaled');
+      width *= 2;
+      height *= 2;
+      // graph.setAttribute('width', width);
+      // graph.style.width =  width + 'px';
+      graph.style.height =  height + 'px';
+      initSimulation()
+    } else {
+      graph.classList.remove('scaled');
+      width *= 0.5;
+      height *= 0.5;
+      // graph.style.width =  width + 'px';
+      graph.style.height =  height + 'px';
+      initSimulation()
+    }
+
+    graphZoomed = !graphZoomed;
+    return;
+  }
+
+
+
+
+
 
   let titleNode = nodes_data.find(element => element.id === title);
   titleNode.active = true;
@@ -320,7 +350,7 @@ function get(url) {
 }
 
 function shuffle(a) {
-  var j, x, i;
+  let j, x, i;
   for (i = a.length - 1; i > 0; i--) {
     j = Math.floor(Math.random() * (i + 1));
     x = a[i];
