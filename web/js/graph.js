@@ -190,6 +190,7 @@ function addNode(circleElement, d, random) {
 
     // console.log(responseJson.categories)
     console.log(responseJson.pages)
+    console.log(responseJson.mainPage)
 
     shuffle(responseJson.categories).splice(0, random ? 1 : 7).forEach(categoryJson => {
 
@@ -212,10 +213,8 @@ function addNode(circleElement, d, random) {
       }
     });
 
-    setContent(responseJson.pages)
+    setContent(responseJson.pages, responseJson.mainPage)
   }
-
-
 
   initData();
   initView();
@@ -225,8 +224,12 @@ function addNode(circleElement, d, random) {
 
 }
 
-function setContent(pages) {
+function setContent(pages, mainPage) {
   let html = '';
+
+  if (mainPage.text) {
+    html += '<div>' + mainPage.text.slice(0, 1000) + '</div>';
+  }
   document.getElementById('content').innerHTML = '';
   for (let i = 0; i < pages.length; i++) {
     html += '<div><a href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';

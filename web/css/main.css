@@ -49,6 +49,10 @@ main #border:hover {
     background-color: var(--color-blue);
 }
 
+main #border.active {
+    background-color: var(--color-blue);
+}
+
 main #border:hover > input {
     /*background-color: var(--color-blue);*/
 }

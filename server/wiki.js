@@ -12,7 +12,6 @@ exports.getWikiCategories = async function (title, lang = 'en') {
       title = mainTitle[lang];
 
     const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + categoryLang[lang] + title;
-    // console.log(urlString)
     const url = encodeURI(urlString);
     const response = await axios.get(url);
     const data = response.data;
@@ -22,13 +21,18 @@ exports.getWikiCategories = async function (title, lang = 'en') {
     $('#mw-subcategories .CategoryTreeItem').find('a').each(function (index, element) {
       categories.push({id: $(element).text(), info: $(element).next().text()});
     });
-    let pages = [];
-    $('#mw-pages li').find('a').each(function (index, element) {
-      pages.push({id: $(element).text()});
-    });
-    // console.log(pages)
 
-    return {categories: categories, pages: pages};
+    let pages = [];
+    let isMainPage = false;
+    let mainPage = {};
+    $('#mw-pages li').find('a').each(function (index, element) {
+      const pageTitle = $(element).text();
+      pages.push({id: pageTitle});
+      if (pageTitle === title)
+        isMainPage = true;
+    });
+
+    return {categories: categories, pages: pages, mainPage: isMainPage ? await getWikiCategoryPage(title, lang) : {}};
 
   } catch (error) {
     console.log(error);
@@ -37,4 +41,14 @@ exports.getWikiCategories = async function (title, lang = 'en') {
 
 let getWikiCategoryPage = async function (title, lang = 'en') {
 
+  const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + title;
+  const url = encodeURI(urlString);
+  const response = await axios.get(url);
+  const data = response.data;
+
+  const $ = cheerio.load(data);
+
+  let text = $('p').text();
+  console.log(text.length)
+  return {text: text};
 }

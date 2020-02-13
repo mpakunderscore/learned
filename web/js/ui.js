@@ -9,6 +9,7 @@ function dragMouseDown(e) {
   e.preventDefault();
   document.onmouseup = closeDragElement;
   document.onmousemove = elementDrag;
+  border.classList.add('active');
 }
 
 function elementDrag(e) {
@@ -35,6 +36,7 @@ function closeDragElement() {
   // stop moving when mouse button is released:
   document.onmouseup = null;
   document.onmousemove = null;
+  border.classList.remove('active');
 }
 
 let graphZoomed = false;
