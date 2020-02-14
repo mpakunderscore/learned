@@ -15,6 +15,15 @@ let svg = d3.select('#graph').append('svg')
 
 let content = document.getElementById('content');
 content.style.width = (99.5 - 100 * borderRatio) + '%';
+
+function initInput() {
+  return '<input id="input" autocomplete="off" placeholder="Link, message or search"/>';
+}
+
+content.innerHTML = initInput();
+
+// content.innerHTML += '<div>Hey. Add a link via input, from below. Or leave a message</div>';
+
 graph.style.width = 100 * borderRatio + '%';
 
 
@@ -225,16 +234,17 @@ function addNode(circleElement, d, random) {
 }
 
 function setContent(pages, mainPage) {
-  let html = '';
 
+  content.innerHTML = initInput();
+
+  let html = '';
   if (mainPage.text) {
-    html += '<div>' + mainPage.text.slice(0, 1000) + '</div>';
+    html += '<div id="main-text">' + mainPage.text + '</div>';
   }
-  document.getElementById('content').innerHTML = '';
   for (let i = 0; i < pages.length; i++) {
     html += '<div><a href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
   }
-  document.getElementById('content').innerHTML += html;
+  content.innerHTML += html;
 }
 
 function initSimulation() {

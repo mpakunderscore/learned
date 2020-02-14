@@ -24,11 +24,10 @@ exports.getWikiCategories = async function (title, lang = 'en') {
 
     let pages = [];
     let isMainPage = false;
-    let mainPage = {};
     $('#mw-pages li').find('a').each(function (index, element) {
       const pageTitle = $(element).text();
       pages.push({id: pageTitle});
-      if (pageTitle === title)
+      if (pageTitle === title || pageTitle === title.substring(0, title.length - 1))
         isMainPage = true;
     });
 
@@ -48,7 +47,9 @@ let getWikiCategoryPage = async function (title, lang = 'en') {
 
   const $ = cheerio.load(data);
 
-  let text = $('p').text();
-  console.log(text.length)
-  return {text: text};
+  let text = $('p[class!=mw-empty-elt]').first().text();
+  // console.log(text)
+  let fixedText = text.replace(/\[.*\]/gm, '').replace(/\s\s+/g, ' ');;
+  // console.log(fixedText)
+  return {text: fixedText};
 }
