@@ -86,7 +86,7 @@ let getWords = function (text) {
         globalWords[name] = 1 + globalWords[name];
     }
 
-    sortable.sort(function(a, b) {
+    sortable.sort(function (a, b) {
         return b.count - a.count;
     });
 
