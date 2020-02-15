@@ -21,6 +21,10 @@ a {
     color: var(--color-blue-dark)
 }
 
+a:visited {
+    color: var(--color-gray)
+}
+
 input {
     font-size: var(--font-size-small);
     margin: 0;

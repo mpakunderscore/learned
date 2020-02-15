@@ -121,6 +121,10 @@ function initView() {
       .attr('class', (d) => {
         return d.main ? 'main' : (d.active ? 'active' : '')
       })
+      .on('click', function (d) {
+        // alert(d)
+        // console.log(d)
+      })
       .text(function (d) {
         return d.id; // + (d.info ? ' ' + d.info : '');
       })
@@ -150,7 +154,7 @@ function initView() {
 
 function addNode(circleElement, d, random) {
 
-  console.log('addNode')
+  // console.log('addNode')
 
   // let title = that.nextSibling.textContent;
   // let title = that.textContent;
@@ -198,8 +202,12 @@ function addNode(circleElement, d, random) {
     const responseJson = JSON.parse(response);
 
     // console.log(responseJson.categories)
-    console.log(responseJson.pages)
-    console.log(responseJson.mainPage)
+    // console.log(responseJson.pages)
+    // console.log(responseJson.mainPage)
+
+    // console.log(responseJson.categories.length)
+
+    let categoriesLength = responseJson.categories.length;
 
     shuffle(responseJson.categories).splice(0, random ? 1 : 7).forEach(categoryJson => {
 
@@ -222,7 +230,7 @@ function addNode(circleElement, d, random) {
       }
     });
 
-    setContent(responseJson.pages, responseJson.mainPage)
+    setContent(responseJson.pages, responseJson.mainPage, categoriesLength)
   }
 
   initData();
@@ -233,7 +241,13 @@ function addNode(circleElement, d, random) {
 
 }
 
-function setContent(pages, mainPage) {
+function setContent(pages, mainPage, categoriesLength) {
+
+  // console.log(responseJson)
+
+  // let categories = responseJson.categories
+
+  // console.log(categories)
 
   content.innerHTML = initInput();
 
@@ -241,6 +255,7 @@ function setContent(pages, mainPage) {
   if (mainPage.text) {
     html += '<div id="main-text">' + mainPage.text + '</div>';
   }
+  html += '<div>Pages: ' + pages.length + ', Categories: ' + categoriesLength + '</div>';
   for (let i = 0; i < pages.length; i++) {
     html += '<div><a href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
   }
@@ -256,7 +271,7 @@ function initSimulation() {
       .distance(function (d) {
         return d.value;
       }));
-  console.log(graphZoomed)
+  // console.log(graphZoomed)
   simulation.force('charge', d3.forceManyBody())
   simulation.force('center', d3.forceCenter(width * (!graphZoomed ? 1 : ratio) / 2, height * (!graphZoomed ? 1 : ratio) / 2));
   simulation.alpha(1).restart();

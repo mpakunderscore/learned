@@ -42,14 +42,18 @@ let getWikiCategoryPage = async function (title, lang = 'en') {
 
   const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + title;
   const url = encodeURI(urlString);
-  const response = await axios.get(url);
-  const data = response.data;
 
-  const $ = cheerio.load(data);
+  try {
+    const response = await axios.get(url);
+    const data = response.data;
 
-  let text = $('p[class!=mw-empty-elt]').first().text();
-  // console.log(text)
-  let fixedText = text.replace(/\[.*\]/gm, '').replace(/\s\s+/g, ' ');;
-  // console.log(fixedText)
-  return {text: fixedText};
+    const $ = cheerio.load(data);
+    let text = $('p[class!=mw-empty-elt]').first().text();
+    let fixedText = text.replace(/\[.*\]/gm, '').replace(/\s\s+/g, ' ');;
+
+    return {text: fixedText};
+
+  } catch (e) {
+    return {text: null}
+  }
 }

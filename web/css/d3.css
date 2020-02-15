@@ -58,6 +58,14 @@ text {
     /*visibility: hidden;*/
     pointer-events: none;
     z-index: 1;
+
+    cursor: pointer;
+}
+
+text:hover {
+    cursor: pointer;
+    fill: white !important;
+    fill-opacity: 1;
 }
 
 text.main {
