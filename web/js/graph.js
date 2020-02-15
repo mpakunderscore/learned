@@ -115,16 +115,24 @@ function initView() {
             if (index !== -1) {
 
 
-                nodes_data.splice(index, 1);
-                console.log(index)
-                console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
+                // nodes_data.splice(index, 1);
+                // node.data(nodes_data)
+                //     .exit()
+                //     .remove();
+
+                // console.log(index)
+                // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
                 links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
+                link.data(links_data)
+                    .exit()
+                    .remove();
+
             }
 
             // console.log(nodes_data.length)
             // console.log(links_data.length)
 
-            // d3.event.stopPropagation();
+            d3.event.stopPropagation();
 
             initGraph();
         })
@@ -145,14 +153,14 @@ function initView() {
     //
     // node = node.merge(node);
 
-    node.exit().remove();
+    // node.exit().remove();
 
     link = link.enter()
         .append('line')
         .attr('class', 'link')
         .merge(link);
 
-    link.exit().remove();
+    // link.exit().remove();
 }
 
 function addNode(circleElement, category, random) {
