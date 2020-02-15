@@ -83,9 +83,12 @@ let node = svg.selectAll('node');
 let simulation = d3.forceSimulation()
 simulation.on('tick', tickActions);
 
-initData();
-initView();
-initSimulation();
+let initGraph = () => {
+  initData();
+  initView();
+  initSimulation();
+};
+initGraph();
 
 function initData() {
   node = node.data(nodes_data, function (d) {
@@ -122,8 +125,17 @@ function initView() {
         return d.main ? 'main' : (d.active ? 'active' : '')
       })
       .on('click', function (d) {
-        // alert(d)
-        // console.log(d)
+
+        // console.log(nodes_data.length)
+        // console.log(links_data.length)
+        nodes_data.splice(nodes_data.indexOf(d), 1);
+        links_data = links_data.filter(link => link.source !== d && link.target !== d);
+        // console.log(nodes_data.length)
+        // console.log(links_data.length)
+
+        // d3.event.stopPropagation();
+
+        initGraph();
       })
       .text(function (d) {
         return d.id; // + (d.info ? ' ' + d.info : '');
@@ -152,17 +164,17 @@ function initView() {
   link.exit().remove();
 }
 
-function addNode(circleElement, d, random) {
+function addNode(circleElement, category, random) {
 
   // console.log('addNode')
 
   // let title = that.nextSibling.textContent;
   // let title = that.textContent;
-  let title = d.id;
+  let title = category.id;
   // d.active = true;
 
-  d3.select(circleElement).attr('class', d.main ? 'main' : 'active')
-  d3.select(circleElement.nextSibling).attr('class', d.main ? 'main' : 'active')
+  d3.select(circleElement).attr('class', category.main ? 'main' : 'active')
+  d3.select(circleElement.nextSibling).attr('class', category.main ? 'main' : 'active')
   // d.active = true;
 
   if (title === 'Random') {
@@ -212,7 +224,6 @@ function addNode(circleElement, d, random) {
     shuffle(responseJson.categories).splice(0, random ? 1 : 7).forEach(categoryJson => {
 
       if (!nodes_data.find(element => element.id === categoryJson.id)) {
-        // categoryJson.active = true;
 
         if (random) {
           categoryJson.active = true;
@@ -224,21 +235,13 @@ function addNode(circleElement, d, random) {
 
       } else {
 
-        // if (!links_data.find(element => element.source === category)) {
-        //   console.log(titleNode)
-        // }
       }
     });
 
     setContent(responseJson.pages, responseJson.mainPage, categoriesLength)
   }
 
-  initData();
-  initView();
-  initSimulation();
-
-  // if (randomJson)
-
+  initGraph();
 }
 
 function setContent(pages, mainPage, categoriesLength) {

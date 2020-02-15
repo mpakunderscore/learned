@@ -59,13 +59,12 @@ text {
     pointer-events: none;
     z-index: 1;
 
-    cursor: pointer;
+    /*cursor: default;*/
 }
 
-text:hover {
+text.active:hover {
+    fill-opacity: 0.5;
     cursor: pointer;
-    fill: white !important;
-    fill-opacity: 1;
 }
 
 text.main {
@@ -73,5 +72,6 @@ text.main {
 }
 
 text.active {
+    pointer-events: auto;
     fill-opacity: 1;
 }

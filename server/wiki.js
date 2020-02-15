@@ -27,7 +27,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
     $('#mw-pages li').find('a').each(function (index, element) {
       const pageTitle = $(element).text();
       pages.push({id: pageTitle});
-      if (pageTitle === title || pageTitle === title.substring(0, title.length - 1))
+      if (pageTitle === title || pageTitle === title.substring(0, title.length - 1) || pageTitle.substring(0, pageTitle.length - 1) === title.substring(0, title.length - 1))
         isMainPage = true;
     });
 
