@@ -128,8 +128,14 @@ function initView() {
 
         // console.log(nodes_data.length)
         // console.log(links_data.length)
-        nodes_data.splice(nodes_data.indexOf(d), 1);
-        links_data = links_data.filter(link => link.source !== d && link.target !== d);
+        let index = nodes_data.indexOf(d);
+        if (index !== -1) {
+          nodes_data.splice(index, 1);
+          console.log(index)
+          console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
+          links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
+        }
+
         // console.log(nodes_data.length)
         // console.log(links_data.length)
 
