@@ -1,5 +1,6 @@
 const crawler = require("./server/crawler");
 const wiki = require("./server/wiki");
+const database = require("./server/database");
 
 let express = require('express');
 let app = express();

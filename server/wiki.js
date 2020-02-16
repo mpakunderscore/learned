@@ -38,7 +38,8 @@ exports.getWikiCategories = async function (title, lang = 'en') {
         };
 
     } catch (error) {
-        console.log(error);
+        // TODO
+        // console.log(error);
     }
 }
 
