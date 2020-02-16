@@ -34,10 +34,12 @@ Category.init({
 }, {sequelize, modelName: 'category'});
 
 sequelize.sync().then(() => {
+
     User.create({email: 'test1@test.test'}).then(user => {
-        console.log(user.toJSON());
+        // console.log(user.toJSON());
     });
+
     User.create({email: 'test2@test.test'}).then(user => {
-        console.log(user.toJSON());
+        // console.log(user.toJSON());
     });
-})
+});

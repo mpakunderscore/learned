@@ -51,6 +51,12 @@ input::placeholder {
     z-index: 2;
 }
 
+#userid {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+}
+
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */

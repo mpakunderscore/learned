@@ -1,2 +1,4 @@
-1. User context, local storage id
-2.
+1. Юзер записывает ссылку по которой сходил
+
+Таблица user
+Таблица user.id > link.id

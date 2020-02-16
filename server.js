@@ -24,3 +24,21 @@ app.get('/wiki', async function (request, response) {
     response.json(await wiki.getWikiCategories(request.query.title, request.query.lang));
 });
 
+app.get('/user', async function (request, response) {
+
+    // console.log(request.query.id)
+
+    if (!request.query.id)
+        response.json({id: uuidv4()});
+
+    else
+        response.json({id: request.query.id, data: {links: []}});
+});
+
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+

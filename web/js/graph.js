@@ -314,13 +314,6 @@ function dragended(d) {
     d.fy = null;
 }
 
-function get(url) {
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('GET', url, false); // false for synchronous request
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
-}
-
 function shuffle(a) {
     let j, x, i;
     for (i = a.length - 1; i > 0; i--) {
