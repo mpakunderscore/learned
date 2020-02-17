@@ -21,7 +21,8 @@ function initInput() {
 }
 
 function initFAQ() {
-    return '<div class="info">Link input does not work now, sorry</div>' +
+    return '<div class="info">Link input does not work currently</div>' +
+    '<div>Explore graph</div>' +
     '<div>Click on active node name to remove edges</div>' +
     '<div>Move border</div>';
 

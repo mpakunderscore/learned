@@ -58,10 +58,19 @@ sequelize.sync().then(() => {
     });
 });
 
+exports.saveWord = (userid, url) => {
+    let userLink = UserLink.create({userid: userid, url: url})
+    console.log(userLink)
+};
+
+exports.getWords = async () => {
+    return await Word.findAll();
+};
+
 exports.saveUserLink = (userid, url) => {
     let userLink = UserLink.create({userid: userid, url: url})
     console.log(userLink)
-}
+};
 
 exports.getUserLinks = async (userid) => {
     return await UserLink.findAll({
@@ -69,4 +78,4 @@ exports.getUserLinks = async (userid) => {
             userid: userid
         }
     });
-}
+};
