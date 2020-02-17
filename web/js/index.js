@@ -1,18 +1,20 @@
 let user = JSON.parse(localStorage.getItem('user')) || {};
-console.log(user)
+// console.log(user)
 
 if (!user.id) {
     const response = get('/user');
-    const userJson = JSON.parse(response);
-    console.log(userJson)
-    user.id = userJson.id;
+    user = JSON.parse(response);
     localStorage.setItem('user', JSON.stringify(user))
 } else {
-    console.log(user)
     const response = get('/user?id=' + user.id);
-    const userJson = JSON.parse(response);
-    console.log(userJson)
+    user = JSON.parse(response);
 }
+
+console.log(user)
+
+const response = get('/links?userid=' + user.id);
+let links = JSON.parse(response);
+console.log(links)
 
 document.getElementById('userid').innerHTML = user.id;
 

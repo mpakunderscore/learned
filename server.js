@@ -1,3 +1,4 @@
+const utils = require("./server/utils");
 const crawler = require("./server/crawler");
 const wiki = require("./server/wiki");
 const database = require("./server/database");
@@ -29,16 +30,19 @@ app.get('/user', async function (request, response) {
     // console.log(request.query.id)
 
     if (!request.query.id)
-        response.json({id: uuidv4()});
+        response.json({id: utils.uuidv4()});
 
     else
         response.json({id: request.query.id, data: {links: []}});
 });
 
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        let r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
+app.get('/link', async function (request, response) {
+    response.json(await database.saveUserLink(request.query.userid, request.query.url));
+});
+
+app.get('/links', async function (request, response) {
+    let links = await database.getUserLinks(request.query.userid);
+    console.log(links)
+    response.json(links);
+});
 

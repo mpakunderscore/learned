@@ -3,6 +3,7 @@ const sequelize = new Sequelize('sqlite::memory:');
 
 class User extends Model {}
 class Link extends Model {}
+class UserLink extends Model {}
 class Word extends Model {}
 class Category extends Model {}
 
@@ -18,6 +19,17 @@ Link.init({
         allowNull: false
     },
 }, {sequelize, modelName: 'link'});
+
+UserLink.init({
+    userid: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    url: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+}, {sequelize, modelName: 'userlink'});
 
 Word.init({
     id: {
@@ -35,11 +47,26 @@ Category.init({
 
 sequelize.sync().then(() => {
 
-    User.create({email: 'test1@test.test'}).then(user => {
-        // console.log(user.toJSON());
+    User.create({email: 'email'}).then(user => {
+        console.log(user.toJSON());
     });
-
-    User.create({email: 'test2@test.test'}).then(user => {
-        // console.log(user.toJSON());
+    Link.create({url: 'url'}).then(user => {
+        console.log(user.toJSON());
+    });
+    UserLink.create({userid: 'bb888fae-4189-4c50-8381-363f937c8f78', url: 'url'}).then(user => {
+        console.log(user.toJSON());
     });
 });
+
+exports.saveUserLink = (userid, url) => {
+    let userLink = UserLink.create({userid: userid, url: url})
+    console.log(userLink)
+}
+
+exports.getUserLinks = async (userid) => {
+    return await UserLink.findAll({
+        where: {
+            userid: userid
+        }
+    });
+}
