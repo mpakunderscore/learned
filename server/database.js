@@ -56,6 +56,12 @@ sequelize.sync().then(() => {
     UserLink.create({userid: 'bb888fae-4189-4c50-8381-363f937c8f78', url: 'url'}).then(user => {
         console.log(user.toJSON());
     });
+    Word.create({id: 'the'}).then(user => {
+        console.log(user.toJSON());
+    });
+    Category.create({id: 'music'}).then(user => {
+        console.log(user.toJSON());
+    });
 });
 
 exports.saveWord = (userid, url) => {
