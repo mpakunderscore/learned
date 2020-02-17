@@ -20,7 +20,14 @@ function initInput() {
     return '<input id="input" autocomplete="off" placeholder="Link, message or search"/>';
 }
 
-content.innerHTML = initInput() + '<div>Click on active node name to remove edges</div>';
+function initFAQ() {
+    return '<div class="info">Link input does not work now, sorry</div>' +
+    '<div>Click on active node name to remove edges</div>' +
+    '<div>Move border</div>';
+
+}
+
+content.innerHTML = initInput() + initFAQ();
 
 // content.innerHTML += '<div>Hey. Add a link via input, from below. Or leave a message</div>';
 

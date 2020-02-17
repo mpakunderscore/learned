@@ -18,6 +18,10 @@ app.get('/api', function (request, response) {
 });
 
 app.get('/url', async function (request, response) {
+    response.json(await crawler.getURLData(request.query.url));
+});
+
+app.get('/urls', async function (request, response) {
     response.json(await crawler.getURLsData([request.query.url1, request.query.url2]));
 });
 

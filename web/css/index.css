@@ -3,10 +3,19 @@ html, body {
 
     --font-size-main: 12px;
     --font-size-small: 12px;
+
     --color-blue: #16b9e7;
-    --color-blue-dark: #108bad;
+    --color-blue-dark: #0e7d9c;
+
+    --color-green: #00e200;
     --color-green-dark: #007200;
-    --color-gray: lightgray;
+
+    --color-red: #f3a24b;
+    --color-red-dark: #c0421d;
+
+    --color-white: white;
+    --color-gray: #bfbfbf;
+    --color-gray-dark: #777;
 }
 
 body {
@@ -51,6 +60,7 @@ input::placeholder {
     z-index: 2;
 }
 
+/*TODO temp*/
 #userid {
     position: absolute;
     left: 10px;

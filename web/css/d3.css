@@ -12,7 +12,7 @@
 
 line {
     pointer-events: none;
-    stroke: #999;
+    stroke: var(--color-gray-dark);
     stroke-opacity: 0.1;
 }
 
@@ -20,14 +20,14 @@ g {
 }
 
 circle {
-    fill: white;
-    stroke: #b8b8b8;
+    fill: var(--color-white);
+    stroke: var(--color-gray);
     stroke-width: 1px;
 }
 
 circle.active {
-    stroke: #007200;
-    fill: #00e200;
+    stroke: var(--color-green-dark);
+    fill: var(--color-green);
 }
 
 circle.main {
@@ -37,13 +37,13 @@ circle.main {
 
 circle:hover {
     cursor: pointer;
-    stroke: #008e00;
-    fill: rgba(0, 203, 0, 0.52);
+    stroke: var(--color-green-dark);
+    fill: var(--color-green);
 }
 
 circle.active:hover {
-    stroke: #8e5d04;
-    fill: rgba(203, 159, 8, 0.52);
+    stroke: var(--color-red-dark);
+    fill: var(--color-red);
 }
 
 circle:hover + text {

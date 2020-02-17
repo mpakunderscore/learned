@@ -38,7 +38,7 @@ let setGraph = function (page) {
     });
 };
 
-let getURLData = async function (url) {
+exports.getURLData = async function (url) {
 
     console.log(url);
 
