@@ -8,37 +8,45 @@ const database = require("./database");
 
 exports.init = (app) => {
 
+    // get url graph
     app.get('/url', async function (request, response) {
-        response.json(await crawler.getURLData(request.query.url));
+
+        let urlData = await crawler.getURLData(request.query.url);
+
+        if (request.query.short === 'true')
+            urlData.words = urlData.words.splice(0, 7);
+
+        response.json(urlData);
     });
 
     // app.get('/urls', async function (request, response) {
     //     response.json(await crawler.getURLsData([request.query.url1, request.query.url2]));
     // });
 
+    // get all words
     app.get('/words', async function (request, response) {
         response.json(await database.getWords());
     });
 
+    // get wiki next categories in graph
     app.get('/wiki', async function (request, response) {
         response.json(await wiki.getWikiCategories(request.query.title, request.query.lang));
     });
 
+    // init user
     app.get('/user', async function (request, response) {
-
-        // console.log(request.query.id)
-
         if (!request.query.id)
             response.json({id: utils.uuidv4()});
-
         else
             response.json({id: request.query.id, data: {links: []}});
     });
 
+    // add link to user
     app.get('/link', async function (request, response) {
         response.json(await database.saveUserLink(request.query.userid, request.query.url));
     });
 
+    // get user list of links
     app.get('/links', async function (request, response) {
         let links = await database.getUserLinks(request.query.userid);
         // console.log(links)

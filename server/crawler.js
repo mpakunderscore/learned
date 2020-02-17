@@ -60,7 +60,9 @@ exports.getURLData = async function (url) {
         // console.log(responseJson)
         // let text = responseJson.query.pages[Object.keys(responseJson.query.pages)[0]].revisions[0]['*']; // Print the HTML for the Google homepage.
 
-        return {url: url, title: title, words: getWords(text), text: text.length};
+        let words = getWords(text);
+
+        return {url: url, title: title, words: words, wordsLength: words.length, textLength: text.length};
 
     } catch (error) {
         console.log(error);
@@ -81,9 +83,14 @@ let getWords = function (text) {
 
     let sortable = [];
     for (let name in words) {
-        let word = {name: name, count: words[name]}
-        sortable.push(word);
-        globalWords[name] = 1 + globalWords[name];
+        if (name.length > 2) {
+            let word = {name: name, count: words[name]}
+            sortable.push(word);
+        }
+    }
+
+    for (let word in sortable) {
+
     }
 
     sortable.sort(function (a, b) {
