@@ -1,5 +1,4 @@
 let user = JSON.parse(localStorage.getItem('user')) || {};
-// console.log(user)
 
 if (!user.id) {
     const response = get('/user');
@@ -10,17 +9,15 @@ if (!user.id) {
     user = JSON.parse(response);
 }
 
-console.log(user)
+const getUserLinks = () => {
+    const response = get('/links?userid=' + user.id);
+    const userLinks = JSON.parse(response);
+    user.links = userLinks.list;
 
-const response = get('/links?userid=' + user.id);
-const userLinks = JSON.parse(response);
-console.log(userLinks)
-user.links = userLinks.list;
-// console.log(user.links)
-// console.log(userLinks.graph)
+    document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
+};
 
-
-document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
+getUserLinks();
 
 function get(url) {
     let xmlHttp = new XMLHttpRequest();

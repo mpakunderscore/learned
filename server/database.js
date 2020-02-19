@@ -17,7 +17,7 @@ class Category extends Model {
 }
 
 User.init({
-    uuid: {
+    id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV1,
         primaryKey: true
@@ -65,28 +65,43 @@ Category.init({
 
 sequelize.sync().then(() => {
 
-    User.create({email: 'email'}).then(user => {
-        console.log(user.toJSON());
-    });
-    Link.create({url: 'url'}).then(user => {
-        console.log(user.toJSON());
-    });
-    UserLink.create({userid: 'userid', url: 'url'}).then(user => {
-        console.log(user.toJSON());
-    });
-    Word.create({id: 'the'}).then(user => {
-        console.log(user.toJSON());
-    });
-    Category.create({id: 'music'}).then(user => {
-        console.log(user.toJSON());
-    });
+    // User.create({id: 'bb888fae-4189-4c50-8381-363f937c8f78', email: null}).then(user => {
+    //     console.log(user.toJSON());
+    // });
+    // Link.create({url: 'url'}).then(user => {
+    //     console.log(user.toJSON());
+    // });
+    // UserLink.create({userid: 'bb888fae-4189-4c50-8381-363f937c8f78', url: 'url'}).then(user => {
+    //     console.log(user.toJSON());
+    // });
+    // Word.create({id: 'the'}).then(user => {
+    //     console.log(user.toJSON());
+    // });
+    // Category.create({id: 'music'}).then(user => {
+    //     console.log(user.toJSON());
+    // });
 });
+
+exports.getUser = async (id) => {
+
+    let user = await User.findOne({where: {id: id}});
+
+    if (user)
+        return user.toJSON();
+
+    user = await User.create({id: id});
+
+    return user.toJSON();
+};
+
+exports.getUsers = async () => {
+
+    return await User.findAll();
+};
 
 exports.saveWord = (name) => {
 
     Word.findOne({where: {id: name}}).then(function (word) {
-
-        // console.log(word)
 
         if (word)
             return word.update({count: word.count + 1});
@@ -115,8 +130,10 @@ exports.getUserLinks = async (userid) => {
         }
     });
 
-    // TODO We don't have .words inside UserLink. and inside Link also.
-    // only in crawler method. Where we store Word model
+    // TODO We don't have .words inside UserLink. And inside Link also.
+    // Only in crawler method. Where we store Word model.
+
+    // So. We need to get words here. Dynamically or from database.
 
     let words = {};
     for (let userLink in userLinks) {

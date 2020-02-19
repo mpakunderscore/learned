@@ -41,6 +41,8 @@ function setMine() {
 
     // console.log(categories)
 
+    getUserLinks();
+
     content.innerHTML = initInput();
 
     let html = '';

@@ -45,10 +45,23 @@ exports.init = (app) => {
 
     // init user
     app.get('/user', async function (request, response) {
-        if (!request.query.id)
+
+        if (!request.query.id) {
+
+            //TODO create user in DB
             response.json({id: utils.uuidv4()});
-        else
-            response.json({id: request.query.id, data: {links: []}});
+
+        } else {
+
+            // response.json({id: request.query.id});
+
+            let user = await database.getUser(request.query.id);
+            response.json(user);
+        }
+    });
+
+    app.get('/users', async function (request, response) {
+        response.json(await database.getUsers());
     });
 
     // add link to user
@@ -59,13 +72,12 @@ exports.init = (app) => {
     // get user list of links
     app.get('/links', async function (request, response) {
         let links = await database.getUserLinks(request.query.userid);
-        // console.log(links)
         response.json(links);
     });
 
     let routes = [];
-    app._router.stack.forEach(function(r){
-        if (r.route && r.route.path){
+    app._router.stack.forEach(function (r) {
+        if (r.route && r.route.path) {
             routes.push(r.route.path)
         }
     });
