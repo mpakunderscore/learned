@@ -45,17 +45,21 @@ exports.crawlURLLinks = async function (url) {
 
     let subPages = [];
     let page = await exports.getURLData(url);
-    console.log(page)
-     page.internalLinks.forEach(async link => {
-         subPages.push(await exports.getURLData(link));
-     })
+
+    // async page.internalLinks.forEach(link => {
+    //     subPages.push(await exports.getURLData(link));
+    // })
+
+    for (const link of page.internalLinks) {
+        subPages.push(await exports.getURLData(link));
+    }
 
     return subPages;
 };
 
 exports.getURLData = async function (url) {
 
-    console.log(url);
+    console.log('getURLData: ' + url);
 
     const urlArray = url.split( '/' );
 
@@ -78,16 +82,18 @@ exports.getURLData = async function (url) {
         $('a').each(function (i, link) {
 
             let linkUrl = $(link).attr('href');
-            if (linkUrl.includes('http'))
-                externalLinks.push(linkUrl);
-            else {
-                internalLinks.push(baseUrl + '/' + linkUrl);
-            }
 
+            if (linkUrl) {
+                if (linkUrl.includes('http'))
+                    externalLinks.push(linkUrl);
+                else {
+                    internalLinks.push(baseUrl + '/' + linkUrl);
+                }
+            }
         });
 
-        console.log('Title: ' + title);
-        console.log('Text length: ' + text.length);
+        // console.log('Title: ' + title);
+        // console.log('Text length: ' + text.length);
 
         // let responseJson = JSON.parse(body);
         // console.log(responseJson)
@@ -133,7 +139,7 @@ let getWords = function (text) {
         return b.count - a.count;
     });
 
-    console.log('Words length: ' + sortable.length);
+    // console.log('Words length: ' + sortable.length);
     // console.log('Global words length: ' + Object.keys(globalWords).length);
 
     return sortable;

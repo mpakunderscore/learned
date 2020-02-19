@@ -94,7 +94,8 @@ exports.saveWord = (name) => {
         return Word.create({id: name});
 
     }).catch(function (err) {
-        console.error(err)
+        // console.error(err)
+        console.error(name)
     });
 };
 

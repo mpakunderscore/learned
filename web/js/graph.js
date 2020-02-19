@@ -15,20 +15,7 @@ let svg = d3.select('#graph').append('svg')
 
 let content = document.getElementById('content');
 content.style.width = (99.5 - 100 * borderRatio) + '%';
-
-function initInput() {
-    return '<input id="input" autocomplete="off" placeholder="Link, message or search"/>';
-}
-
-function initFAQ() {
-    return '<div class="info">Link input does not work currently</div>' +
-    '<div>Explore graph</div>' +
-    '<div>Click on active node name to remove edges</div>' +
-    '<div>Move border</div>';
-
-}
-
-content.innerHTML = initInput() + initFAQ();
+content.innerHTML = initInput() + initChat();
 
 // content.innerHTML += '<div>Hey. Add a link via input, from below. Or leave a message</div>';
 
@@ -249,27 +236,6 @@ function addNode(circleElement, category, random) {
     }
 
     initGraph();
-}
-
-function setContent(pages, mainPage, categoriesLength) {
-
-    // console.log(responseJson)
-
-    // let categories = responseJson.categories
-
-    // console.log(categories)
-
-    content.innerHTML = initInput();
-
-    let html = '';
-    if (mainPage.text) {
-        html += '<div id="main-text">' + mainPage.text + '</div>';
-    }
-    html += '<div>Pages: ' + pages.length + ', Categories: ' + categoriesLength + '</div>';
-    for (let i = 0; i < pages.length; i++) {
-        html += '<div><a href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
-    }
-    content.innerHTML += html;
 }
 
 function initSimulation() {
