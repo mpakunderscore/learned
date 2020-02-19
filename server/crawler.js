@@ -101,7 +101,15 @@ exports.getURLData = async function (url) {
 
         let words = getWords(text);
 
-        return {url: url, title: title, words: words, wordsLength: words.length, textLength: text.length, internalLinks: internalLinks, externalLinks: externalLinks};
+        return {
+            url: url,
+            title: title,
+            words: words, // {name, count}
+            wordsLength: words.length,
+            textLength: text.length,
+            internalLinks: internalLinks, // ['']
+            externalLinks: externalLinks
+        };
 
     } catch (error) {
         console.log(error);

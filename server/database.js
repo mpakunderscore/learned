@@ -109,11 +109,24 @@ exports.saveUserLink = (userid, url) => {
 };
 
 exports.getUserLinks = async (userid) => {
-    return await UserLink.findAll({
+    let userLinks = await UserLink.findAll({
         where: {
             userid: userid
         }
     });
+
+    // TODO We don't have .words inside UserLink. and inside Link also.
+    // only in crawler method. Where we store Word model
+
+    let words = {};
+    for (let userLink in userLinks) {
+        for (let id in userLink.words) {
+            let name = userLink.words[id].name;
+            words[name] += userLink.words[id].count;
+        }
+    }
+
+    return {list: userLinks, graph: words};
 };
 
 function upsert(values, condition) {

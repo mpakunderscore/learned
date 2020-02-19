@@ -13,8 +13,12 @@ if (!user.id) {
 console.log(user)
 
 const response = get('/links?userid=' + user.id);
-user.links = JSON.parse(response);
-console.log(user.links)
+const userLinks = JSON.parse(response);
+console.log(userLinks)
+user.links = userLinks.list;
+// console.log(user.links)
+// console.log(userLinks.graph)
+
 
 document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
 
