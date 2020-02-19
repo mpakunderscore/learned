@@ -1,13 +1,27 @@
 const {Sequelize, Model, DataTypes} = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+const sequelize = new Sequelize('sqlite::memory:', {logging: false});
 
-class User extends Model {}
-class Link extends Model {}
-class UserLink extends Model {}
-class Word extends Model {}
-class Category extends Model {}
+class User extends Model {
+}
+
+class Link extends Model {
+}
+
+class UserLink extends Model {
+}
+
+class Word extends Model {
+}
+
+class Category extends Model {
+}
 
 User.init({
+    uuid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV1,
+        primaryKey: true
+    },
     email: {
         type: DataTypes.STRING
     },
@@ -18,7 +32,7 @@ Link.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-}, {sequelize, modelName: 'link'});
+}, {sequelize, modelName: 'link', timestamps: false});
 
 UserLink.init({
     userid: {
@@ -29,21 +43,25 @@ UserLink.init({
         type: DataTypes.STRING,
         allowNull: false
     },
-}, {sequelize, modelName: 'userlink'});
+}, {sequelize, modelName: 'userlink', timestamps: false});
 
 Word.init({
     id: {
         type: DataTypes.STRING,
         primaryKey: true
     },
-}, {sequelize, modelName: 'word'});
+    count: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0
+    },
+}, {sequelize, modelName: 'word', timestamps: false});
 
 Category.init({
     id: {
         type: DataTypes.STRING,
         primaryKey: true
     },
-}, {sequelize, modelName: 'category'});
+}, {sequelize, modelName: 'category', timestamps: false});
 
 sequelize.sync().then(() => {
 
@@ -64,9 +82,20 @@ sequelize.sync().then(() => {
     });
 });
 
-exports.saveWord = (userid, url) => {
-    let userLink = UserLink.create({userid: userid, url: url})
-    console.log(userLink)
+exports.saveWord = (name) => {
+
+    Word.findOne({where: {id: name}}).then(function (word) {
+
+        // console.log(word)
+
+        if (word)
+            return word.update({count: word.count + 1});
+
+        return Word.create({id: name});
+
+    }).catch(function (err) {
+        console.error(err)
+    });
 };
 
 exports.getWords = async () => {
@@ -75,7 +104,7 @@ exports.getWords = async () => {
 
 exports.saveUserLink = (userid, url) => {
     let userLink = UserLink.create({userid: userid, url: url})
-    console.log(userLink)
+    // console.log(userLink)
 };
 
 exports.getUserLinks = async (userid) => {
@@ -85,3 +114,15 @@ exports.getUserLinks = async (userid) => {
         }
     });
 };
+
+function upsert(values, condition) {
+    return Model
+        .findOne({where: condition})
+        .then(function (obj) {
+            // update
+            if (obj)
+                return obj.update(values);
+            // insert
+            return Model.create(values);
+        })
+}

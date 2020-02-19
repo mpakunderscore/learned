@@ -19,6 +19,16 @@ exports.init = (app) => {
         response.json(urlData);
     });
 
+    app.get('/crawl', async function (request, response) {
+
+        let linksArray = await crawler.crawlURLLinks(request.query.url);
+
+        // if (request.query.short === 'true')
+        //     urlData.words = urlData.words.splice(0, 7);
+
+        response.json(linksArray);
+    });
+
     // app.get('/urls', async function (request, response) {
     //     response.json(await crawler.getURLsData([request.query.url1, request.query.url2]));
     // });

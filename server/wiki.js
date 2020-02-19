@@ -55,7 +55,6 @@ let getWikiCategoryPage = async function (title, lang = 'en') {
         const $ = cheerio.load(data);
         let text = $('p[class!=mw-empty-elt]').first().text();
         let fixedText = text.replace(/\[.*\]/gm, '').replace(/\s\s+/g, ' ');
-        ;
 
         return {text: fixedText};
 
