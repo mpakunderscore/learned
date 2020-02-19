@@ -4,8 +4,10 @@ function initInput() {
 
 function initChat() {
     return '<div class="info">Link input does not work currently</div>' +
-        '<div>Explore graph</div>' +
+        '<div>Last update: 18.02.2020</div>' +
+        '<div>Explore graph and <strike>interesting</strike> links</div>' +
         '<div>Click on active node name to remove edges</div>' +
+        '<div>Click on link to save it in mine</div>' +
         '<div>Move border</div>';
 
 }
