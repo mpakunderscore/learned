@@ -45,19 +45,8 @@ exports.init = (app) => {
 
     // init user
     app.get('/user', async function (request, response) {
-
-        if (!request.query.id) {
-
-            //TODO create user in DB
-            response.json({id: utils.uuidv4()});
-
-        } else {
-
-            // response.json({id: request.query.id});
-
-            let user = await database.getUser(request.query.id);
-            response.json(user);
-        }
+        let user = await database.getUser(request.query.id);
+        response.json(user);
     });
 
     app.get('/users', async function (request, response) {

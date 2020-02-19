@@ -1,5 +1,5 @@
 const {Sequelize, Model, DataTypes} = require('sequelize');
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:');
 
 class User extends Model {
 }
@@ -63,7 +63,7 @@ Category.init({
     },
 }, {sequelize, modelName: 'category', timestamps: false});
 
-sequelize.sync().then(() => {
+sequelize.sync({force: true}).then(() => {
 
     // User.create({id: 'bb888fae-4189-4c50-8381-363f937c8f78', email: null}).then(user => {
     //     console.log(user.toJSON());
@@ -84,10 +84,17 @@ sequelize.sync().then(() => {
 
 exports.getUser = async (id) => {
 
-    let user = await User.findOne({where: {id: id}});
+    console.log(id)
 
-    if (user)
-        return user.toJSON();
+    let user;
+
+    if (id) {
+
+        let user = await User.findOne({where: {id: id}});
+
+        if (user)
+            return user.toJSON();
+    }
 
     user = await User.create({id: id});
 

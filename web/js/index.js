@@ -1,13 +1,13 @@
-let user = JSON.parse(localStorage.getItem('user')) || {};
+let user;
 
-if (!user.id) {
-    const response = get('/user');
+const getUser = () => {
+    user = JSON.parse(localStorage.getItem('user')) || {};
+    const response = get('/user?' + (user.id ? 'id=' + user.id : ''));
     user = JSON.parse(response);
-    localStorage.setItem('user', JSON.stringify(user))
-} else {
-    const response = get('/user?id=' + user.id);
-    user = JSON.parse(response);
-}
+    localStorage.setItem('user', JSON.stringify(user));
+};
+
+getUser();
 
 const getUserLinks = () => {
     const response = get('/links?userid=' + user.id);
