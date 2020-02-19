@@ -31,6 +31,27 @@ function setContent(pages, mainPage, categoriesLength) {
     content.innerHTML += html;
 }
 
+function setMine() {
+
+    // console.log(responseJson)
+
+    // let categories = responseJson.categories
+
+    // console.log(categories)
+
+    content.innerHTML = initInput();
+
+    let html = '';
+    html += '<div id="main-text">Your links collection</div>';
+    // html += '<div>Links: ' + user.links.length +'</div>';
+    for (let i = 0; i < user.links.length; i++) {
+        html += '<div><a href="' + user.links[i].url + '" target="_blank">' + user.links[i].url + '</a></div>';
+    }
+    content.innerHTML += html;
+}
+
 let linkClick = (url) => {
     console.log(url)
+    const response = get('/link?userid=' + user.id + '&url=' + url);
+    // console.log(JSON.parse(response));
 }

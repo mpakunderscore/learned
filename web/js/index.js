@@ -13,10 +13,10 @@ if (!user.id) {
 console.log(user)
 
 const response = get('/links?userid=' + user.id);
-let links = JSON.parse(response);
-console.log(links)
+user.links = JSON.parse(response);
+console.log(user.links)
 
-document.getElementById('userid').innerHTML = user.id;
+document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
 
 function get(url) {
     let xmlHttp = new XMLHttpRequest();

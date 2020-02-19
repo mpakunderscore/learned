@@ -38,9 +38,13 @@ nodes_data.push(mainCategory);
 // TODO MENU DATA
 
 // menuItem({id: 'Links'})
-menuItem({id: 'Random'})
-menuItem({id: 'Wiki', active: false})
+
+
 menuItem({id: 'Language'})
+menuItem({id: 'Wiki', active: false})
+menuItem({id: 'Mine'})
+menuItem({id: 'Random'})
+
 // menuItem({id: 'HN'})
 // menuItem({id: 'About'})
 
@@ -201,6 +205,10 @@ function addNode(circleElement, category, random) {
 
         if (title === 'Simple')
             lang = 'simple';
+
+    } else if (title === 'Mine') {
+
+        setMine()
 
     } else {
 

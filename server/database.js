@@ -71,7 +71,7 @@ sequelize.sync().then(() => {
     Link.create({url: 'url'}).then(user => {
         console.log(user.toJSON());
     });
-    UserLink.create({userid: 'bb888fae-4189-4c50-8381-363f937c8f78', url: 'url'}).then(user => {
+    UserLink.create({userid: 'userid', url: 'url'}).then(user => {
         console.log(user.toJSON());
     });
     Word.create({id: 'the'}).then(user => {
