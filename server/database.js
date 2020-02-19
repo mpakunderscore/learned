@@ -63,7 +63,9 @@ Category.init({
     },
 }, {sequelize, modelName: 'category', timestamps: false});
 
-sequelize.sync({force: true}).then(() => {
+// {force: true}
+
+sequelize.sync().then(() => {
 
     // User.create({id: 'bb888fae-4189-4c50-8381-363f937c8f78', email: null}).then(user => {
     //     console.log(user.toJSON());
