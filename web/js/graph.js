@@ -14,8 +14,10 @@ let svg = d3.select('#graph').append('svg')
     .attr('height', height);
 
 let content = document.getElementById('content');
+let contentList = document.getElementById('content-list');
 content.style.width = (99.5 - 100 * borderRatio) + '%';
-content.innerHTML = initInput() + initChat();
+initInput();
+initServiceInfo();
 
 // content.innerHTML += '<div>Hey. Add a link via input, from below. Or leave a message</div>';
 
@@ -211,6 +213,10 @@ function addNode(circleElement, category, random) {
     } else if (title === 'Mine') {
 
         setMine()
+
+    } else if (title === '') {
+
+        setCircle()
 
     } else {
 

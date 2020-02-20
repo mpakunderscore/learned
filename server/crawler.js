@@ -68,7 +68,7 @@ exports.getURLData = async function (url) {
     const baseUrl = protocol + '//' + host;
 
     try {
-        const response = await axios.get(url);
+        const response = await axios.get(encodeURI(url));
         const data = response.data;
 
         // console.log(data);

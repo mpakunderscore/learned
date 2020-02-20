@@ -40,6 +40,8 @@ input {
     margin: 0;
     border: none;
     background-color: var(--color-gray);
+
+    /*margin-top: auto;*/
 }
 
 input::placeholder {

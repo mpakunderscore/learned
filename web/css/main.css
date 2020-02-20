@@ -22,9 +22,15 @@ main #content {
     overflow: scroll;
 
     min-width: 110px;
+
+    justify-content: space-between;
 }
 
-main #content div, input {
+main #content div div {
+    padding: 10px;
+}
+
+main #content input {
     padding: 10px;
 }
 

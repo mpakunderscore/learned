@@ -1,15 +1,39 @@
 function initInput() {
-    return '<input id="input" autocomplete="off" placeholder="Link, message or search"/>';
+
+    let input = document.getElementById('main-input');
+    input.id = 'main-input';
+    input.type = 'text';
+    input.autocomplete = 'off';
+    input.placeholder = 'Link, message or search';
+    // content.innerHTML = '<input id="main-input" autocomplete="off" placeholder="Link, message or search"/>';
+    // let input = document.getElementById('main-input');
+
+    console.log(input)
+    // input.value = 'test';
+
+    content.append(input)
+
+    input.addEventListener('keyup', function (event) {
+        if (event.keyCode === 13) {
+            console.log('enter')
+            event.preventDefault();
+            console.log(input.value)
+            input.value = '';
+        }
+    });
 }
 
-function initChat() {
-    return '<div class="info">Link input does not work currently</div>' +
+function initServiceInfo() {
+
+    contentList.innerHTML = '' +
         '<div>Last update: 19.02.2020</div>' +
         '<div>Version: 0.2.1</div>' +
+        '<div class="info">Link input does not work currently</div>' +
         '<div>Explore graph and <strike>interesting</strike> links</div>' +
         '<div>Click on active node name to remove edges</div>' +
         '<div>Click on link to save it in mine</div>' +
-        '<div>Move border</div>';
+        '<div>Move border</div>' +
+        '';
 }
 
 function setContent(pages, mainPage, categoriesLength) {
@@ -20,7 +44,7 @@ function setContent(pages, mainPage, categoriesLength) {
 
     // console.log(categories)
 
-    content.innerHTML = initInput();
+    initInput();
 
     let html = '';
     if (mainPage.text) {
@@ -30,7 +54,7 @@ function setContent(pages, mainPage, categoriesLength) {
     for (let i = 0; i < pages.length; i++) {
         html += '<div><a onclick="linkClick(this.href)" href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
     }
-    content.innerHTML += html;
+    contentList.innerHTML += html;
 }
 
 function setMine() {
@@ -41,9 +65,9 @@ function setMine() {
 
     // console.log(categories)
 
-    getUserLinks();
+    initInput();
 
-    content.innerHTML = initInput();
+    getUserLinks();
 
     let html = '';
     html += '<div id="main-text">Your links collection</div>';
@@ -52,6 +76,23 @@ function setMine() {
         html += '<div><a href="' + user.links[i].url + '" target="_blank">' + user.links[i].url + '</a></div>';
     }
     content.innerHTML += html;
+}
+
+function setCircle() {
+    contentList.innerHTML += '<div id="message"></div>';
+    let message = document.getElementById('message')
+
+    let dotIteration = 0;
+    let dotCount = 1;
+    let dotInterval = setInterval(function () {
+        message.innerText = '.'.repeat(dotCount++)
+        if (dotCount >= 4)
+            dotCount = 1;
+        if (dotIteration++ > 8) {
+            clearInterval(dotInterval);
+            message.innerText = 'What'
+        }
+    }, 300);
 }
 
 let linkClick = (url) => {
