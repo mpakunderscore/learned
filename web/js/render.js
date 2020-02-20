@@ -17,7 +17,7 @@ function initInput() {
         if (event.keyCode === 13) {
             event.preventDefault();
             let value = input.value;
-            console.log(value)
+            // console.log(value)
             input.value = '';
 
             if (value.startsWith('http'))
@@ -99,7 +99,7 @@ function setCircle() {
 }
 
 let linkClick = (url) => {
-    console.log(url)
+    // console.log(url)
     const response = get('/user/link/add?userid=' + user.id + '&url=' + url);
     console.log(JSON.parse(response));
 }

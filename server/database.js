@@ -80,7 +80,7 @@ Category.init({
 
 // {force: true}
 
-sequelize.sync().then(() => {
+sequelize.sync({force: true}).then(() => {
 
     // User.create({id: 'bb888fae-4189-4c50-8381-363f937c8f78', email: null}).then(user => {
     //     console.log(user.toJSON());
@@ -220,6 +220,11 @@ exports.getUserLinks = async (userid) => {
                 else
                     words[name] = link.words[id].count;
             }
+
+        for (let id in words) {
+            if (words[id] < 10)
+                delete words[id];
+        }
     }
 
     return {list: userLinks, graph: words};
