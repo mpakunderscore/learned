@@ -169,7 +169,7 @@ exports.getLink = async (url) => {
 
 // Get links
 
-exports.getLink = async () => {
+exports.getLinks = async () => {
     let links = Link.findAll()
     return links;
 };
@@ -195,24 +195,29 @@ exports.getUserLinks = async (userid) => {
 
     // So. We need to get words here. Dynamically or from database.
 
-    console.log(userLinks)
+    // console.log(userLinks)
 
     let words = {};
-    for (let userLink in userLinks) {
+    for (let id in userLinks) {
 
-        let userLinkJson = userLink.toJSON();
+        // let userLinkJson = userLink.toJSON();
 
-        console.log(userLinkJson)
+        // console.log(userLinks[id].toJSON())
 
-        console.log(userLinkJson.url)
+        let userLinkUrl = userLinks[id].toJSON().url;
 
-        const link = await exports.getLink(userLinkJson.url);
-        console.log(link)
+        // console.log(userLinkJson.url)
+
+        const link = await exports.getLink(userLinkUrl);
+        // console.log(link)
 
         if (link)
             for (let id in link.words) {
                 let name = link.words[id].name;
-                words[name] += link.words[id].count;
+                if (words[name])
+                    words[name] += link.words[id].count;
+                else
+                    words[name] = link.words[id].count;
             }
     }
 

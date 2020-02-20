@@ -5,7 +5,7 @@ function initInput() {
 function initChat() {
     return '<div class="info">Link input does not work currently</div>' +
         '<div>Last update: 19.02.2020</div>' +
-        '<div>Version: 0.2.0</div>' +
+        '<div>Version: 0.2.1</div>' +
         '<div>Explore graph and <strike>interesting</strike> links</div>' +
         '<div>Click on active node name to remove edges</div>' +
         '<div>Click on link to save it in mine</div>' +
