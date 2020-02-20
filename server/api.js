@@ -70,6 +70,12 @@ exports.init = (app) => {
         response.json(links);
     });
 
+    // statistics
+    app.get('/statistics', async function (request, response) {
+        let statistics = await database.getStatistics();
+        response.json(statistics);
+    });
+
     let routes = [];
     app._router.stack.forEach(function (r) {
         if (r.route && r.route.path) {

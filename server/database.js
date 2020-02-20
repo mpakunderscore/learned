@@ -106,7 +106,7 @@ sequelize.sync().then(() => {
 
 exports.getUser = async (id) => {
 
-    console.log(id)
+    // console.log(id)
 
     let user;
 
@@ -178,7 +178,8 @@ exports.getLinks = async () => {
 
 exports.saveUserLink = async (userid, url) => {
     let userLink = UserLink.create({userid: userid, url: url})
-    await crawler.getURLData(url)
+    let link = await crawler.getURLData(url);
+    return link;
     // console.log(userLink)
 };
 
@@ -223,3 +224,13 @@ exports.getUserLinks = async (userid) => {
 
     return {list: userLinks, graph: words};
 };
+
+
+exports.getStatistics = async () => {
+    let statistics = {};
+    statistics.words = await Word.count()
+    statistics.links = await Link.count()
+    statistics.users = await User.count()
+    statistics.userLinks = await UserLink.count()
+    return statistics;
+}

@@ -61,6 +61,10 @@ exports.getURLData = async function (url) {
 
     console.log('getURLData: ' + url);
 
+    let databaseLink = await database.getLink(url);
+    if (databaseLink)
+        return databaseLink;
+
     const urlArray = url.split( '/' );
 
     const protocol = urlArray[0];
