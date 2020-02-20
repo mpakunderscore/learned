@@ -80,7 +80,7 @@ Category.init({
 
 // {force: true}
 
-sequelize.sync({force: true}).then(() => {
+sequelize.sync().then(() => {
 
     // User.create({id: 'bb888fae-4189-4c50-8381-363f937c8f78', email: null}).then(user => {
     //     console.log(user.toJSON());
