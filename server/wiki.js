@@ -12,6 +12,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
             title = mainTitle[lang];
 
         const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + categoryLang[lang] + title;
+        console.log(urlString)
         const url = encodeURI(urlString);
         const response = await axios.get(url);
         const data = response.data;
@@ -34,7 +35,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
         return {
             categories: categories,
             pages: pages,
-            mainPage: isMainPage ? await getWikiCategoryPage(title, lang) : {}
+            mainPage: isMainPage ? await getWikiCategoryMainPage(title, lang) : {}
         };
 
     } catch (error) {
@@ -43,7 +44,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
     }
 }
 
-let getWikiCategoryPage = async function (title, lang = 'en') {
+let getWikiCategoryMainPage = async function (title, lang = 'en') {
 
     const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + title;
     const url = encodeURI(urlString);
@@ -60,5 +61,41 @@ let getWikiCategoryPage = async function (title, lang = 'en') {
 
     } catch (e) {
         return {text: null}
+    }
+}
+
+exports.getWikiPage = async function (title, lang = 'en') {
+
+    // console.log(title)
+
+    const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + title;
+    const url = encodeURI(urlString);
+
+    // console.log(url)
+
+    let page = {};
+
+    try {
+        const response = await axios.get(url);
+        const data = response.data;
+
+        let categories = [];
+        const $ = cheerio.load(data);
+        // console.log($('#mw-normal-catlinks > ul').find('li > a').length)
+        // console.log($('#mw-normal-catlinks'))
+
+        // console.log($('#mw-normal-catlinks').find('a').length);
+
+        // console.log($('#mw-normal-catlinks > ul').find('li > a').length)
+        $('#mw-normal-catlinks > ul').find('li > a').each(function (index, element) {
+            categories.push($(element).text());
+        });
+
+        page.categories = categories;
+
+        return page;
+
+    } catch (e) {
+        return {error: e};
     }
 }

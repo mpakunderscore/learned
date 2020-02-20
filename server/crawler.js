@@ -103,7 +103,7 @@ exports.getURLData = async function (url) {
         // console.log(responseJson)
         // let text = responseJson.query.pages[Object.keys(responseJson.query.pages)[0]].revisions[0]['*']; // Print the HTML for the Google homepage.
 
-        let words = getWords(text);
+        let words = await getWords(text);
 
         let link = {
             url: url,
@@ -126,7 +126,7 @@ exports.getURLData = async function (url) {
     }
 };
 
-let getWords = function (text) {
+let getWords = async function (text) {
 
     //TODO no time for this, did it before in edflow
 
@@ -149,7 +149,7 @@ let getWords = function (text) {
     }
 
     for (let id in sortable) {
-        database.saveWord(sortable[id].name)
+        await database.saveWord(sortable[id].name)
         // console.log(sortable[id].name + ' / ' + sortable[id].count)
     }
 

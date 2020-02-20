@@ -1,3 +1,5 @@
+const wiki = require('./wiki');
+
 const {Sequelize, Model, DataTypes} = require('sequelize');
 const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
 
@@ -69,6 +71,10 @@ Word.init({
         type: DataTypes.INTEGER,
         defaultValue: 0
     },
+    categories: {
+        type: DataTypes.JSONB,
+        defaultValue: []
+    },
 }, {sequelize, modelName: 'word', timestamps: false});
 
 Category.init({
@@ -133,12 +139,18 @@ exports.getUsers = async () => {
 
 exports.saveWord = (name) => {
 
-    Word.findOne({where: {id: name}}).then(function (word) {
+    Word.findOne({where: {id: name}}).then(async function (word) {
 
         if (word)
             return word.update({count: word.count + 1});
 
-        return Word.create({id: name});
+        let page = await wiki.getWikiPage(name);
+
+        // console.log(page);
+
+        let databaseWord = await Word.create({id: name, categories: page.categories});
+
+        return databaseWord;
 
     }).catch(function (err) {
         // console.error(err)
@@ -149,7 +161,8 @@ exports.saveWord = (name) => {
 // Get list of words
 
 exports.getWords = async () => {
-    return await Word.findAll();
+    let words = await Word.findAll();
+    return words.filter(word => word.categories.length > 0 && !word.categories.includes('Disambiguation pages'))
 };
 
 // Save link
