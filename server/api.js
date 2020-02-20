@@ -53,14 +53,20 @@ exports.init = (app) => {
         response.json(await database.getUsers());
     });
 
+    // get user list of links
+    app.get('/user/links', async function (request, response) {
+        let links = await database.getUserLinks(request.query.userid);
+        response.json(links);
+    });
+
     // add link to user
-    app.get('/link', async function (request, response) {
+    app.get('/user/link/add', async function (request, response) {
         response.json(await database.saveUserLink(request.query.userid, request.query.url));
     });
 
-    // get user list of links
+    // get list of links
     app.get('/links', async function (request, response) {
-        let links = await database.getUserLinks(request.query.userid);
+        let links = await database.getLinks();
         response.json(links);
     });
 

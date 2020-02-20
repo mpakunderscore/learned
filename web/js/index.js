@@ -10,9 +10,11 @@ const getUser = () => {
 getUser();
 
 const getUserLinks = () => {
-    const response = get('/links?userid=' + user.id);
+    const response = get('/user/links?userid=' + user.id);
     const userLinks = JSON.parse(response);
     user.links = userLinks.list;
+
+    console.log(userLinks)
 
     document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
 };

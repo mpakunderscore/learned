@@ -1,5 +1,7 @@
 const {Sequelize, Model, DataTypes} = require('sequelize');
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:');
+const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
+
+const crawler = require("./crawler");
 
 class User extends Model {
 }
@@ -32,6 +34,19 @@ Link.init({
         type: DataTypes.STRING,
         allowNull: false
     },
+
+    title: DataTypes.STRING,
+
+    words: DataTypes.JSONB,
+
+
+    wordsLength: DataTypes.INTEGER,
+    textLength: DataTypes.INTEGER,
+
+    internalLinks: DataTypes.JSONB,
+    externalLinks: DataTypes.JSONB,
+
+
 }, {sequelize, modelName: 'link', timestamps: false});
 
 UserLink.init({
@@ -84,6 +99,11 @@ sequelize.sync().then(() => {
     // });
 });
 
+
+
+
+// Create or get user
+
 exports.getUser = async (id) => {
 
     console.log(id)
@@ -103,10 +123,13 @@ exports.getUser = async (id) => {
     return user.toJSON();
 };
 
-exports.getUsers = async () => {
+// Get list of users
 
+exports.getUsers = async () => {
     return await User.findAll();
 };
+
+// Save word or update word count (word in links)
 
 exports.saveWord = (name) => {
 
@@ -123,16 +146,44 @@ exports.saveWord = (name) => {
     });
 };
 
+// Get list of words
+
 exports.getWords = async () => {
     return await Word.findAll();
 };
 
-exports.saveUserLink = (userid, url) => {
+// Save link
+
+exports.saveLink = async (link) => {
+
+    let databaseLink = await Link.create(link)
+    return databaseLink.toJSON();
+};
+
+// Get link
+
+exports.getLink = async (url) => {
+    let link = Link.findOne({where: {url: url}})
+    return link;
+};
+
+// Get links
+
+exports.getLink = async () => {
+    let links = Link.findAll()
+    return links;
+};
+
+// Save url for user.id. Nothing more
+
+exports.saveUserLink = async (userid, url) => {
     let userLink = UserLink.create({userid: userid, url: url})
+    await crawler.getURLData(url)
     // console.log(userLink)
 };
 
 exports.getUserLinks = async (userid) => {
+
     let userLinks = await UserLink.findAll({
         where: {
             userid: userid
@@ -144,25 +195,26 @@ exports.getUserLinks = async (userid) => {
 
     // So. We need to get words here. Dynamically or from database.
 
+    console.log(userLinks)
+
     let words = {};
     for (let userLink in userLinks) {
-        for (let id in userLink.words) {
-            let name = userLink.words[id].name;
-            words[name] += userLink.words[id].count;
-        }
+
+        let userLinkJson = userLink.toJSON();
+
+        console.log(userLinkJson)
+
+        console.log(userLinkJson.url)
+
+        const link = await exports.getLink(userLinkJson.url);
+        console.log(link)
+
+        if (link)
+            for (let id in link.words) {
+                let name = link.words[id].name;
+                words[name] += link.words[id].count;
+            }
     }
 
     return {list: userLinks, graph: words};
 };
-
-function upsert(values, condition) {
-    return Model
-        .findOne({where: condition})
-        .then(function (obj) {
-            // update
-            if (obj)
-                return obj.update(values);
-            // insert
-            return Model.create(values);
-        })
-}

@@ -101,7 +101,7 @@ exports.getURLData = async function (url) {
 
         let words = getWords(text);
 
-        return {
+        let link = {
             url: url,
             title: title,
             words: words, // {name, count}
@@ -110,6 +110,12 @@ exports.getURLData = async function (url) {
             internalLinks: internalLinks, // ['']
             externalLinks: externalLinks
         };
+
+        let savedLink = await database.saveLink(link);
+
+        // console.log(savedLink)
+
+        return savedLink;
 
     } catch (error) {
         console.log(error);

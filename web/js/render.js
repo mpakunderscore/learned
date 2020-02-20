@@ -4,12 +4,12 @@ function initInput() {
 
 function initChat() {
     return '<div class="info">Link input does not work currently</div>' +
-        '<div>Last update: 18.02.2020</div>' +
+        '<div>Last update: 19.02.2020</div>' +
+        '<div>Version: 0.2.0</div>' +
         '<div>Explore graph and <strike>interesting</strike> links</div>' +
         '<div>Click on active node name to remove edges</div>' +
         '<div>Click on link to save it in mine</div>' +
         '<div>Move border</div>';
-
 }
 
 function setContent(pages, mainPage, categoriesLength) {
@@ -56,6 +56,6 @@ function setMine() {
 
 let linkClick = (url) => {
     console.log(url)
-    const response = get('/link?userid=' + user.id + '&url=' + url);
+    const response = get('/user/link/add?userid=' + user.id + '&url=' + url);
     // console.log(JSON.parse(response));
 }

@@ -71,6 +71,8 @@ let initGraph = () => {
 };
 initGraph();
 
+window.onresize = function(){ location.reload(); }
+
 function initData() {
     node = node.data(nodes_data, function (d) {
         return d.id;
