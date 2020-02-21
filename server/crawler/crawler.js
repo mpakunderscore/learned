@@ -1,4 +1,4 @@
-const database = require('./database');
+const database = require('../database/postgres');
 
 const cheerio = require('cheerio');
 const axios = require('axios');

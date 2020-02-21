@@ -1,9 +1,9 @@
-const wiki = require('./wiki');
+const wiki = require('../crawler/wiki');
 
 const {Sequelize} = require('sequelize');
 module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
 
-const crawler = require("./crawler");
+const crawler = require("../crawler/crawler");
 
 let models = require("./models");
 
@@ -107,12 +107,11 @@ exports.getUserLinks = async (userid) => {
         }
     });
 
-    // TODO We don't have .words inside UserLink. And inside Link also.
-    // Only in crawler method. Where we store Word model.
+    // TODO We don't have .words inside UserLink. And inside Link only word name and page count.
 
     // So. We need to get words here. Dynamically or from database.
 
-    // console.log(userLinks)
+    const globalWords = await exports.getWords();
 
     let words = {};
     for (let id in userLinks) {
@@ -142,6 +141,11 @@ exports.getUserLinks = async (userid) => {
                 delete words[id];
         }
     }
+
+    // TODO now we need to sort out words
+
+    // TODO and after it. Go down by graph and fill nodes with count
+    // so we need this graph at first
 
     return {list: userLinks, graph: words};
 };

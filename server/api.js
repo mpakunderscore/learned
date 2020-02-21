@@ -2,9 +2,9 @@
 // let router = express.Router();
 
 const utils = require("./utils");
-const crawler = require("./crawler");
-const wiki = require("./wiki");
-const database = require("./database");
+const crawler = require("./crawler/crawler");
+const wiki = require("./crawler/wiki");
+const database = require("./database/postgres");
 
 exports.init = (app) => {
 

@@ -1,4 +1,4 @@
-let sequelize = require('./database').sequelize;;
+let sequelize = require('./postgres').sequelize;;
 
 const {Model, DataTypes} = require('sequelize');
 
@@ -47,7 +47,6 @@ Link.init({
 
     words: DataTypes.JSONB,
 
-
     wordsLength: DataTypes.INTEGER,
     textLength: DataTypes.INTEGER,
 
@@ -87,5 +86,12 @@ Category.init({
     id: {
         type: DataTypes.STRING,
         primaryKey: true
+    },
+    language: {
+        type: DataTypes.STRING,
+    },
+    categories: {
+        type: DataTypes.JSONB,
+        defaultValue: []
     },
 }, {sequelize, modelName: 'category', timestamps: false});
