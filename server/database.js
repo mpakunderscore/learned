@@ -1,112 +1,15 @@
 const wiki = require('./wiki');
 
-const {Sequelize, Model, DataTypes} = require('sequelize');
-const sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
+const {Sequelize} = require('sequelize');
+module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
 
 const crawler = require("./crawler");
 
-class User extends Model {
-}
-
-class Link extends Model {
-}
-
-class UserLink extends Model {
-}
-
-class Word extends Model {
-}
-
-class Category extends Model {
-}
-
-User.init({
-    id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV1,
-        primaryKey: true
-    },
-    email: {
-        type: DataTypes.STRING
-    },
-}, {sequelize, modelName: 'user'});
-
-Link.init({
-    url: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    title: DataTypes.STRING,
-
-    words: DataTypes.JSONB,
-
-
-    wordsLength: DataTypes.INTEGER,
-    textLength: DataTypes.INTEGER,
-
-    internalLinks: DataTypes.JSONB,
-    externalLinks: DataTypes.JSONB,
-
-
-}, {sequelize, modelName: 'link', timestamps: false});
-
-UserLink.init({
-    userid: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    url: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-}, {sequelize, modelName: 'userlink', timestamps: false});
-
-Word.init({
-    id: {
-        type: DataTypes.STRING,
-        primaryKey: true
-    },
-    count: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0
-    },
-    categories: {
-        type: DataTypes.JSONB,
-        defaultValue: []
-    },
-}, {sequelize, modelName: 'word', timestamps: false});
-
-Category.init({
-    id: {
-        type: DataTypes.STRING,
-        primaryKey: true
-    },
-}, {sequelize, modelName: 'category', timestamps: false});
+let models = require("./models");
 
 // {force: true}
 
-sequelize.sync().then(() => {
-
-    // User.create({id: 'bb888fae-4189-4c50-8381-363f937c8f78', email: null}).then(user => {
-    //     console.log(user.toJSON());
-    // });
-    // Link.create({url: 'url'}).then(user => {
-    //     console.log(user.toJSON());
-    // });
-    // UserLink.create({userid: 'bb888fae-4189-4c50-8381-363f937c8f78', url: 'url'}).then(user => {
-    //     console.log(user.toJSON());
-    // });
-    // Word.create({id: 'the'}).then(user => {
-    //     console.log(user.toJSON());
-    // });
-    // Category.create({id: 'music'}).then(user => {
-    //     console.log(user.toJSON());
-    // });
-});
-
-
-
+module.exports.sequelize.sync().then(() => {});
 
 // Create or get user
 
@@ -118,13 +21,13 @@ exports.getUser = async (id) => {
 
     if (id) {
 
-        let user = await User.findOne({where: {id: id}});
+        let user = await models.User.findOne({where: {id: id}});
 
         if (user)
             return user.toJSON();
     }
 
-    user = await User.create({id: id});
+    user = await models.User.create({id: id});
 
     return user.toJSON();
 };
@@ -132,14 +35,14 @@ exports.getUser = async (id) => {
 // Get list of users
 
 exports.getUsers = async () => {
-    return await User.findAll();
+    return await models.User.findAll();
 };
 
 // Save word or update word count (word in links)
 
 exports.saveWord = (name) => {
 
-    Word.findOne({where: {id: name}}).then(async function (word) {
+    models.Word.findOne({where: {id: name}}).then(async function (word) {
 
         if (word)
             return word.update({count: word.count + 1});
@@ -148,7 +51,7 @@ exports.saveWord = (name) => {
 
         // console.log(page);
 
-        let databaseWord = await Word.create({id: name, categories: page.categories});
+        let databaseWord = await models.Word.create({id: name, categories: page.categories});
 
         return databaseWord;
 
@@ -161,7 +64,7 @@ exports.saveWord = (name) => {
 // Get list of words
 
 exports.getWords = async () => {
-    let words = await Word.findAll();
+    let words = await models.Word.findAll();
     return words.filter(word => word.categories.length > 0 && !word.categories.includes('Disambiguation pages'))
 };
 
@@ -169,28 +72,28 @@ exports.getWords = async () => {
 
 exports.saveLink = async (link) => {
 
-    let databaseLink = await Link.create(link)
+    let databaseLink = await models.Link.create(link)
     return databaseLink.toJSON();
 };
 
 // Get link
 
 exports.getLink = async (url) => {
-    let link = Link.findOne({where: {url: url}})
+    let link = models.Link.findOne({where: {url: url}})
     return link;
 };
 
 // Get links
 
 exports.getLinks = async () => {
-    let links = Link.findAll()
+    let links = models.Link.findAll()
     return links;
 };
 
 // Save url for user.id. Nothing more
 
 exports.saveUserLink = async (userid, url) => {
-    let userLink = UserLink.create({userid: userid, url: url})
+    let userLink = models.UserLink.create({userid: userid, url: url})
     let link = await crawler.getURLData(url);
     return link;
     // console.log(userLink)
@@ -198,7 +101,7 @@ exports.saveUserLink = async (userid, url) => {
 
 exports.getUserLinks = async (userid) => {
 
-    let userLinks = await UserLink.findAll({
+    let userLinks = await models.UserLink.findAll({
         where: {
             userid: userid
         }
@@ -246,9 +149,9 @@ exports.getUserLinks = async (userid) => {
 
 exports.getStatistics = async () => {
     let statistics = {};
-    statistics.words = await Word.count()
-    statistics.links = await Link.count()
-    statistics.users = await User.count()
-    statistics.userLinks = await UserLink.count()
+    statistics.words = await models.Word.count()
+    statistics.links = await models.Link.count()
+    statistics.users = await models.User.count()
+    statistics.userLinks = await models.UserLink.count()
     return statistics;
 }

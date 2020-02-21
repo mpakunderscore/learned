@@ -12,7 +12,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
             title = mainTitle[lang];
 
         const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + categoryLang[lang] + title;
-        console.log(urlString)
+        // console.log(urlString)
         const url = encodeURI(urlString);
         const response = await axios.get(url);
         const data = response.data;
