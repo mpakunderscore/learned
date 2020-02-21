@@ -13,6 +13,10 @@ exports.getWikiCategories = async function (title, lang = 'en') {
         if (title === 'Wiki')
             title = mainTitle[lang];
 
+        let databaseCategory = await database.getCategory(title).then();
+        if (databaseCategory)
+            return databaseCategory;
+
         const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + categoryLang[lang] + title;
         // console.log(urlString)
         const url = encodeURI(urlString);

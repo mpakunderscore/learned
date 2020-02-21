@@ -157,6 +157,13 @@ exports.saveCategory = async (category) => {
     return databaseCategory.toJSON();
 };
 
+// Get one category
+
+exports.getCategory = async (id) => {
+    let category = await models.Category.findOne({where: {id: id}});
+    return category;
+}
+
 // List of categories graph
 
 exports.getCategories = async () => {
