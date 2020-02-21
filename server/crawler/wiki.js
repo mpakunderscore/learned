@@ -1,6 +1,8 @@
 const cheerio = require('cheerio')
 const axios = require('axios');
 
+const database = require("../database/postgres");
+
 exports.getWikiCategories = async function (title, lang = 'en') {
 
     const categoryLang = {en: 'Category:', ru: 'Категория:', simple: 'Category:'}
@@ -32,11 +34,17 @@ exports.getWikiCategories = async function (title, lang = 'en') {
                 isMainPage = true;
         });
 
-        return {
+        let category = {
+            id: title,
             categories: categories,
             pages: pages,
-            mainPage: isMainPage ? await getWikiCategoryMainPage(title, lang) : {}
+            mainPage: isMainPage ? await getWikiCategoryMainPage(title, lang) : {},
+            language: lang,
         };
+
+        database.saveCategory(category).then();
+
+        return category;
 
     } catch (error) {
         // TODO

@@ -87,11 +87,20 @@ Category.init({
         type: DataTypes.STRING,
         primaryKey: true
     },
-    language: {
-        type: DataTypes.STRING,
-    },
     categories: {
         type: DataTypes.JSONB,
         defaultValue: []
     },
+    pages: {
+        type: DataTypes.JSONB,
+        defaultValue: []
+    },
+    mainPage: {
+        type: DataTypes.JSONB,
+        defaultValue: {}
+    },
+    language: {
+        type: DataTypes.STRING,
+    },
+
 }, {sequelize, modelName: 'category', timestamps: false});

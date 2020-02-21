@@ -1,7 +1,7 @@
 // let express = require('express');
 // let router = express.Router();
 
-const utils = require("./utils");
+// const utils = require("./utils");
 const crawler = require("./crawler/crawler");
 const wiki = require("./crawler/wiki");
 const database = require("./database/postgres");
@@ -68,6 +68,12 @@ exports.init = (app) => {
     app.get('/links', async function (request, response) {
         let links = await database.getLinks();
         response.json(links);
+    });
+
+    // get list of links
+    app.get('/categories', async function (request, response) {
+        let categories = await database.getCategories();
+        response.json(categories);
     });
 
     // statistics

@@ -150,6 +150,19 @@ exports.getUserLinks = async (userid) => {
     return {list: userLinks, graph: words};
 };
 
+// Save category from wiki graph
+
+exports.saveCategory = async (category) => {
+    let databaseCategory = await models.Category.create(category)
+    return databaseCategory.toJSON();
+};
+
+// List of categories graph
+
+exports.getCategories = async () => {
+    let categories = await models.Category.findAll();
+    return categories;
+};
 
 exports.getStatistics = async () => {
     let statistics = {};
