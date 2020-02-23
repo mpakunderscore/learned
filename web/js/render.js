@@ -4,7 +4,7 @@ function initInput() {
     input.id = 'main-input';
     input.type = 'text';
     input.autocomplete = 'off';
-    input.placeholder = 'Link, message or search';
+    input.placeholder = 'Link input';
     // content.innerHTML = '<input id="main-input" autocomplete="off" placeholder="Link, message or search"/>';
     // let input = document.getElementById('main-input');
 

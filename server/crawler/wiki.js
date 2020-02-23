@@ -10,7 +10,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
 
     try {
 
-        if (title === 'Wiki')
+        if (title === 'Graph')
             title = mainTitle[lang];
 
         let databaseCategory = await database.getCategory(title).then();

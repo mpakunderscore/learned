@@ -4,7 +4,7 @@ const screenWidth = window.innerWidth;
 const isMobile = screenWidth < 600;
 
 // console.log(localStorage.getItem('borderRatio'))
-let borderRatio = localStorage.getItem('borderRatio') || 0.5;
+let borderRatio = localStorage.getItem('borderRatio') || 0.65;
 let width = screenWidth * (isMobile ? 1 : borderRatio);
 let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 
@@ -26,6 +26,8 @@ graph.style.width = 100 * borderRatio + '%';
 
 // TODO
 
+let lang = 'en';
+
 const circleRadius = isMobile ? 12 : 6;
 const textPadding = isMobile ? 18 : 12;
 const textHeight = isMobile ? '.4em' : '.33em';
@@ -33,30 +35,26 @@ const textHeight = isMobile ? '.4em' : '.33em';
 let nodes_data = [];
 let links_data = [];
 
+
+
 let mainCategory = {id: '', main: true};
 nodes_data.push(mainCategory);
 
-
 // TODO MENU DATA
+let initMain = () => {
 
-// menuItem({id: 'Links'})
-
-
-menuItem({id: 'Language'})
-menuItem({id: 'Wiki', active: false})
-menuItem({id: 'Mine'})
-menuItem({id: 'Random'})
-
-// menuItem({id: 'HN'})
-// menuItem({id: 'About'})
-
-let lang = 'en';
-
-// let lang = 'ru';
+    menuItem({id: 'Language'})
+    menuItem({id: 'Graph', active: false})
+    menuItem({id: 'Mine'})
+    menuItem({id: 'Random'})
+};
+initMain();
 
 function menuItem(item) {
     nodes_data.push(item);
     links_data.push({source: mainCategory, target: item, value: 100});
+
+    return item;
 }
 
 
@@ -69,11 +67,14 @@ simulation.on('tick', tickActions);
 let initGraph = () => {
     initData();
     initView();
+
     initSimulation();
 };
 initGraph();
 
-window.onresize = function(){ location.reload(); }
+window.onresize = function () {
+    location.reload();
+}
 
 function initData() {
     node = node.data(nodes_data, function (d) {
@@ -117,12 +118,6 @@ function initView() {
             let index = nodes_data.indexOf(d);
             if (index !== -1) {
 
-
-                // nodes_data.splice(index, 1);
-                // node.data(nodes_data)
-                //     .exit()
-                //     .remove();
-
                 // console.log(index)
                 // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
                 links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
@@ -130,12 +125,23 @@ function initView() {
                     .exit()
                     .remove();
 
+                console.log(nodes_data[index])
+
+                nodes_data.splice(index, 1);
+                node.data(nodes_data)
+                    .exit()
+                    .remove();
+
+                console.log(nodes_data)
+
+                console.log(links_data)
+
             }
 
             // console.log(nodes_data.length)
             // console.log(links_data.length)
 
-            d3.event.stopPropagation();
+            // d3.event.stopPropagation();
 
             initGraph();
         })
@@ -180,25 +186,38 @@ function addNode(circleElement, category, random) {
     // d.active = true;
 
     if (title === 'Random') {
-        title = 'Wiki';
+        title = 'Graph';
         random = true;
     }
 
-    let titleNode = nodes_data.find(element => element.id === title);
-    titleNode.active = true;
+    let selectedNode = nodes_data.find(element => element.id === title);
+    selectedNode.active = true;
 
     if (title === 'Language' || title === 'Ru' || title === 'En' || title === 'Simple') {
 
         if (title === 'Language') {
+
+            links_data = links_data.filter(link => link.source.id === selectedNode.id || link.target.id === selectedNode.id);
+            // links_data = [];
+            // links_data.push({source: mainCategory, target: selectedNode, value: 100});
+            link.data(links_data)
+                .exit()
+                .remove();
+
+            nodes_data = nodes_data.filter(node => node.id === selectedNode.id || node.id === '')
+            node.data(nodes_data)
+                .exit()
+                .remove();
+
             let ru = {id: 'Ru'};
-            let en = {id: 'En'};
+            let en = {id: 'En', active: true};
             let simple = {id: 'Simple'};
             nodes_data.push(ru);
             nodes_data.push(en);
             nodes_data.push(simple);
-            links_data.push({source: ru, target: titleNode, value: 100})
-            links_data.push({source: en, target: titleNode, value: 100})
-            links_data.push({source: simple, target: titleNode, value: 100})
+            links_data.push({source: ru, target: selectedNode, value: 100})
+            links_data.push({source: en, target: selectedNode, value: 100})
+            links_data.push({source: simple, target: selectedNode, value: 100})
         }
 
         if (title === 'Ru')
@@ -209,6 +228,8 @@ function addNode(circleElement, category, random) {
 
         if (title === 'Simple')
             lang = 'simple';
+
+        initGraph();
 
     } else if (title === 'Mine') {
 
@@ -241,7 +262,7 @@ function addNode(circleElement, category, random) {
                 }
 
                 nodes_data.push(categoryJson);
-                links_data.push({source: categoryJson, target: titleNode, value: 100})
+                links_data.push({source: categoryJson, target: selectedNode, value: 100})
 
             } else {
 

@@ -42,8 +42,8 @@ circle:hover {
 }
 
 circle.active:hover {
-    stroke: var(--color-red-dark);
-    fill: var(--color-red);
+    stroke: var(--color-yellow-dark);
+    fill: var(--color-yellow);
 }
 
 circle:hover + text {

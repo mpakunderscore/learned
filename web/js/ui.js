@@ -41,6 +41,7 @@ function closeDragElement() {
 
 let graphZoomed = false;
 
+// TODO
 let ratio = 1.51515152;
 
 let zoom = () => {
