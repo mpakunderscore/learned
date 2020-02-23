@@ -1,6 +1,7 @@
 const wiki = require('../crawler/wiki');
 
 const {Sequelize} = require('sequelize');
+
 module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
 
 const crawler = require("../crawler/crawler");
@@ -99,6 +100,8 @@ exports.saveUserLink = async (userid, url) => {
     // console.log(userLink)
 };
 
+// Get user links and graph
+
 exports.getUserLinks = async (userid) => {
 
     let userLinks = await models.UserLink.findAll({
@@ -147,6 +150,12 @@ exports.getUserLinks = async (userid) => {
     // TODO and after it. Go down by graph and fill nodes with count
     // so we need this graph at first
 
+    // TODO DO
+
+    let categories = await exports.getCategories(); // {id, categiries, pages}
+
+    console.log(categories.length)
+
     return {list: userLinks, graph: words};
 };
 
@@ -171,11 +180,14 @@ exports.getCategories = async () => {
     return categories;
 };
 
+// Get user
+
 exports.getStatistics = async () => {
     let statistics = {};
     statistics.words = await models.Word.count()
     statistics.links = await models.Link.count()
     statistics.users = await models.User.count()
     statistics.userLinks = await models.UserLink.count()
+    statistics.categories = await models.Category.count()
     return statistics;
 }

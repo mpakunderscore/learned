@@ -42,7 +42,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
             id: title,
             categories: categories,
             pages: pages,
-            mainPage: isMainPage ? await getWikiCategoryMainPage(title, lang) : {},
+            mainPage: isMainPage ? await exports.getWikiPage(title, lang) : {},
             language: lang,
         };
 
@@ -56,10 +56,12 @@ exports.getWikiCategories = async function (title, lang = 'en') {
     }
 }
 
-let getWikiCategoryMainPage = async function (title, lang = 'en') {
+exports.getWikiPage = async function (title, lang = 'en') {
 
     const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + title;
     const url = encodeURI(urlString);
+
+    let page = {};
 
     try {
         const response = await axios.get(url);
@@ -68,46 +70,24 @@ let getWikiCategoryMainPage = async function (title, lang = 'en') {
         const $ = cheerio.load(data);
         let text = $('p[class!=mw-empty-elt]').first().text();
         let fixedText = text.replace(/\[.*\]/gm, '').replace(/\s\s+/g, ' ');
-
-        return {text: fixedText};
-
-    } catch (e) {
-        return {text: null}
-    }
-}
-
-exports.getWikiPage = async function (title, lang = 'en') {
-
-    // console.log(title)
-
-    const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + title;
-    const url = encodeURI(urlString);
-
-    // console.log(url)
-
-    let page = {};
-
-    try {
-        const response = await axios.get(url);
-        const data = response.data;
+        page.text = fixedText;
 
         let categories = [];
-        const $ = cheerio.load(data);
-        // console.log($('#mw-normal-catlinks > ul').find('li > a').length)
-        // console.log($('#mw-normal-catlinks'))
-
-        // console.log($('#mw-normal-catlinks').find('a').length);
-
-        // console.log($('#mw-normal-catlinks > ul').find('li > a').length)
         $('#mw-normal-catlinks > ul').find('li > a').each(function (index, element) {
             categories.push($(element).text());
         });
-
         page.categories = categories;
+
+        $('img').each(function (index, element) {
+            let src = $(element).attr('src');
+            let width = $(element).attr('width');
+            if (width > 100)
+                page.image = src;
+        });
 
         return page;
 
     } catch (e) {
-        return {error: e};
+        return {text: null}
     }
-}
+};

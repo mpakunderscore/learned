@@ -8,7 +8,7 @@ const database = require("./database/postgres");
 
 exports.init = (app) => {
 
-    // get url graph
+    // get url graph TODO currently only words
     app.get('/url', async function (request, response) {
 
         let urlData = await crawler.getURLData(request.query.url);
@@ -19,6 +19,7 @@ exports.init = (app) => {
         response.json(urlData);
     });
 
+    // get pages from this url list links
     app.get('/crawl', async function (request, response) {
 
         let linksArray = await crawler.crawlURLLinks(request.query.url);
@@ -49,11 +50,12 @@ exports.init = (app) => {
         response.json(user);
     });
 
+    // list of all users
     app.get('/users', async function (request, response) {
         response.json(await database.getUsers());
     });
 
-    // get user list of links
+    // get user list of links TODO and graph, currently only words
     app.get('/user/links', async function (request, response) {
         let links = await database.getUserLinks(request.query.userid);
         response.json(links);
