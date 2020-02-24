@@ -40,14 +40,18 @@ let links_data = [];
 let mainCategory = {id: '', main: true};
 nodes_data.push(mainCategory);
 
-let languageCategory = menuItem({id: 'Language'});
-menuItem({id: 'Graph', active: false});
-menuItem({id: 'Mine'});
-menuItem({id: 'Random'});
+// let languageCategory;
+// let graphCategory;
 
-// // TODO MENU DATA
-// let initMain = () => {};
-// initMain();
+// TODO MENU DATA
+let initMain = () => {
+
+    menuItem({id: 'Language'});
+    menuItem({id: 'Graph'});
+    menuItem({id: 'Mine'});
+    menuItem({id: 'Random'});
+};
+initMain();
 
 function menuItem(item) {
     nodes_data.push(item);
@@ -75,12 +79,8 @@ window.onresize = function () {
 }
 
 function initData() {
-    node = node.data(nodes_data, function (d) {
-        return d.id;
-    });
-    link = link.data(links_data, function (d) {
-        return d.source.id + '-' + d.target.id;
-    })
+    node = node.data(nodes_data);
+    link = link.data(links_data);
 }
 
 function initView() {
@@ -119,20 +119,17 @@ function initView() {
                 // console.log(index)
                 // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
                 links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
-                link.data(links_data)
-                    .exit()
-                    .remove();
+                link = link.data(links_data)
+                link.exit().remove();
 
-                console.log(nodes_data[index])
+                // console.log(nodes_data[index])
 
                 nodes_data.splice(index, 1);
-                node.data(nodes_data)
-                    .exit()
-                    .remove();
+                node = node.data(nodes_data)
+                node.exit().remove();
 
-                console.log(nodes_data)
-
-                console.log(links_data)
+                // console.log(nodes_data)
+                // console.log(links_data)
 
             }
 
@@ -170,35 +167,30 @@ function initView() {
     // link.exit().remove();
 }
 
-function clearGraph(selectedNode) {
-
-    links_data = [];
-    links_data.push({source: mainCategory, target: selectedNode, value: 100});
-    link.data(links_data)
-        .exit()
-        .remove();
+function clearGraph() {
 
     nodes_data = [];
     nodes_data.push(mainCategory);
-    nodes_data.push(selectedNode);
-    node.data(nodes_data)
-        .exit()
-        .remove();
+    node = node.data(nodes_data);
+    node.exit().remove();
+
+    links_data = [];
+    // links_data.push({source: mainCategory, target: selectedNode, value: 100});
+    link = link.data(links_data)
+    link.exit().remove();
 }
 
-
+let ru = {id: 'Ru'};
+let en = {id: 'En'};
+let simple = {id: 'Simple'};
 
 function setLanguageMenu() {
 
-    let ru = {id: 'Ru'};
-    let en = {id: 'En'};
-    let simple = {id: 'Simple'};
+    let languageCategory = menuItem({id: 'Language', active: true});
 
     en.active = lang === 'en';
     ru.active = lang === 'ru';
     simple.active = lang === 'simple';
-
-    // nodes_data = [mainCategory, languageCategory]
 
     nodes_data.push(en);
     nodes_data.push(ru);
@@ -209,17 +201,6 @@ function setLanguageMenu() {
     links_data.push({source: en, target: languageCategory, value: 100});
     links_data.push({source: simple, target: languageCategory, value: 100});
     console.log(links_data)
-
-    // link.data(links_data)
-    //     .exit()
-    //     .remove();
-
-
-    // node.data(nodes_data)
-    //     .exit()
-    //     .remove();
-
-    // initGraph()
 }
 
 function selectNode(circleElement, category, random) {
@@ -237,34 +218,39 @@ function selectNode(circleElement, category, random) {
     let selectedNode = nodes_data.find(element => element.id === title);
     selectedNode.active = true;
 
+    console.log(title)
+
     if (title === 'Language' || title === 'Ru' || title === 'En' || title === 'Simple') {
 
         if (title !== 'Language')
             lang = title.toLowerCase();
 
-        console.log(lang)
+        // console.log(lang)
 
-        clearGraph(languageCategory);
+        clearGraph();
         setLanguageMenu();
 
     } else if (title === 'Mine') {
 
-        setMine()
+        clearGraph();
+        menuItem(selectedNode);
+        setMine();
 
     } else if (title === '') {
 
-        setCircle()
+        clearGraph();
+        initMain();
+        // setCircle()
 
     } else {
 
+        if (title === 'Graph') {
+            clearGraph();
+            menuItem(selectedNode);
+        }
+
         const response = get('/wiki?title=' + title + '&lang=' + lang);
         const responseJson = JSON.parse(response);
-
-        // console.log(responseJson.categories)
-        // console.log(responseJson.pages)
-        // console.log(responseJson.mainPage)
-
-        // console.log(responseJson.categories.length)
 
         let categoriesLength = responseJson.categories.length;
 
