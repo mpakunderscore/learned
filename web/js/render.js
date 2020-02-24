@@ -52,9 +52,9 @@ function setContent(pages, mainPage, categoriesLength) {
 
     let html = '';
 
-    if (mainPage.image) {
-        html += '<div id="main-image"><img src="' + mainPage.image + '" alt="Page name"/></div>';
-    }
+    // if (mainPage.image) {
+    //     html += '<div id="main-image"><img src="' + mainPage.image + '" alt="Page name"/></div>';
+    // }
 
     if (mainPage.text) {
         html += '<div id="main-text">' + mainPage.text + '</div>';

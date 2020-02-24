@@ -109,25 +109,58 @@ exports.getUserLinks = async (userid) => {
         }
     });
 
-    // TODO We don't have .words inside UserLink. And inside Link only word name and page count.
+    // let words = {};
+    for (let id in userLinks) {
 
-    // So. We need to get words here. Dynamically or from database.
+        // let userLinkUrl = userLinks[id].url;
 
-    const databaseWords = await exports.getWords();
+        // const link = await exports.getLink(userLinkUrl);
+
+        // userLinks[id]['title'] = link.title;
+
+        // if (link)
+        //     for (let id in link.words) {
+        //         let name = link.words[id].name;
+        //         if (words[name])
+        //             words[name] += link.words[id].count;
+        //         else
+        //             words[name] = link.words[id].count;
+        //     }
+        //
+        // for (let id in words) {
+        //     if (words[id] < 3)
+        //         delete words[id];
+        // }
+    }
+
+    let categories = await exports.getCategories(); // {id, categiries, pages}
+
+    // console.log(categories.length)
+
+    // let userGraph = words;
+
+    return userLinks;
+};
+
+exports.getUserGraph = async (userid) => {
+
+    // opened links
+    // added links
+    // saved categories
+    // language
+
+    let userLinks = await models.UserLink.findAll({
+        where: {
+            userid: userid
+        }
+    });
 
     let words = {};
     for (let id in userLinks) {
 
-        // let userLinkJson = userLink.toJSON();
-
-        // console.log(userLinks[id].toJSON())
-
         let userLinkUrl = userLinks[id].toJSON().url;
 
-        // console.log(userLinkJson.url)
-
         const link = await exports.getLink(userLinkUrl);
-        // console.log(link)
 
         if (link)
             for (let id in link.words) {
@@ -139,24 +172,13 @@ exports.getUserLinks = async (userid) => {
             }
 
         for (let id in words) {
-            if (words[id] < 10)
+            if (words[id] < 3)
                 delete words[id];
         }
     }
 
-    // TODO now we need to sort out words
-
-    // TODO and after it. Go down by graph and fill nodes with count
-    // so we need this graph at first
-
-    // TODO DO
-
-    let categories = await exports.getCategories(); // {id, categiries, pages}
-
-    console.log(categories.length)
-
-    return {list: userLinks, graph: words};
-};
+    return userLinks;
+}
 
 // Save category from wiki graph
 

@@ -1,6 +1,6 @@
 {
-    "name": "crawler",
-    "version": "0.2.1",
+    "name": "learned.space",
+    "version": "0.2.3",
     "description": "",
     "main": "server.js",
     "scripts": {
@@ -8,7 +8,7 @@
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "",
-    "license": "ISC",
+    "license": "",
     "dependencies": {
         "axios": "^0.19.0",
         "cheerio": "^1.0.0-rc.3",

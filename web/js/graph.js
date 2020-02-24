@@ -80,7 +80,9 @@ window.onresize = function () {
 
 function initData() {
     node = node.data(nodes_data);
+    node.exit().remove();
     link = link.data(links_data);
+    link.exit().remove();
 }
 
 function initView() {
@@ -114,22 +116,22 @@ function initView() {
             // console.log(links_data.length)
 
             let index = nodes_data.indexOf(d);
+            console.log(nodes_data[index])
             if (index !== -1) {
+
+                nodes_data.splice(index, 1);
+                // node = node.data(nodes_data)
+                // node.exit().remove();
+
+                console.log(nodes_data)
+                console.log(links_data)
 
                 // console.log(index)
                 // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
+
                 links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
-                link = link.data(links_data)
-                link.exit().remove();
-
-                // console.log(nodes_data[index])
-
-                nodes_data.splice(index, 1);
-                node = node.data(nodes_data)
-                node.exit().remove();
-
-                // console.log(nodes_data)
-                // console.log(links_data)
+                // link = link.data(links_data)
+                // link.exit().remove();
 
             }
 
@@ -228,7 +230,7 @@ function selectNode(circleElement, category, random) {
         // console.log(lang)
 
         clearGraph();
-        initGraph();
+        // initGraph();
         setLanguageMenu();
 
     } else if (title === 'Mine') {
@@ -241,7 +243,7 @@ function selectNode(circleElement, category, random) {
 
         clearGraph();
         initMain();
-        // setCircle()
+        setCircle()
 
     } else {
 

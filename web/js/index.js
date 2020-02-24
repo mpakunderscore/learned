@@ -6,21 +6,24 @@ const getUser = () => {
     user = JSON.parse(response);
     localStorage.setItem('user', JSON.stringify(user));
 };
-
 getUser();
 
 const getUserLinks = () => {
     const response = get('/user/links?userid=' + user.id);
     const userLinks = JSON.parse(response);
-    user.links = userLinks.list;
-
-    console.log(userLinks.list)
-    console.log(userLinks.graph)
-
+    user.links = userLinks;
+    console.log(userLinks)
     document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
 };
-
 getUserLinks();
+
+const getUserGraph = () => {
+    const response = get('/user/graph?userid=' + user.id);
+    const userGraph = JSON.parse(response);
+    user.graph = userGraph;
+    console.log(userGraph)
+};
+getUserGraph();
 
 function get(url) {
     let xmlHttp = new XMLHttpRequest();

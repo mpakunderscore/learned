@@ -9,7 +9,7 @@ const database = require("./database/postgres");
 exports.init = (app) => {
 
     // get url graph TODO currently only words
-    app.get('/url', async function (request, response) {
+    app.get('/crawl', async function (request, response) {
 
         let urlData = await crawler.getURLData(request.query.url);
 
@@ -20,7 +20,7 @@ exports.init = (app) => {
     });
 
     // get pages from this url list links
-    app.get('/crawl', async function (request, response) {
+    app.get('/crawl/links', async function (request, response) {
 
         let linksArray = await crawler.crawlURLLinks(request.query.url);
 
@@ -34,28 +34,19 @@ exports.init = (app) => {
     //     response.json(await crawler.getURLsData([request.query.url1, request.query.url2]));
     // });
 
-    // get all words
-    app.get('/words', async function (request, response) {
-        response.json(await database.getWords());
-    });
-
     // get wiki next categories in graph
     app.get('/wiki', async function (request, response) {
         response.json(await wiki.getWikiCategories(request.query.title, request.query.lang));
     });
 
-    // init user
+
+    // init or get user
     app.get('/user', async function (request, response) {
         let user = await database.getUser(request.query.id);
         response.json(user);
     });
 
-    // list of all users
-    app.get('/users', async function (request, response) {
-        response.json(await database.getUsers());
-    });
-
-    // get user list of links TODO and graph, currently only words
+    // get user list of links TODO title doesn't work
     app.get('/user/links', async function (request, response) {
         let links = await database.getUserLinks(request.query.userid);
         response.json(links);
@@ -66,10 +57,28 @@ exports.init = (app) => {
         response.json(await database.saveUserLink(request.query.userid, request.query.url));
     });
 
+    // TODO get user graph,
+    app.get('/user/graph', async function (request, response) {
+        let links = await database.getUserLinks(request.query.userid);
+        response.json(links);
+    });
+
+
+
+    // list of all users
+    app.get('/users', async function (request, response) {
+        response.json(await database.getUsers());
+    });
+
     // get list of links
     app.get('/links', async function (request, response) {
         let links = await database.getLinks();
         response.json(links);
+    });
+
+    // get all words
+    app.get('/words', async function (request, response) {
+        response.json(await database.getWords());
     });
 
     // get list of links
@@ -78,7 +87,8 @@ exports.init = (app) => {
         response.json(categories);
     });
 
-    // statistics
+
+    // TODO statistics
     app.get('/statistics', async function (request, response) {
         let statistics = await database.getStatistics();
         response.json(statistics);
