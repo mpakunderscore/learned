@@ -40,15 +40,14 @@ let links_data = [];
 let mainCategory = {id: '', main: true};
 nodes_data.push(mainCategory);
 
-// TODO MENU DATA
-let initMain = () => {
+let languageCategory = menuItem({id: 'Language'});
+menuItem({id: 'Graph', active: false});
+menuItem({id: 'Mine'});
+menuItem({id: 'Random'});
 
-    menuItem({id: 'Language'})
-    menuItem({id: 'Graph', active: false})
-    menuItem({id: 'Mine'})
-    menuItem({id: 'Random'})
-};
-initMain();
+// // TODO MENU DATA
+// let initMain = () => {};
+// initMain();
 
 function menuItem(item) {
     nodes_data.push(item);
@@ -67,7 +66,6 @@ simulation.on('tick', tickActions);
 let initGraph = () => {
     initData();
     initView();
-
     initSimulation();
 };
 initGraph();
@@ -99,7 +97,7 @@ function initView() {
             return d.main ? 'main' : (d.active ? 'active' : '')
         })
         .on('click', function (d) {
-            addNode(this, d, false)
+            selectNode(this, d, false)
         })
         .select(function () {
             return this.parentNode;
@@ -172,18 +170,64 @@ function initView() {
     // link.exit().remove();
 }
 
-function addNode(circleElement, category, random) {
+function clearGraph(selectedNode) {
 
-    // console.log('addNode')
+    links_data = [];
+    links_data.push({source: mainCategory, target: selectedNode, value: 100});
+    link.data(links_data)
+        .exit()
+        .remove();
 
-    // let title = that.nextSibling.textContent;
-    // let title = that.textContent;
+    nodes_data = [];
+    nodes_data.push(mainCategory);
+    nodes_data.push(selectedNode);
+    node.data(nodes_data)
+        .exit()
+        .remove();
+}
+
+
+
+function setLanguageMenu() {
+
+    let ru = {id: 'Ru'};
+    let en = {id: 'En'};
+    let simple = {id: 'Simple'};
+
+    en.active = lang === 'en';
+    ru.active = lang === 'ru';
+    simple.active = lang === 'simple';
+
+    // nodes_data = [mainCategory, languageCategory]
+
+    nodes_data.push(en);
+    nodes_data.push(ru);
+    nodes_data.push(simple);
+    console.log(nodes_data)
+
+    links_data.push({source: ru, target: languageCategory, value: 100});
+    links_data.push({source: en, target: languageCategory, value: 100});
+    links_data.push({source: simple, target: languageCategory, value: 100});
+    console.log(links_data)
+
+    // link.data(links_data)
+    //     .exit()
+    //     .remove();
+
+
+    // node.data(nodes_data)
+    //     .exit()
+    //     .remove();
+
+    // initGraph()
+}
+
+function selectNode(circleElement, category, random) {
+
     let title = category.id;
-    // d.active = true;
 
     d3.select(circleElement).attr('class', category.main ? 'main' : 'active')
     d3.select(circleElement.nextSibling).attr('class', category.main ? 'main' : 'active')
-    // d.active = true;
 
     if (title === 'Random') {
         title = 'Graph';
@@ -195,41 +239,13 @@ function addNode(circleElement, category, random) {
 
     if (title === 'Language' || title === 'Ru' || title === 'En' || title === 'Simple') {
 
-        if (title === 'Language') {
+        if (title !== 'Language')
+            lang = title.toLowerCase();
 
-            links_data = links_data.filter(link => link.source.id === selectedNode.id || link.target.id === selectedNode.id);
-            // links_data = [];
-            // links_data.push({source: mainCategory, target: selectedNode, value: 100});
-            link.data(links_data)
-                .exit()
-                .remove();
+        console.log(lang)
 
-            nodes_data = nodes_data.filter(node => node.id === selectedNode.id || node.id === '')
-            node.data(nodes_data)
-                .exit()
-                .remove();
-
-            let ru = {id: 'Ru'};
-            let en = {id: 'En', active: true};
-            let simple = {id: 'Simple'};
-            nodes_data.push(ru);
-            nodes_data.push(en);
-            nodes_data.push(simple);
-            links_data.push({source: ru, target: selectedNode, value: 100})
-            links_data.push({source: en, target: selectedNode, value: 100})
-            links_data.push({source: simple, target: selectedNode, value: 100})
-        }
-
-        if (title === 'Ru')
-            lang = 'ru';
-
-        if (title === 'En')
-            lang = 'en';
-
-        if (title === 'Simple')
-            lang = 'simple';
-
-        initGraph();
+        clearGraph(languageCategory);
+        setLanguageMenu();
 
     } else if (title === 'Mine') {
 
@@ -258,7 +274,7 @@ function addNode(circleElement, category, random) {
 
                 if (random) {
                     categoryJson.active = true;
-                    setTimeout(() => addNode(circleElement, categoryJson, random), 1000);
+                    setTimeout(() => selectNode(circleElement, categoryJson, random), 1000);
                 }
 
                 nodes_data.push(categoryJson);

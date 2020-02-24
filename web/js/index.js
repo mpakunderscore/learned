@@ -14,7 +14,8 @@ const getUserLinks = () => {
     const userLinks = JSON.parse(response);
     user.links = userLinks.list;
 
-    console.log(userLinks)
+    console.log(userLinks.list)
+    console.log(userLinks.graph)
 
     document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
 };

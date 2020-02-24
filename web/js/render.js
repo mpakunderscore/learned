@@ -29,9 +29,10 @@ function initInput() {
 function initServiceInfo() {
 
     contentList.innerHTML = '' +
-        '<div>Last update: 20.02.2020</div>' +
-        '<div>Version: 0.2.2</div>' +
-        '<div class="info">Link input does not work properly\n</div>' +
+        '<div>Last update: 24.02.2020</div>' +
+        '<div>Version: 0.2.3</div>' +
+        '<div>Menu update</div>' +
+        // '<div class="info">Link input work not properly</div>' +
         '<div>Explore graph and <strike>interesting</strike> links</div>' +
         '<div>Click on active node name to remove edges</div>' +
         '<div>Click on link to save it in mine</div>' +
