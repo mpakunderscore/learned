@@ -228,6 +228,7 @@ function selectNode(circleElement, category, random) {
         // console.log(lang)
 
         clearGraph();
+        initGraph();
         setLanguageMenu();
 
     } else if (title === 'Mine') {

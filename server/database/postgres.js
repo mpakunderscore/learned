@@ -10,7 +10,7 @@ let models = require("./models");
 
 // {force: true}
 
-module.exports.sequelize.sync().then(() => {});
+module.exports.sequelize.sync({force: true}).then(() => {});
 
 // Create or get user
 
@@ -114,7 +114,7 @@ exports.getUserLinks = async (userid) => {
 
     // So. We need to get words here. Dynamically or from database.
 
-    const globalWords = await exports.getWords();
+    const databaseWords = await exports.getWords();
 
     let words = {};
     for (let id in userLinks) {
