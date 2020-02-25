@@ -87,6 +87,10 @@ Category.init({
         type: DataTypes.STRING,
         primaryKey: true
     },
+    subcategories: {
+        type: DataTypes.JSONB,
+        defaultValue: []
+    },
     categories: {
         type: DataTypes.JSONB,
         defaultValue: []

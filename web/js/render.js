@@ -46,7 +46,7 @@ function setContent(pages, mainPage, categoriesLength) {
 
     // let categories = responseJson.categories
 
-    console.log(mainPage)
+    // console.log(mainPage)
 
     // initInput();
 
@@ -66,7 +66,7 @@ function setContent(pages, mainPage, categoriesLength) {
     contentList.innerHTML = html;
 }
 
-function setMine() {
+function renderUserLinks() {
 
     // console.log(responseJson)
 
@@ -75,8 +75,6 @@ function setMine() {
     // console.log(categories)
 
     // initInput();
-
-    getUserLinks();
 
     let html = '';
     html += '<div id="main-text">Your links collection</div>';

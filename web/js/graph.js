@@ -1,4 +1,4 @@
-const screenWidth = window.innerWidth;
+let screenWidth = window.innerWidth;
 // const screenWidth = screen.width;
 
 const isMobile = screenWidth < 600;
@@ -73,10 +73,6 @@ let initGraph = () => {
     initSimulation();
 };
 initGraph();
-
-window.onresize = function () {
-    location.reload();
-}
 
 function initData() {
     node = node.data(nodes_data);
@@ -220,9 +216,9 @@ function selectNode(circleElement, category, random) {
     let selectedNode = nodes_data.find(element => element.id === title);
     selectedNode.active = true;
 
-    console.log(title)
+    // console.log(title)
 
-    if (title === 'Language' || title === 'Ru' || title === 'En' || title === 'Simple') {
+    if (title === 'Language' || title === 'Ru' || title === 'En' || title === 'Simple') { // Language
 
         if (title !== 'Language')
             lang = title.toLowerCase();
@@ -230,22 +226,28 @@ function selectNode(circleElement, category, random) {
         // console.log(lang)
 
         clearGraph();
-        // initGraph();
         setLanguageMenu();
 
-    } else if (title === 'Mine') {
+    } else if (title === 'Mine') { // Personal graph
 
         clearGraph();
         menuItem(selectedNode);
-        setMine();
 
-    } else if (title === '') {
+        getUserLinks();
+        renderUserLinks();
+
+        getUserGraph();
+        renderUserGraph();
+
+        // TODO ADD GRAPH BUILDER FROM {} HERE
+
+    } else if (title === '') { // Main
 
         clearGraph();
         initMain();
         setCircle()
 
-    } else {
+    } else { // Graph and categories
 
         if (title === 'Graph') {
             clearGraph();
@@ -255,9 +257,9 @@ function selectNode(circleElement, category, random) {
         const response = get('/wiki?title=' + title + '&lang=' + lang);
         const responseJson = JSON.parse(response);
 
-        let categoriesLength = responseJson.categories.length;
+        let categoriesLength = responseJson.subcategories.length;
 
-        shuffle(responseJson.categories).splice(0, random ? 1 : 7).forEach(categoryJson => {
+        shuffle(responseJson.subcategories).splice(0, random ? 1 : 7).forEach(categoryJson => {
 
             if (!nodes_data.find(element => element.id === categoryJson.id)) {
 
@@ -279,6 +281,11 @@ function selectNode(circleElement, category, random) {
 
     initGraph();
 }
+
+function renderUserGraph() {
+
+}
+
 
 function initSimulation() {
     simulation.nodes(nodes_data);

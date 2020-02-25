@@ -20,16 +20,31 @@ function elementDrag(e) {
     e.preventDefault();
 
     borderRatio = e.clientX / screenWidth;
+
+    if (borderRatio !== 0) {
+        renderView()
+    }
+}
+
+function renderView() {
+
+    const graphSvg = document.getElementById('graph-svg');
+
     localStorage.setItem('borderRatio', borderRatio);
     width = screenWidth * (isMobile ? 1 : borderRatio);
     height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 
-    if (borderRatio !== 0) {
-        content.style.width = (99.5 - 100 * borderRatio) + '%';
-        graph.style.width = 100 * borderRatio + '%';
-        graphSvg.setAttribute('width', width * (!graphZoomed ? 1 : ratio));
-        initSimulation();
-    }
+    content.style.width = (99.5 - 100 * borderRatio) + '%';
+    graph.style.width = 100 * borderRatio + '%';
+    graphSvg.setAttribute('width', width * (!graphZoomed ? 1 : ratio));
+    initSimulation();
+}
+
+window.onresize = function () {
+    // location.reload();
+
+    screenWidth = window.innerWidth;
+    renderView();
 }
 
 function closeDragElement() {

@@ -109,38 +109,10 @@ exports.getUserLinks = async (userid) => {
         }
     });
 
-    // let words = {};
-    for (let id in userLinks) {
-
-        // let userLinkUrl = userLinks[id].url;
-
-        // const link = await exports.getLink(userLinkUrl);
-
-        // userLinks[id]['title'] = link.title;
-
-        // if (link)
-        //     for (let id in link.words) {
-        //         let name = link.words[id].name;
-        //         if (words[name])
-        //             words[name] += link.words[id].count;
-        //         else
-        //             words[name] = link.words[id].count;
-        //     }
-        //
-        // for (let id in words) {
-        //     if (words[id] < 3)
-        //         delete words[id];
-        // }
-    }
-
-    let categories = await exports.getCategories(); // {id, categiries, pages}
-
-    // console.log(categories.length)
-
-    // let userGraph = words;
-
     return userLinks;
 };
+
+// Get user graph based on user links TODO
 
 exports.getUserGraph = async (userid) => {
 
@@ -155,7 +127,19 @@ exports.getUserGraph = async (userid) => {
         }
     });
 
-    let words = {};
+    let words = await exports.getWords(); // {id, categiries, pages}
+    let globalWords = {}
+    for (let id in words) {
+        globalWords[words[id].id] = {};
+        globalWords[words[id].id].count = words[id].count;
+        globalWords[words[id].id].categories = words[id].categories;
+    }
+
+    // console.log(words)
+
+    let categories = await exports.getCategories(); // {id, categiries, pages}
+
+    let userWords = {};
     for (let id in userLinks) {
 
         let userLinkUrl = userLinks[id].toJSON().url;
@@ -164,20 +148,61 @@ exports.getUserGraph = async (userid) => {
 
         if (link)
             for (let id in link.words) {
+
                 let name = link.words[id].name;
-                if (words[name])
-                    words[name] += link.words[id].count;
-                else
-                    words[name] = link.words[id].count;
+
+                // console.log(words[name])
+
+                if (userWords[name])
+                    userWords[name].count += link.words[id].count;
+
+                else if (globalWords[name] && isNaN(name) && !globalWords[name].categories.includes('English grammar')) //English words
+                        userWords[name] = {count: link.words[id].count, globalCount: globalWords[name].count, categories: globalWords[name].categories};
             }
 
-        for (let id in words) {
-            if (words[id] < 3)
-                delete words[id];
+        for (let id in userWords) {
+            if (userWords[id].count < 10)
+                delete userWords[id];
         }
     }
 
-    return userLinks;
+    // TODO BUILD GRAPH FROM CATEGORIES AND WORDS INTO {id: 'Main', categories: [{id: 'Engineering', categories: []}]}
+
+    return userWords;
+}
+
+exports.getUserGraphTest = async (userid) => {
+
+    let word = {id: 'startup', categories: ['Entrepreneurship', 'Private equity', 'Types of business entity', 'Business incubators']}
+
+    let graphCategories = {};
+
+    for (let wordCategory in word.categories) {
+
+        let upperCategories = await wiki.getWikiCategories(wordCategory).categories; // []
+
+        //
+
+        for (let upperCategory in upperCategories) {
+
+            if (graphCategories[upperCategory])
+                graphCategories[upperCategory].subcategories.push(wordCategory);
+
+            else
+                graphCategories[upperCategory].subcategories = [];
+
+            // TODO new thread here
+
+            let higherCategories = await wiki.getWikiCategories(upperCategory).categories; // []
+
+            for (let upperCategory in higherCategories) {
+            }
+        }
+    }
+}
+
+let getParrentCategory = function () {
+
 }
 
 // Save category from wiki graph

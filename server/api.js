@@ -59,7 +59,7 @@ exports.init = (app) => {
 
     // TODO get user graph,
     app.get('/user/graph', async function (request, response) {
-        let links = await database.getUserLinks(request.query.userid);
+        let links = await database.getUserGraph(request.query.userid);
         response.json(links);
     });
 

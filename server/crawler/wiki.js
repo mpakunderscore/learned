@@ -23,10 +23,16 @@ exports.getWikiCategories = async function (title, lang = 'en') {
         const response = await axios.get(url);
         const data = response.data;
 
-        let categories = [];
         const $ = cheerio.load(data);
+
+        let subcategories = [];
         $('#mw-subcategories .CategoryTreeItem').find('a').each(function (index, element) {
-            categories.push({id: $(element).text(), info: $(element).next().text()});
+            subcategories.push({id: $(element).text(), info: $(element).next().text()});
+        });
+
+        let categories = [];
+        $('#mw-normal-catlinks > ul').find('li > a').each(function (index, element) {
+            categories.push($(element).text());
         });
 
         let pages = [];
@@ -40,6 +46,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
 
         let category = {
             id: title,
+            subcategories: subcategories,
             categories: categories,
             pages: pages,
             mainPage: isMainPage ? await exports.getWikiPage(title, lang) : {},

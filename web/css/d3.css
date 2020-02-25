@@ -22,7 +22,7 @@ g {
 circle {
     fill: var(--color-white);
     stroke: var(--color-gray);
-    stroke-width: 1px;
+    stroke-width: 1.5px;
 }
 
 circle.active {
