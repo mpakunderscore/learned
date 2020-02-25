@@ -16,8 +16,10 @@ line {
     stroke-opacity: 0.1;
 }
 
-g {
-}
+/*g {*/
+/*    background-color: red;*/
+/*    min-height: 100px;*/
+/*}*/
 
 circle {
     fill: var(--color-white);

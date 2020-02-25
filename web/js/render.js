@@ -40,7 +40,7 @@ function initServiceInfo() {
         '';
 }
 
-function setContent(pages, mainPage, categoriesLength) {
+function setContent(pages, mainPage, categoriesLength, title) {
 
     // console.log(responseJson)
 
@@ -56,10 +56,18 @@ function setContent(pages, mainPage, categoriesLength) {
     //     html += '<div id="main-image"><img src="' + mainPage.image + '" alt="Page name"/></div>';
     // }
 
-    if (mainPage.text) {
-        html += '<div id="main-text">' + mainPage.text + '</div>';
-    }
-    html += '<div>Pages: ' + pages.length + ', Categories: ' + categoriesLength + '</div>';
+
+    html +=
+        '<div class="card" onclick="this.style.display = \'none\'">' +
+        '<div class="title">' +
+            '<div class="circle"></div>' +
+            '<div class="title-text">' + title + '</div>' +
+        '</div>' +
+        (mainPage.text ? '<div class="text">' + mainPage.text + '</div>' : '') +
+        '</div>';
+
+    html += '<div class="hint">Pages: ' + pages.length + ', Categories: ' + categoriesLength + '</div>';
+
     for (let i = 0; i < pages.length; i++) {
         html += '<div><a onclick="linkClick(this.href)" href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
     }
@@ -80,7 +88,7 @@ function renderUserLinks() {
     html += '<div id="main-text">Your links collection</div>';
     // html += '<div>Links: ' + user.links.length +'</div>';
     for (let i = 0; i < user.links.length; i++) {
-        html += '<div><a href="' + user.links[i].url + '" target="_blank">' + user.links[i].url + '</a></div>';
+        html += '<div class="link"><a href="' + user.links[i].url + '" target="_blank">' + user.links[i].url + '</a></div>';
     }
     contentList.innerHTML = html;
 }

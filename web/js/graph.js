@@ -32,6 +32,8 @@ const circleRadius = isMobile ? 12 : 6;
 const textPadding = isMobile ? 18 : 12;
 const textHeight = isMobile ? '.4em' : '.33em';
 
+const defaultEdge = 100;
+
 let nodes_data = [];
 let links_data = [];
 
@@ -55,7 +57,7 @@ initMain();
 
 function menuItem(item) {
     nodes_data.push(item);
-    links_data.push({source: mainCategory, target: item, value: 100});
+    links_data.push({source: mainCategory, target: item, value: defaultEdge});
 
     return item;
 }
@@ -144,6 +146,12 @@ function initView() {
         .select(function () {
             return this.parentNode;
         })
+        // .append('div')
+        // .html('')
+        // .attr('class', 'paper')
+        // .select(function () {
+        //     return this.parentNode;
+        // })
         .merge(node);
 
     // node.append('text')
@@ -173,8 +181,7 @@ function clearGraph() {
     node.exit().remove();
 
     links_data = [];
-    // links_data.push({source: mainCategory, target: selectedNode, value: 100});
-    link = link.data(links_data)
+    link = link.data(links_data);
     link.exit().remove();
 }
 
@@ -195,9 +202,9 @@ function setLanguageMenu() {
     nodes_data.push(simple);
     console.log(nodes_data)
 
-    links_data.push({source: ru, target: languageCategory, value: 100});
-    links_data.push({source: en, target: languageCategory, value: 100});
-    links_data.push({source: simple, target: languageCategory, value: 100});
+    links_data.push({source: ru, target: languageCategory, value: defaultEdge});
+    links_data.push({source: en, target: languageCategory, value: defaultEdge});
+    links_data.push({source: simple, target: languageCategory, value: defaultEdge});
     console.log(links_data)
 }
 
@@ -259,7 +266,7 @@ function selectNode(circleElement, category, random) {
 
         let categoriesLength = responseJson.subcategories.length;
 
-        shuffle(responseJson.subcategories).splice(0, random ? 1 : 7).forEach(categoryJson => {
+        shuffle(responseJson.subcategories).splice(0, random ? 1 : 5).forEach(categoryJson => {
 
             if (!nodes_data.find(element => element.id === categoryJson.id)) {
 
@@ -269,14 +276,14 @@ function selectNode(circleElement, category, random) {
                 }
 
                 nodes_data.push(categoryJson);
-                links_data.push({source: categoryJson, target: selectedNode, value: 100})
+                links_data.push({source: categoryJson, target: selectedNode, value: defaultEdge})
 
             } else {
 
             }
         });
 
-        setContent(responseJson.pages, responseJson.mainPage, categoriesLength)
+        setContent(responseJson.pages, responseJson.mainPage, categoriesLength, title)
     }
 
     initGraph();

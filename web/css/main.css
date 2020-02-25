@@ -33,7 +33,7 @@ main #content #content-list {
     overflow: scroll;
 }
 
-main #content #content-list div {
+main #content #content-list > div {
     padding: 10px;
 }
 
@@ -57,7 +57,7 @@ main #content #content-list #main-image img {
     width: 100%;
 }
 
-main #content #content-list div:hover {
+main #content #content-list > div:not(.hint):hover {
     background-color: ghostwhite;
 }
 
@@ -75,7 +75,7 @@ main #border:hover {
 }
 
 main #border.active {
-    background-color: var(--color-blue);
+    background-color: var(--color-blue-dark);
 }
 
 main #border:hover > input {

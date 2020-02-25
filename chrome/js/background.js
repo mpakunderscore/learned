@@ -1,30 +1,41 @@
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(async function (tab) {
 
-    localStorage["userid"] = 0;
+    console.log('Click')
 
-    var userId = localStorage["userid"];
-    if (!userId) {
+    const key = 'user'
 
-        var url = host + "/user";
+    // const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+    // const tab = tabs[0];
 
-        var request = new XMLHttpRequest();
-        request.open("GET", url, false);
-        request.send(null);
+    // const fromPageLocalStore = await chrome.tabs.executeScript(tab.id, {code: `localStorage['${key}']`});
 
-        var response = request.responseText;
+    // console.log(fromPageLocalStore)
 
-        if (response.length == 0) {
+    let userId = '6827d290-5689-11ea-8832-ade19f30daa6';
 
-            // var loginURL = host + "/login";
-            // chrome.tabs.create({ url: loginURL });
-            // return;
-        }
-
-        var user = JSON.parse(response);
-
-        userId = user.id;
-        localStorage["userid"] = userId;
-    }
+    // var userId = localStorage["userid"];
+    // if (!userId) {
+    //
+    //     var url = host + "/user";
+    //
+    //     var request = new XMLHttpRequest();
+    //     request.open("GET", url, false);
+    //     request.send(null);
+    //
+    //     var response = request.responseText;
+    //
+    //     if (response.length == 0) {
+    //
+    //         // var loginURL = host + "/login";
+    //         // chrome.tabs.create({ url: loginURL });
+    //         // return;
+    //     }
+    //
+    //     var user = JSON.parse(response);
+    //
+    //     userId = user.id;
+    //     localStorage["userid"] = userId;
+    // }
 
     add_url(tab, userId);
 });

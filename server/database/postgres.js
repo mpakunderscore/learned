@@ -169,40 +169,45 @@ exports.getUserGraph = async (userid) => {
     // TODO BUILD GRAPH FROM CATEGORIES AND WORDS INTO {id: 'Main', categories: [{id: 'Engineering', categories: []}]}
 
     return userWords;
-}
+};
+
+// let graphCategories = {};
 
 exports.getUserGraphTest = async (userid) => {
 
-    let word = {id: 'startup', categories: ['Entrepreneurship', 'Private equity', 'Types of business entity', 'Business incubators']}
+    let userGraphCategories = {};
 
-    let graphCategories = {};
+    let word = {id: 'startup', categories: ['Entrepreneurship', 'Private equity', 'Types of business entity', 'Business incubators']};
 
     for (let wordCategory in word.categories) {
 
-        let upperCategories = await wiki.getWikiCategories(wordCategory).categories; // []
-
-        //
-
-        for (let upperCategory in upperCategories) {
-
-            if (graphCategories[upperCategory])
-                graphCategories[upperCategory].subcategories.push(wordCategory);
-
-            else
-                graphCategories[upperCategory].subcategories = [];
-
-            // TODO new thread here
-
-            let higherCategories = await wiki.getWikiCategories(upperCategory).categories; // []
-
-            for (let upperCategory in higherCategories) {
-            }
-        }
+        await getParentCategories(wordCategory, userGraphCategories);
     }
-}
+};
 
-let getParrentCategory = function () {
+let getParentCategories = async function (category, userGraphCategories) {
 
+    let upperCategories = await wiki.getWikiCategories(category).categories; // []
+
+    for (let upperCategory in upperCategories) {
+
+        if (userGraphCategories[upperCategory])
+            userGraphCategories[upperCategory].subcategories.push(category);
+
+        else {
+
+            userGraphCategories[upperCategory] = {};
+            userGraphCategories[upperCategory].subcategories = [];
+        }
+
+
+
+        // TODO new thread here
+
+        let higherCategories = await wiki.getWikiCategories(upperCategory).categories; // []
+
+        await getParentCategories(higherCategories);
+    }
 }
 
 // Save category from wiki graph
