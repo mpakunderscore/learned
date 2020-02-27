@@ -9,7 +9,7 @@ const crawler = require("../crawler/crawler");
 let models = require("./models");
 
 // {force: true}
-module.exports.sequelize.sync().then(() => {});
+module.exports.sequelize.sync({force: true}).then(() => {});
 
 // Create or get user
 
