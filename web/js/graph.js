@@ -189,27 +189,18 @@ function clearGraph() {
     link.exit().remove();
 }
 
-let ru = {id: 'Ru'};
-let en = {id: 'En'};
-let simple = {id: 'Simple'};
+const languages = [{id: 'En'}, {id: 'Ru'}, {id: 'Es'}, {id: 'Fr'}, {id: 'De'}];
 
 function setLanguageMenu() {
 
     let languageCategory = menuItem({id: 'Language', active: true});
 
-    en.active = lang === 'en';
-    ru.active = lang === 'ru';
-    simple.active = lang === 'simple';
-
-    nodes_data.push(en);
-    nodes_data.push(ru);
-    nodes_data.push(simple);
-    console.log(nodes_data)
-
-    links_data.push({source: ru, target: languageCategory, value: defaultEdge});
-    links_data.push({source: en, target: languageCategory, value: defaultEdge});
-    links_data.push({source: simple, target: languageCategory, value: defaultEdge});
-    console.log(links_data)
+    for (let id in languages) {
+        let language = languages[id]
+        language.active = lang === language.id.toLowerCase();
+        nodes_data.push(language);
+        links_data.push({source: language, target: languageCategory, value: defaultEdge});
+    }
 }
 
 function selectNode(circleElement, category, random) {
