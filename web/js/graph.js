@@ -23,6 +23,12 @@ initServiceInfo();
 
 graph.style.width = 100 * borderRatio + '%';
 
+let mainChat = 'Go back';
+
+// setTimeout(() => {
+//     initGraph();
+//     // console.log('test')
+// }, 1000);
 
 // TODO
 
@@ -83,6 +89,33 @@ function initData() {
     link.exit().remove();
 }
 
+function clickNodeName(d) {
+
+    let clickIndex = nodes_data.indexOf(d);
+    nodes_data.splice(clickIndex, 1);
+    console.log(nodes_data)
+    console.log(links_data)
+
+    // console.log(index)
+    // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
+
+    for (let id in links_data) {
+        let link = links_data[id]
+        if (link.target.id === d.id) {
+            let nodeIndex = nodes_data.indexOf(link.source);
+            if (!link.source.main)
+                nodes_data.splice(nodeIndex, 1);
+        }
+    }
+
+    node = node.data(nodes_data)
+    node.exit().remove();
+
+    links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
+    link = link.data(links_data)
+    link.exit().remove();
+}
+
 function initView() {
     node = node.enter()
         .append('g')
@@ -109,39 +142,10 @@ function initView() {
             return d.main ? 'main' : (d.active ? 'active' : '')
         })
         .on('click', function (d) {
-
-            // console.log(nodes_data.length)
-            // console.log(links_data.length)
-
-            let index = nodes_data.indexOf(d);
-            console.log(nodes_data[index])
-            if (index !== -1) {
-
-                nodes_data.splice(index, 1);
-                // node = node.data(nodes_data)
-                // node.exit().remove();
-
-                console.log(nodes_data)
-                console.log(links_data)
-
-                // console.log(index)
-                // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
-
-                links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
-                // link = link.data(links_data)
-                // link.exit().remove();
-
-            }
-
-            // console.log(nodes_data.length)
-            // console.log(links_data.length)
-
-            // d3.event.stopPropagation();
-
-            initGraph();
+            clickNodeName(d);
         })
         .text(function (d) {
-            return d.id; // + (d.info ? ' ' + d.info : '');
+            return d.id + (d.main ? mainChat : ''); // + (d.info ? ' ' + d.info : '');
         })
         .select(function () {
             return this.parentNode;

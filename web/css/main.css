@@ -68,6 +68,8 @@ main #border {
     background-color: var(--color-gray);
 
     cursor: pointer;
+
+    /*box-shadow: -5px 0px 7px 0px var(--color-blue-dark);*/
 }
 
 main #border:hover {

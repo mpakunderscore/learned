@@ -33,14 +33,16 @@ User.init({
         primaryKey: true
     },
     email: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
     },
 }, {sequelize, modelName: 'user'});
 
 Link.init({
     url: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
 
     title: DataTypes.STRING,
@@ -63,7 +65,8 @@ UserLink.init({
     },
     url: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
 }, {sequelize, modelName: 'userlink', timestamps: false});
 

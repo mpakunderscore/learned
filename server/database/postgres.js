@@ -179,34 +179,40 @@ exports.getUserGraphTest = async (userid) => {
 
     let word = {id: 'startup', categories: ['Entrepreneurship', 'Private equity', 'Types of business entity', 'Business incubators']};
 
-    for (let wordCategory in word.categories) {
-
-        await getParentCategories(wordCategory, userGraphCategories);
+    for (let id in word.categories) {
+        await getParentCategories(word.categories[id], userGraphCategories);
     }
+
+    return userGraphCategories;
 };
 
 let getParentCategories = async function (category, userGraphCategories) {
 
-    let upperCategories = await wiki.getWikiCategories(category).categories; // []
+    let upperCategories = (await wiki.getWikiCategories(category)).categories; // []
 
-    for (let upperCategory in upperCategories) {
+    if (upperCategories.includes('Main_topic_articles')) {
+        userGraphCategories['Main_topic_articles'].subcategories.push(category);
+        return;
+    }
 
-        if (userGraphCategories[upperCategory])
-            userGraphCategories[upperCategory].subcategories.push(category);
+    for (let id in upperCategories) {
+
+        console.log(upperCategories[id])
+
+        if (userGraphCategories[upperCategories[id]])
+            userGraphCategories[upperCategories[id]].subcategories.push(category);
 
         else {
 
-            userGraphCategories[upperCategory] = {};
-            userGraphCategories[upperCategory].subcategories = [];
+            userGraphCategories[upperCategories[id]] = {};
+            userGraphCategories[upperCategories[id]].subcategories = [];
         }
 
+        let higherCategories = (await wiki.getWikiCategories(upperCategories[id])).categories; // []
 
-
-        // TODO new thread here
-
-        let higherCategories = await wiki.getWikiCategories(upperCategory).categories; // []
-
-        await getParentCategories(higherCategories);
+        for (let id in higherCategories) {
+            await getParentCategories(higherCategories[id], userGraphCategories);
+        }
     }
 }
 
