@@ -152,7 +152,7 @@ function initView() {
             // TODO click node name
         })
         .text(function (d) {
-            return d.id + (d.main ? mainChat : ''); // + (d.info ? ' ' + d.info : '');
+            return d.id + (d.main ? mainChat : '') + (d.debug ? ' ' + d.debug : ''); // + (d.info ? ' ' + d.info : '');
         })
         .select(function () {
             return this.parentNode;
@@ -315,12 +315,14 @@ function selectNode(circleElement, category, random) {
 
 function renderUserGraph(graphNode, categoryName) {
 
-    let renderNode = {id: categoryName, active: true};
-    nodes_data.push(renderNode);
-    links_data.push({source: renderNode, target: graphNode, value: defaultEdge})
+    if (user.graph[categoryName].count > 10) {
+        let renderNode = {id: categoryName, active: true, debug: user.graph[categoryName].count};
+        nodes_data.push(renderNode);
+        links_data.push({source: renderNode, target: graphNode, value: defaultEdge})
 
-    for (let id in user.graph[categoryName].subcategories) {
-        renderUserGraph(renderNode, user.graph[categoryName].subcategories[id])
+        for (let id in user.graph[categoryName].subcategories) {
+            renderUserGraph(renderNode, user.graph[categoryName].subcategories[id])
+        }
     }
 
     // console.log(user.graph[id].subcategories)

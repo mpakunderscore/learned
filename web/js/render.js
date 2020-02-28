@@ -30,9 +30,9 @@ function initServiceInfo() {
 
     contentList.innerHTML = '' +
         '<div>Last update: 29.02.2020</div>' +
-        '<div>Version: 0.3.0</div>' +
+        '<div>Version: 0.3.1</div>' +
         // '<div>Small design update</div>' +
-        '<div class="info">Personal graph from mine links</div>' +
+        '<div class="info">Personal graph from mine links, alpha</div>' +
         '<div>Go forward</div>' +
         // '<div class="info">Link input work not properly</div>' +
         // '<div>Explore graph and <strike>interesting</strike> links</div>' +

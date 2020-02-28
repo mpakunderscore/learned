@@ -188,8 +188,8 @@ exports.getUserGraph = async (userid) => {
 
     for (let id in userWords) {
 
-        if (i > 5)
-            break;
+        // if (i > 5)
+        //     break;
 
         i++;
 
@@ -229,6 +229,10 @@ let getParentCategories = async function (category, userGraphCategories) {
         topCategory = true;
     }
 
+    if (upperCategories.indexOf('Wikipedia categories') > -1) {
+        upperCategories = ['Disambiguation pages']
+        topCategory = true;
+    }
 
     // TODO
     upperCategories = [upperCategories[0]];
