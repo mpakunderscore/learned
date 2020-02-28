@@ -122,9 +122,9 @@ input::placeholder {
 }
 
 .card .circle {
-    width: 12px;
-    height: 12px;
-    border: solid 1.5px var(--color-blue-dark);
+    width: 10px;
+    height: 10px;
+    border: solid 2px var(--color-blue-dark);
     background-color: var(--color-blue);
     border-radius: 12px;
     margin: auto 0;

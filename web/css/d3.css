@@ -24,7 +24,7 @@ line {
 circle {
     fill: var(--color-white);
     stroke: var(--color-gray);
-    stroke-width: 1.5px;
+    stroke-width: 2px;
 }
 
 circle.active {
@@ -56,7 +56,7 @@ circle:hover + text {
 text {
     position: relative;
     fill: black;
-    fill-opacity: 0.35;
+    fill-opacity: 0.4;
     /*visibility: hidden;*/
     pointer-events: none;
     z-index: 1;
@@ -65,7 +65,7 @@ text {
 }
 
 text.active:hover {
-    fill-opacity: 0.5;
+    fill-opacity: 0.6;
     cursor: pointer;
 }
 
@@ -76,4 +76,20 @@ text.main {
 text.active {
     pointer-events: auto;
     fill-opacity: 1;
+}
+
+text.button {
+    pointer-events: auto;
+    cursor: pointer;
+    fill-opacity: 0;
+    fill: var(--color-red-dark);
+}
+
+text.button.star {
+    fill: var(--color-yellow);
+}
+
+text.button:hover {
+    fill-opacity: 1;
+    cursor: pointer;
 }

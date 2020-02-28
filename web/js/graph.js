@@ -36,7 +36,7 @@ let lang = 'en';
 
 const circleRadius = isMobile ? 12 : 6;
 const textPadding = isMobile ? 18 : 12;
-const textHeight = isMobile ? '.4em' : '.33em';
+const textHeight = isMobile ? '.4em' : '.35em';
 
 const defaultEdge = 100;
 
@@ -89,34 +89,40 @@ function initData() {
     link.exit().remove();
 }
 
-function clickNodeName(d) {
+function deleteNode(d) {
 
     let clickIndex = nodes_data.indexOf(d);
     nodes_data.splice(clickIndex, 1);
+
     console.log(nodes_data)
-    console.log(links_data)
+    // console.log(links_data)
 
     // console.log(index)
     // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
 
-    for (let id in links_data) {
-        let link = links_data[id]
-        if (link.target.id === d.id) {
-            let nodeIndex = nodes_data.indexOf(link.source);
-            if (!link.source.main)
-                nodes_data.splice(nodeIndex, 1);
-        }
-    }
+    // for (let id in links_data) {
+    //     let link = links_data[id]
+    //     if (link.target.id === d.id) {
+    //         let nodeIndex = nodes_data.indexOf(link.source);
+    //         if (!link.source.main)
+    //             nodes_data.splice(nodeIndex, 1);
+    //     }
+    // }
 
-    node = node.data(nodes_data)
-    node.exit().remove();
+    // node = node.data(nodes_data)
+    // node.exit().remove();
 
-    links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
-    link = link.data(links_data)
-    link.exit().remove();
+    let list = links_data.filter(link => link.source !== d && link.target !== d).slice();
+    links_data = list;
+    console.log(links_data)
+    // link = link.data(links_data)
+    // link.exit().remove();
+
+    initGraph()
 }
 
 function initView() {
+
     node = node.enter()
         .append('g')
         .attr('class', 'node')
@@ -135,6 +141,7 @@ function initView() {
         .select(function () {
             return this.parentNode;
         })
+
         .append('text')
         .attr('dx', textPadding)
         .attr('dy', textHeight)
@@ -142,7 +149,7 @@ function initView() {
             return d.main ? 'main' : (d.active ? 'active' : '')
         })
         .on('click', function (d) {
-            clickNodeName(d);
+            // TODO click node name
         })
         .text(function (d) {
             return d.id + (d.main ? mainChat : ''); // + (d.info ? ' ' + d.info : '');
@@ -150,31 +157,43 @@ function initView() {
         .select(function () {
             return this.parentNode;
         })
-        // .append('div')
-        // .html('')
-        // .attr('class', 'paper')
+
+        // TODO
+
+        .append('text')
+        .attr('class', 'button close')
+        .attr('dx', textPadding * -1 - 8)
+        .attr('dy', textHeight)
+        .text(function (d) {
+            return '✕'; // + (d.info ? ' ' + d.info : '');
+        })
+        .on('click', function (d) {
+            deleteNode(d);
+        })
+        .select(function () {
+            return this.parentNode;
+        })
+
+        // .append('text')
+        // .attr('class', 'button star')
+        // .attr('dx', textPadding * -1 - 22)
+        // .attr('dy', textHeight)
+        // .text(function (d) {
+        //     return '★'; // + (d.info ? ' ' + d.info : '');
+        // })
+        // .on('click', function (d) {
+        //
+        // })
         // .select(function () {
         //     return this.parentNode;
         // })
+
         .merge(node);
-
-    // node.append('text')
-    // .attr('dx', 10)
-    // .attr('dy', '.35em')
-    //     .text(function (d) {
-    //       return d.id;
-    //     })
-    //
-    // node = node.merge(node);
-
-    // node.exit().remove();
 
     link = link.enter()
         .append('line')
         .attr('class', 'link')
         .merge(link);
-
-    // link.exit().remove();
 }
 
 function clearGraph() {
@@ -203,6 +222,8 @@ function setLanguageMenu() {
     }
 }
 
+
+// TODO refactoring
 function selectNode(circleElement, category, random) {
 
     let title = category.id;
@@ -220,7 +241,7 @@ function selectNode(circleElement, category, random) {
 
     // console.log(title)
 
-    if (title === 'Language' || title === 'Ru' || title === 'En' || title === 'Simple') { // Language
+    if (title === 'Language' || title === 'Ru' || title === 'En') { // Language
 
         if (title !== 'Language')
             lang = title.toLowerCase();
@@ -277,6 +298,9 @@ function selectNode(circleElement, category, random) {
 
             }
         });
+
+        // nodes_data.filter(node => node.id === d.id || node.target.id === d.id))
+        // links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
 
         setContent(responseJson.pages, responseJson.mainPage, categoriesLength, title)
     }
