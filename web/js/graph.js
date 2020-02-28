@@ -243,8 +243,12 @@ function selectNode(circleElement, category, random) {
 
     if (title === 'Language' || title === 'Ru' || title === 'En') { // Language
 
-        if (title !== 'Language')
+        if (title !== 'Language') {
             lang = title.toLowerCase();
+        } else {
+            // window.location.href = '/language'
+            // console.log(window.location.href)
+        }
 
         // console.log(lang)
 
@@ -260,7 +264,8 @@ function selectNode(circleElement, category, random) {
         renderUserLinks();
 
         getUserGraph();
-        renderUserGraph();
+        if (user.graph['Main_topic_classifications'])
+            renderUserGraph(selectedNode, 'Main_topic_classifications');
 
         // TODO ADD GRAPH BUILDER FROM {} HERE
 
@@ -308,8 +313,17 @@ function selectNode(circleElement, category, random) {
     initGraph();
 }
 
-function renderUserGraph() {
+function renderUserGraph(graphNode, categoryName) {
 
+    let renderNode = {id: categoryName, active: true};
+    nodes_data.push(renderNode);
+    links_data.push({source: renderNode, target: graphNode, value: defaultEdge})
+
+    for (let id in user.graph[categoryName].subcategories) {
+        renderUserGraph(renderNode, user.graph[categoryName].subcategories[id])
+    }
+
+    // console.log(user.graph[id].subcategories)
 }
 
 

@@ -29,10 +29,10 @@ function initInput() {
 function initServiceInfo() {
 
     contentList.innerHTML = '' +
-        '<div>Last update: 27.02.2020</div>' +
-        '<div>Version: 0.2.4</div>' +
-        '<div>Small design update</div>' +
-        '<div><strike>Personal graph from links</strike></div>' +
+        '<div>Last update: 29.02.2020</div>' +
+        '<div>Version: 0.3.0</div>' +
+        // '<div>Small design update</div>' +
+        '<div class="info">Personal graph from mine links</div>' +
         '<div>Go forward</div>' +
         // '<div class="info">Link input work not properly</div>' +
         // '<div>Explore graph and <strike>interesting</strike> links</div>' +

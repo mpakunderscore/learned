@@ -79,7 +79,7 @@ input::placeholder {
 
 /*TODO temp*/
 .info {
-    background-color: var(--color-red);
+    background-color: var(--color-blue);
 }
 
 .noselect {

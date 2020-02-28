@@ -57,7 +57,13 @@ exports.init = (app) => {
         response.json(await database.saveUserLink(request.query.userid, request.query.url));
     });
 
-    // TODO get user graph,
+    // get user words
+    app.get('/user/words', async function (request, response) {
+        let links = await database.getUserWords(request.query.userid);
+        response.json(links);
+    });
+
+    // get user graph
     app.get('/user/graph', async function (request, response) {
         let links = await database.getUserGraph(request.query.userid);
         response.json(links);
