@@ -18,6 +18,9 @@ html, body {
     --color-yellow: #e2e12c;
     --color-yellow-dark: #717212;
 
+    --color-orange: #e2b152;
+    --color-orange-dark: #725936;
+
     --color-red: rgba(231, 33, 4, 0.51);
     --color-red-dark: #c00715;
 
@@ -96,26 +99,26 @@ input:hover {
                                   supported by Chrome, Opera and Firefox */
 }
 
-#design {
-    width: 0;
-    height: 100%;
+/*#design {*/
+/*    width: 0;*/
+/*    height: 100%;*/
 
-    /*background-color: var(--color-blue);*/
-}
+/*    !*background-color: var(--color-blue);*!*/
+/*}*/
 
-#design div {
-    /*position: relative;*/
-    padding-top: 100px;
-    width: 100px;
-    height: 100%;
-    background-color: var(--color-blue);
-    transform: rotate(15deg);
+/*#design div {*/
+/*    !*position: relative;*!*/
+/*    padding-top: 100px;*/
+/*    width: 100px;*/
+/*    height: 100%;*/
+/*    background-color: var(--color-blue);*/
+/*    transform: rotate(15deg);*/
 
-    z-index: 1;
-}
+/*    z-index: 1;*/
+/*}*/
 
-#design div:last-child {
-    padding-top: 0;
-    background-color: var(--color-red-dark);
-    transform: rotate(15deg);
-}
+/*#design div:last-child {*/
+/*    padding-top: 0;*/
+/*    background-color: var(--color-red-dark);*/
+/*    transform: rotate(15deg);*/
+/*}*/

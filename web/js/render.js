@@ -102,21 +102,40 @@ function renderUserLinks() {
     contentList.innerHTML = html;
 }
 
+let wordArray = [];
+
 function setCircle() {
+
     contentList.innerHTML += '<div id="message"></div>';
+
     let message = document.getElementById('message')
 
-    let dotIteration = 0;
-    let dotCount = 1;
-    let dotInterval = setInterval(function () {
-        message.innerText = '.'.repeat(dotCount++)
-        if (dotCount >= 4)
-            dotCount = 1;
-        if (dotIteration++ > 8) {
-            clearInterval(dotInterval);
-            message.innerText = 'What'
-        }
-    }, 300);
+    // let iterator = 0;
+    // let dotCount = 1;
+    let i = 0;
+    let text = 'You cannot return to where there is nothing'
+
+    let interval = setInterval(function () {
+
+        // message.innerText = '.'.repeat(dotCount++)
+
+        // if (dotCount >= 4)
+        //     dotCount = 1;
+
+        message.innerText = generatedWord(text, i);
+
+        i++;
+
+        if (i > text.length)
+            clearInterval(interval)
+
+        // console.log(i)
+
+    }, 30);
+}
+
+function generatedWord(text, i) {
+    return text.substring(0, i);
 }
 
 let linkClick = (url) => {
