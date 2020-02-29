@@ -47,13 +47,17 @@ input {
     font-size: var(--font-size-small);
     margin: 0;
     border: none;
-    background-color: var(--color-gray);
+    background-color: var(--color-white);
 
     /*margin-top: auto;*/
 }
 
 input::placeholder {
     color: var(--color-blue-dark)
+}
+
+input:hover {
+    /*background-color: var(--color-blue);*/
 }
 
 :focus {
@@ -79,7 +83,7 @@ input::placeholder {
 
 /*TODO temp*/
 .info {
-    background-color: var(--color-blue);
+    background: var(--color-blue);
 }
 
 .noselect {
@@ -92,52 +96,26 @@ input::placeholder {
                                   supported by Chrome, Opera and Firefox */
 }
 
+#design {
+    width: 0;
+    height: 100%;
 
-
-
-
-
-.card {
-    background-color: white;
-    border: 1px solid var(--color-blue-dark);
-
-    border-radius: 12px;
-    padding: 10px;
-    margin: 10px;
-    margin-bottom: 0;
-
-    cursor: pointer;
+    /*background-color: var(--color-blue);*/
 }
 
-.card:hover {
-    /*border: 1px solid var(--color-black);*/
-    background-color: var(--color-blue-dark) !important;
-    color: white;
-}
-
-.card .title {
-    display: flex;
-    flex-direction: row;
-    font-weight: 600;
-}
-
-.card .circle {
-    width: 10px;
-    height: 10px;
-    border: solid 2px var(--color-blue-dark);
+#design div {
+    /*position: relative;*/
+    padding-top: 100px;
+    width: 100px;
+    height: 100%;
     background-color: var(--color-blue);
-    border-radius: 12px;
-    margin: auto 0;
+    transform: rotate(15deg);
+
+    z-index: 1;
 }
 
-.card div.title-text {
-    padding-left: 6px;
-}
-
-.card div.text {
-    padding-top: 5px;
-}
-
-.hint {
-    text-align: right;
+#design div:last-child {
+    padding-top: 0;
+    background-color: var(--color-red-dark);
+    transform: rotate(15deg);
 }

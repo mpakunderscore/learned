@@ -229,7 +229,7 @@ let getParentCategories = async function (category, userGraphCategories) {
         topCategory = true;
     }
 
-    if (upperCategories.indexOf('Wikipedia categories') > -1) {
+    if (upperCategories.indexOf('Disambiguation pages') > -1) {
         upperCategories = ['Disambiguation pages']
         topCategory = true;
     }
@@ -261,16 +261,9 @@ let getParentCategories = async function (category, userGraphCategories) {
             console.log('TOP CATEGORY: ' + category + ' / ' + userGraphCategories[category].count)
             return;
 
-        } else {
-
-            // let higherCategories = (await wiki.getWikiCategories(upperCategories[id])).categories; // []
-
+        } else
             await getParentCategories(upperCategories[id], userGraphCategories);
 
-            // for (let id in higherCategories) {
-            //
-            // }
-        }
     }
 }
 

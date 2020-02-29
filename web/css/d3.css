@@ -41,7 +41,13 @@ circle:hover {
     cursor: pointer;
     stroke: var(--color-green-dark);
     fill: var(--color-green);
+    transition: 1s fill;
 }
+
+/*circle.main:hover {*/
+/*    cursor: pointer;*/
+/*    fill: var(--color-green);*/
+/*}*/
 
 circle.active:hover {
     stroke: var(--color-yellow-dark);

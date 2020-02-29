@@ -30,16 +30,18 @@ function initServiceInfo() {
 
     contentList.innerHTML = '' +
         '<div>Last update: 29.02.2020</div>' +
-        '<div>Version: 0.3.1</div>' +
-        // '<div>Small design update</div>' +
-        '<div class="info">Personal graph from mine links, alpha</div>' +
-        '<div>Go forward</div>' +
+        '<div>Version: 0.3.2</div>' +
+        '<div>Design update, small</div>' +
+        '<div class="info">Personal graph from mine links, alpha 2</div>' +
+        '<div>Go colors</div>' +
         // '<div class="info">Link input work not properly</div>' +
         // '<div>Explore graph and <strike>interesting</strike> links</div>' +
         // '<div>Click on active node name to remove edges</div>' +
         // '<div>Click on link to save it in mine</div>' +
         // '<div>Move border</div>' +
         '';
+
+    contentList.innerHTML += renderCard('インタラクションカードの例', 'セゴビアはマドリードからの日帰り観光地として人気がある（マドリードからは高速鉄道で30分）。旧市街は長く狭い高台の上に壮大に位置している。大聖堂、古代ローマの水道橋、美しいおとぎ話にでてきそうな古城（アルカサル）などの名所があり、眼下には田舎の景色が広がっている。カスティーリャと言われるこの辺りの景色は赤い大地という異名と合わせてファンタジーではよく用いられる。')
 }
 
 function setContent(pages, mainPage, categoriesLength, title) {
@@ -59,14 +61,8 @@ function setContent(pages, mainPage, categoriesLength, title) {
     // }
 
 
-    html +=
-        '<div class="card" onclick="this.style.display = \'none\'">' +
-        '<div class="title">' +
-            '<div class="circle"></div>' +
-            '<div class="title-text">' + title + '</div>' +
-        '</div>' +
-        (mainPage.text ? '<div class="text">' + mainPage.text + '</div>' : '') +
-        '</div>';
+    html += renderCard(title, mainPage.text)
+
 
     html += '<div class="hint">Pages: ' + pages.length + ', Categories: ' + categoriesLength + '</div>';
 
@@ -74,6 +70,17 @@ function setContent(pages, mainPage, categoriesLength, title) {
         html += '<div><a onclick="linkClick(this.href)" href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
     }
     contentList.innerHTML = html;
+}
+
+function renderCard(title, text, img) {
+    return '' +
+    '<div class="card" onclick="this.style.display = \'none\'">' +
+        '<div class="title">' +
+            '<div class="circle"></div>' +
+            '<div class="title-text">' + title + '</div>' +
+        '</div>' +
+        (text ? '<div class="text">' + text + '</div>' : '') +
+    '</div>';
 }
 
 function renderUserLinks() {
