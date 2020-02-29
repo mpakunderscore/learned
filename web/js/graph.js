@@ -23,7 +23,7 @@ initServiceInfo();
 
 graph.style.width = 100 * borderRatio + '%';
 
-let mainChat = 'Go back';
+let mainChat = 'Home';
 
 // setTimeout(() => {
 //     initGraph();
@@ -315,7 +315,7 @@ function selectNode(circleElement, category, random) {
 
 function renderUserGraph(graphNode, categoryName) {
 
-    if (user.graph[categoryName].count > 10) {
+    if (user.graph[categoryName].count > 1) {
         let renderNode = {id: categoryName, active: true, debug: user.graph[categoryName].count};
         nodes_data.push(renderNode);
         links_data.push({source: renderNode, target: graphNode, value: defaultEdge})

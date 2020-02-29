@@ -102,8 +102,6 @@ function renderUserLinks() {
     contentList.innerHTML = html;
 }
 
-let wordArray = [];
-
 function setCircle() {
 
     contentList.innerHTML += '<div id="message"></div>';
