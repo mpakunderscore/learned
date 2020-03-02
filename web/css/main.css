@@ -8,7 +8,15 @@ main {
 main #graph {
     background-color: #e6e6ed;
     overflow: hidden;
+
+    /*animation-name: example;*/
+    /*animation-duration: 1s;*/
 }
+
+/*@keyframes example {*/
+/*    from {background-color: var(--color-blue);}*/
+/*    to {background-color: #e6e6ed;}*/
+/*}*/
 
 main #graph-svg {
     /*background-color: rgba(135, 206, 250, 0.45);*/
@@ -61,36 +69,6 @@ main #content #content-list #main-image img {
 
 main #content #content-list > div:not(.hint):hover {
     background-color: ghostwhite;
-}
-
-main #border {
-
-    width: .5%;
-    height: 100%;
-    background-color: var(--color-white);
-
-    cursor: pointer;
-
-    z-index: 2;
-
-    transition: .2s width;
-
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-
-    /*box-shadow: -5px 0px 7px 0px var(--color-blue-dark);*/
-}
-
-main #border:hover {
-    background-color: var(--color-blue);
-    width: 1%;
-}
-
-main #border.active {
-    background-color: var(--color-blue-dark);
-}
-
-main #border:hover > input {
-    /*background-color: var(--color-blue);*/
 }
 
 @media only screen and (max-width: 600px) {

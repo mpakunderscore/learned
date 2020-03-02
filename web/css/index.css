@@ -63,6 +63,14 @@ input:hover {
     /*background-color: var(--color-blue);*/
 }
 
+input:focus {
+    background-color: var(--color-blue);
+}
+
+input:focus::placeholder {
+    color: var(--color-white)
+}
+
 :focus {
     outline: none;
 }
