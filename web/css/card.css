@@ -10,6 +10,8 @@
     cursor: pointer;
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    transition: background-color .2s, color .2s
 }
 
 .card:hover {
@@ -21,8 +23,8 @@
 }
 
 .card:hover .circle {
-    border: solid 2px var(--color-red-dark);
-    background-color: var(--color-red);
+    /*border: solid 2px var(--color-red-dark);*/
+    /*background-color: var(--color-red);*/
 }
 
 .card .title {

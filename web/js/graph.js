@@ -287,7 +287,7 @@ function selectNode(circleElement, category, random) {
 
         let categoriesLength = responseJson.subcategories.length;
 
-        shuffle(responseJson.subcategories).splice(0, random ? 1 : 5).forEach(categoryJson => {
+        shuffle(responseJson.subcategories).splice(0, random ? 1 : 7).forEach(categoryJson => {
 
             if (!nodes_data.find(element => element.id === categoryJson.id)) {
 
