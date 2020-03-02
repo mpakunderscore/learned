@@ -1,6 +1,21 @@
-#graph {
-    /*background-color: lightcoral;*/
+main #graph {
+    background-color: #e6e6ed;
+    /*background-color: rgba(91, 237, 114, 0.5);*/
+    overflow: hidden;
+
+    /*animation-name: example;*/
+    /*animation-duration: 1s;*/
 }
+
+/*@keyframes example {*/
+/*    from {background-color: var(--color-blue);}*/
+/*    to {background-color: #e6e6ed;}*/
+/*}*/
+
+main #graph-svg {
+    /*background-color: rgba(135, 206, 250, 0.45);*/
+}
+
 
 .scaled {
     /*transform: scale(0.8); !* Equal to scaleX(0.7) scaleY(0.7) *!*/

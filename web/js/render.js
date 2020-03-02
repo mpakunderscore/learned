@@ -44,7 +44,6 @@ function setContent(pages, mainPage, categoriesLength, title) {
     //     html += '<div id="main-image"><img src="' + mainPage.image + '" alt="Page name"/></div>';
     // }
 
-
     html += renderCard(title, mainPage.text)
 
     html += renderHelpRow(pages.length, categoriesLength);

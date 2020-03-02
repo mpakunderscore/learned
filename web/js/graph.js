@@ -118,7 +118,7 @@ function deleteNode(d) {
     // link = link.data(links_data)
     // link.exit().remove();
 
-    initGraph()
+    initGraph();
 }
 
 function initView() {
@@ -208,6 +208,23 @@ function clearGraph() {
     link.exit().remove();
 }
 
+function clearGray() {
+
+    for (let i = 0; i < nodes_data; i++) {
+        if (!nodes_data[i].active) {
+            links_data.filter(link => link.source.id === nodes_data[i].id || link.target.id === nodes_data[i].id)
+            delete nodes_data[i];
+        }
+
+    }
+
+    node = node.data(nodes_data);
+    node.exit().remove();
+
+    link = link.data(links_data);
+    link.exit().remove();
+}
+
 const languages = [{id: 'En'}, {id: 'Ru'}, {id: 'Es'}, {id: 'Fr'}, {id: 'De'}];
 
 function setLanguageMenu() {
@@ -285,6 +302,10 @@ function selectNode(circleElement, category, random) {
         const response = get('/wiki?title=' + title + '&lang=' + lang);
         const responseJson = JSON.parse(response);
 
+        clearGray();
+
+        initGraph();
+
         let categoriesLength = responseJson.subcategories.length;
 
         shuffle(responseJson.subcategories).splice(0, random ? 1 : 7).forEach(categoryJson => {
@@ -327,7 +348,6 @@ function renderUserGraph(graphNode, categoryName) {
 
     // console.log(user.graph[id].subcategories)
 }
-
 
 function initSimulation() {
     simulation.nodes(nodes_data);

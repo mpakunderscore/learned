@@ -2,7 +2,7 @@ main #border {
 
     width: .5%;
     height: 100%;
-    background: white;
+    background: rgba(22, 185, 231, 0.1);
 
     cursor: pointer;
 

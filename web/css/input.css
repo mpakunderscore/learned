@@ -3,7 +3,7 @@ input {
     font-size: var(--font-size-small);
     margin: 0;
     border: none;
-    background-color: var(--color-white);
+    background: rgba(22, 185, 231, 0.1);
 
     /*margin-top: auto;*/
 
