@@ -48,6 +48,8 @@
     padding-top: 5px;
 }
 
-.hint {
-    text-align: right;
+.help-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

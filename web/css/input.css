@@ -1,0 +1,31 @@
+
+input {
+    font-size: var(--font-size-small);
+    margin: 0;
+    border: none;
+    background-color: var(--color-white);
+
+    /*margin-top: auto;*/
+
+    transition: color .2s, background-color .2s;
+}
+
+input::placeholder {
+    color: var(--color-blue-dark)
+}
+
+input:hover {
+    /*background-color: var(--color-blue);*/
+}
+
+input:focus {
+    background-color: var(--color-blue);
+}
+
+input:focus::placeholder {
+    color: var(--color-white)
+}
+
+:focus {
+    outline: none;
+}

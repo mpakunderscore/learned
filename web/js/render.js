@@ -41,8 +41,11 @@ function initServiceInfo() {
         // '<div>Move border</div>' +
         '';
 
+    // TODO card design
     contentList.innerHTML += renderCard('インタラクションカードの例', 'セゴビアはマドリードからの日帰り観光地として人気がある（マドリードからは高速鉄道で30分）。旧市街は長く狭い高台の上に壮大に位置している。大聖堂、古代ローマの水道橋、美しいおとぎ話にでてきそうな古城（アルカサル）などの名所があり、眼下には田舎の景色が広がっている。カスティーリャと言われるこの辺りの景色は赤い大地という異名と合わせてファンタジーではよく用いられる。')
 }
+
+// TODO need refactoring
 
 function setContent(pages, mainPage, categoriesLength, title) {
 
@@ -63,13 +66,20 @@ function setContent(pages, mainPage, categoriesLength, title) {
 
     html += renderCard(title, mainPage.text)
 
-
-    html += '<div class="hint">Pages: ' + pages.length + ', Categories: ' + categoriesLength + '</div>';
+    html += renderHelpRow(pages.length, categoriesLength);
 
     for (let i = 0; i < pages.length; i++) {
         html += '<div><a onclick="linkClick(this.href)" href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
     }
     contentList.innerHTML = html;
+}
+
+function renderHelpRow(pagesLength, categoriesLength) {
+    return '' +
+        '<div class="help-row">' +
+        '<div>Sort: name / time / complexity</div>' +
+        '<div>Pages: ' + pagesLength + ', Categories: ' + categoriesLength + '</div>' +
+        '</div>';
 }
 
 function renderCard(title, text, img) {
@@ -102,7 +112,7 @@ function renderUserLinks() {
     contentList.innerHTML = html;
 }
 
-function setCircle() {
+function clickMainCircle() {
 
     contentList.innerHTML += '<div id="message"></div>';
 

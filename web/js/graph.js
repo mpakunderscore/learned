@@ -273,7 +273,7 @@ function selectNode(circleElement, category, random) {
 
         clearGraph();
         initMain();
-        setCircle()
+        clickMainCircle();
 
     } else { // Graph and categories
 
