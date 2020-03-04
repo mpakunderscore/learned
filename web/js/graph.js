@@ -45,7 +45,7 @@ let links_data = [];
 
 
 
-let mainCategory = {id: '', main: true};
+let mainCategory = {id: '', main: true, active: true};
 nodes_data.push(mainCategory);
 
 // let languageCategory;
@@ -208,24 +208,41 @@ function clearGraph() {
     link.exit().remove();
 }
 
-function clearGray() {
+function clearGray(selectedNode) {
 
-    for (let i = 0; i < nodes_data; i++) {
+    console.log('nodes: ' + nodes_data.length)
+
+    let nodes_data_green = []
+    for (let i = 0; i < nodes_data.length; i++) {
+
+        // if (!nodes_data[i])
+        //     break;
+
         if (!nodes_data[i].active) {
-            links_data.filter(link => link.source.id === nodes_data[i].id || link.target.id === nodes_data[i].id)
-            delete nodes_data[i];
+            links_data = links_data.filter(link => {
+                return link.source.id !== nodes_data[i].id && link.target.id !== nodes_data[i].id
+            })
+        } else {
+            nodes_data_green.push(nodes_data[i])
         }
-
     }
 
-    node = node.data(nodes_data);
-    node.exit().remove();
+    // nodes_data_green.push(selectedNode)
+
+    // console.log(nodes_data_green)
 
     link = link.data(links_data);
     link.exit().remove();
+
+    nodes_data = [];
+    nodes_data = nodes_data_green;
+    node = node.data(nodes_data);
+    node.exit().remove();
+
+    console.log('nodes: ' + nodes_data.length)
 }
 
-const languages = [{id: 'En'}, {id: 'Ru'}, {id: 'Es'}, {id: 'Fr'}, {id: 'De'}];
+const languages = [{id: 'En'}, {id: 'Ru'}, {id: 'Es'}, {id: 'Fr'}, {id: 'De'}, {id: 'Zh'}, {id: 'Ja'}];
 
 function setLanguageMenu() {
 
@@ -241,6 +258,9 @@ function setLanguageMenu() {
 
 
 // TODO refactoring
+
+let currentNode = '';
+
 function selectNode(circleElement, category, random) {
 
     let title = category.id;
@@ -275,6 +295,7 @@ function selectNode(circleElement, category, random) {
     } else if (title === 'Mine') { // Personal graph
 
         clearGraph();
+        selectedNode.active = true;
         menuItem(selectedNode);
 
         getUserLinks();
@@ -297,14 +318,18 @@ function selectNode(circleElement, category, random) {
         if (title === 'Graph') {
             clearGraph();
             menuItem(selectedNode);
+        } else {
+
+            if (selectedNode.id !== currentNode) {
+                clearGray(selectedNode);
+                currentNode = selectedNode.id;
+            } else {
+                console.log(currentNode)
+            }
         }
 
         const response = get('/wiki?title=' + title + '&lang=' + lang);
         const responseJson = JSON.parse(response);
-
-        clearGray();
-
-        initGraph();
 
         let categoriesLength = responseJson.subcategories.length;
 
