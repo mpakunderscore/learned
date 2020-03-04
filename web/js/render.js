@@ -92,7 +92,11 @@ function renderUserLinks() {
     contentList.innerHTML = html;
 }
 
-function clickMainCircle() {
+function clickMainCircle(text = 'You are back now') {
+
+    console.log(text)
+
+    // return;
 
     contentList.innerHTML += '<div id="message"></div>';
 
@@ -101,7 +105,7 @@ function clickMainCircle() {
     // let iterator = 0;
     // let dotCount = 1;
     let i = 0;
-    let text = 'You cannot return to where there is nothing'
+    // let text = text
 
     let interval = setInterval(function () {
 

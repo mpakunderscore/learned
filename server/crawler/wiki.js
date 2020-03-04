@@ -5,6 +5,8 @@ const database = require("../database/postgres");
 
 exports.getWikiCategories = async function (title, lang = 'en') {
 
+    console.log(title)
+
     const categoryLang = {en: 'Category:', ru: 'Категория:', simple: 'Category:'}
     const mainTitle = {en: 'Main_topic_classifications', ru: 'Статьи', simple: 'Articles'};
 
@@ -60,6 +62,8 @@ exports.getWikiCategories = async function (title, lang = 'en') {
     } catch (error) {
         // TODO
         // console.log(error);
+
+        return {id: title, categories: []};
     }
 }
 

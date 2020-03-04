@@ -1,36 +1,6 @@
-let screenWidth = window.innerWidth;
-// const screenWidth = screen.width;
-
-const isMobile = screenWidth < 600;
-
-// console.log(localStorage.getItem('borderRatio'))
-let borderRatio = localStorage.getItem('borderRatio') || 0.65;
-let width = screenWidth * (isMobile ? 1 : borderRatio);
-let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
-
-let svg = d3.select('#graph').append('svg')
-    .attr('id', 'graph-svg')
-    .attr('width', width)
-    .attr('height', height);
-
-let content = document.getElementById('content');
-let contentList = document.getElementById('content-list');
-content.style.width = (99.5 - 100 * borderRatio) + '%';
-initInput();
-initServiceInfo();
-
-// content.innerHTML += '<div>Hey. Add a link via input, from below. Or leave a message</div>';
-
 graph.style.width = 100 * borderRatio + '%';
 
-let mainChat = 'Home';
-
-// setTimeout(() => {
-//     initGraph();
-//     // console.log('test')
-// }, 1000);
-
-// TODO
+let mainCircleText = 'Home';
 
 let lang = 'en';
 
@@ -38,12 +8,10 @@ const circleRadius = isMobile ? 12 : 6;
 const textPadding = isMobile ? 18 : 12;
 const textHeight = isMobile ? '.4em' : '.35em';
 
-const defaultEdge = 100;
+const defaultEdge = 150;
 
 let nodes_data = [];
 let links_data = [];
-
-
 
 let mainCategory = {id: '', main: true, active: true};
 nodes_data.push(mainCategory);
@@ -152,7 +120,7 @@ function initView() {
             // TODO click node name
         })
         .text(function (d) {
-            return d.id + (d.main ? mainChat : '') + (d.debug ? ' ' + d.debug : ''); // + (d.info ? ' ' + d.info : '');
+            return d.id + (d.main ? mainCircleText : '') + (d.debug ? ' ' + d.debug : ''); // + (d.info ? ' ' + d.info : '');
         })
         .select(function () {
             return this.parentNode;

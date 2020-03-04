@@ -1,8 +1,50 @@
+let screenWidth = window.innerWidth;
+// const screenWidth = screen.width;
+
+const isMobile = screenWidth < 600;
+
+// console.log(localStorage.getItem('borderRatio'))
+let borderRatio = isMobile ? 0 : localStorage.getItem('borderRatio') || 0.65;
+let width = screenWidth * (isMobile ? 1 : borderRatio);
+let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
+
+let svg = d3.select('#graph').append('svg')
+    .attr('id', 'graph-svg')
+    .attr('width', width)
+    .attr('height', height);
+
+let content = document.getElementById('content');
+let contentList = document.getElementById('content-list');
+content.style.width = (99.5 - 100 * borderRatio) + '%';
+initInput();
+initServiceInfo();
+
 const graph = document.getElementById('graph');
 const border = document.getElementById('border');
 // const content = document.getElementById('content');
 
 border.onmousedown = dragMouseDown;
+border.onclick = () => {
+    // clickMainCircle('Border click')
+}
+border.ontouchstart = () => {
+    // console.log('border touch')
+    if (isMobile) {
+        borderRatio = .2;
+        renderView();
+    }
+}
+
+if (isMobile) {
+    clickMainCircle('NO MOBILE, WILL BE 0.5')
+}
+
+document.onload = () => {
+    if (isMobile) {
+        document.body.requestFullscreen();
+        window.scrollTo(0, 1);
+    }
+}
 
 function dragMouseDown(e) {
     e = e || window.event;

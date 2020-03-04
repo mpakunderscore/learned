@@ -5,7 +5,8 @@
     flex-direction: column;
     /*overflow: scroll;*/
 
-    min-width: 110px;
+
+    /*min-width: 100px;*/
     /*height: 100%;*/
 
     /*overflow: scroll;*/
@@ -16,6 +17,8 @@
     /*border-left: 1px solid var(--color-blue);*/
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    /*transition: width .2s;*/
 }
 
 #content #content-list {

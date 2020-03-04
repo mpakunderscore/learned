@@ -3,16 +3,13 @@ function initServiceInfo() {
     contentList.innerHTML = '' +
         '<div>Last update: 04.03.2020</div>' +
         '<div>Version: 0.3.3</div>' +
-        '<div>Close branch by x fixed</div>' +
-        '<div>Gray categories only from current node</div>' +
+        '<div>Mobile stub</div>' +
+        '<div>Border design</div>' +
+        // '<div>Close branch by x fixed</div>' +
+        '<div>Gray categories only from current node, test</div>' +
         '<div class="info">Personal graph, alpha 3</div>' +
         '<div>Meh, we need some ideas on it</div>' +
         '<div>Where is colors</div>' +
-        // '<div class="info">Link input work not properly</div>' +
-        // '<div>Explore graph and <strike>interesting</strike> links</div>' +
-        // '<div>Click on active node name to remove edges</div>' +
-        // '<div>Click on link to save it in mine</div>' +
-        // '<div>Move border</div>' +
         '';
 
     // TODO card design
