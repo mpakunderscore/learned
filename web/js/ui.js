@@ -33,7 +33,7 @@ border.ontouchstart = () => {
         borderRatio = .2;
         renderView();
     }
-}
+};
 
 if (isMobile) {
     clickMainCircle('NO MOBILE, WILL BE 0.5')
@@ -41,9 +41,13 @@ if (isMobile) {
 
 document.onload = () => {
     if (isMobile) {
-        document.body.requestFullscreen();
-        window.scrollTo(0, 1);
+        fullscreen()
     }
+};
+
+function fullscreen() {
+    document.body.requestFullscreen();
+    window.scrollTo(0, 1);
 }
 
 function dragMouseDown(e) {

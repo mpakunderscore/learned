@@ -64,7 +64,7 @@ function renderHelpRow(pagesLength, categoriesLength) {
 
 function renderCard(title, text, img) {
     return '' +
-    '<div class="card" onclick="this.style.display = \'none\'">' +
+    '<div class="card" onclick="isMobile ? fullscreen() : this.style.display = \'none\'">' +
         '<div class="title">' +
             '<div class="circle"></div>' +
             '<div class="title-text">' + title + '</div>' +
