@@ -183,42 +183,24 @@ exports.getUserWords = async (userid) => {
 
 // let graphCategories = {};
 
-exports.getUserGraph = async (userid) => {
+exports.getWordsGraph = async (words) => {
 
-    let userGraphCategories = {};
-
-    // let word = {id: 'startup', categories: ['Entrepreneurship', 'Private equity', 'Types of business entity', 'Business incubators']};
-
-    // let page = await wiki.getWikiPage('startup');
-
-    // let words = await exports.getWords();
-
-    let userWords = await exports.getUserWords(userid);
-
-    // for (let id in userWords) {
-    //     if (userWords[id].count < 10)
-    //         delete userWords[id];
-    // }
+    let wordsCategoriesGraph = {};
 
     let i = 0;
 
-    for (let id in userWords) {
+    for (let id in words) {
 
-        // if (i > 5)
-        //     break;
+        let word = words[id];
 
-        i++;
-
-        let word = userWords[id];
-
-        console.log(word.categories)
+        // console.log(word.categories)
 
         for (let n in word.categories) {
-            await getParentCategories(word.categories[n], userGraphCategories);
+            await getParentCategories(word.categories[n], wordsCategoriesGraph);
         }
     }
 
-    return userGraphCategories;
+    return wordsCategoriesGraph;
 };
 
 let getParentCategories = async function (category, userGraphCategories) {

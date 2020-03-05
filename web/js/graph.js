@@ -141,7 +141,7 @@ function initView() {
         // TODO
 
         .append('text')
-        .attr('class', 'button close')
+        .attr('class', 'button')
         .attr('dx', textPadding * -1 - 8)
         .attr('dy', textHeight)
         .text(function (d) {
@@ -293,7 +293,7 @@ function selectNode(circleElement, category, random) {
         getUserLinks();
         renderMine();
 
-        // getUserGraph();
+        // getWordsGraph();
         // if (user.graph['Main_topic_classifications'])
         //     renderUserGraph(selectedNode, 'Main_topic_classifications');
 

@@ -53,11 +53,13 @@
     background-color: ghostwhite;
 }
 
-#content .link span {
-    cursor: pointer;
-}
 
 /*TODO*/
+#content .link span {
+    cursor: pointer;
+    padding-left: 5px;
+}
+
 #content .link span:hover {
     opacity: .5;
 }

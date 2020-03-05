@@ -65,7 +65,7 @@ exports.init = (app) => {
 
     // get user graph
     app.get('/user/graph', async function (request, response) {
-        let links = await database.getUserGraph(request.query.userid);
+        let links = await database.getWordsGraph(await exports.getUserWords(request.query.userid));
         response.json(links);
     });
 

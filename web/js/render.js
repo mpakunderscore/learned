@@ -30,14 +30,6 @@ function initInput() {
 
 function setContent(pages, mainPage, categoriesLength, title) {
 
-    // console.log(responseJson)
-
-    // let categories = responseJson.categories
-
-    // console.log(mainPage)
-
-    // initInput();
-
     let html = '';
 
     // if (mainPage.image) {
@@ -87,10 +79,10 @@ function renderMine() {
         html += '' +
             '<div class="link">' +
                 '<a href="' + user.links[i].url + '" target="_blank" title="' + user.links[i].url + '">' +
-                user.links[i].title +
-                '</a> ' +
-
+                    user.links[i].title +
+                '</a>' +
                 '<span title="Link graph" onclick="renderLinkGraph()">g</span>' +
+                '<span title="Delete link" onclick="deleteLink()">✕</span>' +
             '</div>';
     }
     contentList.innerHTML = html;
