@@ -2,13 +2,12 @@ function initServiceInfo() {
 
     contentList.innerHTML = '' +
         '<div>Last update: 04.03.2020</div>' +
-        '<div>Version: 0.3.3</div>' +
-        '<div>Mobile stub</div>' +
-        '<div>Border design</div>' +
-        // '<div>Close branch by x fixed</div>' +
-        '<div>Gray categories only from current node, test</div>' +
-        '<div class="info">Personal graph, alpha 3</div>' +
-        '<div>Meh, we need some ideas on it</div>' +
+        '<div>Version: 0.3.4</div>' +
+        // '<div>Mobile stub</div>' +
+        // '<div>Border design</div>' +
+        '<div>Close branch by x fixed</div>' +
+        // '<div>Gray categories only from current node, test</div>' +
+        '<div class="info">Personal graph, alpha 4</div>' +
         '<div>Where is colors</div>' +
         '';
 

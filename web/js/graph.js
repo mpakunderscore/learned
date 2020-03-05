@@ -8,7 +8,7 @@ const circleRadius = isMobile ? 12 : 6;
 const textPadding = isMobile ? 18 : 12;
 const textHeight = isMobile ? '.4em' : '.35em';
 
-const defaultEdge = 150;
+const defaultEdge = 100;
 
 let nodes_data = [];
 let links_data = [];
@@ -46,23 +46,29 @@ simulation.on('tick', tickActions);
 let initGraph = () => {
     initData();
     initView();
+    // initExit();
     initSimulation();
 };
 initGraph();
 
 function initData() {
     node = node.data(nodes_data);
-    node.exit().remove();
     link = link.data(links_data);
+}
+
+function initExit() {
+    node.exit().remove();
     link.exit().remove();
 }
 
 function deleteNode(d) {
 
-    let clickIndex = nodes_data.indexOf(d);
-    nodes_data.splice(clickIndex, 1);
+    // console.log(i)
 
-    console.log(nodes_data)
+    let clickIndex = nodes_data.indexOf(d);
+    console.log(clickIndex)
+
+
     // console.log(links_data)
 
     // console.log(index)
@@ -77,16 +83,22 @@ function deleteNode(d) {
     //     }
     // }
 
-    // node = node.data(nodes_data)
+
     // node.exit().remove();
 
-    let list = links_data.filter(link => link.source !== d && link.target !== d).slice();
-    links_data = list;
-    console.log(links_data)
-    // link = link.data(links_data)
-    // link.exit().remove();
+    links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
+    // console.log(links_data)
+    link = link.data(links_data)
+    link.exit().remove();
 
-    initGraph();
+
+    console.log(nodes_data)
+    // nodes_data.splice(clickIndex, 1);
+    console.log(nodes_data)
+
+    // node = node.data(nodes_data)
+
+    // initGraph();
 }
 
 function initView() {
@@ -136,7 +148,14 @@ function initView() {
             return '✕'; // + (d.info ? ' ' + d.info : '');
         })
         .on('click', function (d) {
+            // d3.event.stopPropagation();
+            // this.parentNode.remove();
+            // nodes_data.splice(d.index, 1);
+            // console.log(d)
+            // console.log(this)
+            // console.log(this.parentNode)
             deleteNode(d);
+            initGraph();
         })
         .select(function () {
             return this.parentNode;
@@ -180,18 +199,24 @@ function clearGray(selectedNode) {
 
     console.log('nodes: ' + nodes_data.length)
 
-    let nodes_data_green = []
+    // let nodes_data_green = []
     for (let i = 0; i < nodes_data.length; i++) {
 
         // if (!nodes_data[i])
         //     break;
 
         if (!nodes_data[i].active) {
+
             links_data = links_data.filter(link => {
                 return link.source.id !== nodes_data[i].id && link.target.id !== nodes_data[i].id
             })
+
+            // nodes_data.slice(i, 1)
+
         } else {
-            nodes_data_green.push(nodes_data[i])
+
+            // nodes_data_green.push(nodes_data[i])
+
         }
     }
 
@@ -202,10 +227,10 @@ function clearGray(selectedNode) {
     link = link.data(links_data);
     link.exit().remove();
 
-    nodes_data = [];
-    nodes_data = nodes_data_green;
-    node = node.data(nodes_data);
-    node.exit().remove();
+    // nodes_data = [];
+    // nodes_data = nodes_data_green;
+    // node = node.data(nodes_data);
+    // node.exit().remove();
 
     console.log('nodes: ' + nodes_data.length)
 }
@@ -286,20 +311,21 @@ function selectNode(circleElement, category, random) {
         if (title === 'Graph') {
             clearGraph();
             menuItem(selectedNode);
-        } else {
-
-            if (selectedNode.id !== currentNode) {
-                clearGray(selectedNode);
-                currentNode = selectedNode.id;
-            } else {
-                console.log(currentNode)
-            }
         }
 
         const response = get('/wiki?title=' + title + '&lang=' + lang);
         const responseJson = JSON.parse(response);
 
         let categoriesLength = responseJson.subcategories.length;
+
+        console.log(nodes_data)
+
+        selectedNode = nodes_data.find(element => element.id === title);
+
+        if (selectedNode.id !== currentNode) {
+            clearGray(selectedNode);
+            currentNode = selectedNode.id;
+        }
 
         shuffle(responseJson.subcategories).splice(0, random ? 1 : 7).forEach(categoryJson => {
 
@@ -312,6 +338,7 @@ function selectNode(circleElement, category, random) {
 
                 nodes_data.push(categoryJson);
                 links_data.push({source: categoryJson, target: selectedNode, value: defaultEdge})
+                console.log(selectedNode.id)
 
             } else {
 
