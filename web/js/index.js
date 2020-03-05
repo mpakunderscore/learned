@@ -23,7 +23,14 @@ const getUserGraph = () => {
     user.graph = userGraph;
     console.log(userGraph)
 };
-// getUserWords();
+
+const getUserWords = () => {
+    const response = get('/user/words?userid=' + user.id);
+    const userWords = JSON.parse(response);
+    user.words = userWords;
+    console.log(userWords)
+};
+getUserWords();
 
 function get(url) {
     let xmlHttp = new XMLHttpRequest();

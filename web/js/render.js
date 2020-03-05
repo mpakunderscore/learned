@@ -63,6 +63,7 @@ function renderHelpRow(pagesLength, categoriesLength) {
 }
 
 function renderCard(title, text, img) {
+
     return '' +
     '<div class="card" onclick="isMobile ? fullscreen() : this.style.display = \'none\'">' +
         '<div class="title">' +
@@ -73,26 +74,34 @@ function renderCard(title, text, img) {
     '</div>';
 }
 
-function renderUserLinks() {
+function renderLinkGraph() {
+    console.log('renderLinkGraph')
+}
 
-    // console.log(responseJson)
-
-    // let categories = responseJson.categories
-
-    // console.log(categories)
-
-    // initInput();
+function renderMine() {
 
     let html = '';
-    html += '<div id="main-text">Your links collection</div>';
+    html += '<div id="main-text">Sort: name / time / complexity / source </div>';
     // html += '<div>Links: ' + user.links.length +'</div>';
     for (let i = 0; i < user.links.length; i++) {
-        html += '<div class="link"><a href="' + user.links[i].url + '" target="_blank">' + user.links[i].url + '</a></div>';
+        html += '' +
+            '<div class="link">' +
+                '<a href="' + user.links[i].url + '" target="_blank" title="' + user.links[i].url + '">' +
+                user.links[i].title +
+                '</a> ' +
+
+                '<span title="Link graph" onclick="renderLinkGraph()">g</span>' +
+            '</div>';
     }
     contentList.innerHTML = html;
 }
 
-function clickMainCircle(text = 'You are back now') {
+function clickHome() {
+    initServiceInfo();
+    clickMainCircle('You are back now')
+}
+
+function clickMainCircle(text) {
 
     console.log(text)
 

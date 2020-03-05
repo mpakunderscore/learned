@@ -52,3 +52,12 @@
 #content #content-list > div:not(.help-row):hover {
     background-color: ghostwhite;
 }
+
+#content .link span {
+    cursor: pointer;
+}
+
+/*TODO*/
+#content .link span:hover {
+    opacity: .5;
+}

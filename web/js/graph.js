@@ -288,23 +288,20 @@ function selectNode(circleElement, category, random) {
     } else if (title === 'Mine') { // Personal graph
 
         clearGraph();
-        selectedNode.active = true;
         menuItem(selectedNode);
 
         getUserLinks();
-        renderUserLinks();
+        renderMine();
 
-        getUserGraph();
-        if (user.graph['Main_topic_classifications'])
-            renderUserGraph(selectedNode, 'Main_topic_classifications');
-
-        // TODO ADD GRAPH BUILDER FROM {} HERE
+        // getUserGraph();
+        // if (user.graph['Main_topic_classifications'])
+        //     renderUserGraph(selectedNode, 'Main_topic_classifications');
 
     } else if (title === '') { // Main
 
         clearGraph();
         initMain();
-        clickMainCircle();
+        clickHome()
 
     } else { // Graph and categories
 

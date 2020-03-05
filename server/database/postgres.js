@@ -102,14 +102,33 @@ exports.saveUserLink = async (userid, url) => {
 // Get user links and graph
 
 exports.getUserLinks = async (userid) => {
-
     let userLinks = await models.UserLink.findAll({
         where: {
             userid: userid
         }
     });
 
-    return userLinks;
+    // console.log(userLinks)
+
+    let userLinksJson = []
+    for (let i = 0; i < userLinks.length; i++) {
+
+        let userLinkJson = userLinks[i].toJSON();
+
+        //TODO foreign key or title field, or links global array by url key
+        let link = await models.Link.findOne({
+            where: {
+                url: userLinkJson.url
+            }
+        })
+
+        // console.log(link)
+
+        userLinkJson.title = link.toJSON().title;
+        userLinksJson.push(userLinkJson)
+    }
+
+    return userLinksJson;
 };
 
 // Get user graph based on user links TODO
@@ -157,14 +176,7 @@ exports.getUserWords = async (userid) => {
                 else if (globalWords[name] && isNaN(name) && !globalWords[name].categories.includes('English grammar')) //English words
                         userWords[name] = {count: link.words[id].count, globalCount: globalWords[name].count, categories: globalWords[name].categories};
             }
-
-        for (let id in userWords) {
-            if (userWords[id].count < 10)
-                delete userWords[id];
-        }
     }
-
-    // TODO BUILD GRAPH FROM CATEGORIES AND WORDS INTO {id: 'Main', categories: [{id: 'Engineering', categories: []}]}
 
     return userWords;
 };
@@ -183,8 +195,12 @@ exports.getUserGraph = async (userid) => {
 
     let userWords = await exports.getUserWords(userid);
 
-    let i = 0;
+    // for (let id in userWords) {
+    //     if (userWords[id].count < 10)
+    //         delete userWords[id];
+    // }
 
+    let i = 0;
 
     for (let id in userWords) {
 

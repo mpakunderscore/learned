@@ -5,7 +5,7 @@ function initServiceInfo() {
         '<div>Version: 0.3.4</div>' +
         // '<div>Mobile stub</div>' +
         // '<div>Border design</div>' +
-        '<div>Close branch by x fixed</div>' +
+        '<div>Close branch by x fixed somehow</div>' +
         // '<div>Gray categories only from current node, test</div>' +
         '<div class="info">Personal graph, alpha 4</div>' +
         '<div>Where is colors</div>' +
