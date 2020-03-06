@@ -5,7 +5,7 @@
 const crawler = require("./crawler/crawler");
 const wiki = require("./crawler/wiki");
 const database = require("./database/postgres");
-const worker = require("./database/worker");e
+const worker = require("./database/worker");
 
 exports.init = (app) => {
 
@@ -16,6 +16,9 @@ exports.init = (app) => {
 
         if (request.query.short === 'true')
             urlData.words = urlData.words.splice(0, 7);
+
+        if (request.query.graph === 'true')
+            urlData.graph = worker.getTokensGraph(worker.getWordsTokens(urlData.words));
 
         response.json(urlData);
     });
@@ -68,13 +71,13 @@ exports.init = (app) => {
 
     // get user words
     app.get('/user/words', async function (request, response) {
-        let links = await worker.getUserWords(request.query.userid);
+        let links = await worker.getUserTokens(request.query.userid);
         response.json(links);
     });
 
     // get user graph
     app.get('/user/graph', async function (request, response) {
-        let links = await worker.getWordsGraph(await worker.getUserWords(request.query.userid));
+        let links = await worker.getTokensGraph(await worker.getUserTokens(request.query.userid));
         response.json(links);
     });
 

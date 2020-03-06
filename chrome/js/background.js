@@ -11,7 +11,7 @@ chrome.browserAction.onClicked.addListener(async function (tab) {
 
     // console.log(fromPageLocalStore)
 
-    let userId = '6827d290-5689-11ea-8832-ade19f30daa6';
+    let userId = '95aa5a50-5f60-11ea-b80a-d1db10638b99';
 
     // var userId = localStorage["userid"];
     // if (!userId) {

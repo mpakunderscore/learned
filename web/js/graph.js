@@ -294,7 +294,7 @@ function selectNode(circleElement, category, random) {
 
         renderMine();
 
-        // getWordsGraph();
+        // getTokensGraph();
         // if (user.graph['Main_topic_classifications'])
         //     renderUserGraph(selectedNode, 'Main_topic_classifications');
 

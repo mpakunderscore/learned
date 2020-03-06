@@ -1,10 +1,12 @@
-const api = require('./server/api')
+const api = require('./server/api');
 
 let express = require('express');
 let app = express();
 
 //static
 app.use('/', express.static(__dirname + '/web'));
+
+app.use('/mine', express.static(__dirname + '/web'));
 
 // app.use('/language', express.static(__dirname + '/web'));
 

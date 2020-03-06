@@ -1,8 +1,8 @@
 let models = require("./models");
 
-const database = require("./database/postgres");
+const database = require("./postgres");
 
-// Get user links and graph
+// Get user links and graph TODO redo dis, very bad. Need to be in postgres module
 
 exports.getUserLinks = async (userid) => {
     let userLinks = await models.UserLink.findAll({
@@ -36,7 +36,7 @@ exports.getUserLinks = async (userid) => {
 
 // Get user graph based on user links TODO
 
-exports.getUserWords = async (userid) => {
+exports.getUserTokens = async (userid) => {
 
     // TODO foreign key
     let userLinks = await models.UserLink.findAll({
@@ -55,10 +55,12 @@ exports.getUserWords = async (userid) => {
             links.push(link)
     }
 
-    return exports.getLinksWords(links);
+    return exports.getLinksTokens(links);
 };
 
-exports.getLinksWords = async (links) => {
+// Tokens based on links []
+
+exports.getLinksTokens = async (links) => {
 
     let words = await database.getWords(); // {id, categiries, pages}
     let globalWords = {}
@@ -89,9 +91,15 @@ exports.getLinksWords = async (links) => {
     return linksWords;
 }
 
-// let graphCategories = {};
+// Graph based on words []
 
-exports.getWordsGraph = async (words) => {
+exports.getWordsTokens = () => {
+
+}
+
+// Graph based on tokens []
+
+exports.getTokensGraph = async (words) => {
 
     let wordsCategoriesGraph = {};
 
