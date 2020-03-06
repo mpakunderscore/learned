@@ -43,10 +43,10 @@ const deleteLink = (element) => {
     renderMine()
 }
 
-const getLinkGraph = (element) => {
+const crawlLink = (element) => {
     // TODO
-    const response = get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.firstChild.getAttribute('href'));
-    renderMine()
+    const response = get('/crawl?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true');
+    console.log(JSON.parse(response))
 }
 
 function get(url) {

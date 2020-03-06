@@ -66,9 +66,9 @@ function renderCard(title, text, img) {
     '</div>';
 }
 
-function renderLinkGraph() {
-    console.log('renderLinkGraph')
-}
+// function renderLinkGraph() {
+//     console.log('renderLinkGraph')
+// }
 
 function renderMine() {
 
@@ -85,7 +85,7 @@ function renderMine() {
                 '<a href="' + url + '" target="_blank" title="' + url + '">' +
                     user.links[i].title +
                 '</a>' +
-                '<span title="Link graph" onclick="renderLinkGraph(this)">Graph</span>' +
+                '<span title="Link graph" onclick="crawlLink(this)">Graph</span>' +
                 '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
             '</div>';
     }

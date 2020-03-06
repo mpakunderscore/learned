@@ -18,7 +18,7 @@ exports.init = (app) => {
             urlData.words = urlData.words.splice(0, 7);
 
         if (request.query.graph === 'true')
-            urlData.graph = worker.getTokensGraph(worker.getWordsTokens(urlData.words));
+            urlData.graph = await worker.getTokensGraph(await worker.getLinksTokens([urlData]));
 
         response.json(urlData);
     });
@@ -55,13 +55,13 @@ exports.init = (app) => {
         response.json(database.saveUserLink(request.query.userid, request.query.url));
     });
 
-    // TODO
     // delete user link
     app.get('/user/link/delete', async function (request, response) {
         response.json(database.deleteUserLink(request.query.userid, request.query.url));
     });
 
 
+    // TODO dev api
 
     // get user list of links
     app.get('/user/links', async function (request, response) {
@@ -82,6 +82,10 @@ exports.init = (app) => {
     });
 
 
+
+
+
+    // TODO dev api
 
     // list of all users
     app.get('/users', async function (request, response) {

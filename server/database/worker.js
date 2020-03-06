@@ -1,6 +1,7 @@
 let models = require("./models");
 
 const database = require("./postgres");
+const wiki = require("../crawler/wiki");
 
 // Get user links and graph TODO redo dis, very bad. Need to be in postgres module
 
@@ -154,6 +155,9 @@ let getParentCategories = async function (category, userGraphCategories) {
     for (let id in upperCategories) {
 
         // console.log(upperCategories[id])
+
+        if (!upperCategories[id])
+            return;
 
         if (userGraphCategories[upperCategories[id]]) {
 
