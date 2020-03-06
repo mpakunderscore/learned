@@ -72,17 +72,21 @@ function renderLinkGraph() {
 
 function renderMine() {
 
+    getUserLinks();
+
     let html = '';
     html += '<div id="main-text">Sort: name / time / complexity / source </div>';
     // html += '<div>Links: ' + user.links.length +'</div>';
     for (let i = 0; i < user.links.length; i++) {
+
+        let url = user.links[i].url;
         html += '' +
             '<div class="link">' +
-                '<a href="' + user.links[i].url + '" target="_blank" title="' + user.links[i].url + '">' +
+                '<a href="' + url + '" target="_blank" title="' + url + '">' +
                     user.links[i].title +
                 '</a>' +
                 '<span title="Link graph" onclick="renderLinkGraph()">Graph</span>' +
-                '<span title="Delete link" onclick="deleteLink()">✕</span>' +
+                '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
             '</div>';
     }
     contentList.innerHTML = html;

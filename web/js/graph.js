@@ -235,7 +235,9 @@ function clearGray(selectedNode) {
     console.log('nodes: ' + nodes_data.length)
 }
 
-const languages = [{id: 'En'}, {id: 'Ru'}, {id: 'Es'}, {id: 'Fr'}, {id: 'De'}, {id: 'Zh'}, {id: 'Ja'}];
+const languages = [{id: 'En'}, {id: 'Ru'}];
+
+// , {id: 'Es'}, {id: 'Fr'}, {id: 'De'}, {id: 'Zh'}, {id: 'Ja'}
 
 function setLanguageMenu() {
 
@@ -290,7 +292,6 @@ function selectNode(circleElement, category, random) {
         clearGraph();
         menuItem(selectedNode);
 
-        getUserLinks();
         renderMine();
 
         // getWordsGraph();

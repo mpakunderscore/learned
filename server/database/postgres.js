@@ -102,9 +102,11 @@ exports.saveUserLink = async (userid, url) => {
 // Delete user link
 
 exports.deleteUserLink = async (userid, url) => {
-    let userLink = models.UserLink.create({userid: userid, url: url})
-    let link = await crawler.getURLData(url);
-    return link;
+    // console.log(userid, url)
+    await models.UserLink.destroy({
+        where: {userid: userid, url: url}
+    })
+    return true;
     // console.log(userLink)
 };
 
