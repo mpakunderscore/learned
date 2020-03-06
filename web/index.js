@@ -1,6 +1,8 @@
 let user;
 
-// TODO need refactoring, user object and client api here
+// TODO need refactoring, user object
+
+// Client API here
 
 const getUser = () => {
     user = JSON.parse(localStorage.getItem('user')) || {};
@@ -36,6 +38,12 @@ const getUserWords = () => {
 getUserWords();
 
 const deleteLink = (element) => {
+    // TODO
+    const response = get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.firstChild.getAttribute('href'));
+    renderMine()
+}
+
+const getLinkGraph = (element) => {
     // TODO
     const response = get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.firstChild.getAttribute('href'));
     renderMine()
