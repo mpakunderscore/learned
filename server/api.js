@@ -6,6 +6,10 @@ const crawler = require("./crawler/crawler");
 const wiki = require("./crawler/wiki");
 const database = require("./database/postgres");
 
+exports.init2 = () => {
+
+}
+
 exports.init = (app) => {
 
     // get url graph TODO currently only words
@@ -54,7 +58,13 @@ exports.init = (app) => {
 
     // add link to user
     app.get('/user/link/add', async function (request, response) {
-        response.json(await database.saveUserLink(request.query.userid, request.query.url));
+        response.json(database.saveUserLink(request.query.userid, request.query.url));
+    });
+
+    // TODO
+    // delete user link
+    app.get('/user/link/delete', async function (request, response) {
+        response.json(database.deleteUserLink(request.query.userid, request.query.url));
     });
 
     // get user words

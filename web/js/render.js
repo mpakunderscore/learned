@@ -81,7 +81,7 @@ function renderMine() {
                 '<a href="' + user.links[i].url + '" target="_blank" title="' + user.links[i].url + '">' +
                     user.links[i].title +
                 '</a>' +
-                '<span title="Link graph" onclick="renderLinkGraph()">g</span>' +
+                '<span title="Link graph" onclick="renderLinkGraph()">Graph</span>' +
                 '<span title="Delete link" onclick="deleteLink()">✕</span>' +
             '</div>';
     }

@@ -20,7 +20,15 @@ initInput();
 initServiceInfo();
 
 const graph = document.getElementById('graph');
+
+
 const border = document.getElementById('border');
+
+
+
+
+
+
 // const content = document.getElementById('content');
 
 border.onmousedown = dragMouseDown;

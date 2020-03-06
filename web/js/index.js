@@ -32,7 +32,15 @@ const getUserWords = () => {
 };
 getUserWords();
 
+const deleteLink = () => {
+    const response = get('/user/link/delete?userid=' + user.id);
+    const userWords = JSON.parse(response);
+    user.words = userWords;
+    console.log(userWords)
+}
+
 function get(url) {
+    // TODO fetch
     let xmlHttp = new XMLHttpRequest();
     xmlHttp.open('GET', url, false); // false for synchronous request
     xmlHttp.send(null);

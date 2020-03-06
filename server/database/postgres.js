@@ -99,6 +99,15 @@ exports.saveUserLink = async (userid, url) => {
     // console.log(userLink)
 };
 
+// Delete user link
+
+exports.deleteUserLink = async (userid, url) => {
+    let userLink = models.UserLink.create({userid: userid, url: url})
+    let link = await crawler.getURLData(url);
+    return link;
+    // console.log(userLink)
+};
+
 // Get user links and graph
 
 exports.getUserLinks = async (userid) => {
