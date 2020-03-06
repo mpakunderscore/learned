@@ -5,10 +5,7 @@
 const crawler = require("./crawler/crawler");
 const wiki = require("./crawler/wiki");
 const database = require("./database/postgres");
-
-exports.init2 = () => {
-
-}
+const worker = require("./database/worker");e
 
 exports.init = (app) => {
 
@@ -50,12 +47,6 @@ exports.init = (app) => {
         response.json(user);
     });
 
-    // get user list of links TODO title doesn't work
-    app.get('/user/links', async function (request, response) {
-        let links = await database.getUserLinks(request.query.userid);
-        response.json(links);
-    });
-
     // add link to user
     app.get('/user/link/add', async function (request, response) {
         response.json(database.saveUserLink(request.query.userid, request.query.url));
@@ -67,15 +58,23 @@ exports.init = (app) => {
         response.json(database.deleteUserLink(request.query.userid, request.query.url));
     });
 
+
+
+    // get user list of links
+    app.get('/user/links', async function (request, response) {
+        let links = await worker.getUserLinks(request.query.userid);
+        response.json(links);
+    });
+
     // get user words
     app.get('/user/words', async function (request, response) {
-        let links = await database.getUserWords(request.query.userid);
+        let links = await worker.getUserWords(request.query.userid);
         response.json(links);
     });
 
     // get user graph
     app.get('/user/graph', async function (request, response) {
-        let links = await database.getWordsGraph(await exports.getUserWords(request.query.userid));
+        let links = await worker.getWordsGraph(await worker.getUserWords(request.query.userid));
         response.json(links);
     });
 

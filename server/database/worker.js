@@ -38,16 +38,27 @@ exports.getUserLinks = async (userid) => {
 
 exports.getUserWords = async (userid) => {
 
-    // opened links
-    // added links
-    // saved categories
-    // language
-
+    // TODO foreign key
     let userLinks = await models.UserLink.findAll({
         where: {
             userid: userid
         }
     });
+
+    let links = []
+    for (let id in userLinks) {
+
+        let userLinkUrl = userLinks[id].toJSON().url;
+        const link = await database.getLink(userLinkUrl);
+
+        if (link)
+            links.push(link)
+    }
+
+    return exports.getLinksWords(links);
+};
+
+exports.getLinksWords = async (links) => {
 
     let words = await database.getWords(); // {id, categiries, pages}
     let globalWords = {}
@@ -55,16 +66,10 @@ exports.getUserWords = async (userid) => {
         globalWords[words[id].id] = {count: words[id].count, categories: words[id].categories};
     }
 
-    // console.log(words)
+    let linksWords = {};
+    for (let id in links) {
 
-    // let categories = await database.getCategories(); // {id, categiries, pages}
-
-    let userWords = {};
-    for (let id in userLinks) {
-
-        let userLinkUrl = userLinks[id].toJSON().url;
-
-        const link = await database.getLink(userLinkUrl);
+        const link = links[id];
 
         if (link)
             for (let id in link.words) {
@@ -73,16 +78,16 @@ exports.getUserWords = async (userid) => {
 
                 // console.log(words[name])
 
-                if (userWords[name])
-                    userWords[name].count += link.words[id].count;
+                if (linksWords[name])
+                    linksWords[name].count += link.words[id].count;
 
                 else if (globalWords[name] && isNaN(name) && !globalWords[name].categories.includes('English grammar')) //English words
-                    userWords[name] = {count: link.words[id].count, globalCount: globalWords[name].count, categories: globalWords[name].categories};
+                    linksWords[name] = {count: link.words[id].count, globalCount: globalWords[name].count, categories: globalWords[name].categories};
             }
     }
 
-    return userWords;
-};
+    return linksWords;
+}
 
 // let graphCategories = {};
 

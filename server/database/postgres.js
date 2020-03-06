@@ -35,7 +35,7 @@ exports.getUser = async (id) => {
 // Get list of users
 
 exports.getUsers = async () => {
-    return await models.User.findAll();
+    return models.User.findAll();
 };
 
 // Save word or update word count (word in links)
@@ -79,15 +79,13 @@ exports.saveLink = async (link) => {
 // Get link
 
 exports.getLink = async (url) => {
-    let link = models.Link.findOne({where: {url: url}})
-    return link;
+    return models.Link.findOne({where: {url: url}})
 };
 
 // Get links
 
 exports.getLinks = async () => {
-    let links = models.Link.findAll()
-    return links;
+    return models.Link.findAll();
 };
 
 // Save url for user.id. Nothing more
@@ -96,18 +94,13 @@ exports.saveUserLink = async (userid, url) => {
     let userLink = models.UserLink.create({userid: userid, url: url})
     let link = await crawler.getURLData(url);
     return link;
-    // console.log(userLink)
 };
 
 // Delete user link
 
 exports.deleteUserLink = async (userid, url) => {
-    // console.log(userid, url)
-    await models.UserLink.destroy({
-        where: {userid: userid, url: url}
-    })
+    await models.UserLink.destroy({where: {userid: userid, url: url}})
     return true;
-    // console.log(userLink)
 };
 
 // Save category from wiki graph

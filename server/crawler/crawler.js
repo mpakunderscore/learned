@@ -128,11 +128,13 @@ exports.getURLData = async function (url) {
 
 let getWords = async function (text) {
 
-    //TODO no time for this, did it before in edflow
+    //TODO No time for this, did it before in edflow
 
     let words = text.split(' ').reduce((prev, next) => {
 
         // console.log(prev)
+        // TODO I know, i know. You are a god of regex. Once upon a time i spent 3 days on favicon parser.
+        // Is this necessary? AT LAST, BIGRAMS NECESSARY!
         next = next.replace(/,|\.|:|'|\(|\)"|\?|;|!/, '')
 
         prev[next] = (prev[next] + 1) || 1;
@@ -161,6 +163,6 @@ let getWords = async function (text) {
     // console.log('Global words length: ' + Object.keys(globalWords).length);
 
     return sortable;
-}
+};
 
 
