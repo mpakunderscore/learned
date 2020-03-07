@@ -14,13 +14,16 @@ exports.init = (app) => {
 
         let urlData = await crawler.getURLData(request.query.url);
 
+        // TODO :(
+        let urlDataJson = JSON.parse(JSON.stringify(urlData));;
+
         if (request.query.short === 'true')
-            urlData.words = urlData.words.splice(0, 7);
+            urlDataJson.words = urlData.words.splice(0, 7);
 
         if (request.query.graph === 'true')
             urlData.graph = await worker.getTokensGraph(await worker.getLinksTokens([urlData]));
 
-        response.json(urlData);
+        response.json(urlDataJson);
     });
 
     // get pages from this url list links

@@ -70,9 +70,9 @@ exports.getLinksTokens = async (links) => {
     }
 
     let linksWords = {};
-    for (let id in links) {
+    for (let i in links) {
 
-        const link = links[id];
+        const link = links[i];
 
         if (link)
             for (let id in link.words) {
@@ -122,6 +122,8 @@ exports.getTokensGraph = async (words) => {
 
 let getParentCategories = async function (category, userGraphCategories) {
 
+    console.log('getParentCategories: ' + category)
+
     if (userGraphCategories[category]) {
         userGraphCategories[category].count += 1;
     } else {
@@ -161,7 +163,7 @@ let getParentCategories = async function (category, userGraphCategories) {
 
         if (userGraphCategories[upperCategories[id]]) {
 
-            console.log(userGraphCategories[upperCategories[id]])
+            // console.log(userGraphCategories[upperCategories[id]])
 
             if (!userGraphCategories[upperCategories[id]].subcategories.includes(category))
                 userGraphCategories[upperCategories[id]].subcategories.push(category);
@@ -172,7 +174,7 @@ let getParentCategories = async function (category, userGraphCategories) {
             userGraphCategories[upperCategories[id]] = {subcategories: [category], count: 1};
         }
 
-        console.log(upperCategories[id] + ': ' + userGraphCategories[upperCategories[id]].count)
+        // console.log(upperCategories[id] + ': ' + userGraphCategories[upperCategories[id]].count)
 
         if (topCategory) {
 

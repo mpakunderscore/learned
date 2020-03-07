@@ -85,7 +85,7 @@ function renderMine() {
                 '<a href="' + url + '" target="_blank" title="' + url + '">' +
                     user.links[i].title +
                 '</a>' +
-                '<span title="Link graph" onclick="crawlLink(this)">Graph</span>' +
+                '<span title="Link graph" onclick="crawlLink(this)">G</span>' +
                 '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
             '</div>';
     }
