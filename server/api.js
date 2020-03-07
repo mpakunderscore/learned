@@ -18,10 +18,10 @@ exports.init = (app) => {
         let urlDataJson = JSON.parse(JSON.stringify(urlData));;
 
         if (request.query.short === 'true')
-            urlDataJson.words = urlData.words.splice(0, 7);
+            urlDataJson.words = urlDataJson.words.splice(0, 2);
 
         if (request.query.graph === 'true')
-            urlData.graph = await worker.getTokensGraph(await worker.getLinksTokens([urlData]));
+            urlData.graph = await worker.getTokensGraph(await worker.getLinksTokens([urlDataJson]));
 
         response.json(urlDataJson);
     });

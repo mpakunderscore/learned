@@ -2,6 +2,7 @@ main #graph {
     background-color: #e6e6ed;
     /*background-color: rgba(91, 237, 114, 0.5);*/
     overflow: hidden;
+    font-weight: 600;
 
     /*animation-name: example;*/
     /*animation-duration: 1s;*/

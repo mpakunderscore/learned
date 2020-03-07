@@ -45,7 +45,7 @@ const deleteLink = (element) => {
 
 const crawlLink = (element) => {
     // TODO
-    const response = get('/crawl?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true');
+    const response = get('/crawl?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true');
     console.log(JSON.parse(response))
 }
 

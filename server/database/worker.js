@@ -75,27 +75,26 @@ exports.getLinksTokens = async (links) => {
         const link = links[i];
 
         if (link)
-            for (let id in link.words) {
-
-                let name = link.words[id].name;
-
-                // console.log(words[name])
-
-                if (linksWords[name])
-                    linksWords[name].count += link.words[id].count;
-
-                else if (globalWords[name] && isNaN(name) && !globalWords[name].categories.includes('English grammar')) //English words
-                    linksWords[name] = {count: link.words[id].count, globalCount: globalWords[name].count, categories: globalWords[name].categories};
-            }
+            getLinkTokens(link, linksWords, globalWords)
     }
 
     return linksWords;
-}
+};
 
-// Graph based on words []
+let getLinkTokens = (link, linksWords, globalWords) => {
 
-exports.getWordsTokens = () => {
+    for (let id in link.words) {
 
+        let name = link.words[id].name;
+
+        // console.log(words[name])
+
+        if (linksWords[name])
+            linksWords[name].count += link.words[id].count;
+
+        else if (globalWords[name] && isNaN(name) && !globalWords[name].categories.includes('English grammar')) //English words
+            linksWords[name] = {count: link.words[id].count, globalCount: globalWords[name].count, categories: globalWords[name].categories};
+    }
 }
 
 // Graph based on tokens []
