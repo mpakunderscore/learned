@@ -5,7 +5,7 @@
 const crawler = require("./crawler/crawler");
 const wiki = require("./crawler/wiki");
 const database = require("./database/postgres");
-const worker = require("./database/worker");
+const worker = require("./worker");
 
 exports.init = (app) => {
 

@@ -61,7 +61,7 @@ exports.saveWord = (name) => {
     });
 };
 
-// Get list of words
+// Get list of words TODO
 
 exports.getWords = async () => {
     let words = await models.Word.findAll();

@@ -1,4 +1,4 @@
-const database = require("./postgres");
+const database = require("./database/postgres");
 
 // up to 5k
 exports.links = {};
@@ -17,7 +17,7 @@ exports.init = async () => {
         exports.words[words[i].id] = words[i].toJSON();
     }
 
-    console.log('Stored categories: ' + Object.keys(exports.categories).length)
+    console.log('storage.categories: ' + categories + 'storage.words: ' + words.length)
 };
 
 

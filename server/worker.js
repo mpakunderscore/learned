@@ -1,7 +1,7 @@
-let models = require("./models");
+let models = require("./database/models");
+const database = require("./database/postgres");
 
-const database = require("./postgres");
-const wiki = require("../crawler/wiki");
+const wiki = require("./crawler/wiki");
 
 const storage = require("./storage");
 
