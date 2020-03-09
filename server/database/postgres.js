@@ -106,8 +106,8 @@ exports.deleteUserLink = async (userid, url) => {
 // Save category from wiki graph
 
 exports.saveCategory = async (category) => {
-    let databaseCategory = await models.Category.create(category)
-    return databaseCategory.toJSON();
+    let databaseCategory = await models.Category.create(category).toJSON();
+    return databaseCategory;
 };
 
 // Get one category

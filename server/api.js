@@ -20,8 +20,10 @@ exports.init = (app) => {
         if (request.query.short === 'true')
             urlDataJson.words = urlDataJson.words.splice(0, 2);
 
+        let tokens = await worker.getLinksTokens([urlDataJson]);
+
         if (request.query.graph === 'true')
-            urlData.graph = await worker.getTokensGraph(await worker.getLinksTokens([urlDataJson]));
+            urlData.graph = await worker.getTokensGraph(tokens);
 
         response.json(urlDataJson);
     });

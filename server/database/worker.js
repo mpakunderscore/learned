@@ -3,6 +3,8 @@ let models = require("./models");
 const database = require("./postgres");
 const wiki = require("../crawler/wiki");
 
+const storage = require("./storage");
+
 // Get user links and graph TODO redo dis, very bad. Need to be in postgres module
 
 exports.getUserLinks = async (userid) => {
@@ -129,7 +131,11 @@ let getParentCategories = async function (category, userGraphCategories) {
         userGraphCategories[category] = {count: 1, subcategories: []}
     }
 
-    let upperCategories = (await wiki.getWikiCategories(category)).categories; // []
+    console.log(category)
+    console.log(Object.keys(storage.categories))
+    // console.log(storage.categories)
+
+    let upperCategories = storage.categories[category].categories; // []
 
     let topCategory = false;
 
