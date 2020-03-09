@@ -68,6 +68,12 @@ exports.getWords = async () => {
     return words.filter(word => word.categories.length > 0 && !word.categories.includes('Disambiguation pages'))
 };
 
+// Get list of words TODO
+
+exports.getAllWords = async () => {
+    return models.Word.findAll();
+};
+
 // Save link
 
 exports.saveLink = async (link) => {
@@ -88,12 +94,22 @@ exports.getLinks = async () => {
     return models.Link.findAll();
 };
 
-// Save url for user.id. Nothing more
+// Save url for user.id and create link object
 
 exports.saveUserLink = async (userid, url) => {
     let userLink = models.UserLink.create({userid: userid, url: url})
     let link = await crawler.getURLData(url);
     return link;
+};
+
+// Get user links
+
+exports.getUserLinks = async (userid) => {
+    return models.UserLink.findAll({
+        where: {
+            userid: userid
+        }
+    });
 };
 
 // Delete user link

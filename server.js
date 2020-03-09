@@ -1,5 +1,3 @@
-import * as database from "./server/database/postgres";
-
 require('dotenv').config();
 
 const api = require('./server/api');

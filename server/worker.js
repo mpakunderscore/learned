@@ -5,18 +5,15 @@ const wiki = require("./crawler/wiki");
 
 const storage = require("./storage");
 
-// Get user links and graph TODO redo dis, very bad. Need to be in postgres module
+// Get user links titled
 
-exports.getUserLinks = async (userid) => {
-    let userLinks = await models.UserLink.findAll({
-        where: {
-            userid: userid
-        }
-    });
+exports.getUserLinksTitled = async (userid) => {
+
+    let userLinks = database.getUserLinks(userid);
 
     // console.log(userLinks)
 
-    let userLinksJson = []
+    let userLinksJson = [];
     for (let i = 0; i < userLinks.length; i++) {
 
         let userLinkJson = userLinks[i].toJSON();
@@ -26,7 +23,7 @@ exports.getUserLinks = async (userid) => {
             where: {
                 url: userLinkJson.url
             }
-        })
+        });
 
         // console.log(link)
 
@@ -41,14 +38,10 @@ exports.getUserLinks = async (userid) => {
 
 exports.getUserTokens = async (userid) => {
 
-    // TODO foreign key
-    let userLinks = await models.UserLink.findAll({
-        where: {
-            userid: userid
-        }
-    });
+    let userLinks = database.getUserLinks(userid);
 
-    let links = []
+    // TODO foreign key
+    let links = [];
     for (let id in userLinks) {
 
         let userLinkUrl = userLinks[id].toJSON().url;

@@ -70,7 +70,7 @@ exports.init = (app) => {
 
     // get user list of links
     app.get('/user/links', async function (request, response) {
-        let links = await worker.getUserLinks(request.query.userid);
+        let links = await worker.getUserLinksTitled(request.query.userid);
         response.json(links);
     });
 

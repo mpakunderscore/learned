@@ -17,7 +17,13 @@ exports.init = async () => {
         exports.words[words[i].id] = words[i].toJSON();
     }
 
-    console.log('storage.categories: ' + categories + 'storage.words: ' + words.length)
+    const allWords = await database.getAllWords();
+
+    console.log(
+        'storage.categories: ' + categories.length +
+        ' / storage.words: ' + words.length +
+        ' / storage.words.all: ' + allWords.length
+    )
 };
 
 
