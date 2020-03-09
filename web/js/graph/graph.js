@@ -14,8 +14,8 @@ let initTest = () => {
     menuItem({id: 'D'});
 };
 
-// initMain();
-initTest();
+initMain();
+// initTest();
 
 function menuItem(item) {
     nodes_data.push(item);

@@ -125,10 +125,12 @@ let getParentCategories = async function (category, userGraphCategories) {
     }
 
     console.log(category)
-    console.log(Object.keys(storage.categories))
+    // console.log(Object.keys(storage.categories))
     // console.log(storage.categories)
 
-    let upperCategories = storage.categories[category].categories; // []
+    let categoryObject = await storage.getCategory(category)
+
+    let upperCategories = categoryObject.categories;
 
     let topCategory = false;
 

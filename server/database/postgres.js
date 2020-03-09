@@ -64,14 +64,14 @@ exports.saveWord = (name) => {
 // Get list of words TODO
 
 exports.getWords = async () => {
-    let words = await models.Word.findAll();
+    let words = await models.Word.findAll({order: [['count', 'DESC']]});
     return words.filter(word => word.categories.length > 0 && !word.categories.includes('Disambiguation pages'))
 };
 
 // Get list of words TODO
 
 exports.getAllWords = async () => {
-    return models.Word.findAll();
+    return models.Word.findAll({order: [['count', 'DESC']]});
 };
 
 // Save link

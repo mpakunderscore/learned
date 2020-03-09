@@ -44,7 +44,7 @@ function selectNode(circleElement, category, random) {
         // if (user.graph['Main_topic_classifications'])
         //     renderUserGraph(selectedNode, 'Main_topic_classifications');
 
-    } else if (title === '') { // Main
+    } else if (title === mainCategory.id) { // Main
 
         clearGraph();
         initMain();

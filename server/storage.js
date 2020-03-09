@@ -1,4 +1,5 @@
 const database = require("./database/postgres");
+const wiki = require("./crawler/wiki");
 
 // up to 5k
 exports.links = {};
@@ -25,5 +26,14 @@ exports.init = async () => {
         ' / storage.words.all: ' + allWords.length
     )
 };
+
+// TODO hmm
+exports.getCategory = async (id) => {
+    let category = exports.categories[id];
+    if (!category)
+        category = (await wiki.getWikiCategories(id));
+
+    return category;
+}
 
 
