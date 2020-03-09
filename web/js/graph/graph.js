@@ -1,24 +1,3 @@
-graph.style.width = 100 * borderRatio + '%';
-
-let mainCircleText = 'Home';
-
-let lang = 'en';
-
-const circleRadius = isMobile ? 12 : 6;
-const textPadding = isMobile ? 18 : 12;
-const textHeight = isMobile ? '.4em' : '.35em';
-
-const defaultEdge = 100;
-
-let nodes_data = [];
-let links_data = [];
-
-let mainCategory = {id: '', main: true, active: true};
-nodes_data.push(mainCategory);
-
-// let languageCategory;
-// let graphCategory;
-
 // TODO MENU DATA
 let initMain = () => {
 
@@ -27,7 +6,16 @@ let initMain = () => {
     menuItem({id: 'Mine'});
     menuItem({id: 'Random'});
 };
-initMain();
+
+let initTest = () => {
+    menuItem({id: 'A'});
+    menuItem({id: 'B'});
+    menuItem({id: 'C'});
+    menuItem({id: 'D'});
+};
+
+// initMain();
+initTest();
 
 function menuItem(item) {
     nodes_data.push(item);
@@ -36,6 +24,7 @@ function menuItem(item) {
     return item;
 }
 
+// Graph render functions
 
 let link = svg.selectAll('line');
 let node = svg.selectAll('node');
@@ -46,7 +35,6 @@ simulation.on('tick', tickActions);
 let initGraph = () => {
     initData();
     initView();
-    // initExit();
     initSimulation();
 };
 initGraph();
@@ -56,50 +44,10 @@ function initData() {
     link = link.data(links_data);
 }
 
-function initExit() {
-    node.exit().remove();
-    link.exit().remove();
-}
-
-function deleteNode(d) {
-
-    // console.log(i)
-
-    let clickIndex = nodes_data.indexOf(d);
-    console.log(clickIndex)
-
-
-    // console.log(links_data)
-
-    // console.log(index)
-    // console.log(links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
-
-    // for (let id in links_data) {
-    //     let link = links_data[id]
-    //     if (link.target.id === d.id) {
-    //         let nodeIndex = nodes_data.indexOf(link.source);
-    //         if (!link.source.main)
-    //             nodes_data.splice(nodeIndex, 1);
-    //     }
-    // }
-
-
-    // node.exit().remove();
-
-    links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
-    // console.log(links_data)
-    link = link.data(links_data)
-    link.exit().remove();
-
-
-    console.log(nodes_data)
-    // nodes_data.splice(clickIndex, 1);
-    console.log(nodes_data)
-
-    // node = node.data(nodes_data)
-
-    // initGraph();
-}
+// function initExit() {
+//     node.exit().remove();
+//     link.exit().remove();
+// }
 
 function initView() {
 
@@ -252,105 +200,7 @@ function setLanguageMenu() {
 }
 
 
-// TODO refactoring
 
-let currentNode = '';
-
-function selectNode(circleElement, category, random) {
-
-    let title = category.id;
-
-    d3.select(circleElement).attr('class', category.main ? 'main' : 'active')
-    d3.select(circleElement.nextSibling).attr('class', category.main ? 'main' : 'active')
-
-    if (title === 'Random') {
-        title = 'Graph';
-        random = true;
-    }
-
-    let selectedNode = nodes_data.find(element => element.id === title);
-    selectedNode.active = true;
-
-    // console.log(title)
-
-    if (title === 'Language' || title === 'Ru' || title === 'En') { // Language
-
-        if (title !== 'Language') {
-            lang = title.toLowerCase();
-        } else {
-            // window.location.href = '/language'
-            // console.log(window.location.href)
-        }
-
-        // console.log(lang)
-
-        clearGraph();
-        setLanguageMenu();
-
-    } else if (title === 'Mine') { // Personal graph
-
-        clearGraph();
-        menuItem(selectedNode);
-
-        renderMine();
-
-        // getTokensGraph();
-        // if (user.graph['Main_topic_classifications'])
-        //     renderUserGraph(selectedNode, 'Main_topic_classifications');
-
-    } else if (title === '') { // Main
-
-        clearGraph();
-        initMain();
-        clickHome()
-
-    } else { // Graph and categories
-
-        if (title === 'Graph') {
-            clearGraph();
-            menuItem(selectedNode);
-        }
-
-        const response = get('/wiki?title=' + title + '&lang=' + lang);
-        const responseJson = JSON.parse(response);
-
-        let categoriesLength = responseJson.subcategories.length;
-
-        console.log(nodes_data)
-
-        selectedNode = nodes_data.find(element => element.id === title);
-
-        if (selectedNode.id !== currentNode) {
-            clearGray(selectedNode);
-            currentNode = selectedNode.id;
-        }
-
-        shuffle(responseJson.subcategories).splice(0, random ? 1 : 7).forEach(categoryJson => {
-
-            if (!nodes_data.find(element => element.id === categoryJson.id)) {
-
-                if (random) {
-                    categoryJson.active = true;
-                    setTimeout(() => selectNode(circleElement, categoryJson, random), 1000);
-                }
-
-                nodes_data.push(categoryJson);
-                links_data.push({source: categoryJson, target: selectedNode, value: defaultEdge})
-                console.log(selectedNode.id)
-
-            } else {
-
-            }
-        });
-
-        // nodes_data.filter(node => node.id === d.id || node.target.id === d.id))
-        // links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
-
-        setContent(responseJson.pages, responseJson.mainPage, categoriesLength, title)
-    }
-
-    initGraph();
-}
 
 function renderUserGraph(graphNode, categoryName) {
 

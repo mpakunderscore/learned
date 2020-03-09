@@ -16,17 +16,12 @@ let svg = d3.select('#graph').append('svg')
 let content = document.getElementById('content');
 let contentList = document.getElementById('content-list');
 content.style.width = (99.5 - 100 * borderRatio) + '%';
+
 initInput();
 initServiceInfo();
 
 const graph = document.getElementById('graph');
-
-
 const border = document.getElementById('border');
-
-
-
-
 
 
 // const content = document.getElementById('content');
