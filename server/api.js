@@ -23,7 +23,7 @@ exports.init = (app) => {
         let tokens = await worker.getLinksTokens([urlDataJson]);
 
         if (request.query.graph === 'true')
-            urlData.graph = await worker.getTokensGraph(tokens);
+            urlDataJson.graph = await worker.getTokensGraph(tokens);
 
         response.json(urlDataJson);
     });

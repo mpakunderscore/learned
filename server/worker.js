@@ -96,7 +96,7 @@ let getLinkTokens = (link, linksWords, globalWords) => {
 
 exports.getTokensGraph = async (words) => {
 
-    let wordsCategoriesGraph = {};
+    let categoriesGraph = {};
 
     let i = 0;
 
@@ -107,34 +107,27 @@ exports.getTokensGraph = async (words) => {
         // console.log(word.categories)
 
         for (let n in word.categories) {
-            await getParentCategories(word.categories[n], wordsCategoriesGraph);
+            await getParentCategories(word.categories[n], categoriesGraph, 0);
         }
     }
 
-    return wordsCategoriesGraph;
+    return categoriesGraph;
 };
 
-let getParentCategories = async function (category, userGraphCategories) {
-
-    console.log('getParentCategories: ' + category)
+let getParentCategories = async function (category, userGraphCategories, depth) {
 
     if (userGraphCategories[category]) {
         userGraphCategories[category].count += 1;
     } else {
-        userGraphCategories[category] = {count: 1, subcategories: []}
+        userGraphCategories[category] = {count: 1, subcategories: [], depth: depth}
     }
 
-    console.log(category)
-    // console.log(Object.keys(storage.categories))
-    // console.log(storage.categories)
-
     let categoryObject = await storage.getCategory(category)
-
     let upperCategories = categoryObject.categories;
-
     let topCategory = false;
 
-    console.log(upperCategories)
+    console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
+    // console.log(upperCategories[0])
 
     if (upperCategories.indexOf('Main topic classifications') > -1) {
         upperCategories = ['Main_topic_classifications']
@@ -156,33 +149,38 @@ let getParentCategories = async function (category, userGraphCategories) {
 
     for (let id in upperCategories) {
 
-        // console.log(upperCategories[id])
+        let upperCategory = upperCategories[id];
 
-        if (!upperCategories[id])
+        // console.log(upperCategory)
+
+        if (!upperCategory)
             return;
 
-        if (userGraphCategories[upperCategories[id]]) {
+        if (userGraphCategories[upperCategory]) {
 
-            // console.log(userGraphCategories[upperCategories[id]])
+            if (!userGraphCategories[upperCategory].subcategories.includes(category))
+                userGraphCategories[upperCategory].subcategories.push(category);
 
-            if (!userGraphCategories[upperCategories[id]].subcategories.includes(category))
-                userGraphCategories[upperCategories[id]].subcategories.push(category);
-
-            userGraphCategories[upperCategories[id]].count += 1;
+            userGraphCategories[upperCategory].count += 1;
 
         } else {
-            userGraphCategories[upperCategories[id]] = {subcategories: [category], count: 1};
+            userGraphCategories[upperCategory] = {subcategories: [category], count: 1, depth: depth};
         }
 
-        // console.log(upperCategories[id] + ': ' + userGraphCategories[upperCategories[id]].count)
+        // console.log(upperCategory + ': ' + userGraphCategories[upperCategory].depth)
 
         if (topCategory) {
 
             console.log('TOP CATEGORY: ' + category + ' / ' + userGraphCategories[category].count)
             return;
 
+        } else if (userGraphCategories[upperCategory].depth < userGraphCategories[category].depth) {
+
+            console.error('LOOP: ' + category + userGraphCategories[category].depth + ' > ' + upperCategory + userGraphCategories[upperCategory].depth);
+            return;
+
         } else
-            await getParentCategories(upperCategories[id], userGraphCategories);
+            await getParentCategories(upperCategory, userGraphCategories, depth + 1);
 
     }
 }
