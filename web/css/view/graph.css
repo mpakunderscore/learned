@@ -1,6 +1,7 @@
 main #graph {
     background-color: #e6e6ed;
     /*background-color: rgba(91, 237, 114, 0.5);*/
+    width: 100%;
     overflow: hidden;
     /*font-weight: 400;*/
 

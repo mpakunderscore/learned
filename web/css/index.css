@@ -57,12 +57,22 @@ a:visited {
 
 /*TODO move*/
 #topButtons {
+    display: flex;
+    flex-direction: row;
     position: absolute;
     left: 10px;
     top: 10px;
-    cursor: pointer;
 
     z-index: 2;
+}
+
+#topButtons span {
+    margin: 0 5px;
+}
+
+#topButtons div:hover {
+    cursor: pointer;
+    opacity: .5;
 }
 
 /*TODO temp*/

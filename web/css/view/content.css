@@ -50,3 +50,7 @@
 #content .link span:hover {
     opacity: .5;
 }
+
+#content .recommended a {
+    color: var(--color-green-dark)
+}
