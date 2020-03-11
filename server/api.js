@@ -18,11 +18,11 @@ exports.init = (app) => {
         let urlDataJson = JSON.parse(JSON.stringify(urlData));;
 
         if (request.query.short === 'true')
-            urlDataJson.words = urlDataJson.words.splice(0, 2);
+            urlDataJson.words = urlDataJson.words.splice(0, 10);
 
         let tokens = await worker.getLinksTokens([urlDataJson]);
 
-        console.log(tokens.length)
+        // console.log(tokens.length)
 
         if (request.query.graph === 'true')
             urlDataJson.graph = await worker.getTokensGraph(tokens);
@@ -138,4 +138,6 @@ exports.init = (app) => {
     app.get('/api', function (request, response) {
         response.json(routes);
     });
+
+    console.log('api.routes: ' + routes.length)
 }

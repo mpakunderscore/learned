@@ -1,5 +1,5 @@
 // TODO MENU DATA
-let initMain = () => {
+let initGraphMenu = () => {
 
     menuItem({id: 'Language'});
     menuItem({id: 'Graph'});
@@ -7,20 +7,11 @@ let initMain = () => {
     menuItem({id: 'Random'});
 };
 
-let initTest = () => {
-    menuItem({id: 'A'});
-    menuItem({id: 'B'});
-    menuItem({id: 'C'});
-    menuItem({id: 'D'});
-};
-
-initMain();
-// initTest();
+initGraphMenu();
 
 function menuItem(item) {
     nodes_data.push(item);
     links_data.push({source: mainCategory, target: item, value: defaultEdge});
-
     return item;
 }
 

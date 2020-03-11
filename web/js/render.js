@@ -70,25 +70,33 @@ function renderCard(title, text, img) {
 //     console.log('renderLinkGraph')
 // }
 
-function renderMine() {
+async function renderMine() {
 
-    getUserLinks();
+    await getUserLinks();
 
     let html = '';
     html += '<div id="main-text">Sort: name / time / complexity / source </div>';
-    // html += '<div>Links: ' + user.links.length +'</div>';
+
+    for (let i = 0; i < 1; i++) {
+        html += '' +
+            '<div class="link recommended">' +
+            '<a href="">Recommended link</a>' +
+            '</div>';
+    }
+
     for (let i = 0; i < user.links.length; i++) {
 
         let url = user.links[i].url;
         html += '' +
             '<div class="link">' +
-                '<a href="' + url + '" target="_blank" title="' + url + '">' +
-                    user.links[i].title +
-                '</a>' +
-                '<span title="Link graph" onclick="crawlLink(this)">G</span>' +
-                '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
+            '<a href="' + url + '" target="_blank" title="' + url + '">' +
+            user.links[i].title +
+            '</a>' +
+            '<span title="Link graph" onclick="crawlLink(this)">G</span>' +
+            '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
             '</div>';
     }
+
     contentList.innerHTML = html;
 }
 
@@ -133,10 +141,4 @@ function clickMainCircle(text) {
 
 function generatedWord(text, i) {
     return text.substring(0, i);
-}
-
-let linkClick = (url) => {
-    // console.log(url)
-    const response = get('/user/link/add?userid=' + user.id + '&url=' + url);
-    console.log(JSON.parse(response));
 }

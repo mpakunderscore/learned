@@ -2,7 +2,7 @@
 
 let currentNode = '';
 
-function selectNode(circleElement, category, random) {
+async function selectNode(circleElement, category, random) {
 
     let title = category.id;
 
@@ -38,7 +38,7 @@ function selectNode(circleElement, category, random) {
         clearGraph();
         menuItem(selectedNode);
 
-        renderMine();
+        await renderMine();
 
         // getTokensGraph();
         // if (user.graph['Main_topic_classifications'])
@@ -47,7 +47,7 @@ function selectNode(circleElement, category, random) {
     } else if (title === mainCategory.id) { // Main
 
         clearGraph();
-        initMain();
+        initGraphMenu();
         clickHome()
 
     } else { // Graph and categories
@@ -57,8 +57,7 @@ function selectNode(circleElement, category, random) {
             menuItem(selectedNode);
         }
 
-        const response = get('/wiki?title=' + title + '&lang=' + lang);
-        const responseJson = JSON.parse(response);
+        const responseJson = await getCategory(title);
 
         let categoriesLength = responseJson.subcategories.length;
 
@@ -76,13 +75,17 @@ function selectNode(circleElement, category, random) {
             if (!nodes_data.find(element => element.id === categoryJson.id)) {
 
                 if (random) {
+
                     categoryJson.active = true;
-                    setTimeout(() => selectNode(circleElement, categoryJson, random), 1000);
+                    setTimeout(() => {
+                        selectNode(circleElement, categoryJson, random)
+                    }, 300);
+
+                } else {
                 }
 
                 nodes_data.push(categoryJson);
                 links_data.push({source: categoryJson, target: selectedNode, value: defaultEdge})
-                console.log(selectedNode.id)
 
             } else {
 
