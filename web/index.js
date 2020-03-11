@@ -1,58 +1,70 @@
 let user;
 
-// TODO need refactoring, user object
+// Client API
 
-// Client API here
-
-const getUser = () => {
-    user = JSON.parse(localStorage.getItem('user')) || {};
-    const response = get('/user?' + (user.id ? 'id=' + user.id : ''));
-    user = JSON.parse(response);
+const getUser = async () => {
+    user = JSON.parse(localStorage['user'] || '{}');
+    user = await get('/user?' + (user.id ? 'id=' + user.id : ''));
     localStorage.setItem('user', JSON.stringify(user));
+    document.getElementById('userid').innerHTML = user.id;
 };
-getUser();
 
-const getUserLinks = () => {
-    const response = get('/user/links?userid=' + user.id);
-    const userLinks = JSON.parse(response);
+const getUserLinks = async () => {
+    const userLinks = await get('/user/links?userid=' + user.id);
     user.links = userLinks;
-    console.log(userLinks)
+    console.log(userLinks);
     document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
 };
-getUserLinks();
+
+const initAPI = async () => {
+    await getUser();
+    await getUserLinks();
+};
 
 //TODO heavy method
 const getUserGraph = () => {
     const response = get('/user/graph?userid=' + user.id);
-    const userGraph = JSON.parse(response);
+    const userGraph = response;
     user.graph = userGraph;
     console.log(userGraph)
 };
 
 const getUserWords = () => {
     const response = get('/user/words?userid=' + user.id);
-    const userWords = JSON.parse(response);
+    const userWords = response;
     user.words = userWords;
     console.log(userWords)
 };
-getUserWords();
 
-const deleteLink = (element) => {
-    // TODO
-    const response = get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.firstChild.getAttribute('href'));
-    renderMine()
+const getCategory = async (title) => {
+    const response = await get('/wiki?title=' + title + '&lang=' + lang);
+    console.log(response);
+    return response;
+};
+
+const linkClick = (url) => {
+    const response = get('/user/link/add?userid=' + user.id + '&url=' + url);
+    console.log(response);
+};
+
+const deleteLink = async (element) => {
+    await get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.firstChild.getAttribute('href'));
+    await renderMine()
+};
+
+const crawlLink = async (element) => {
+    get('/crawl?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true').then(response => {
+        console.log(response)
+    });
+};
+
+async function get(url) {
+    let response = await fetch(url);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        // console.error(response)
+    }
 }
 
-const crawlLink = (element) => {
-    // TODO
-    const response = get('/crawl?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true');
-    console.log(JSON.parse(response))
-}
-
-function get(url) {
-    // TODO fetch
-    let xmlHttp = new XMLHttpRequest();
-    xmlHttp.open('GET', url, false); // false for synchronous request
-    xmlHttp.send(null);
-    return xmlHttp.responseText;
-}
+initAPI().then();
