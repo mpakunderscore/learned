@@ -9,7 +9,7 @@ const storage = require("./storage");
 
 exports.getUserLinksTitled = async (userid) => {
 
-    let userLinks = database.getUserLinks(userid);
+    let userLinks = await database.getUserLinks(userid);
 
     // console.log(userLinks)
 

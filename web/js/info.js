@@ -1,9 +1,9 @@
 function initServiceInfo() {
 
     contentList.innerHTML = '' +
-        '<div>Last update: 06.03.2020</div>' +
-        '<div>Version: 0.3.6</div>' +
-        '<div>Delete mine link</div>' +
+        '<div>Last update: 11.03.2020</div>' +
+        '<div>Version: 0.3.7.1</div>' +
+        // '<div>Delete mine link</div>' +
         // '<div>Link graph</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
         '<div class="info">Personal graph under development</div>' +
