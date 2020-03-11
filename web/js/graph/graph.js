@@ -40,7 +40,9 @@ let initGraph = () => {
 initGraph();
 
 function initData() {
-    node = node.data(nodes_data);
+    node = node.data(nodes_data, function (d) {
+        return d.id;
+    });
     link = link.data(links_data);
 }
 
@@ -97,12 +99,13 @@ function initView() {
         })
         .on('click', function (d) {
             // d3.event.stopPropagation();
-            // this.parentNode.remove();
+
             // nodes_data.splice(d.index, 1);
             // console.log(d)
             // console.log(this)
             // console.log(this.parentNode)
             deleteNode(d);
+            d3.event.stopPropagation();
             initGraph();
         })
         .select(function () {
@@ -135,7 +138,9 @@ function clearGraph() {
 
     nodes_data = [];
     nodes_data.push(mainCategory);
-    node = node.data(nodes_data);
+    node = node.data(nodes_data, function (d) {
+        return d.id;
+    });
     node.exit().remove();
 
     links_data = [];
@@ -143,11 +148,11 @@ function clearGraph() {
     link.exit().remove();
 }
 
-function clearGray(selectedNode) {
+function clearGray() {
 
     console.log('nodes: ' + nodes_data.length)
 
-    // let nodes_data_green = []
+    let nodes_data_green = []
     for (let i = 0; i < nodes_data.length; i++) {
 
         // if (!nodes_data[i])
@@ -163,7 +168,7 @@ function clearGray(selectedNode) {
 
         } else {
 
-            // nodes_data_green.push(nodes_data[i])
+            nodes_data_green.push(nodes_data[i])
 
         }
     }
@@ -176,9 +181,11 @@ function clearGray(selectedNode) {
     link.exit().remove();
 
     // nodes_data = [];
-    // nodes_data = nodes_data_green;
-    // node = node.data(nodes_data);
-    // node.exit().remove();
+    nodes_data = nodes_data_green;
+    node = node.data(nodes_data, function (d) {
+        return d.id;
+    });
+    node.exit().remove();
 
     console.log('nodes: ' + nodes_data.length)
 }

@@ -111,7 +111,9 @@ function deleteNode(d) {
 
     console.log(nodes_data)
     nodes_data.splice(clickIndex, 1);
-    node = node.data(links_data)
+    node = node.data(nodes_data, function (d) {
+        return d.id;
+    });
     node.exit().remove();
     console.log(nodes_data)
 }

@@ -22,6 +22,8 @@ exports.init = (app) => {
 
         let tokens = await worker.getLinksTokens([urlDataJson]);
 
+        console.log(tokens.length)
+
         if (request.query.graph === 'true')
             urlDataJson.graph = await worker.getTokensGraph(tokens);
 

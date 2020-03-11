@@ -29,7 +29,7 @@ const border = document.getElementById('border');
 border.onmousedown = dragMouseDown;
 border.onclick = () => {
     // clickMainCircle('Border click')
-}
+};
 border.ontouchstart = () => {
     // console.log('border touch')
     if (isMobile) {
@@ -94,7 +94,7 @@ window.onresize = function () {
 
     screenWidth = window.innerWidth;
     renderView();
-}
+};
 
 function closeDragElement() {
     // stop moving when mouse button is released:
