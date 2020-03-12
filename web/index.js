@@ -58,7 +58,7 @@ const crawlMineLink = async (element) => {
         console.log(response)
 
         if (response.graph['Main_topic_classifications']) {
-            renderCustomGraph(response.graph, mine, 'Main_topic_classifications');
+            renderCustomGraph(response.graph, menu.mine, 'Main_topic_classifications');
             initGraph();
         }
 

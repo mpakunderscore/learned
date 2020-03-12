@@ -13,23 +13,24 @@ const defaultEdge = 100;
 let nodes_data = [];
 let links_data = [];
 
-let mainCategory = {id: '', main: true, active: true};
+let mainCategory = {id: '', main: true, active: true, depth: 0};
 nodes_data.push(mainCategory);
 
-let mine;
+let menu = {};
 
 // TODO MENU DATA
-let initGraphMenu = () => {
+let initMenu = () => {
 
-    menuItem({id: 'Settings', lang: true});
+    menu.settings = menuItem({id: 'Settings', lang: true});
     menuItem({id: 'Graph'});
-    mine = menuItem({id: 'Mine'});
+    menu.mine = menuItem({id: 'Mine'});
     menuItem({id: 'Random'});
 };
 
-initGraphMenu();
+initMenu();
 
 function menuItem(item) {
+    item.depth = 1;
     nodes_data.push(item);
     links_data.push({source: mainCategory, target: item, value: defaultEdge});
     return item;
@@ -39,15 +40,13 @@ const languages = [{id: 'En', lang: true}, {id: 'Ru', lang: true}];
 
 // , {id: 'Es'}, {id: 'Fr'}, {id: 'De'}, {id: 'Zh'}, {id: 'Ja'}
 
-function setLanguageMenu() {
-
-    let languageCategory = menuItem({id: 'Language', active: true, lang: true});
+function initLanguageMenu(selectedNode) {
 
     for (let id in languages) {
         let language = languages[id]
         console.log(lang + ' ' + language.id.toLowerCase())
         language.active = lang === language.id.toLowerCase();
         nodes_data.push(language);
-        links_data.push({source: language, target: languageCategory, value: defaultEdge});
+        links_data.push({source: language, target: menu.settings, value: defaultEdge});
     }
 }

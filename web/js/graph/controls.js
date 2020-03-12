@@ -19,7 +19,7 @@ async function selectNode(circleElement, category, random) {
 
     if (selectedNode.lang) { // Language
 
-        selectLanguage(title);
+        selectLanguage(selectedNode);
 
     } else if (title === 'Mine') { // Personal graph
 
@@ -32,8 +32,7 @@ async function selectNode(circleElement, category, random) {
     } else { // Graph and categories
 
         if (title === 'Graph') {
-            clearGraph();
-            menuItem(selectedNode);
+            clearGraph(selectedNode);
         }
 
         const responseJson = await getCategory(title);
@@ -53,6 +52,8 @@ async function selectNode(circleElement, category, random) {
 
             if (!nodes_data.find(element => element.id === categoryJson.id)) {
 
+                categoryJson.depth = selectedNode.depth + 1;
+
                 if (random) {
 
                     categoryJson.active = true;
@@ -60,7 +61,6 @@ async function selectNode(circleElement, category, random) {
                         selectNode(circleElement, categoryJson, random)
                     }, 300);
 
-                } else {
                 }
 
                 nodes_data.push(categoryJson);
@@ -75,29 +75,28 @@ async function selectNode(circleElement, category, random) {
     initGraph();
 }
 
-function selectLanguage(title) {
+function selectLanguage(selectedNode) {
 
-    console.log(title)
+    clearGraph(selectedNode);
+    if (selectedNode.id !== 'Language' && selectedNode.id !== 'Settings' ) {
+        lang = selectedNode.id.toLowerCase();
+    } else {
 
-    if (title !== 'Language' && title !== 'Settings' ) {
-        lang = title.toLowerCase();
     }
-
-    clearGraph();
-    setLanguageMenu();
+    // menuItem(selectedNode);
+    initLanguageMenu(selectedNode);
 }
 
 function selectMain() {
 
     clearGraph();
-    initGraphMenu();
+    initMenu();
     clickHome();
 }
 
 async function selectMine(selectedNode) {
 
-    clearGraph();
-    menuItem(selectedNode);
+    clearGraph(selectedNode);
 
     await renderMine();
 
@@ -108,16 +107,22 @@ async function selectMine(selectedNode) {
 
 function deleteNode(d) {
 
+    links_data.filter(link => link.source.id === d.id || link.target.id === d.id).forEach(link_data => {
+
+        console.log(link_data.source)
+        console.log(link_data.target)
+
+        if (link_data.source.depth > d.depth) {
+            nodes_data.splice(nodes_data.indexOf(link_data.source), 1);
+            // links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
+        }
+    });
+
     links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
-    link = link.data(links_data)
+    link = link.data(links_data);
     link.exit().remove();
 
-    for (let i = 0; i < links_data.length; i++) {
-
-    }
-
     let clickIndex = nodes_data.indexOf(d);
-
     nodes_data.splice(clickIndex, 1);
     node = node.data(nodes_data, function (d) {
         return d.id;
@@ -126,16 +131,21 @@ function deleteNode(d) {
 }
 
 // TODO bad to 0 all nodes
-function clearGraph() {
+function clearGraph(selectedNode) {
 
     nodes_data = [];
     nodes_data.push(mainCategory);
-    node = node.data(nodes_data, function (d) {
-        return d.id;
-    });
+    links_data = [];
+
+    if (selectedNode) {
+        selectedNode.active = true;
+        menuItem(selectedNode)
+    }
+
+
+    node = node.data(nodes_data, function (d) {return d.id});
     node.exit().remove();
 
-    links_data = [];
     link = link.data(links_data);
     link.exit().remove();
 }
@@ -156,8 +166,6 @@ function clearGray() {
             links_data = links_data.filter(link => {
                 return link.source.id !== nodes_data[i].id && link.target.id !== nodes_data[i].id
             })
-
-            // nodes_data.slice(i, 1)
 
         } else {
 
