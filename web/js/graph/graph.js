@@ -1,20 +1,3 @@
-// TODO MENU DATA
-let initGraphMenu = () => {
-
-    menuItem({id: 'Language'});
-    menuItem({id: 'Graph'});
-    menuItem({id: 'Mine'});
-    menuItem({id: 'Random'});
-};
-
-initGraphMenu();
-
-function menuItem(item) {
-    nodes_data.push(item);
-    links_data.push({source: mainCategory, target: item, value: defaultEdge});
-    return item;
-}
-
 // Graph render functions
 
 let link = svg.selectAll('line');
@@ -31,11 +14,9 @@ let initGraph = () => {
 initGraph();
 
 function initData() {
-    node = node.data(nodes_data, function (d) {
-        return d.id;
-    });
+    node = node.data(nodes_data, function (d) {return d.id;});
     link = link.data(links_data);
-}
+};
 
 // function initExit() {
 //     node.exit().remove();
@@ -57,7 +38,7 @@ function initView() {
             return d.main ? 'main' : (d.active ? 'active' : '')
         })
         .on('click', function (d) {
-            selectNode(this, d, false)
+            selectNode(this, d, false).then()
         })
         .select(function () {
             return this.parentNode;
@@ -125,77 +106,7 @@ function initView() {
         .merge(link);
 }
 
-function clearGraph() {
 
-    nodes_data = [];
-    nodes_data.push(mainCategory);
-    node = node.data(nodes_data, function (d) {
-        return d.id;
-    });
-    node.exit().remove();
-
-    links_data = [];
-    link = link.data(links_data);
-    link.exit().remove();
-}
-
-function clearGray() {
-
-    console.log('nodes: ' + nodes_data.length)
-
-    let nodes_data_green = []
-    for (let i = 0; i < nodes_data.length; i++) {
-
-        // if (!nodes_data[i])
-        //     break;
-
-        if (!nodes_data[i].active) {
-
-            links_data = links_data.filter(link => {
-                return link.source.id !== nodes_data[i].id && link.target.id !== nodes_data[i].id
-            })
-
-            // nodes_data.slice(i, 1)
-
-        } else {
-
-            nodes_data_green.push(nodes_data[i])
-
-        }
-    }
-
-    // nodes_data_green.push(selectedNode)
-
-    // console.log(nodes_data_green)
-
-    link = link.data(links_data);
-    link.exit().remove();
-
-    // nodes_data = [];
-    nodes_data = nodes_data_green;
-    node = node.data(nodes_data, function (d) {
-        return d.id;
-    });
-    node.exit().remove();
-
-    console.log('nodes: ' + nodes_data.length)
-}
-
-const languages = [{id: 'En'}, {id: 'Ru'}];
-
-// , {id: 'Es'}, {id: 'Fr'}, {id: 'De'}, {id: 'Zh'}, {id: 'Ja'}
-
-function setLanguageMenu() {
-
-    let languageCategory = menuItem({id: 'Language', active: true});
-
-    for (let id in languages) {
-        let language = languages[id]
-        language.active = lang === language.id.toLowerCase();
-        nodes_data.push(language);
-        links_data.push({source: language, target: languageCategory, value: defaultEdge});
-    }
-}
 
 
 

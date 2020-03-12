@@ -17,38 +17,19 @@ async function selectNode(circleElement, category, random) {
     let selectedNode = nodes_data.find(element => element.id === title);
     selectedNode.active = true;
 
-    // console.log(title)
+    console.log(selectedNode)
 
-    if (title === 'Language' || title === 'Ru' || title === 'En') { // Language
+    if (selectedNode.lang) { // Language
 
-        if (title !== 'Language') {
-            lang = title.toLowerCase();
-        } else {
-            // window.location.href = '/language'
-            // console.log(window.location.href)
-        }
-
-        // console.log(lang)
-
-        clearGraph();
-        setLanguageMenu();
+        selectLanguage(title);
 
     } else if (title === 'Mine') { // Personal graph
 
-        clearGraph();
-        menuItem(selectedNode);
-
-        await renderMine();
-
-        // getTokensGraph();
-        // if (user.graph['Main_topic_classifications'])
-        //     renderUserGraph(selectedNode, 'Main_topic_classifications');
+        await selectMine(selectedNode);
 
     } else if (title === mainCategory.id) { // Main
 
-        clearGraph();
-        initGraphMenu();
-        clickHome()
+        selectMain();
 
     } else { // Graph and categories
 
@@ -87,13 +68,8 @@ async function selectNode(circleElement, category, random) {
                 nodes_data.push(categoryJson);
                 links_data.push({source: categoryJson, target: selectedNode, value: defaultEdge})
 
-            } else {
-
             }
         });
-
-        // nodes_data.filter(node => node.id === d.id || node.target.id === d.id))
-        // links_data.filter(link => link.source.id === d.id || link.target.id === d.id))
 
         setContent(responseJson.pages, responseJson.mainPage, categoriesLength, title)
     }
@@ -101,22 +77,110 @@ async function selectNode(circleElement, category, random) {
     initGraph();
 }
 
+function selectLanguage(title) {
+
+    console.log(title)
+
+    if (title !== 'Language' && title !== 'Settings' ) {
+        lang = title.toLowerCase();
+    }
+
+    clearGraph();
+    setLanguageMenu();
+}
+
+function selectMain() {
+
+    clearGraph();
+    initGraphMenu();
+    clickHome();
+}
+
+async function selectMine(selectedNode) {
+
+    clearGraph();
+    menuItem(selectedNode);
+
+    await renderMine();
+
+    // getTokensGraph();
+    // if (user.graph['Main_topic_classifications'])
+    //     renderUserGraph(selectedNode, 'Main_topic_classifications');
+}
+
 function deleteNode(d) {
 
     links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
-    // console.log(links_data)
     link = link.data(links_data)
     link.exit().remove();
 
+    for (let i = 0; i < links_data.length; i++) {
+
+    }
 
     let clickIndex = nodes_data.indexOf(d);
-    console.log(clickIndex)
 
-    console.log(nodes_data)
     nodes_data.splice(clickIndex, 1);
     node = node.data(nodes_data, function (d) {
         return d.id;
     });
     node.exit().remove();
-    console.log(nodes_data)
+}
+
+// TODO bad to 0 all nodes
+function clearGraph() {
+
+    nodes_data = [];
+    nodes_data.push(mainCategory);
+    node = node.data(nodes_data, function (d) {
+        return d.id;
+    });
+    node.exit().remove();
+
+    links_data = [];
+    link = link.data(links_data);
+    link.exit().remove();
+}
+
+
+function clearGray() {
+
+    console.log('nodes: ' + nodes_data.length)
+
+    let nodes_data_green = []
+    for (let i = 0; i < nodes_data.length; i++) {
+
+        // if (!nodes_data[i])
+        //     break;
+
+        if (!nodes_data[i].active) {
+
+            links_data = links_data.filter(link => {
+                return link.source.id !== nodes_data[i].id && link.target.id !== nodes_data[i].id
+            })
+
+            // nodes_data.slice(i, 1)
+
+        } else {
+
+            nodes_data_green.push(nodes_data[i])
+
+        }
+    }
+
+    // nodes_data_green.push(selectedNode)
+
+    // console.log(nodes_data_green)
+
+    link = link.data(links_data);
+    link.exit().remove();
+
+    // nodes_data = [];
+    nodes_data = nodes_data_green;
+    node = node.data(nodes_data, function (d) {
+        return d.id;
+    });
+    node.exit().remove();
+
+    console.log('nodes: ' + nodes_data.length)
 }
