@@ -29,6 +29,10 @@ async function selectNode(circleElement, category, random) {
 
         selectMain();
 
+    } else if (title === 'Demo') { // Personal graph
+
+        // renderView();
+
     } else { // Graph and categories
 
         if (title === 'Graph') {

@@ -132,10 +132,10 @@ exports.init = (app) => {
 
     // TODO demo
     app.get('/demo/graph', async function (request, response) {
-        let demoGraph = {'Y Combinator': {count: 3, subcategories: ['Companies', 'People', 'Videos'], active: true},
-                        'Companies': {count: 2, subcategories: []},
-                        'People': {count: 2, subcategories: []},
-                        'Videos': {count: 2, subcategories: []}
+        let demoGraph = {'Y Combinator (company)': {count: 3, subcategories: ['Y Combinator companies', 'Y Combinator people', 'Y Combinator videos'], active: true},
+                        'Y Combinator people': {count: 2, subcategories: []},
+                        'Y Combinator companies': {count: 2, subcategories: []},
+                        'Y Combinator videos': {count: 2, subcategories: []}
                         };
         response.json({graph: demoGraph});
     });

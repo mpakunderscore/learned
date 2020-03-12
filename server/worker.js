@@ -27,8 +27,10 @@ exports.getUserLinksTitled = async (userid) => {
 
         // console.log(link)
 
-        userLinkJson.title = link.toJSON().title;
-        userLinksJson.push(userLinkJson)
+        if (link) {
+            userLinkJson.title = link.toJSON().title;
+            userLinksJson.push(userLinkJson)
+        }
     }
 
     return userLinksJson;
