@@ -72,8 +72,8 @@ function renderCard(title, text, img) {
 
 async function renderMine(lazy) {
 
-    // if (!lazy)
-    //     getUserLinks().then(() => renderMine(true));
+    if (!lazy)
+        getUserLinks().then(() => renderMine(true));
 
     let html = '';
     html += '<div id="main-text">Sort: name / time / complexity / source </div>';
