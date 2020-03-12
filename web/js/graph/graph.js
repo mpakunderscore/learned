@@ -111,19 +111,23 @@ function initView() {
 
 
 
-function renderUserGraph(graphNode, categoryName) {
+function renderCustomGraph(graph, graphNode, categoryName) {
 
-    if (user.graph[categoryName].count > 1) {
-        let renderNode = {id: categoryName, active: true, debug: user.graph[categoryName].count};
+    // console.log(graph)
+    // console.log(graphNode)
+    // console.log(categoryName)
+
+    if (graph[categoryName].count > 1) {
+        let renderNode = {id: categoryName, active: true, debug: graph[categoryName].count};
         nodes_data.push(renderNode);
         links_data.push({source: renderNode, target: graphNode, value: defaultEdge})
 
-        for (let id in user.graph[categoryName].subcategories) {
-            renderUserGraph(renderNode, user.graph[categoryName].subcategories[id])
+        for (let id in graph[categoryName].subcategories) {
+            renderCustomGraph(graph, renderNode, graph[categoryName].subcategories[id])
         }
     }
 
-    // console.log(user.graph[id].subcategories)
+    // console.log(graph[id].subcategories)
 }
 
 function initSimulation() {

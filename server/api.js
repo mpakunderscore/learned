@@ -14,7 +14,6 @@ exports.init = (app) => {
 
         let urlData = await crawler.getURLData(request.query.url);
 
-        // TODO :(
         let urlDataJson = JSON.parse(JSON.stringify(urlData));;
 
         if (request.query.short === 'true')
@@ -24,8 +23,11 @@ exports.init = (app) => {
 
         // console.log(tokens.length)
 
-        if (request.query.graph === 'true')
+        if (request.query.graph === 'true') {
+            urlDataJson.tokens = tokens;
             urlDataJson.graph = await worker.getTokensGraph(tokens);
+        }
+
 
         response.json(urlDataJson);
     });

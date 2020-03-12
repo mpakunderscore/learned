@@ -17,8 +17,6 @@ async function selectNode(circleElement, category, random) {
     let selectedNode = nodes_data.find(element => element.id === title);
     selectedNode.active = true;
 
-    console.log(selectedNode)
-
     if (selectedNode.lang) { // Language
 
         selectLanguage(title);
@@ -42,7 +40,7 @@ async function selectNode(circleElement, category, random) {
 
         let categoriesLength = responseJson.subcategories.length;
 
-        console.log(nodes_data)
+        // console.log(nodes_data)
 
         selectedNode = nodes_data.find(element => element.id === title);
 
@@ -105,7 +103,7 @@ async function selectMine(selectedNode) {
 
     // getTokensGraph();
     // if (user.graph['Main_topic_classifications'])
-    //     renderUserGraph(selectedNode, 'Main_topic_classifications');
+    //     renderCustomGraph(selectedNode, 'Main_topic_classifications');
 }
 
 function deleteNode(d) {

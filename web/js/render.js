@@ -70,9 +70,10 @@ function renderCard(title, text, img) {
 //     console.log('renderLinkGraph')
 // }
 
-async function renderMine() {
+async function renderMine(lazy) {
 
-    await getUserLinks();
+    // if (!lazy)
+    //     getUserLinks().then(() => renderMine(true));
 
     let html = '';
     html += '<div id="main-text">Sort: name / time / complexity / source </div>';
@@ -84,18 +85,19 @@ async function renderMine() {
             '</div>';
     }
 
-    for (let i = 0; i < user.links.length; i++) {
+    if (user.links)
+        for (let i = 0; i < user.links.length; i++) {
 
-        let url = user.links[i].url;
-        html += '' +
-            '<div class="link">' +
-            '<a href="' + url + '" target="_blank" title="' + url + '">' +
-            user.links[i].title +
-            '</a>' +
-            '<span title="Link graph" onclick="crawlLink(this)">G</span>' +
-            '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
-            '</div>';
-    }
+            let url = user.links[i].url;
+            html += '' +
+                '<div class="link">' +
+                '<a href="' + url + '" target="_blank" title="' + url + '">' +
+                user.links[i].title +
+                '</a>' +
+                '<span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
+                '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
+                '</div>';
+        }
 
     contentList.innerHTML = html;
 }

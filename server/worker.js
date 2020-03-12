@@ -58,11 +58,12 @@ exports.getUserTokens = async (userid) => {
 
 exports.getLinksTokens = async (links) => {
 
-    let words = await database.getWords(); // {id, categiries, pages}
-    let globalWords = {}
-    for (let id in words) {
-        globalWords[words[id].id] = {count: words[id].count, categories: words[id].categories};
-    }
+    // TODO storage.words
+    // let words = await database.getWords(); // {id, categiries, pages}
+    // let globalWords = {}
+    // for (let id in words) {
+    //     globalWords[words[id].id] = {count: words[id].count, categories: words[id].categories};
+    // }
 
     let linksWords = {};
     for (let i in links) {
@@ -70,7 +71,7 @@ exports.getLinksTokens = async (links) => {
         const link = links[i];
 
         if (link)
-            getLinkTokens(link, linksWords, globalWords)
+            getLinkTokens(link, linksWords, storage.words)
     }
 
     return linksWords;

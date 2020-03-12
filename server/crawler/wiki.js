@@ -2,6 +2,7 @@ const cheerio = require('cheerio')
 const axios = require('axios');
 
 const database = require("../database/postgres");
+const storage = require("../storage");
 
 exports.getWikiCategories = async function (title, lang = 'en') {
 
@@ -55,6 +56,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
             language: lang,
         };
 
+        storage.categories[title] = category;
         database.saveCategory(category).then();
 
         return category;

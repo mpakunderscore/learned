@@ -16,12 +16,14 @@ let links_data = [];
 let mainCategory = {id: '', main: true, active: true};
 nodes_data.push(mainCategory);
 
+let mine;
+
 // TODO MENU DATA
 let initGraphMenu = () => {
 
     menuItem({id: 'Settings', lang: true});
     menuItem({id: 'Graph'});
-    menuItem({id: 'Mine'});
+    mine = menuItem({id: 'Mine'});
     menuItem({id: 'Random'});
 };
 

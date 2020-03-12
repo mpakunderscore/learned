@@ -33,18 +33,18 @@ const getUserWords = () => {
     const response = get('/user/words?userid=' + user.id);
     const userWords = response;
     user.words = userWords;
-    console.log(userWords)
+    // console.log(userWords)
 };
 
 const getCategory = async (title) => {
     const response = await get('/wiki?title=' + title + '&lang=' + lang);
-    console.log(response);
+    // console.log(response);
     return response;
 };
 
 const linkClick = (url) => {
     const response = get('/user/link/add?userid=' + user.id + '&url=' + url);
-    console.log(response);
+    // console.log(response);
 };
 
 const deleteLink = async (element) => {
@@ -52,9 +52,16 @@ const deleteLink = async (element) => {
     await renderMine()
 };
 
-const crawlLink = async (element) => {
+const crawlMineLink = async (element) => {
     get('/crawl?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true').then(response => {
+
         console.log(response)
+
+        if (response.graph['Main_topic_classifications']) {
+            renderCustomGraph(response.graph, mine, 'Main_topic_classifications');
+            initGraph();
+        }
+
     });
 };
 

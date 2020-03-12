@@ -22,16 +22,16 @@ exports.init = async () => {
 
     console.log(
         'storage.categories: ' + categories.length +
-        ' / storage.words: ' + words.length +
-        ' / storage.words.all: ' + allWords.length
+        ' / storage.tokens: ' + words.length +
+        ' / storage.words: ' + allWords.length
     )
 };
 
 // TODO hmm
-exports.getCategory = async (id) => {
-    let category = exports.categories[id];
+exports.getCategory = async (title) => {
+    let category = exports.categories[title];
     if (!category)
-        category = (await wiki.getWikiCategories(id));
+        category = await wiki.getWikiCategories(title);
 
     return category;
 }
