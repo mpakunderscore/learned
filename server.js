@@ -8,6 +8,8 @@ let app = express();
 
 app.use('/', express.static(__dirname + '/web'));
 
+app.use('/demo', express.static(__dirname + '/web'));
+
 // app.use('/language', express.static(__dirname + '/web'));
 
 let server = require('http').Server(app);

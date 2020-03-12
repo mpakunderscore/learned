@@ -17,7 +17,7 @@ exports.init = (app) => {
         let urlDataJson = JSON.parse(JSON.stringify(urlData));;
 
         if (request.query.short === 'true')
-            urlDataJson.words = urlDataJson.words.splice(0, 10);
+            urlDataJson.words = urlDataJson.words.splice(0, 25);
 
         let tokens = await worker.getLinksTokens([urlDataJson]);
 

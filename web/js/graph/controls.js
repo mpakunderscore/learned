@@ -84,7 +84,7 @@ function selectLanguage(selectedNode) {
 
     }
     // menuItem(selectedNode);
-    initLanguageMenu(selectedNode);
+    initLanguageMenu();
 }
 
 function selectMain() {
@@ -130,7 +130,6 @@ function deleteNode(d) {
     node.exit().remove();
 }
 
-// TODO bad to 0 all nodes
 function clearGraph(selectedNode) {
 
     nodes_data = [];
@@ -149,7 +148,6 @@ function clearGraph(selectedNode) {
     link = link.data(links_data);
     link.exit().remove();
 }
-
 
 function clearGray() {
 

@@ -141,7 +141,7 @@ function initServiceInfo() {
 
     contentList.innerHTML = '' +
         '<div>Last update: 12.03.2020</div>' +
-        '<div>Version: 0.3.8</div>' +
+        '<div>Version: 0.3.8.1</div>' +
         // '<div>Delete mine link</div>' +
         // '<div>Link graph</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
@@ -150,5 +150,5 @@ function initServiceInfo() {
         '';
 
     // TODO card design
-    contentList.innerHTML += renderCard('インタラクションカードの例', 'セゴビアはマドリードからの日帰り観光地として人気がある（マドリードからは高速鉄道で30分）。旧市街は長く狭い高台の上に壮大に位置している。大聖堂、古代ローマの水道橋、美しいおとぎ話にでてきそうな古城（アルカサル）などの名所があり、眼下には田舎の景色が広がっている。カスティーリャと言われるこの辺りの景色は赤い大地という異名と合わせてファンタジーではよく用いられる。')
+    contentList.innerHTML += renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have a neuron for chat and one more for cool recommendations. But for now, we need to complete the normal UI and graph structure.')
 }
