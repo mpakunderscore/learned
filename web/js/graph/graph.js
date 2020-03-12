@@ -111,19 +111,21 @@ function initView() {
 
 
 
-function renderCustomGraph(graph, graphNode, categoryName) {
+function renderCustomGraph(graph, parentNode, categoryName) {
 
-    // console.log(graph)
+    // console.log(categoryName)
     // console.log(graphNode)
     // console.log(categoryName)
 
-    if (graph[categoryName].count > 1) {
-        let renderNode = {id: categoryName, active: true, debug: graph[categoryName].count};
-        nodes_data.push(renderNode);
-        links_data.push({source: renderNode, target: graphNode, value: defaultEdge})
+    let graphNode = graph[categoryName];
 
-        for (let id in graph[categoryName].subcategories) {
-            renderCustomGraph(graph, renderNode, graph[categoryName].subcategories[id])
+    if (graphNode.count > 1) {
+        let renderNode = {id: categoryName, active: graphNode.active}; //, debug: graphNode.count
+        nodes_data.push(renderNode);
+        links_data.push({source: renderNode, target: parentNode, value: defaultEdge})
+
+        for (let id in graphNode.subcategories) {
+            renderCustomGraph(graph, renderNode, graphNode.subcategories[id])
         }
     }
 

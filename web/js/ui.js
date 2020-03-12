@@ -141,7 +141,7 @@ function initServiceInfo() {
 
     contentList.innerHTML = '' +
         '<div>Last update: 12.03.2020</div>' +
-        '<div>Version: 0.3.8.1</div>' +
+        '<div>Version: 0.3.8.2</div>' +
         // '<div>Delete mine link</div>' +
         // '<div>Link graph</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
@@ -150,5 +150,5 @@ function initServiceInfo() {
         '';
 
     // TODO card design
-    contentList.innerHTML += renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have a neuron for chat and one more for cool recommendations. But for now, we need to complete the normal UI and graph structure.')
+    contentList.innerHTML += renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have NN for chatbot and one more for recommendations. But for now, we need to complete the normal UI and graph structure.')
 }

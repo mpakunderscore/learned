@@ -130,6 +130,16 @@ exports.init = (app) => {
         response.json(statistics);
     });
 
+    // TODO demo
+    app.get('/demo/graph', async function (request, response) {
+        let demoGraph = {'Y Combinator': {count: 3, subcategories: ['Companies', 'People', 'Videos'], active: true},
+                        'Companies': {count: 2, subcategories: []},
+                        'People': {count: 2, subcategories: []},
+                        'Videos': {count: 2, subcategories: []}
+                        };
+        response.json({graph: demoGraph});
+    });
+
     let routes = [];
     app._router.stack.forEach(function (r) {
         if (r.route && r.route.path) {

@@ -1,7 +1,7 @@
 const database = require("./database/postgres");
 const wiki = require("./crawler/wiki");
 
-// up to 5k
+// up to 50k
 exports.links = {};
 exports.words = {};
 exports.categories = {};
