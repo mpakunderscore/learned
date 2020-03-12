@@ -84,6 +84,8 @@ function selectLanguage(selectedNode) {
     clearGraph(selectedNode);
     if (selectedNode.id !== 'Language' && selectedNode.id !== 'Settings' ) {
         lang = selectedNode.id.toLowerCase();
+        clearGraph();
+        initMenu()
     } else {
 
     }
