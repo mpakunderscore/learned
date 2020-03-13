@@ -118,8 +118,14 @@ function deleteNode(d) {
         console.log(link_data.source)
         console.log(link_data.target)
 
+
+
         if (link_data.source.depth > d.depth) {
             nodes_data.splice(nodes_data.indexOf(link_data.source), 1);
+
+            links_data.filter(link => link.source.id === d.id || link.target.id === d.id).forEach(link_data => {
+
+            });
             // links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
         }
     });

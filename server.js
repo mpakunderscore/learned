@@ -16,7 +16,9 @@ app.use('/', express.static(__dirname + '/web'));
 //         next();
 // });
 
-app.use('/demo?', express.static(__dirname + '/web'));
+app.use('/demo', express.static(__dirname + '/web'));
+
+app.use('/coronavirus', express.static(__dirname + '/web'));
 
 // app.use(function(req, res, next) {
 //     if (req.path.substr(-1) == '/' && req.path.length > 1) {

@@ -114,23 +114,12 @@ let zoom = () => {
 
     if (!graphZoomed) {
         graphSvg.classList.add('scaled');
-        // width *= 1.5;
-        // height *= 1.5;
         graphSvg.setAttribute('width', width * ratio);
         graphSvg.setAttribute('height', height * ratio);
-        // graphSvg.style.width =  width * zzz + 'px';
-        // graph.style.width =  width + 'px';
-        // graph.style.height =  height + 'px';
     } else {
         graphSvg.classList.remove('scaled');
-        // width /= 1.5;
-        // height /= 1.5;
         graphSvg.setAttribute('width', width);
         graphSvg.setAttribute('height', height);
-        // graphSvg.style.width =  width + 'px';
-        // graph.style.width =  width + 'px';
-        // graph.style.height =  height + 'px';
-
     }
 
     graphZoomed = !graphZoomed;

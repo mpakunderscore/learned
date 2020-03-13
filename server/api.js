@@ -139,6 +139,13 @@ exports.init = (app) => {
         response.json({graph: demoGraph});
     });
 
+    app.get('/coronavirus/graph', async function (request, response) {
+        let demoGraph = {'2019–20 coronavirus pandemic': {count: 3, subcategories: []}};
+        response.json({graph: demoGraph});
+    });
+
+
+
     let routes = [];
     app._router.stack.forEach(function (r) {
         if (r.route && r.route.path) {
