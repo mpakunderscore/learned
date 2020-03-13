@@ -10,6 +10,7 @@ if (window.location.href.endsWith('/demo/')) {
 }
 
 if (window.location.href.endsWith('/coronavirus/')) {
+    clickMainCircle('Wash your hands!')
     get('/coronavirus/graph').then(response => {
         let coronavirus = {id: 'Coronavirus'}
         clearGraph(coronavirus);
