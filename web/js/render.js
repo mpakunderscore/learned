@@ -113,9 +113,8 @@ function clickMainCircle(text) {
 
     // return;
 
-    contentList.innerHTML += '<div id="message"></div>';
-
-    let message = document.getElementById('message')
+    let message = document.createElement('div');
+    contentList.append(message)
 
     // let iterator = 0;
     // let dotCount = 1;
