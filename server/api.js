@@ -16,8 +16,8 @@ exports.init = (app) => {
 
         let urlDataJson = JSON.parse(JSON.stringify(urlData));;
 
-        if (request.query.short === 'true')
-            urlDataJson.words = urlDataJson.words.splice(0, 25);
+        // if (request.query.short === 'true')
+        //     urlDataJson.words = urlDataJson.words.splice(0, 25);
 
         let tokens = await worker.getLinksTokens([urlDataJson]);
 
@@ -25,26 +25,19 @@ exports.init = (app) => {
 
         if (request.query.graph === 'true') {
             urlDataJson.tokens = tokens;
-            urlDataJson.graph = await worker.getTokensGraph(tokens);
+            // urlDataJson.graph = await worker.getTokensGraph(tokens);
         }
 
 
         response.json(urlDataJson);
     });
 
+    // TODO will be for active crawler
     // get pages from this url list links
-    app.get('/crawl/links', async function (request, response) {
-
-        let linksArray = await crawler.crawlURLLinks(request.query.url);
-
-        // if (request.query.short === 'true')
-        //     urlData.words = urlData.words.splice(0, 7);
-
-        response.json(linksArray);
-    });
-
-    // app.get('/urls', async function (request, response) {
-    //     response.json(await crawler.getURLsData([request.query.url1, request.query.url2]));
+    // app.get('/crawl/links', async function (request, response) {
+    //
+    //     let linksArray = await crawler.crawlURLLinks(request.query.url);
+    //     response.json(linksArray);
     // });
 
     // get wiki next categories in graph

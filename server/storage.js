@@ -6,6 +6,8 @@ exports.links = {};
 exports.words = {};
 exports.categories = {};
 
+// TODO you need to write in storage when new row incoming bro
+
 exports.init = async () => {
 
     let categories = await database.getCategories();

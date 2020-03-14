@@ -60,13 +60,6 @@ exports.getUserTokens = async (userid) => {
 
 exports.getLinksTokens = async (links) => {
 
-    // TODO storage.words
-    // let words = await database.getWords(); // {id, categiries, pages}
-    // let globalWords = {}
-    // for (let id in words) {
-    //     globalWords[words[id].id] = {count: words[id].count, categories: words[id].categories};
-    // }
-
     let linksWords = {};
     for (let i in links) {
 

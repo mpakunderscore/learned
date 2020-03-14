@@ -49,8 +49,8 @@ Link.init({
 
     words: DataTypes.JSONB,
 
-    wordsLength: DataTypes.INTEGER,
     textLength: DataTypes.INTEGER,
+    wordsLength: DataTypes.INTEGER,
 
     internalLinks: DataTypes.JSONB,
     externalLinks: DataTypes.JSONB,
