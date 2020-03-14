@@ -82,7 +82,7 @@ async function selectNode(circleElement, category, random) {
 function selectLanguage(selectedNode) {
 
     clearGraph(selectedNode);
-    if (selectedNode.id !== 'Language' && selectedNode.id !== 'Settings' ) {
+    if (selectedNode.id !== 'Language' && selectedNode.id !== 'Settings') {
         lang = selectedNode.id.toLowerCase();
         clearGraph();
         initMenu()
@@ -111,31 +111,32 @@ async function selectMine(selectedNode) {
     //     renderCustomGraph(selectedNode, 'Main_topic_classifications');
 }
 
-function deleteNode(d) {
+function deleteUpperNodes(d, nodesForDeletion) {
+
+    nodesForDeletion.push(d.id)
 
     links_data.filter(link => link.source.id === d.id || link.target.id === d.id).forEach(link_data => {
 
-        console.log(link_data.source)
-        console.log(link_data.target)
-
-
-
         if (link_data.source.depth > d.depth) {
-            nodes_data.splice(nodes_data.indexOf(link_data.source), 1);
 
-            links_data.filter(link => link.source.id === d.id || link.target.id === d.id).forEach(link_data => {
-
-            });
-            // links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
+            deleteUpperNodes(link_data.source, nodesForDeletion);
         }
     });
+}
 
-    links_data = links_data.filter(link => link.source.id !== d.id && link.target.id !== d.id);
+function deleteNode(d) {
+
+    let nodesForDeletion = [];
+
+    deleteUpperNodes(d, nodesForDeletion);
+
+    console.log(nodesForDeletion);
+
+    links_data = links_data.filter(link => nodesForDeletion.indexOf(link.source.id) < 0 && nodesForDeletion.indexOf(link.target.id) < 0);
     link = link.data(links_data);
     link.exit().remove();
 
-    let clickIndex = nodes_data.indexOf(d);
-    nodes_data.splice(clickIndex, 1);
+    nodes_data = nodes_data.filter(node => nodesForDeletion.indexOf(node.id) < 0);
     node = node.data(nodes_data, function (d) {
         return d.id;
     });
@@ -154,7 +155,9 @@ function clearGraph(selectedNode) {
     }
 
 
-    node = node.data(nodes_data, function (d) {return d.id});
+    node = node.data(nodes_data, function (d) {
+        return d.id
+    });
     node.exit().remove();
 
     link = link.data(links_data);
