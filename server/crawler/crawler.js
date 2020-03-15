@@ -11,8 +11,9 @@ exports.getURLData = async function (url) {
     console.log('getURLData: ' + url);
 
     let databaseLink = await database.getLink(url);
-    if (databaseLink)
-        return databaseLink;
+
+    // if (databaseLink)
+    //     return databaseLink;
 
     // TODO hmm
     const urlArray = url.split( '/' );
@@ -21,30 +22,21 @@ exports.getURLData = async function (url) {
     const baseUrl = protocol + '//' + host;
 
     try {
-
         const response = await axios.get(encodeURI(url));
         const data = response.data;
-
-        // console.log(data);
-
         const $ = cheerio.load(data);
 
         const title = $('title').text();
 
-        const text = getURLText($);
-
         const links = getURLLinks($, baseUrl);
 
-        // console.log('Title: ' + title);
-        // console.log('Text length: ' + text.length);
+        const text = getURLText($);
 
-        // let responseJson = JSON.parse(body);
-        // console.log(responseJson)
-        // let text = responseJson.query.pages[Object.keys(responseJson.query.pages)[0]].revisions[0]['*']; // Print the HTML for the Google homepage.
+        let wordsList = engine.getWordsList(text);
 
-        let words = await engine.getWords(text);
+        let words = await engine.getWords(wordsList);
 
-
+        // let words = await engine.getWords(text);
 
 
 
@@ -52,10 +44,8 @@ exports.getURLData = async function (url) {
             url: url,
             title: title,
             words: words, // {name, count}
-            wordsLength: words.length,
             textLength: text.length,
-            internalLinks: internalLinks, // ['']
-            externalLinks: externalLinks
+            links: links, // ['']
         };
 
         let savedLink = await database.saveLink(link);
@@ -69,12 +59,11 @@ exports.getURLData = async function (url) {
     }
 };
 
-
 function getURLText($) {
-    return $.root().text().toLowerCase().replace(/\n/g, '');
+    return $.root().text();
 }
 
-function getURLLinks($) {
+function getURLLinks($, baseUrl) {
 
     let links = {};
     links.internal = [];
@@ -87,7 +76,7 @@ function getURLLinks($) {
             if (linkUrl.includes('http'))
                 links.external.push(linkUrl);
             else {
-                links.internal.push(c + '/' + linkUrl);
+                links.internal.push(baseUrl + '/' + linkUrl);
             }
         }
     });

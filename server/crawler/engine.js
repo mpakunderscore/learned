@@ -1,31 +1,52 @@
 // Text analysis engine
 
-exports.getWords = async function (text) {
+exports.getWordsList = (text) => {
 
-    //TODO No time for this, did it before in edflow
+    // Words separators
+    text = text.replace(/(?:\n|\t|–|-|\.|\/)/g, ' ');
+    // Get words and remove empty elements
+    let words = text.split(' ').filter(item => item);
 
-    let words = text.split(' ').reduce((prev, next) => {
+    for (let i = 0; i < words.length; i++) {
+        // Remove garbage
+        words[i] = words[i].replace(/(?:,|\.|\.|:|'|\(|\)|\[|\]|"|\?|;|!)/g, '').trim();
+        // There is words with first big letter, but TODO
+        words[i] = words[i].toLowerCase()
+    }
 
-        // console.log(prev)
-        // TODO I know, i know. You are a god of regex. Once upon a time i spent 3 days on favicon parser.
-        // Is this necessary? AT LAST, BIGRAMS NECESSARY!
-        next = next.replace(/,|\.|:|'|\(|\)"|\?|;|!/, '')
+    words = words.filter(item => item);
 
+    return words;
+};
+
+exports.getWords = async function (wordsList) {
+
+    let bigrams = {};
+    for (let i = 0; i < wordsList.length - 1; i++) {
+        let bigram = wordsList[i] + ' ' + wordsList[i + 1];
+        if (bigrams[bigram])
+            bigrams[bigram] += 1;
+        else
+            bigrams[bigram] = 1;
+    }
+
+    let words = wordsList.reduce((prev, next) => {
         prev[next] = (prev[next] + 1) || 1;
         return prev;
-
     }, {});
 
     let sortable = [];
-    for (let name in words) {
-        if (name.length > 2) {
-            let word = {name: name, count: words[name]};
-            sortable.push(word);
-        }
+    for (let id in words) {
+        let word = {id: id, count: words[id]};
+        sortable.push(word);
+    }
+    for (let id in bigrams) {
+        let bigram = {id: id, count: bigrams[id]};
+        sortable.push(bigram);
     }
 
     for (let id in sortable) {
-        await database.saveWord(sortable[id].name)
+        // await database.saveWord(sortable[id].name)
         // console.log(sortable[id].name + ' / ' + sortable[id].count)
     }
 
