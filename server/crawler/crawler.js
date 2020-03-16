@@ -48,7 +48,7 @@ exports.getURLData = async function (url) {
             links: links, // ['']
         };
 
-        let savedLink = await database.saveLink(link);
+        // let savedLink = await database.saveLink(link);
 
         // console.log(savedLink)
 
