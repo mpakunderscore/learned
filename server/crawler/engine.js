@@ -5,14 +5,14 @@ let utils = require('./utils')
 exports.getWordsList = (text) => {
 
     // Words separators
-    text = text.replace(/(?:\n|\t|–|-|\.|\/)/g, ' ');
+    text = text.replace(utils.separator, ' ');
     // Get words and remove empty elements
     let words = text.split(' ').filter(item => item);
 
     for (let i = 0; i < words.length; i++) {
 
         // Remove garbage
-        words[i] = words[i].replace(/(?:,|\.|\.|:|'|\(|\)|\[|\]|"|\?|;|!|\^|(\d+)|\$|=|\+|&)/g, '').trim();
+        words[i] = words[i].replace(utils.garbage, '').trim();
 
         // There is words with first big letter, but TODO
         words[i] = words[i].toLowerCase()

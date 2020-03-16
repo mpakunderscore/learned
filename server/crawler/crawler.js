@@ -36,9 +36,9 @@ exports.getURLData = async function (url) {
 
         let words = await engine.getWords(wordsList);
 
+        console.log(wordsList.length/words.length)
+
         // let words = await engine.getWords(text);
-
-
 
         let link = {
             url: url,
@@ -52,7 +52,7 @@ exports.getURLData = async function (url) {
 
         // console.log(savedLink)
 
-        return savedLink;
+        return databaseLink;
 
     } catch (error) {
         console.log(error);
