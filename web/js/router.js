@@ -18,3 +18,7 @@ if (window.location.href.endsWith('/coronavirus/')) {
         initGraph();
     });
 }
+
+if (window.location.href.endsWith('/mine/')) {
+    selectMine(menu.mine).then(() => {initGraph()});
+}

@@ -6,6 +6,9 @@ const storage = require("./server/storage");
 let express = require('express');
 let app = express();
 
+// const router = express.Router({ strict: true })
+// app.use(router)
+
 // TODO i don't want this redirect to last backslash
 
 // let router = express.Router({ strict: true });
@@ -17,6 +20,8 @@ app.use('/', express.static(__dirname + '/web'));
 app.use('/demo', express.static(__dirname + '/web'));
 
 app.use('/coronavirus', express.static(__dirname + '/web'));
+
+app.use('/mine', express.static(__dirname + '/web'));
 
 // TODO also we need routing for menu here. And menu array
 

@@ -63,17 +63,23 @@ exports.saveWord = (name) => {
     });
 };
 
-// Get list of words TODO
+// Get list of words
 
 exports.getWords = async () => {
     let words = await models.Word.findAll({order: [['count', 'DESC']]});
     return words.filter(word => word.categories.length > 0 && !word.categories.includes('Disambiguation pages'))
 };
 
-// Get list of words TODO
+// Get list of words
 
 exports.getAllWords = async () => {
     return models.Word.findAll({order: [['count', 'DESC']]});
+};
+
+// Get list of top words
+
+exports.getTopWords = async () => {
+    return models.Word.findAll({order: [['count', 'DESC']], limit: 100});
 };
 
 // Save link
@@ -109,7 +115,7 @@ exports.getLinksShort = async () => {
             title: linkJson.title,
             textLength: linkJson.textLength,
             wordsLength: linkJson.wordsLength,
-            words: linkJson.words.splice(0, 7)
+            words: linkJson.words.splice(0, 15)
         })
     }
 

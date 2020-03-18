@@ -76,7 +76,7 @@ let getLinkTokens = (link, linksWords, globalWords) => {
 
     for (let id in link.words) {
 
-        let name = link.words[id].name;
+        let name = link.words[id].id;
 
         // console.log(words[name])
 

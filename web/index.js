@@ -66,7 +66,7 @@ const crawlMineLink = async (element) => {
 };
 
 async function get(url) {
-    console.log(url)
+    // console.log(url)
     let response = await fetch(url);
     if (response.ok) {
         return await response.json();

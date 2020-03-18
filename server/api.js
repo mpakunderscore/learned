@@ -125,6 +125,11 @@ exports.init = (app) => {
         response.json(await database.getAllWords());
     });
 
+    // get all words
+    app.get('/words/top', async function (request, response) {
+        response.json(await database.getTopWords());
+    });
+
     // get list of links
     app.get('/categories', async function (request, response) {
         let categories = await database.getCategories();
