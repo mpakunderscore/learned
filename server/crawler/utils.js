@@ -9,6 +9,6 @@ exports.exclude = [
     'later', 'been'
 ];
 
-exports.separator = /(?:\n|\t|–|—|-|\.|\/)/g;
+exports.separator = /(?:\n|\t|–|—|-|−|\.|\/)/g;
 
 exports.garbage = /(?:,|\.|:|'|\(|\)|\[|\]|"|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;

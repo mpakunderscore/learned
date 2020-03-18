@@ -6,14 +6,27 @@ const axios = require('axios');
 
 // First wiki result in google is a good way to find token word.
 
-exports.getURLData = async function (url) {
+exports.getURL = async function (url) {
 
-    console.log('getURLData: ' + url);
+    console.log('getURL: ' + url);
 
     let databaseLink = await database.getLink(url);
 
     if (databaseLink)
         return databaseLink;
+
+    let link = await getURLData(url)
+
+    // for (let i in link.words) {
+    //     database.saveWord(link.words[i].id)
+    // }
+
+    let savedLink = await database.saveLink(link);
+
+    return savedLink;
+}
+
+let getURLData = async function (url) {
 
     // TODO hmm
     const urlArray = url.split( '/' );
@@ -36,11 +49,7 @@ exports.getURLData = async function (url) {
 
         let words = await engine.getWords(wordsList);
 
-        for (let i in words) {
-            database.saveWord(words[i].id)
-        }
-
-        console.log(wordsList.length / words.length)
+        // console.log(wordsList.length / words.length)
 
         let link = {
             url: url,
@@ -56,11 +65,7 @@ exports.getURLData = async function (url) {
             externalLinks: links.external // ['']
         };
 
-        // let savedLink = await database.saveLink(link);
-
-        // console.log(savedLink)
-
-        // return savedLink;
+        return link;
 
     } catch (error) {
         console.log(error);
@@ -88,20 +93,22 @@ function getURLLinks($, baseUrl) {
             }
         }
     });
+
+    return links;
 }
 
-exports.crawlURLLinks = async function (url) {
-
-    let subPages = [];
-    let page = await exports.getURLData(url);
-
-    // async page.internalLinks.forEach(link => {
-    //     subPages.push(await exports.getURLData(link));
-    // })
-
-    for (const link of page.internalLinks) {
-        subPages.push(await exports.getURLData(link));
-    }
-
-    return subPages;
-};
+// exports.crawlURLLinks = async function (url) {
+//
+//     let subPages = [];
+//     let page = await exports.getURL(url);
+//
+//     // async page.internalLinks.forEach(link => {
+//     //     subPages.push(await exports.getURLData(link));
+//     // })
+//
+//     for (const link of page.internalLinks) {
+//         subPages.push(await exports.getURL(link));
+//     }
+//
+//     return subPages;
+// };

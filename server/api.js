@@ -12,7 +12,7 @@ exports.init = (app) => {
     // get url graph TODO currently only words
     app.get('/crawl', async function (request, response) {
 
-        let urlData = await crawler.getURLData(request.query.url);
+        let urlData = await crawler.getURL(request.query.url);
 
         let urlDataJson = JSON.parse(JSON.stringify(urlData));;
 
@@ -101,8 +101,14 @@ exports.init = (app) => {
     });
 
     // get short list of links
-    app.get('/links/statistics', async function (request, response) {
-        let links = await database.getLinksStatistics();
+    app.get('/links/short', async function (request, response) {
+        let links = await database.getLinksShort();
+        response.json(links);
+    });
+
+    // update all links
+    app.get('/links/update', async function (request, response) {
+        let links = await database.updateLinks();
         response.json(links);
     });
 

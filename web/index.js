@@ -42,9 +42,9 @@ const getCategory = async (title) => {
     return response;
 };
 
-const linkClick = (url) => {
-    const response = get('/user/link/add?userid=' + user.id + '&url=' + url);
-    // console.log(response);
+const linkClick = async (url) => {
+    const response = await get('/user/link/add?userid=' + user.id + '&url=' + url);
+    console.log(response);
 };
 
 const deleteLink = async (element) => {

@@ -15,6 +15,11 @@ exports.init = async () => {
         exports.categories[categories[i].id] = categories[i].toJSON();
     }
 
+    let links = await database.getLinks();
+    for (let i = 0; i < links.length; i++) {
+        exports.links[links[i].id] = links[i].toJSON();
+    }
+
     let words = await database.getWords();
     for (let i = 0; i < words.length; i++) {
         exports.words[words[i].id] = words[i].toJSON();
@@ -25,7 +30,8 @@ exports.init = async () => {
     console.log(
         'storage.categories: ' + categories.length +
         ' / storage.tokens: ' + words.length +
-        ' / storage.words: ' + allWords.length
+        ' / storage.words: ' + allWords.length +
+        ''
     )
 };
 

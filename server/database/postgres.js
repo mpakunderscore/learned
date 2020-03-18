@@ -9,7 +9,9 @@ const crawler = require("../crawler/crawler");
 let models = require("./models");
 
 // {force: true}
-module.exports.sequelize.sync().then(() => {});
+module.exports.sequelize.sync().then(() => {
+    console.log('database: on')
+});
 
 // Create or get user
 
@@ -96,7 +98,7 @@ exports.getLinks = async () => {
 
 // Get links statistics
 
-exports.getLinksStatistics = async () => {
+exports.getLinksShort = async () => {
 
     let links = await models.Link.findAll()
     let linksJson = [];
@@ -107,7 +109,7 @@ exports.getLinksStatistics = async () => {
             title: linkJson.title,
             textLength: linkJson.textLength,
             wordsLength: linkJson.wordsLength,
-            words: linkJson.words.splice(0, 3)
+            words: linkJson.words.splice(0, 7)
         })
     }
 
@@ -118,8 +120,8 @@ exports.getLinksStatistics = async () => {
 
 exports.saveUserLink = async (userid, url) => {
     // TODO here check if user link exist
-    // let userLink = models.UserLink.create({userid: userid, url: url})
-    let link = await crawler.getURLData(url);
+    let userLink = models.UserLink.create({userid: userid, url: url})
+    let link = await crawler.getURL(url);
     return link;
 };
 
@@ -172,3 +174,19 @@ exports.getStatistics = async () => {
     statistics.categories = await models.Category.count()
     return statistics;
 }
+
+// Update links
+
+exports.updateLinks = async () => {
+
+    let links = await models.Link.findAll();
+    for (let i = 0; i < links.length; i++) {
+
+        console.log(links[i].toJSON().title)
+        let newLink = await crawler.getURLData(links[i].toJSON().url);
+        links[i].words = newLink.words;
+        await links[i].save();
+    }
+
+    return links;
+};

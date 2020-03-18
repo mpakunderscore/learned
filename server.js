@@ -20,9 +20,7 @@ app.use('/coronavirus', express.static(__dirname + '/web'));
 let server = require('http').Server(app);
 server.listen(process.env.PORT || 8080);
 
-storage.init().then(() => {
-    console.log('server.status: on')
-});
+storage.init().then(() => {console.log('storage: on')});
 
 api.init(app);
 
