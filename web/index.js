@@ -16,7 +16,7 @@ const getUserLinks = async () => {
     document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
 };
 
-const initAPI = async () => {
+const initUser = async () => {
     await getUser();
     await getUserLinks();
 };
@@ -66,6 +66,7 @@ const crawlMineLink = async (element) => {
 };
 
 async function get(url) {
+    console.log(url)
     let response = await fetch(url);
     if (response.ok) {
         return await response.json();
@@ -74,4 +75,4 @@ async function get(url) {
     }
 }
 
-initAPI().then();
+initUser().then();

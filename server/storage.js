@@ -14,25 +14,22 @@ exports.init = async () => {
     for (let i = 0; i < categories.length; i++) {
         exports.categories[categories[i].id] = categories[i].toJSON();
     }
+    console.log('storage.categories: ' + categories.length);
 
     let links = await database.getLinks();
     for (let i = 0; i < links.length; i++) {
         exports.links[links[i].id] = links[i].toJSON();
     }
+    console.log('storage.links: ' + links.length);
 
     let words = await database.getWords();
     for (let i = 0; i < words.length; i++) {
         exports.words[words[i].id] = words[i].toJSON();
     }
+    console.log('storage.tokens: ' + words.length);
 
     const allWords = await database.getAllWords();
-
-    console.log(
-        'storage.categories: ' + categories.length +
-        ' / storage.tokens: ' + words.length +
-        ' / storage.words: ' + allWords.length +
-        ''
-    )
+    console.log('storage.words: ' + allWords.length);
 };
 
 // TODO hmm

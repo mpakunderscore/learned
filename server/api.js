@@ -7,14 +7,17 @@ const wiki = require("./crawler/wiki");
 const database = require("./database/postgres");
 const worker = require("./worker");
 
+// TODO move api on prefix url
+const prefix = '/api';
+
 exports.init = (app) => {
 
-    // get url graph TODO currently only words
+    // get url graph
     app.get('/crawl', async function (request, response) {
 
         let urlData = await crawler.getURL(request.query.url);
 
-        let urlDataJson = JSON.parse(JSON.stringify(urlData));;
+        let urlDataJson = JSON.parse(JSON.stringify(urlData));
 
         // if (request.query.short === 'true')
         //     urlDataJson.words = urlDataJson.words.splice(0, 25);
@@ -163,4 +166,5 @@ exports.init = (app) => {
     });
 
     console.log('api.routes: ' + routes.length)
+    console.log('api: on')
 }
