@@ -12,8 +12,8 @@ exports.getURLData = async function (url) {
 
     let databaseLink = await database.getLink(url);
 
-    // if (databaseLink)
-    //     return databaseLink;
+    if (databaseLink)
+        return databaseLink;
 
     // TODO hmm
     const urlArray = url.split( '/' );
@@ -36,23 +36,31 @@ exports.getURLData = async function (url) {
 
         let words = await engine.getWords(wordsList);
 
-        console.log(wordsList.length/words.length)
+        for (let i in words) {
+            database.saveWord(words[i].id)
+        }
 
-        // let words = await engine.getWords(text);
+        console.log(wordsList.length / words.length)
 
         let link = {
             url: url,
             title: title,
-            words: words, // {name, count}
-            textLength: text.length,
-            links: links, // ['']
+
+            textLength: wordsList.length,
+            wordsLength: words.length,
+
+            // words and bigrams
+            words: words, // {id, count}
+
+            internalLinks: links.internal, // ['']
+            externalLinks: links.external // ['']
         };
 
         // let savedLink = await database.saveLink(link);
 
         // console.log(savedLink)
 
-        return databaseLink;
+        // return savedLink;
 
     } catch (error) {
         console.log(error);

@@ -100,6 +100,12 @@ exports.init = (app) => {
         response.json(links);
     });
 
+    // get short list of links
+    app.get('/links/statistics', async function (request, response) {
+        let links = await database.getLinksStatistics();
+        response.json(links);
+    });
+
     // get all words
     app.get('/words', async function (request, response) {
         response.json(await database.getWords());

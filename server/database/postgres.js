@@ -49,7 +49,7 @@ exports.saveWord = (name) => {
 
         let page = await wiki.getWikiPage(name);
 
-        // console.log(page);
+        console.log(page.title);
 
         let databaseWord = await models.Word.create({id: name, categories: page.categories});
 
@@ -94,10 +94,31 @@ exports.getLinks = async () => {
     return models.Link.findAll();
 };
 
+// Get links statistics
+
+exports.getLinksStatistics = async () => {
+
+    let links = await models.Link.findAll()
+    let linksJson = [];
+
+    for (let n in links) {
+        let linkJson = links[n].toJSON();
+        linksJson.push({
+            title: linkJson.title,
+            textLength: linkJson.textLength,
+            wordsLength: linkJson.wordsLength,
+            words: linkJson.words.splice(0, 3)
+        })
+    }
+
+    return linksJson;
+};
+
 // Save url for user.id and create link object
 
 exports.saveUserLink = async (userid, url) => {
-    let userLink = models.UserLink.create({userid: userid, url: url})
+    // TODO here check if user link exist
+    // let userLink = models.UserLink.create({userid: userid, url: url})
     let link = await crawler.getURLData(url);
     return link;
 };

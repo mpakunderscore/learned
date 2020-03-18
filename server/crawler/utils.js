@@ -5,7 +5,8 @@ exports.exclude = [
     'such', 'that', 'the', 'their', 'to', 'use', 'with',
     'his', 'he', 'after', 'was', 'which', 'more', 'from', 'but',
     'had', 'from', 'first', 'this', 'at', 'its', 'than', 'they',
-    'when', 'also', 'can', 'if', 'you', 'so', 'may'
+    'when', 'also', 'can', 'if', 'you', 'so', 'may', 'were', 'using',
+    'later', 'been'
 ];
 
 exports.separator = /(?:\n|\t|–|—|-|\.|\/)/g;

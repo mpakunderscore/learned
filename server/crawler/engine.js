@@ -41,9 +41,6 @@ exports.getWords = async function (wordsList) {
 
     let sortable = [];
 
-    // words = words.filter(word => word.count > 1);
-    // bigrams = bigrams.filter(bigram => bigram.count > 1);
-
     for (let id in bigrams) {
 
         if (bigrams[id] < 2)
@@ -72,9 +69,8 @@ exports.getWords = async function (wordsList) {
     }
 
     for (let n in sortable) {
-        // await database.saveWord(sortable[id].name)
-        // console.log(sortable[id].name + ' / ' + sortable[id].count)
 
+        // TODO
         let id = sortable[n].id;
         if (id.endsWith('s')) {
             let oneItem = id.substring(0, id.length - 1);
