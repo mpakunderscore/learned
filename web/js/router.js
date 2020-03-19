@@ -11,9 +11,9 @@ if (window.location.href.endsWith('/demo/')) {
 
 if (window.location.href.endsWith('/coronavirus/')) {
     clickMainCircle('Wash your hands!')
+    let coronavirus = {id: 'Coronavirus'}
+    clearGraph(coronavirus);
     get('/coronavirus/graph').then(response => {
-        let coronavirus = {id: 'Coronavirus'}
-        clearGraph(coronavirus);
         renderCustomGraph(response.graph, coronavirus, '2019–20 coronavirus pandemic');
         initGraph();
     });

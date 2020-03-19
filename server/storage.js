@@ -22,6 +22,7 @@ exports.init = async () => {
     }
     console.log('storage.links: ' + links.length);
 
+    // TODO this words is tokens with good categories
     let words = await database.getWords();
     for (let i = 0; i < words.length; i++) {
         exports.words[words[i].id] = words[i].toJSON();

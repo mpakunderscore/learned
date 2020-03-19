@@ -15,7 +15,7 @@ exports.getURL = async function (url) {
     if (databaseLink)
         return databaseLink;
 
-    let link = await getURLData(url)
+    let link = await exports.getURLData(url)
 
     // for (let i in link.words) {
     //     database.saveWord(link.words[i].id)
@@ -26,7 +26,7 @@ exports.getURL = async function (url) {
     return savedLink;
 }
 
-let getURLData = async function (url) {
+exports.getURLData = async function (url) {
 
     // TODO hmm
     const urlArray = url.split( '/' );

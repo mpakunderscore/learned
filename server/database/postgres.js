@@ -63,7 +63,7 @@ exports.saveWord = (name) => {
     });
 };
 
-// Get list of words
+// Get list of tokens (meaningful) based on words
 
 exports.getWords = async () => {
     let words = await models.Word.findAll({order: [['count', 'DESC']]});
@@ -78,8 +78,17 @@ exports.getAllWords = async () => {
 
 // Get list of top words
 
-exports.getTopWords = async () => {
-    return models.Word.findAll({order: [['count', 'DESC']], limit: 100});
+exports.getTokenWords = async () => {
+    let words = await models.Word.findAll({order: [['count', 'DESC']]});
+    return words.filter(word => word.categories.length > 0 && tokenFilter(word)).slice(0, 1000)
+    // !word.categories.includes('Disambiguation pages'))
+
+    function tokenFilter(word) {
+
+        return !word.categories.includes('Disambiguation pages') &&
+            !word.categories.includes('English grammar') &&
+            isNaN(word.id);
+    }
 };
 
 // Save link
@@ -179,20 +188,4 @@ exports.getStatistics = async () => {
     statistics.userLinks = await models.UserLink.count()
     statistics.categories = await models.Category.count()
     return statistics;
-}
-
-// Update links
-
-exports.updateLinks = async () => {
-
-    let links = await models.Link.findAll();
-    for (let i = 0; i < links.length; i++) {
-
-        console.log(links[i].toJSON().title)
-        let newLink = await crawler.getURLData(links[i].toJSON().url);
-        links[i].words = newLink.words;
-        await links[i].save();
-    }
-
-    return links;
 };

@@ -12,11 +12,16 @@ const prefix = '/api';
 
 exports.init = (app) => {
 
-    // get url graph
+    // get url
     app.get('/crawl', async function (request, response) {
 
         let urlData = await crawler.getURL(request.query.url);
+        response.json(urlData);
+    });
 
+    app.get('/crawl/graph', async function (request, response) {
+
+        let urlData = await crawler.getURL(request.query.url);
         let urlDataJson = JSON.parse(JSON.stringify(urlData));
 
         // if (request.query.short === 'true')
@@ -126,8 +131,8 @@ exports.init = (app) => {
     });
 
     // get all words
-    app.get('/words/top', async function (request, response) {
-        response.json(await database.getTopWords());
+    app.get('/words/token', async function (request, response) {
+        response.json(await database.getTokenWords());
     });
 
     // get list of links

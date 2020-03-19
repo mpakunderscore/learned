@@ -66,13 +66,13 @@ exports.getLinksTokens = async (links) => {
         const link = links[i];
 
         if (link)
-            getLinkTokens(link, linksWords, storage.words)
+            getLinkTokens(link, linksWords)
     }
 
     return linksWords;
 };
 
-let getLinkTokens = (link, linksWords, globalWords) => {
+let getLinkTokens = (link, linksWords) => {
 
     for (let id in link.words) {
 
@@ -83,8 +83,8 @@ let getLinkTokens = (link, linksWords, globalWords) => {
         if (linksWords[name])
             linksWords[name].count += link.words[id].count;
 
-        else if (globalWords[name] && isNaN(name) && !globalWords[name].categories.includes('English grammar')) //English words
-            linksWords[name] = {count: link.words[id].count, globalCount: globalWords[name].count, categories: globalWords[name].categories};
+        else if (storage.words[name]) //English words
+            linksWords[name] = {count: link.words[id].count, globalCount: storage.words[name].count, categories: storage.words[name].categories};
     }
 }
 
