@@ -1,10 +1,10 @@
-let host = "http://localhost:8080";
+let host = "http://localhost:8080/api";
 
 let notificationTime = 3000;
 
 let notID = 0;
 
-function add_url(tab, userId) {
+function addUrl(tab, userId) {
 
     if (tab.status != "complete")
         return;
@@ -13,20 +13,13 @@ function add_url(tab, userId) {
 
     let url = host + "/user/link/add?url=" + encodeURIComponent(tab.url) + "&userid=" + userId;
 
-    let request = new XMLHttpRequest();
-    request.open( "GET", url, false );
-    request.send( null );
-
-    let response = request.responseText;
-
-    // if (response.length == 0)
-    //     return; //TODO
+    let request = get(url);
 
     let secondsEnd = new Date().getTime() / 1000;
 
     let time = (secondsEnd - secondsStart) + "";
 
-    notification(tab.favIconUrl, tab.title,  time); //TODO
+    notification(tab.favIconUrl, tab.title, time); //TODO
 }
 
 function notification(iconUrl, title, text) {
@@ -43,6 +36,7 @@ function notification(iconUrl, title, text) {
     options.priority = 0;
 
     options.buttons = [];
+
 //    options.buttons.push({ title: "ok" });
 
     let id = "id" + notID++;
@@ -56,12 +50,22 @@ function creationCallback(notID) {
 
 //    if (document.getElementById("clear").checked) {
 
-        setTimeout(function() {
-
-            chrome.notifications.clear(notID, function(wasCleared) {
-                console.log("Notification " + notID + " cleared: " + wasCleared);
-            });
-
-        }, notificationTime);
+        // setTimeout(function() {
+        //
+        //     chrome.notifications.clear(notID, function(wasCleared) {
+        //         console.log("Notification " + notID + " cleared: " + wasCleared);
+        //     });
+        //
+        // }, notificationTime);
 //    }
+}
+
+async function get(url) {
+    // console.log(url)
+    let response = await fetch(prefix + url);
+    if (response.ok) {
+        return await response.json();
+    } else {
+        // console.error(response)
+    }
 }
