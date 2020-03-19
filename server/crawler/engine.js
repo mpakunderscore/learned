@@ -46,14 +46,14 @@ exports.getWords = async function (wordsList) {
         if (bigrams[id] < 2)
             continue;
 
-        let bigramWords = id.split(' ');
-        if (words[bigramWords[0]] > bigrams[id]) {
-            words[bigramWords[0]] -= bigrams[id];
-        }
-
-        if (words[bigramWords[1]] > bigrams[id]) {
-            words[bigramWords[1]] -= bigrams[id];
-        }
+        // let bigramWords = id.split(' ');
+        // if (words[bigramWords[0]] > bigrams[id]) {
+        //     words[bigramWords[0]] -= bigrams[id];
+        // }
+        //
+        // if (words[bigramWords[1]] > bigrams[id]) {
+        //     words[bigramWords[1]] -= bigrams[id];
+        // }
 
         let bigram = {id: id, count: bigrams[id]};
         sortable.push(bigram);

@@ -79,14 +79,19 @@ exports.getAllWords = async () => {
 // Get list of top words
 
 exports.getTokenWords = async () => {
+
     let words = await models.Word.findAll({order: [['count', 'DESC']]});
-    return words.filter(word => word.categories.length > 0 && tokenFilter(word)).slice(0, 1000)
+    return words.filter(word => word.categories.length > 0 && tokenFilter(word))
     // !word.categories.includes('Disambiguation pages'))
 
     function tokenFilter(word) {
 
         return !word.categories.includes('Disambiguation pages') &&
             !word.categories.includes('English grammar') &&
+            !word.categories.includes('Months') &&
+            !word.categories.includes('Integers') &&
+            !word.categories.includes('Grammar') &&
+            !word.categories.includes('ISO basic Latin letters') &&
             isNaN(word.id);
     }
 };

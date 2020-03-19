@@ -21,7 +21,7 @@ exports.init = (app) => {
 
     app.get(prefix + '/crawl/graph', async function (request, response) {
 
-        let urlData = await crawler.getURL(request.query.url);
+        let urlData = await crawler.getURLData(request.query.url);
         let urlDataJson = JSON.parse(JSON.stringify(urlData));
 
         // if (request.query.short === 'true')

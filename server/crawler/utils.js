@@ -1,14 +1,13 @@
 // TODO
 exports.exclude = [
-    'a', 'all', 'an', 'and', 'are', 'as', 'be', 'by',
-    'for', 'has', 'have', 'in', 'is', 'it', 'of', 'on', 'or', 'other',
-    'such', 'that', 'the', 'their', 'to', 'use', 'with',
-    'his', 'he', 'after', 'was', 'which', 'more', 'from', 'but',
-    'had', 'from', 'first', 'this', 'at', 'its', 'than', 'they',
-    'when', 'also', 'can', 'if', 'you', 'so', 'may', 'were', 'using',
-    'later', 'been'
+    'a', 'after', 'all', 'also', 'an', 'and', 'are', 'as', 'at',
+    'be', 'been', 'but', 'by', 'can', 'first', 'for', 'from', 'from',
+    'had', 'has', 'have', 'he', 'his', 'if', 'in', 'is', 'it', 'its',
+    'later', 'may', 'more', 'of', 'on', 'or', 'other', 'so', 'such',
+    'than', 'that', 'the', 'their', 'they', 'this', 'to', 'use', 'using',
+    'was', 'were', 'when', 'which', 'with', 'you', 'thus', 'retrieved'
 ];
 
 exports.separator = /(?:\n|\t|–|—|-|−|\.|\/)/g;
 
-exports.garbage = /(?:,|\.|:|'|’|"|\(|\)|\[|\]|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;
+exports.garbage = /(?:,|\.|:|'|’|'|"|\(|\)|\[|\]|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;
