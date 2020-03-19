@@ -129,10 +129,10 @@ let zoom = () => {
 function initServiceInfo() {
 
     contentList.innerHTML = '' +
-        '<div>Last update: 19.03.2020</div>' +
-        '<div>Version: 0.3.9.2</div>' +
+        '<div>Last update: 20.03.2020</div>' +
+        '<div>Version: 0.3.9.3</div>' +
         '<div>Routing update</div>' +
-        '<div>Too many garbage in word tokens</div>' +
+        '<div>Too many garbage in link tokens</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
         '<div class="info">Link graph needed</div>' +
         '<div>Where is design</div>' +

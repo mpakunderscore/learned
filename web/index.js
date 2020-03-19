@@ -51,6 +51,7 @@ const linkClick = async (url) => {
 };
 
 const deleteLink = async (element) => {
+    // element.parentNode.classList.add('remove')
     await get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.firstChild.getAttribute('href'));
     await renderMine()
 };
@@ -66,6 +67,18 @@ const crawlMineLink = async (element) => {
         }
 
     });
+};
+
+const share = () => {
+    if (navigator.share) {
+        navigator.share({
+            title: 'learned.space',
+            text: 'Learned',
+            url: 'https://learned.space',
+        })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error sharing', error));
+    }
 };
 
 let prefix = '/api'
