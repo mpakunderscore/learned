@@ -1,11 +1,14 @@
-let user;
+let user = {};
 
 // Client API
 
 const getUser = async () => {
-    user = JSON.parse(localStorage['user'] || '{}');
+    try {
+        user = await JSON.parse(localStorage['user']);
+    } catch (e) {}
     user = await get('/user?' + (user.id ? 'id=' + user.id : ''));
-    localStorage.setItem('user', JSON.stringify(user));
+    if (user)
+        localStorage.setItem('user', JSON.stringify(user));
     document.getElementById('userid').innerHTML = user.id;
 };
 

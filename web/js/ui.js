@@ -130,7 +130,7 @@ function initServiceInfo() {
 
     contentList.innerHTML = '' +
         '<div>Last update: 19.03.2020</div>' +
-        '<div>Version: 0.3.9.1</div>' +
+        '<div>Version: 0.3.9.2</div>' +
         '<div>Routing update</div>' +
         '<div>Too many garbage in word tokens</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
