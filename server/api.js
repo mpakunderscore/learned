@@ -13,13 +13,13 @@ const prefix = '/api';
 exports.init = (app) => {
 
     // get url
-    app.get('/crawl', async function (request, response) {
+    app.get(prefix + '/crawl', async function (request, response) {
 
         let urlData = await crawler.getURL(request.query.url);
         response.json(urlData);
     });
 
-    app.get('/crawl/graph', async function (request, response) {
+    app.get(prefix + '/crawl/graph', async function (request, response) {
 
         let urlData = await crawler.getURL(request.query.url);
         let urlDataJson = JSON.parse(JSON.stringify(urlData));
@@ -42,31 +42,31 @@ exports.init = (app) => {
 
     // TODO will be for active crawler
     // get pages from this url list links
-    // app.get('/crawl/links', async function (request, response) {
+    // app.get(prefix + '/crawl/links', async function (request, response) {
     //
     //     let linksArray = await crawler.crawlURLLinks(request.query.url);
     //     response.json(linksArray);
     // });
 
     // get wiki next categories in graph
-    app.get('/wiki', async function (request, response) {
+    app.get(prefix + '/wiki', async function (request, response) {
         response.json(await wiki.getWikiCategories(request.query.title, request.query.lang));
     });
 
 
     // init or get user
-    app.get('/user', async function (request, response) {
+    app.get(prefix + '/user', async function (request, response) {
         let user = await database.getUser(request.query.id);
         response.json(user);
     });
 
     // add link to user
-    app.get('/user/link/add', async function (request, response) {
+    app.get(prefix + '/user/link/add', async function (request, response) {
         response.json(database.saveUserLink(request.query.userid, request.query.url));
     });
 
     // delete user link
-    app.get('/user/link/delete', async function (request, response) {
+    app.get(prefix + '/user/link/delete', async function (request, response) {
         response.json(database.deleteUserLink(request.query.userid, request.query.url));
     });
 
@@ -74,19 +74,19 @@ exports.init = (app) => {
     // TODO dev api
 
     // get user list of links
-    app.get('/user/links', async function (request, response) {
+    app.get(prefix + '/user/links', async function (request, response) {
         let links = await worker.getUserLinksTitled(request.query.userid);
         response.json(links);
     });
 
     // get user words
-    app.get('/user/words', async function (request, response) {
+    app.get(prefix + '/user/words', async function (request, response) {
         let links = await worker.getUserTokens(request.query.userid);
         response.json(links);
     });
 
     // get user graph
-    app.get('/user/graph', async function (request, response) {
+    app.get(prefix + '/user/graph', async function (request, response) {
         let links = await worker.getTokensGraph(await worker.getUserTokens(request.query.userid));
         response.json(links);
     });
@@ -98,58 +98,58 @@ exports.init = (app) => {
     // TODO dev api
 
     // list of all users
-    app.get('/users', async function (request, response) {
+    app.get(prefix + '/users', async function (request, response) {
         response.json(await database.getUsers());
     });
 
     // get list of links
-    app.get('/links', async function (request, response) {
+    app.get(prefix + '/links', async function (request, response) {
         let links = await database.getLinks();
         response.json(links);
     });
 
     // get short list of links
-    app.get('/links/short', async function (request, response) {
+    app.get(prefix + '/links/short', async function (request, response) {
         let links = await database.getLinksShort();
         response.json(links);
     });
 
     // update all links
-    app.get('/links/update', async function (request, response) {
+    app.get(prefix + '/links/update', async function (request, response) {
         let links = await database.updateLinks();
         response.json(links);
     });
 
     // get all words
-    app.get('/words', async function (request, response) {
+    app.get(prefix + '/words', async function (request, response) {
         response.json(await database.getWords());
     });
 
     // get all words
-    app.get('/words/all', async function (request, response) {
+    app.get(prefix + '/words/all', async function (request, response) {
         response.json(await database.getAllWords());
     });
 
     // get all words
-    app.get('/words/token', async function (request, response) {
+    app.get(prefix + '/words/tokens', async function (request, response) {
         response.json(await database.getTokenWords());
     });
 
     // get list of links
-    app.get('/categories', async function (request, response) {
+    app.get(prefix + '/categories', async function (request, response) {
         let categories = await database.getCategories();
         response.json(categories);
     });
 
 
     // TODO statistics
-    app.get('/statistics', async function (request, response) {
+    app.get(prefix + '/statistics', async function (request, response) {
         let statistics = await database.getStatistics();
         response.json(statistics);
     });
 
     // TODO demo
-    app.get('/demo/graph', async function (request, response) {
+    app.get(prefix + '/demo/graph', async function (request, response) {
         let demoGraph = {'Y Combinator (company)': {count: 3, subcategories: ['Y Combinator companies', 'Y Combinator people'], active: true},
                         'Y Combinator people': {count: 2, subcategories: []},
                         'Y Combinator companies': {count: 2, subcategories: []}
@@ -157,7 +157,7 @@ exports.init = (app) => {
         response.json({graph: demoGraph});
     });
 
-    app.get('/coronavirus/graph', async function (request, response) {
+    app.get(prefix + '/coronavirus/graph', async function (request, response) {
         let demoGraph = {'2019–20 coronavirus pandemic': {count: 3, subcategories: []}};
         response.json({graph: demoGraph});
     });

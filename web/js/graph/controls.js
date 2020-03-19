@@ -35,6 +35,8 @@ async function selectNode(circleElement, category, random) {
 
     } else { // Graph and categories
 
+        setPath('/');
+
         if (title === 'Graph') {
             clearGraph(selectedNode);
         }
@@ -91,6 +93,8 @@ function selectLanguage(selectedNode) {
     }
     // menuItem(selectedNode);
     initLanguageMenu();
+
+    setPath('/settings');
 }
 
 function selectMain() {
@@ -98,6 +102,8 @@ function selectMain() {
     clearGraph();
     initMenu();
     clickHome();
+
+    setPath('/');
 }
 
 async function selectMine(selectedNode) {
@@ -109,6 +115,8 @@ async function selectMine(selectedNode) {
     // getTokensGraph();
     // if (user.graph['Main_topic_classifications'])
     //     renderCustomGraph(selectedNode, 'Main_topic_classifications');
+
+    setPath('/mine');
 }
 
 function deleteUpperNodes(d, nodesForDeletion) {

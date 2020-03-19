@@ -65,9 +65,11 @@ const crawlMineLink = async (element) => {
     });
 };
 
+let prefix = '/api'
+
 async function get(url) {
     // console.log(url)
-    let response = await fetch(url);
+    let response = await fetch(prefix + url);
     if (response.ok) {
         return await response.json();
     } else {
