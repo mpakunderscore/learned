@@ -37,7 +37,7 @@ exports.init = async () => {
 exports.getCategory = async (title) => {
     let category = exports.categories[title];
     if (!category)
-        category = await wiki.getWikiCategories(title);
+        category = await wiki.getCategory(title);
 
     return category;
 }

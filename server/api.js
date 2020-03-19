@@ -50,7 +50,7 @@ exports.init = (app) => {
 
     // get wiki next categories in graph
     app.get(prefix + '/wiki', async function (request, response) {
-        response.json(await wiki.getWikiCategories(request.query.title, request.query.lang));
+        response.json(await wiki.getCategory(request.query.title, request.query.lang));
     });
 
 
@@ -100,6 +100,11 @@ exports.init = (app) => {
     // list of all users
     app.get(prefix + '/users', async function (request, response) {
         response.json(await database.getUsers());
+    });
+
+    // list of all users today
+    app.get(prefix + '/users/today', async function (request, response) {
+        response.json(await database.getUsersToday());
     });
 
     // get list of links

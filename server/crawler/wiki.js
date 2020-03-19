@@ -4,7 +4,7 @@ const axios = require('axios');
 const database = require("../database/postgres");
 const storage = require("../storage");
 
-exports.getWikiCategories = async function (title, lang = 'en') {
+exports.getCategory = async function (title, lang = 'en', update = false) {
 
     // console.log(title)
 
@@ -17,7 +17,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
             title = mainTitle[lang];
 
         let databaseCategory = await database.getCategory(title).then();
-        if (databaseCategory)
+        if (databaseCategory & !update)
             return databaseCategory;
 
         const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + categoryLang[lang] + title;
@@ -52,12 +52,21 @@ exports.getWikiCategories = async function (title, lang = 'en') {
             subcategories: subcategories,
             categories: categories,
             pages: pages,
-            mainPage: isMainPage ? await exports.getWikiPage(title, lang) : {},
+            mainPage: isMainPage ? await exports.getPage(title, lang) : {},
             language: lang,
         };
 
         storage.categories[title] = category;
-        database.saveCategory(category).then();
+
+        if (databaseCategory) {
+            databaseCategory.subcategories = subcategories;
+            databaseCategory.categories = categories;
+            databaseCategory.pages = pages;
+            databaseCategory.save()
+        }
+
+        else
+            database.saveCategory(category).then();
 
         return category;
 
@@ -69,7 +78,7 @@ exports.getWikiCategories = async function (title, lang = 'en') {
     }
 }
 
-exports.getWikiPage = async function (title, lang = 'en') {
+exports.getPage = async function (title, lang = 'en') {
 
     const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + title;
     const url = encodeURI(urlString);

@@ -1,6 +1,6 @@
 const wiki = require('../crawler/wiki');
 
-const {Sequelize} = require('sequelize');
+const {Sequelize, Op} = require('sequelize');
 
 module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
 
@@ -25,8 +25,11 @@ exports.getUser = async (id) => {
 
         let user = await models.User.findOne({where: {id: id}});
 
-        if (user)
+        if (user) {
+            user.changed('updatedAt', true);
+            user.save();
             return user.toJSON();
+        }
     }
 
     user = await models.User.create({id: id});
@@ -40,6 +43,16 @@ exports.getUsers = async () => {
     return models.User.findAll();
 };
 
+// Get lust of users today
+exports.getUsersToday = async () => {
+
+    let yesterday = new Date().setDate(new Date().getDate() - 1);
+    // console.log(yesterday)
+    return models.User.findAll({where: {updatedAt: {
+                [Op.gt]: yesterday,
+            }}});
+}
+
 // Save word or update word count (word in links)
 
 exports.saveWord = (name) => {
@@ -49,7 +62,7 @@ exports.saveWord = (name) => {
         if (word)
             return word.update({count: word.count + 1});
 
-        let page = await wiki.getWikiPage(name);
+        let page = await wiki.getPage(name);
 
         console.log(page.title);
 
@@ -82,6 +95,7 @@ exports.getTokenWords = async () => {
 
     let words = await models.Word.findAll({order: [['count', 'DESC']]});
     return words.filter(word => word.categories.length > 0 && tokenFilter(word))
+
     // !word.categories.includes('Disambiguation pages'))
 
     function tokenFilter(word) {

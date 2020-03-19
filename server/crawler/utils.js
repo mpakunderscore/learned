@@ -1,4 +1,4 @@
-// TODO
+// TODO first word filter. Don't sure this is right
 exports.exclude = [
     'a', 'after', 'all', 'also', 'an', 'and', 'are', 'as', 'at',
     'be', 'been', 'but', 'by', 'can', 'first', 'for', 'from', 'from',
@@ -8,6 +8,7 @@ exports.exclude = [
     'was', 'were', 'when', 'which', 'with', 'you', 'thus', 'retrieved'
 ];
 
-exports.separator = /(?:\n|\t|–|—|-|−|\.|\/)/g;
+// TODO is this different?
+exports.separator = /(?:\n|\t|_|–|—|-|−|\.|\/)/g;
 
-exports.garbage = /(?:,|\.|:|'|’|'|"|\(|\)|\[|\]|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;
+exports.garbage = /(?:,|\.|:|’|‘|'|"|\(|\)|\[|\]|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;
