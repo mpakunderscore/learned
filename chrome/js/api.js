@@ -1,19 +1,14 @@
 let host = "http://localhost:8080/api";
 
-let notificationTime = 3000;
-
 let notID = 0;
 
-function addUrl(tab, userId) {
-
-    if (tab.status != "complete")
-        return;
+async function addUrl(tab, userId) {
 
     let secondsStart = new Date().getTime() / 1000;
 
     let url = host + "/user/link/add?url=" + encodeURIComponent(tab.url) + "&userid=" + userId;
 
-    let request = get(url);
+    let request = await get(url);
 
     let secondsEnd = new Date().getTime() / 1000;
 
@@ -62,10 +57,10 @@ function creationCallback(notID) {
 
 async function get(url) {
     // console.log(url)
-    let response = await fetch(prefix + url);
+    let response = await fetch(url);
     if (response.ok) {
         return await response.json();
     } else {
-        // console.error(response)
+        console.error(response)
     }
 }
