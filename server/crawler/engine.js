@@ -74,10 +74,10 @@ exports.getWords = async function (wordsList) {
         let id = sortable[n].id;
         if (id.endsWith('s')) {
             let oneItem = id.substring(0, id.length - 1);
-            if (bigrams[oneItem])
-                console.log(id + ': ' + sortable[n].count + ' > ' + bigrams[oneItem])
-            if (words[oneItem])
-                console.log(id + ': ' + sortable[n].count + ' > ' + words[oneItem])
+            // if (bigrams[oneItem])
+            //     console.log(id + ': ' + sortable[n].count + ' > ' + bigrams[oneItem])
+            // if (words[oneItem])
+            //     console.log(id + ': ' + sortable[n].count + ' > ' + words[oneItem])
         }
     }
 

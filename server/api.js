@@ -14,9 +14,7 @@ exports.init = (app) => {
 
     // get url
     app.get(prefix + '/crawl', async function (request, response) {
-
-        let urlData = await crawler.getURL(request.query.url);
-        response.json(urlData);
+        response.json(await crawler.getURL(request.query.url));
     });
 
     app.get(prefix + '/crawl/graph', async function (request, response) {
@@ -56,18 +54,17 @@ exports.init = (app) => {
 
     // init or get user
     app.get(prefix + '/user', async function (request, response) {
-        let user = await database.getUser(request.query.id);
-        response.json(user);
+        response.json(await database.getUser(request.query.id));
     });
 
     // add link to user
     app.get(prefix + '/user/link/add', async function (request, response) {
-        response.json(database.saveUserLink(request.query.userid, request.query.url));
+        response.json(await database.saveUserLink(request.query.userid, request.query.url));
     });
 
     // delete user link
     app.get(prefix + '/user/link/delete', async function (request, response) {
-        response.json(database.deleteUserLink(request.query.userid, request.query.url));
+        response.json(await database.deleteUserLink(request.query.userid, request.query.url));
     });
 
 
@@ -75,8 +72,7 @@ exports.init = (app) => {
 
     // get user list of links
     app.get(prefix + '/user/links', async function (request, response) {
-        let links = await worker.getUserLinksTitled(request.query.userid);
-        response.json(links);
+        response.json(await worker.getUserLinksTitled(request.query.userid));
     });
 
     // get user words

@@ -48,9 +48,13 @@ exports.getUsersToday = async () => {
 
     let yesterday = new Date().setDate(new Date().getDate() - 1);
     // console.log(yesterday)
-    return models.User.findAll({where: {updatedAt: {
+    return models.User.findAll({
+        where: {
+            updatedAt: {
                 [Op.gt]: yesterday,
-            }}});
+            }
+        }
+    });
 }
 
 // Save word or update word count (word in links)
@@ -153,10 +157,15 @@ exports.getLinksShort = async () => {
 // Save url for user.id and create link object
 
 exports.saveUserLink = async (userid, url) => {
+
     // TODO here check if user link exist
-    let userLink = models.UserLink.create({userid: userid, url: url})
-    let link = await crawler.getURL(url);
-    return link;
+    // let userLink = models.UserLink.create({userid: userid, url: url})
+    models.UserLink.findOne({where: {userid: userid, url: url}}).then(function (userLink) {
+        if (!userLink)
+            models.UserLink.create({userid: userid, url: url});
+    });
+
+    return await crawler.getURL(url);
 };
 
 // Get user links

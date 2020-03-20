@@ -100,6 +100,8 @@ exports.getPage = async function (title, lang = 'en') {
         });
         page.categories = categories;
 
+        page.title = $('title').text();
+
         $('img').each(function (index, element) {
             let src = $(element).attr('src');
             let width = $(element).attr('width');

@@ -38,7 +38,7 @@ User.init({
     },
 }, {sequelize, modelName: 'user'});
 
-// TODO need refactoring (date of creation page or news)
+// TODO refactoring (date of creation page or news)
 Link.init({
     url: {
         type: DataTypes.STRING,
@@ -71,6 +71,7 @@ UserLink.init({
     },
 }, {sequelize, modelName: 'userlink', timestamps: false});
 
+// TODO refactoring (redirect from 's)
 Word.init({
     id: {
         type: DataTypes.STRING,
