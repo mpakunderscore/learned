@@ -69,6 +69,7 @@ const crawlMineLink = async (element) => {
     });
 };
 
+// Only chrome mobile
 const share = () => {
     if (navigator.share) {
         navigator.share({

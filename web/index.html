@@ -9,7 +9,8 @@
 
     <link rel="shortcut icon"
           type="image/x-icon"
-          href="images/favicon.png">
+          href="images/favicon.png"
+          id="favicon">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="mobile-web-app-capable" content="yes">
@@ -26,7 +27,11 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-40320768-13"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
         gtag('js', new Date());
 
         gtag('config', 'UA-40320768-13');
@@ -35,34 +40,34 @@
 </head>
 
 <body>
-    <main>
+<main>
 
-        <div id="topButtons" class="noselect">
-            <div onclick="zoom()">Zoom</div>
-            <span> / </span>
-<!--            <div onclick="location.reload()">R</div>-->
-            <div onclick="share()">Share</div>
-            <span> / </span>
-            <a href="/api/statistics" target="_blank">Statistics</a>
-            <span> / </span>
-            <a href="/coronavirus">Coronavirus</a>
-<!--            <span> / </span>-->
-        </div>
+    <div id="topButtons" class="noselect">
+        <div onclick="zoom()">Zoom</div>
+        <span> / </span>
+        <!--            <div onclick="location.reload()">R</div>-->
+        <!--            <div onclick="share()">Share</div>-->
+        <!--            <span> / </span>-->
+        <a href="/api/statistics" target="_blank">Statistics</a>
+        <span> / </span>
+        <a href="/coronavirus">Coronavirus</a>
+        <!--            <span> / </span>-->
+    </div>
 
-        <div id="userid"></div>
+    <div id="userid"></div>
 
-        <div id="graph"></div>
+    <div id="graph"></div>
 
-        <div id="border"></div>
+    <div id="border"></div>
 
-        <div id="content">
-            <div id="content-list"></div>
-            <input id="main-input">
-        </div>
+    <div id="content">
+        <div id="content-list"></div>
+        <input id="main-input">
+    </div>
 
-<!--        <div id="modal"></div>-->
+    <!--        <div id="modal"></div>-->
 
-    </main>
+</main>
 </body>
 
 <script src="js/lib/d3.v5.min.js"></script>

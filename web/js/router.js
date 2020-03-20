@@ -1,3 +1,8 @@
+if (window.location.href.includes('localhost')) {
+    document.getElementById('favicon').setAttribute('href', 'images/favicon.green.png');
+    console.log(document.title = '')
+}
+
 let setPath = (path) => {
     history.pushState({}, null, path);
 };
