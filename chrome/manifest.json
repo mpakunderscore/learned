@@ -1,24 +1,24 @@
 {
-	"manifest_version": 2,
-
-	"name": "learned.space",
-	"description": "",
-	"version": "0.3",
-
+    "manifest_version": 2,
+    "name": "learned.space",
+    "description": "",
+    "version": "0.3",
     "background": {
-      	"scripts": ["js/api.js", "js/background.js"]
+        "scripts": [
+            "js/api.js",
+            "js/background.js"
+        ]
     },
-
-    "icons": { "16": "icon.png",
-        "48": "icon.png",
-        "128": "icon.png" },
-
-	"browser_action": {
-		"default_icon": "icon.png",
+    "icons": {
+        "16": "icons/icon.png",
+        "48": "icons/icon.png",
+        "128": "icons/icon.png"
+    },
+    "browser_action": {
+        "default_icon": "icons/icon.png",
         "default_title": "Save page"
-	},
-
-	"permissions": [
+    },
+    "permissions": [
         "bookmarks",
         "http://*/*",
         "https://*/*",

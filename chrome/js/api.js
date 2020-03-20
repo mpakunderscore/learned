@@ -1,20 +1,27 @@
-let host = "http://localhost:8080/api";
+let host = 'http://localhost:8080/api';
+// let host = 'https://learned.space/api';
 
 let notID = 0;
 
 async function addUrl(tab, userId) {
 
-    let secondsStart = new Date().getTime() / 1000;
+    // let startTime = new Date();
 
-    let url = host + "/user/link/add?url=" + encodeURIComponent(tab.url) + "&userid=" + userId;
+    let url = host + '/user/link/add?url=' + encodeURIComponent(tab.url) + '&userid=' + userId;
 
     let request = await get(url);
 
-    let secondsEnd = new Date().getTime() / 1000;
+    // console.log(new Date() - startTime)
 
-    let time = (secondsEnd - secondsStart) + "";
+    // let text = Math.round(100 * (new Date() - startTime)) / 100 + '';
 
-    notification(tab.favIconUrl, tab.title, time); //TODO
+    let text = request.textLength + ' / ' + request.wordsLength;
+
+    console.log(request)
+
+    console.log(tab)
+
+    notification(tab.favIconUrl, tab.title, text); //TODO
 }
 
 function notification(iconUrl, title, text) {
@@ -23,36 +30,29 @@ function notification(iconUrl, title, text) {
         type : "basic",
         title: title,
         message: text,
-        expandedMessage: "Longer part of the message"
+        expandedMessage: 'Longer part of the message',
     };
 
     options.iconUrl = iconUrl;
 
-    options.priority = 0;
+    // options.priority = 0;
 
-    options.buttons = [];
+    // options.buttons = [];
 
-//    options.buttons.push({ title: "ok" });
+//    options.buttons.push({ title: 'ok' });
 
-    let id = "id" + notID++;
+    let id = 'id' + notID++;
 
     chrome.notifications.create(id, options, creationCallback);
 }
 
 function creationCallback(notID) {
 
-    // console.log("Succesfully created " + notID + " notification");
-
-//    if (document.getElementById("clear").checked) {
-
-        // setTimeout(function() {
-        //
-        //     chrome.notifications.clear(notID, function(wasCleared) {
-        //         console.log("Notification " + notID + " cleared: " + wasCleared);
-        //     });
-        //
-        // }, notificationTime);
-//    }
+    setTimeout(function () {
+        chrome.notifications.clear(notID, function (wasCleared) {
+            console.log('Notification ' + notID + ' cleared: ' + wasCleared);
+        });
+    }, 3000);
 }
 
 async function get(url) {
@@ -61,6 +61,6 @@ async function get(url) {
     if (response.ok) {
         return await response.json();
     } else {
-        console.error(response)
+        console.error(response.toString())
     }
 }
