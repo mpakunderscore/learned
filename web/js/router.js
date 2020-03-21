@@ -20,6 +20,7 @@ if (window.location.href.endsWith('/demo/')) {
 }
 
 if (window.location.href.endsWith('/coronavirus/')) {
+    contentList.innerHTML += '<div><a href="https://video-intl.alicdn.com/Handbook%20of%20COVID-19%20Prevention%20and%20Treatment.pdf" target="_blank">Handbook of COVID–19 Prevention and Treatment</a></div>';
     setPath('/coronavirus');
     clickMainCircle('Wash your hands!');
     get('/coronavirus/graph').then(response => {
