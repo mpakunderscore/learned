@@ -46,6 +46,7 @@ exports.getWords = async function (wordsList) {
         if (bigrams[id] < 2)
             continue;
 
+        // TODO
         // let bigramWords = id.split(' ');
         // if (words[bigramWords[0]] > bigrams[id]) {
         //     words[bigramWords[0]] -= bigrams[id];

@@ -5,6 +5,7 @@
 const crawler = require("./crawler/crawler");
 const wiki = require("./crawler/wiki");
 const database = require("./database/postgres");
+const update = require("./database/update");
 const worker = require("./worker");
 
 // TODO move api on prefix url
@@ -105,21 +106,35 @@ exports.init = (app) => {
 
     // get list of links
     app.get(prefix + '/links', async function (request, response) {
-        let links = await database.getLinks();
-        response.json(links);
+        response.json(await database.getLinks());
     });
 
     // get short list of links
     app.get(prefix + '/links/short', async function (request, response) {
-        let links = await database.getLinksShort();
-        response.json(links);
+        response.json(await database.getLinksShort());
     });
+
+
+
 
     // update all links
     app.get(prefix + '/links/update', async function (request, response) {
-        let links = await database.updateLinks();
-        response.json(links);
+        response.json(await update.updateLinks());
     });
+
+    // TODO update all words
+    app.get(prefix + '/words/update', async function (request, response) {
+        response.json(await update.updateWords());
+    });
+
+    // TODO update all words count
+    app.get(prefix + '/words/update/count', async function (request, response) {
+        response.json(await update.updateWordsCounts());
+    });
+
+
+
+
 
     // get all words
     app.get(prefix + '/words', async function (request, response) {
@@ -131,9 +146,19 @@ exports.init = (app) => {
         response.json(await database.getAllWords());
     });
 
-    // get all words
+    // get all tokens
     app.get(prefix + '/words/tokens', async function (request, response) {
         response.json(await database.getTokenWords());
+    });
+
+    // get all garbage words
+    app.get(prefix + '/words/garbage', async function (request, response) {
+        response.json(await database.getGarbageWords());
+    });
+
+    // get all empty words
+    app.get(prefix + '/words/empty', async function (request, response) {
+        response.json(await database.getEmptyWords());
     });
 
     // get list of links
@@ -145,8 +170,7 @@ exports.init = (app) => {
 
     // TODO statistics
     app.get(prefix + '/statistics', async function (request, response) {
-        let statistics = await database.getStatistics();
-        response.json(statistics);
+        response.json(await database.getStatistics());
     });
 
     // TODO demo

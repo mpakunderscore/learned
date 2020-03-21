@@ -112,6 +112,5 @@ exports.getPage = async function (title, lang = 'en') {
         return page;
 
     } catch (e) {
-        return {text: null}
     }
 };

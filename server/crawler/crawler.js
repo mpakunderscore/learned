@@ -18,7 +18,7 @@ exports.getURL = async function (url) {
     let link = await exports.getURLData(url)
 
     for (let i in link.words) {
-        database.saveWord(link.words[i].id)
+        await database.saveWord(link.words[i].id)
     }
 
     let savedLink = await database.saveLink(link);
