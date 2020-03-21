@@ -20,9 +20,9 @@ if (window.location.href.endsWith('/demo/')) {
 }
 
 if (window.location.href.endsWith('/coronavirus/')) {
-    contentList.innerHTML += '<div><a href="https://video-intl.alicdn.com/Handbook%20of%20COVID-19%20Prevention%20and%20Treatment.pdf" target="_blank">Handbook of COVID–19 Prevention and Treatment</a></div>';
+    addLink('https://video-intl.alicdn.com/Handbook%20of%20COVID-19%20Prevention%20and%20Treatment.pdf', 'Handbook of COVID–19 Prevention and Treatment');
     setPath('/coronavirus');
-    clickMainCircle('Wash your hands!');
+    renderText('Wash your hands!');
     get('/coronavirus/graph').then(response => {
         let coronavirus = {id: 'Coronavirus'};
         clearGraph(coronavirus);

@@ -28,7 +28,7 @@ const border = document.getElementById('border');
 
 border.onmousedown = dragMouseDown;
 border.onclick = () => {
-    // clickMainCircle('Border click')
+    // renderText('Border click')
 };
 border.ontouchstart = () => {
     // console.log('border touch')
@@ -39,7 +39,7 @@ border.ontouchstart = () => {
 };
 
 if (isMobile) {
-    clickMainCircle('NO MOBILE, WILL BE 0.5')
+    renderText('NO MOBILE, WILL BE 0.5')
 }
 
 document.onload = () => {

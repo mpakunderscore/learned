@@ -21,7 +21,7 @@ function initInput() {
             input.value = '';
 
             if (value.startsWith('http'))
-                linkClick(value)
+                linkClick(value).then()
         }
     });
 }
@@ -104,10 +104,10 @@ async function renderMine(lazy) {
 
 function clickHome() {
     initServiceInfo();
-    clickMainCircle('You are back now')
+    renderText('You are back now')
 }
 
-function clickMainCircle(text) {
+function renderText(text) {
 
     console.log(text)
 
@@ -142,4 +142,18 @@ function clickMainCircle(text) {
 
 function generatedWord(text, i) {
     return text.substring(0, i);
+}
+
+function addLink (url, title) {
+    let link = document.createElement('div');
+    contentList.append(link)
+
+    let a = document.createElement('a');
+    a.href = url;
+    a.innerText = title;
+    a.target = '_blank';
+    link.append(a);
+
+
+    // link.innerText = title;
 }
