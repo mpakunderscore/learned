@@ -129,8 +129,8 @@ let zoom = () => {
 function initServiceInfo() {
 
     contentList.innerHTML = '' +
-        '<div>Last update: 20.03.2020</div>' +
-        '<div>Version: 0.3.9.3</div>' +
+        '<div>Last update: 22.03.2020</div>' +
+        '<div>Version: 0.3.9.4</div>' +
         '<div>Routing update</div>' +
         '<div>Too many garbage in link tokens</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
@@ -139,5 +139,5 @@ function initServiceInfo() {
         '';
 
     // TODO card design
-    contentList.innerHTML += renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have NN for chatbot and one more for recommendations. But for now, we need to complete the normal UI and graph structure.')
+    renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have NN for chatbot and one more for recommendations. But for now, we need to complete the normal UI and graph structure.')
 }

@@ -36,10 +36,18 @@
 .card .circle {
     width: 10px;
     height: 10px;
-    border: solid 2px var(--color-green-dark);
-    background-color: var(--color-green);
     border-radius: 12px;
     margin: auto 0;
+}
+
+.card .circle.green {
+    border: solid 2px var(--color-green-dark);
+    background-color: var(--color-green);
+}
+
+.card .circle.red {
+    border: solid 2px var(--color-red-dark);
+    background-color: var(--color-red);
 }
 
 .card div.title-text {

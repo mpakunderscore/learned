@@ -31,12 +31,13 @@ function initInput() {
 function setContent(pages, mainPage, categoriesLength, title) {
 
     let html = '';
+    contentList.innerHTML = '';
 
     // if (mainPage.image) {
     //     html += '<div id="main-image"><img src="' + mainPage.image + '" alt="Page name"/></div>';
     // }
 
-    html += renderCard(title, mainPage.text)
+    renderCard(title, mainPage.text)
 
     html += renderHelpRow(pages.length, categoriesLength);
 
@@ -54,12 +55,12 @@ function renderHelpRow(pagesLength, categoriesLength) {
         '</div>';
 }
 
-function renderCard(title, text, img) {
+function renderCard(title, text, img, color = 'green') {
 
-    return '' +
+    contentList.innerHTML +=
     '<div class="card" onclick="isMobile ? fullscreen() : this.style.display = \'none\'">' +
         '<div class="title">' +
-            '<div class="circle"></div>' +
+            '<div class="circle ' + color +'"></div>' +
             '<div class="title-text">' + title + '</div>' +
         '</div>' +
         (text ? '<div class="text">' + text + '</div>' : '') +
