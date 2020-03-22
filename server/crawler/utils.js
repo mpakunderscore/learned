@@ -11,4 +11,5 @@ exports.exclude = [
 // TODO is this different?
 exports.separator = /(?:\n|\t|_|–|—|-|−|\.|\/)/g;
 
-exports.garbage = /(?:,|\.|:|’|‘|'|"|\(|\)|\[|\]|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;
+// TODO uh
+exports.garbage = /(?:,|\.|:|’|‘|”|'|"|\(|\)|\[|\]|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;

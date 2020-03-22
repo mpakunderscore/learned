@@ -27,6 +27,7 @@ exports.updateWords = async () => {
     for (let i = 0; i < words.length; i++) {
 
         let page;
+        let word = words[i].toJSON();
 
         if (words[i].categories.length === 0) {
             try {
@@ -35,6 +36,7 @@ exports.updateWords = async () => {
                 let title = page.title.replace(' - Wikipedia', '').toLowerCase();
                 if (title !== words[i].id)
                     console.error(title)
+
             } catch (e) {
             }
         }
@@ -54,6 +56,8 @@ exports.updateWords = async () => {
 
 exports.updateWordsCounts = async () => {
 
+    let databaseWords = await postgres.getAllWords();
+
     let words = {};
 
     let links = await postgres.getLinks();
@@ -71,19 +75,31 @@ exports.updateWordsCounts = async () => {
         }
     }
 
-    let sortable = []
+    let sortable = [];
     for (let id in words) {
 
-        if (!storage.words[id])
-            continue;
+        // if (!storage.words[id])
+        //     continue;
 
-        let word = {id: id, count: words[id], categories: storage.words[id] ? storage.words[id].categories : []};
-        sortable.push(word);
+        // if (!storage.words[id] || storage.words[id].categories.length === 0) {
+        //     let word = {id: id, count: words[id]};
+        //     sortable.push(word);
+        // }
     }
 
-    sortable.sort(function (a, b) {
-        return b.count - a.count;
-    });
+    for (let i = 0; i < databaseWords.length; i++) {
+        databaseWords[i].count = words[databaseWords[i].id] ? words[databaseWords[i].id].count : 0;
+        await databaseWords[i].save()
+    }
+
+
+
+    // sortable.sort(function (a, b) {
+    //     return b.count - a.count;
+    // });
+    //
+    // for (let i = 0; i < words.length; i++) {
+    // }
 
     // let words = await postgres.getAllWords();
     // for (let i = 0; i < words.length; i++) {
@@ -109,5 +125,5 @@ exports.updateWordsCounts = async () => {
     //     // let databaseWord = await models.Word.create({id: name, categories: page.categories});
     // }
 
-    return sortable;
+    return databaseWords;
 };

@@ -112,5 +112,9 @@ exports.getPage = async function (title, lang = 'en') {
         return page;
 
     } catch (e) {
+        if (e.response.status === 404)
+            return {categories: ['404']}
+        else
+            console.log(e.response.status)
     }
 };

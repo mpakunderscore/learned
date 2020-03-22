@@ -69,6 +69,11 @@ exports.getLinksTokens = async (links) => {
             getLinkTokens(link, linksWords)
     }
 
+    for (let name in linksWords) {
+        if (linksWords[name].count < linksWords[name].globalCount)
+            delete linksWords[name];
+    }
+
     return linksWords;
 };
 

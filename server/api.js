@@ -117,6 +117,9 @@ exports.init = (app) => {
 
 
 
+
+
+
     // update all links
     app.get(prefix + '/links/update', async function (request, response) {
         response.json(await update.updateLinks());
@@ -131,6 +134,9 @@ exports.init = (app) => {
     app.get(prefix + '/words/update/count', async function (request, response) {
         response.json(await update.updateWordsCounts());
     });
+
+
+
 
 
 
