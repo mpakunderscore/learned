@@ -18,7 +18,7 @@ let contentList = document.getElementById('content-list');
 content.style.width = (99.5 - 100 * borderRatio) + '%';
 
 initInput();
-initServiceInfo();
+initServiceInfo(() => renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have NN for chatbot and one more for recommendations. But for now, we need to complete the normal UI and graph structure.'));
 
 const graph = document.getElementById('graph');
 const border = document.getElementById('border');
@@ -126,18 +126,17 @@ let zoom = () => {
     initSimulation()
 };
 
-function initServiceInfo() {
+function initServiceInfo(card = () => {}) {
 
     contentList.innerHTML = '' +
         '<div>Last update: 22.03.2020</div>' +
-        '<div>Version: 0.3.9.4</div>' +
-        '<div>Routing update</div>' +
-        '<div>Too many garbage in link tokens</div>' +
+        '<div>Version: 0.3.9.5</div>' +
+        // '<div>Too many garbage in link tokens</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
         '<div class="info">Link graph needed</div>' +
         '<div>Where is design</div>' +
         '';
 
     // TODO card design
-    renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have NN for chatbot and one more for recommendations. But for now, we need to complete the normal UI and graph structure.')
+    card()
 }
