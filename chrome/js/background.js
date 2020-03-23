@@ -42,7 +42,10 @@ chrome.browserAction.onClicked.addListener(async function (tab) {
 
     // let userId = 'b7970460-5aa6-11ea-891b-6bbc86b992f4';
 
-    await addUrl(tab, userId);
+    try {
+        await addUrl(tab, userId);
+    } catch (e) {
+    }
 });
 
 // chrome.runtime.onMessage.addListener(

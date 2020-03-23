@@ -17,7 +17,7 @@ exports.getCategory = async function (title, lang = 'en', update = false) {
             title = mainTitle[lang];
 
         let databaseCategory = await database.getCategory(title).then();
-        if (databaseCategory & !update)
+        if (databaseCategory && !update)
             return databaseCategory;
 
         const urlString = 'https://' + lang + '.wikipedia.org/wiki/' + categoryLang[lang] + title;
