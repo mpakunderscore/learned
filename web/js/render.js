@@ -44,7 +44,7 @@ function setContent(pages, mainPage, categoriesLength, title) {
     for (let i = 0; i < pages.length; i++) {
         html += '<div><a onclick="linkClick(this.href)" href="https://' + lang + '.wikipedia.org/wiki/' + pages[i].id.replace(/\s/g, '_') + '" target="_blank">' + pages[i].id + '</a></div>';
     }
-    contentList.innerHTML = html;
+    contentList.innerHTML += html;
 }
 
 function renderHelpRow(pagesLength, categoriesLength) {
@@ -97,6 +97,9 @@ async function renderMine(lazy) {
                 '</a>' +
                 '<span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
                 '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
+                '<span>' + user.links[i].textLength + '</span>' +
+                '<span>/</span>' +
+                '<span>' + user.links[i].wordsLength + '</span>' +
                 '</div>';
         }
 
