@@ -151,7 +151,7 @@ let getParentCategories = async function (category, userGraphCategories, depth) 
     }
 
     // TODO
-    upperCategories = [upperCategories[0]];
+    // upperCategories = [upperCategories[0]];
 
     for (let id in upperCategories) {
 
@@ -182,7 +182,7 @@ let getParentCategories = async function (category, userGraphCategories, depth) 
 
         } else if (userGraphCategories[upperCategory].depth < userGraphCategories[category].depth) {
 
-            console.error('LOOP: ' + category + userGraphCategories[category].depth + ' > ' + upperCategory + userGraphCategories[upperCategory].depth);
+            console.error('LOOP: ' + category + ' ' + userGraphCategories[category].depth + ' > ' + upperCategory + ' ' + userGraphCategories[upperCategory].depth);
             return;
 
         } else

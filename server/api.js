@@ -1,15 +1,19 @@
 // let express = require('express');
 // let router = express.Router();
 
-// const utils = require("./utils");
-const crawler = require("./crawler/crawler");
-const wiki = require("./crawler/wiki");
-const database = require("./database/postgres");
-const update = require("./database/update");
-const worker = require("./worker");
+// const utils = require('./utils');
+const crawler = require('./crawler/crawler');
+const wiki = require('./crawler/wiki');
+const database = require('./database/postgres');
+const update = require('./database/update');
+const worker = require('./worker');
+const storage = require('./storage');
+const api = require('./api');
 
 // TODO move api on prefix url
 const prefix = '/api';
+
+exports.status = 'off';
 
 exports.init = (app) => {
 
@@ -32,7 +36,7 @@ exports.init = (app) => {
 
         if (request.query.graph === 'true') {
             urlDataJson.tokens = tokens;
-            // urlDataJson.graph = await worker.getTokensGraph(tokens);
+            urlDataJson.graph = await worker.getTokensGraph(tokens);
         }
 
 
@@ -174,9 +178,12 @@ exports.init = (app) => {
     });
 
 
-    // TODO statistics
     app.get(prefix + '/statistics', async function (request, response) {
         response.json(await database.getStatistics());
+    });
+
+    app.get(prefix + '/status', async function (request, response) {
+        response.json({api: api.status, database: database.status, storage: storage.status});
     });
 
     // TODO demo
@@ -206,6 +213,7 @@ exports.init = (app) => {
         response.json(routes);
     });
 
+    exports.status = 'on';
     console.log('api.routes: ' + routes.length)
     console.log('api: on')
 }

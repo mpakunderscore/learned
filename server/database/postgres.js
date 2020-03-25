@@ -8,8 +8,11 @@ const crawler = require("../crawler/crawler");
 
 let models = require("./models");
 
+exports.status = 'off';
+
 // {force: true}
 module.exports.sequelize.sync().then(() => {
+    exports.status = 'on';
     console.log('database: on')
 });
 

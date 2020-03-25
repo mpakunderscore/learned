@@ -1,6 +1,8 @@
 const database = require("./database/postgres");
 const wiki = require("./crawler/wiki");
 
+exports.status = 'off';
+
 // up to 50k
 exports.links = {};
 exports.words = {};
@@ -31,6 +33,9 @@ exports.init = async () => {
 
     const allWords = await database.getAllWords();
     console.log('storage.words: ' + allWords.length);
+
+    exports.status = 'on';
+    console.log('storage: on')
 };
 
 // TODO hmm
