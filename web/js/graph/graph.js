@@ -119,8 +119,8 @@ function renderCustomGraph(graph, parentNode, categoryName) {
 
     let graphNode = graph[categoryName];
 
-    if (graphNode.count > 1) {
-        let renderNode = {id: categoryName, active: graphNode.active}; //, debug: graphNode.count
+    if (graphNode.count > 50) {
+        let renderNode = {id: categoryName, active: graphNode.active, debug: graphNode.count}; //, debug: graphNode.count
         nodes_data.push(renderNode);
         links_data.push({source: renderNode, target: parentNode, value: defaultEdge})
 

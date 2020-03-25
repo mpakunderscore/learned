@@ -22,6 +22,7 @@ const getUserLinks = async () => {
 const initUser = async () => {
     await getUser();
     await getUserLinks();
+    // getUserGraph().then();
 };
 
 //TODO heavy method
