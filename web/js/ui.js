@@ -129,9 +129,9 @@ let zoom = () => {
 function initServiceInfo(card = () => {}) {
 
     contentList.innerHTML = '' +
-        '<div>Last update: 23.03.2020</div>' +
-        '<div>Version: 0.3.9.6</div>' +
-        '<div>Fixed categories load</div>' +
+        '<div>Last update: 25.03.2020</div>' +
+        '<div>Version: 0.3.9.7</div>' +
+        '<div>Sort and filter in mine</div>' +
         // '<div><a href="/api">API</a> for link graph</div>' +
         '<div class="info">Link graph needed</div>' +
         '<div>Where is design</div>' +

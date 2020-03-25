@@ -18,7 +18,7 @@ exports.init = async () => {
 
     let links = await database.getLinks();
     for (let i = 0; i < links.length; i++) {
-        exports.links[links[i].id] = links[i].toJSON();
+        exports.links[links[i].url] = links[i].toJSON();
     }
     console.log('storage.links: ' + links.length);
 

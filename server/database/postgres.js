@@ -105,6 +105,7 @@ function tokenFilter(word) {
         !word.categories.includes('Grammar') &&
         !word.categories.includes('Punctuation') &&
         !word.categories.includes('ISO basic Latin letters') &&
+        !word.categories.includes('Control characters') &&
         !word.categories.includes('404') &&
         isNaN(word.id);
 }

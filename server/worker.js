@@ -19,16 +19,20 @@ exports.getUserLinksTitled = async (userid) => {
         let userLinkJson = userLinks[i].toJSON();
 
         //TODO foreign key or title field, or links global array by url key
-        let link = await models.Link.findOne({
-            where: {
-                url: userLinkJson.url
-            }
-        });
+        // let link = await models.Link.findOne({
+        //     where: {
+        //         url: userLinkJson.url
+        //     }
+        // })
+
+        let link = storage.links[userLinkJson.url];
 
         // console.log(link)
 
         if (link) {
-            userLinkJson.title = link.toJSON().title;
+            userLinkJson.title = link.title;
+            userLinkJson.wordsLength = link.wordsLength;
+            userLinkJson.textLength = link.textLength;
             userLinksJson.push(userLinkJson)
         }
     }
@@ -69,6 +73,7 @@ exports.getLinksTokens = async (links) => {
             getLinkTokens(link, linksWords)
     }
 
+    // TODO here
     for (let name in linksWords) {
         if (linksWords[name].count < linksWords[name].globalCount)
             delete linksWords[name];

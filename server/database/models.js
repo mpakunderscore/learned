@@ -66,10 +66,17 @@ UserLink.init({
     },
     url: {
         type: DataTypes.STRING,
-        allowNull: false,
-        unique: true
+        allowNull: false
     },
-}, {sequelize, modelName: 'userlink', timestamps: false});
+}, {
+    sequelize, modelName: 'userlink',
+    timestamps: false,
+    indexes: [
+        {
+            unique: true,
+            fields: ['userid', 'url']
+        }
+    ]});
 
 // TODO refactoring (redirect from 's)
 Word.init({

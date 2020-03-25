@@ -21,7 +21,9 @@ function initInput() {
             input.value = '';
 
             if (value.startsWith('http'))
-                linkClick(value).then()
+                linkClick(value).then(() => {
+                    renderMine(false).then()
+                })
         }
     });
 }

@@ -1,4 +1,5 @@
 const database = require('../database/postgres');
+const storage = require('../storage');
 const engine = require('./engine');
 
 const cheerio = require('cheerio');
@@ -10,18 +11,22 @@ exports.getURL = async function (url) {
 
     console.log('getURL: ' + url);
 
+    // if (storage.links[url])
+    //     return storage.links[url]
     let databaseLink = await database.getLink(url);
 
     if (databaseLink)
-        return databaseLink;
+        return databaseLink.toJSON();
 
     let link = await exports.getURLData(url)
 
+    // TODO
     for (let i in link.words) {
-        await database.saveWord(link.words[i].id)
+        database.saveWord(link.words[i].id)
     }
 
     let savedLink = await database.saveLink(link);
+    storage.links[url] = savedLink;
 
     return savedLink;
 }
