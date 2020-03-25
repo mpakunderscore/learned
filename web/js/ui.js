@@ -137,6 +137,5 @@ function initServiceInfo(card = () => {}) {
         '<div>Where is design</div>' +
         '';
 
-    // TODO card design
     card()
 }
