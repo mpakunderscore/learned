@@ -108,6 +108,11 @@ exports.init = (app) => {
         response.json(await database.getUsersToday());
     });
 
+    // top by links
+    app.get(prefix + '/users/links', async function (request, response) {
+        response.json(await database.getUsersByLinksCount());
+    });
+
     // get list of links
     app.get(prefix + '/links', async function (request, response) {
         response.json(await database.getLinks());

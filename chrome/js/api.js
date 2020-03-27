@@ -1,5 +1,5 @@
-let host = 'http://localhost:8080/api';
-// let host = 'https://learned.space/api';
+// let host = 'http://localhost:8080/api';
+let host = 'https://learned.space/api';
 
 let notID = 0;
 

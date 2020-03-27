@@ -4,9 +4,9 @@ const {Sequelize, Op} = require('sequelize');
 
 module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
 
-const crawler = require("../crawler/crawler");
+const crawler = require('../crawler/crawler');
 
-let models = require("./models");
+let models = require('./models');
 
 exports.status = 'off';
 
@@ -58,7 +58,16 @@ exports.getUsersToday = async () => {
             }
         }
     });
-}
+};
+
+// Get list of users
+
+exports.getUsersByLinksCount = async () => {
+    return models.UserLink.findAll({
+        attributes: ['userid', [module.exports.sequelize.fn('count', module.exports.sequelize.col('userid')), 'count']],
+        group: ['userid'],
+    });
+};
 
 // Save word or update word count (word in links)
 

@@ -29,10 +29,17 @@ exports.getUserLinksTitled = async (userid) => {
 
         // console.log(link)
 
+        // TODO
         if (link) {
             userLinkJson.title = link.title;
             userLinkJson.wordsLength = link.wordsLength;
             userLinkJson.textLength = link.textLength;
+            userLinksJson.push(userLinkJson)
+
+        } else {
+            userLinkJson.title = userLinkJson.url;
+            userLinkJson.wordsLength = 0;
+            userLinkJson.textLength = 0;
             userLinksJson.push(userLinkJson)
         }
     }
@@ -150,8 +157,9 @@ let getParentCategories = async function (category, userGraphCategories, depth) 
         topCategory = true;
     }
 
-    // TODO
-    // upperCategories = [upperCategories[0]];
+    // TODO SOMETHING WRONG HERE
+    upperCategories = [upperCategories[0]];
+    // upperCategories = [upperCategories[0], upperCategories[1]];
 
     for (let id in upperCategories) {
 

@@ -58,7 +58,7 @@ a:visited {
 }
 
 /*TODO move*/
-#topButtons {
+#top-menu {
     display: flex;
     flex-direction: row;
     position: absolute;
@@ -68,11 +68,11 @@ a:visited {
     z-index: 2;
 }
 
-#topButtons span {
+#top-menu span {
     margin: 0 5px;
 }
 
-#topButtons div:hover {
+#top-menu div:hover {
     cursor: pointer;
     opacity: .5;
 }
@@ -88,7 +88,7 @@ span.button:hover {
 }
 
 /*TODO temp*/
-#userid {
+#user-menu {
     position: absolute;
     left: 10px;
     bottom: 10px;
