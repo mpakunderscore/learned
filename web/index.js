@@ -16,7 +16,7 @@ const getUserLinks = async () => {
     const userLinks = await get('/user/links?userid=' + user.id);
     user.links = userLinks;
     console.log(userLinks);
-    document.getElementById('userid').innerHTML = user.id + ' ' + user.links.length;
+    document.getElementById('links-count').innerHTML = user.links.length;
 };
 
 const initUser = async () => {
