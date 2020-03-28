@@ -137,9 +137,19 @@ function clickHome() {
     renderText('You are back now')
 }
 
-function renderText(text) {
+function setText(text, status) {
+    let message = document.createElement('div');
+    contentList.append(message)
+    if (status)
+        message.classList.add(status)
+    message.innerHTML = text;
+}
+
+function renderText(text, next) {
 
     console.log(text)
+    // const timeout = 30;
+    const timeout = 0;
 
     // return;
 
@@ -158,16 +168,19 @@ function renderText(text) {
         // if (dotCount >= 4)
         //     dotCount = 1;
 
-        message.innerText = generatedWord(text, i);
+        message.innerHTML = generatedWord(text, i);
 
         i++;
 
-        if (i > text.length)
+        if (i > text.length) {
             clearInterval(interval)
+            next()
+        }
+
 
         // console.log(i)
 
-    }, 30);
+    }, timeout);
 }
 
 function generatedWord(text, i) {

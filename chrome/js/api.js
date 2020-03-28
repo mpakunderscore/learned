@@ -9,6 +9,8 @@ async function addUrl(tab, userId) {
 
     let url = host + '/user/link/add?url=' + encodeURIComponent(tab.url) + '&userid=' + userId;
 
+    notification(tab.favIconUrl, tab.title, ''); //TODO
+
     let request = await get(url);
 
     // console.log(new Date() - startTime)
