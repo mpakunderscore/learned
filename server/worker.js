@@ -36,12 +36,13 @@ exports.getUserLinksTitled = async (userid) => {
             userLinkJson.textLength = link.textLength;
             userLinksJson.push(userLinkJson)
 
-        } else {
-            userLinkJson.title = userLinkJson.url;
-            userLinkJson.wordsLength = 0;
-            userLinkJson.textLength = 0;
-            userLinksJson.push(userLinkJson)
         }
+        // else {
+        //     userLinkJson.title = userLinkJson.url;
+        //     userLinkJson.wordsLength = 0;
+        //     userLinkJson.textLength = 0;
+        //     userLinksJson.push(userLinkJson)
+        // }
     }
 
     return userLinksJson;
@@ -158,8 +159,8 @@ let getParentCategories = async function (category, userGraphCategories, depth) 
     }
 
     // TODO SOMETHING WRONG HERE
-    upperCategories = [upperCategories[0]];
-    // upperCategories = [upperCategories[0], upperCategories[1]];
+    // upperCategories = [upperCategories[0]];
+    upperCategories = [upperCategories[0], upperCategories[1]];
 
     for (let id in upperCategories) {
 

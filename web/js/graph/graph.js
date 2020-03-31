@@ -111,7 +111,10 @@ function initView() {
 
 
 
-function renderCustomGraph(graph, parentNode, categoryName) {
+function renderCustomGraph(graph, parentNode, categoryName, iteration = 0) {
+
+    if (iteration > 3)
+        return;
 
     // console.log(categoryName)
     // console.log(graphNode)
@@ -125,7 +128,7 @@ function renderCustomGraph(graph, parentNode, categoryName) {
         links_data.push({source: renderNode, target: parentNode, value: defaultEdge})
 
         for (let id in graphNode.subcategories) {
-            renderCustomGraph(graph, renderNode, graphNode.subcategories[id])
+            renderCustomGraph(graph, renderNode, graphNode.subcategories[id], iteration + 1)
         }
     }
 
