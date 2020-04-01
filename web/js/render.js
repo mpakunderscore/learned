@@ -133,6 +133,7 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
 }
 
 function clickHome() {
+    contentList.innerHTML = '';
     initServiceInfo();
     renderText('You are back now')
 }
@@ -174,7 +175,7 @@ function renderText(text, next) {
 
         if (i > text.length) {
             clearInterval(interval)
-            next()
+            // next()
         }
 
 
