@@ -121,14 +121,24 @@ exports.getTokensGraph = async (words) => {
         // console.log(word.categories)
 
         for (let n in word.categories) {
-            await getParentCategories(word.categories[n], categoriesGraph, 0);
+            getParentCategories(word.categories[n], categoriesGraph, 0).then();
         }
     }
 
     return categoriesGraph;
 };
 
-let getParentCategories = async function (category, userGraphCategories, depth) {
+let topCategories = ['Main topic classifications', 'Wikipedia categories', 'Disambiguation pages'];
+
+let getParentCategories = async function (category, userGraphCategories, depth, visitedArray = []) {
+
+    if (visitedArray.includes(category)) {
+        console.error('LOOP version 2: ' + category);
+        console.log(visitedArray)
+        return;
+    }
+
+    visitedArray.push(category)
 
     if (userGraphCategories[category]) {
         userGraphCategories[category].count += 1;
@@ -136,37 +146,22 @@ let getParentCategories = async function (category, userGraphCategories, depth) 
         userGraphCategories[category] = {count: 1, subcategories: [], depth: depth}
     }
 
+    // console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
+
     let categoryObject = await storage.getCategory(category)
     let upperCategories = categoryObject.categories;
-    let topCategory = false;
+    let topCategory = !!upperCategories.some(c => topCategories.includes(c));
 
-    console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
     // console.log(upperCategories[0])
 
-    if (upperCategories.indexOf('Main topic classifications') > -1) {
-        upperCategories = ['Main_topic_classifications']
-        topCategory = true;
-    }
-
-    if (upperCategories.indexOf('Wikipedia categories') > -1) {
-        upperCategories = ['Wikipedia categories']
-        topCategory = true;
-    }
-
-    if (upperCategories.indexOf('Disambiguation pages') > -1) {
-        upperCategories = ['Disambiguation pages']
-        topCategory = true;
-    }
-
     // TODO SOMETHING WRONG HERE
-    // upperCategories = [upperCategories[0]];
-    upperCategories = [upperCategories[0], upperCategories[1]];
+    upperCategories = upperCategories.slice(0, 1);
 
     for (let id in upperCategories) {
 
         let upperCategory = upperCategories[id];
 
-        // console.log(upperCategory)
+        console.log(upperCategory)
 
         if (!upperCategory)
             return;
@@ -179,23 +174,25 @@ let getParentCategories = async function (category, userGraphCategories, depth) 
             userGraphCategories[upperCategory].count += 1;
 
         } else {
-            userGraphCategories[upperCategory] = {subcategories: [category], count: 1, depth: depth};
+            userGraphCategories[upperCategory] = {subcategories: [category], count: 1, depth: depth + 1};
+            console.log(category)
         }
 
-        // console.log(upperCategory + ': ' + userGraphCategories[upperCategory].depth)
+        console.log(upperCategory + ': ' + userGraphCategories[upperCategory].depth)
 
         if (topCategory) {
 
-            console.log('TOP CATEGORY: ' + category + ' / ' + userGraphCategories[category].count)
+            // console.log('TOP CATEGORY: ' + category + ' / ' + userGraphCategories[category].count)
             return;
 
-        } else if (userGraphCategories[upperCategory].depth < userGraphCategories[category].depth) {
-
-            console.error('LOOP: ' + category + ' ' + userGraphCategories[category].depth + ' > ' + upperCategory + ' ' + userGraphCategories[upperCategory].depth);
-            return;
+        // } else if (userGraphCategories[upperCategory].depth < userGraphCategories[category].depth) {
+        //
+        //     // Loop and poop is in Russian culture. And wiki categories loops is a really poops
+        //     console.error('LOOP: ' + category + ' ' + userGraphCategories[category].depth + ' > ' + upperCategory + ' ' + userGraphCategories[upperCategory].depth);
+        //     return;
 
         } else
-            await getParentCategories(upperCategory, userGraphCategories, depth + 1);
+            getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then();;
 
     }
 }
