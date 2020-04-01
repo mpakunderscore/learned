@@ -98,6 +98,9 @@ span.button:hover {
 .info {
     background: var(--color-blue);
 }
+.warning {
+    background: var(--color-red);
+}
 
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */

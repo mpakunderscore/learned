@@ -128,11 +128,12 @@ let zoom = () => {
 
 function initServiceInfo(card = () => {}) {
 
-    setText('Last update: 25.03.2020');
-    setText('Version: 0.3.9.7');
-    setText('Sort and filter in mine');
-    setText('Link graph needed', 'info');
-    setText('Where is design');
+    setText('Last update: 1.04.2020');
+    setText('Version: 0.3.9.8');
+    setText('Serial graph builder', 'info');
+    setText('New wiki loop checker');
+    setText('Parallel graph builder work fast and bad', 'warning');
+    setText('We started to draw mocaps');
 
     card()
 }

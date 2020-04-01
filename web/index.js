@@ -58,6 +58,7 @@ const deleteLink = async (element) => {
 };
 
 const crawlMineLink = async (element) => {
+    clearGraph(menu.mine)
     get('/crawl/graph?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true').then(response => {
 
         console.log(response)

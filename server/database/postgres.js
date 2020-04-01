@@ -223,7 +223,7 @@ exports.deleteUserLink = async (userid, url) => {
 // Save category from wiki graph
 
 exports.saveCategory = async (category) => {
-    let databaseCategory = await models.Category.create(category).toJSON();
+    let databaseCategory = await models.Category.upsert(category).toJSON();
     return databaseCategory;
 };
 
