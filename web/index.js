@@ -62,8 +62,8 @@ const crawlMineLink = async (element) => {
 
         console.log(response)
 
-        if (response.graph && response.graph['Main_topic_classifications']) {
-            renderCustomGraph(response.graph, menu.mine, 'Main_topic_classifications');
+        if (response.graph && response.graph['Main topic classifications']) {
+            renderCustomGraph(response.graph, menu.mine, 'Main topic classifications');
             initGraph();
         }
 
@@ -83,7 +83,7 @@ const share = () => {
     }
 };
 
-let prefix = '/api'
+let prefix = '/api';
 
 async function get(url) {
     // console.log(url)

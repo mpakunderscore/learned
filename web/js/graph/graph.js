@@ -113,7 +113,7 @@ function initView() {
 
 function renderCustomGraph(graph, parentNode, categoryName, iteration = 0) {
 
-    if (iteration > 1)
+    if (iteration > 3)
         return;
 
     // console.log(categoryName)

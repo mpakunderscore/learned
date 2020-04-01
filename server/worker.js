@@ -148,9 +148,17 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
     // console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
 
+    // TODO we write to DB a lot of requests parallel with the same data.
     let categoryObject = await storage.getCategory(category)
     let upperCategories = categoryObject.categories;
-    let topCategory = !!upperCategories.some(c => topCategories.includes(c));
+
+    let topCategory = false;
+    upperCategories.forEach(c => {
+        if (topCategories.includes(c)) {
+            upperCategories = [c];
+            topCategory = true;
+        }
+    });
 
     // console.log(upperCategories[0])
 
