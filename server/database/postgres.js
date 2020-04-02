@@ -2,7 +2,9 @@ const wiki = require('../crawler/wiki');
 
 const {Sequelize, Op} = require('sequelize');
 
-module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: false});
+let logging = false;
+
+module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: logging});
 
 const crawler = require('../crawler/crawler');
 
@@ -166,7 +168,7 @@ exports.getLink = async (url) => {
 // Get links
 
 exports.getLinks = async () => {
-    return models.Link.findAll();
+    return models.Link.findAll({benchmark: true});
 };
 
 // Get links statistics

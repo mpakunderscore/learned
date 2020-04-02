@@ -109,6 +109,8 @@ let getLinkTokens = (link, linksWords) => {
 // Graph based on tokens []
 let counter = 0;
 
+let promiseArray = []
+
 exports.getTokensGraph = async (words) => {
 
     let categoriesGraph = {};
@@ -122,16 +124,30 @@ exports.getTokensGraph = async (words) => {
         // console.log(word.categories)
 
         for (let n in word.categories) {
-            // TODO if only [].slice(0, 1)
+
+            // TODO count work normal if only [].slice(0, 1)
             counter++;
             console.log(counter)
-            getParentCategories(word.categories[n], categoriesGraph, 0).then();
+
+            // getParentCategories(word.categories[n], categoriesGraph, 0).then(a => {});
+
+            // const promise1 = Promise.resolve(3);
+            // const promise2 = 42;
+            // setTimeout(resolve, 100, 'foo');
+
+            promiseArray.push(new Promise(function(resolve, reject) {
+                getParentCategories(word.categories[n], categoriesGraph, 0).then(() => resolve());
+            }));
+
+            // expected output: Array [3, 42, "foo"]
         }
     }
 
     // wait here until last thread
 
-    return categoriesGraph;
+    return Promise.all(promiseArray).then(function(values) {
+        return categoriesGraph;
+    });
 };
 
 let topCategories = ['Main topic classifications', 'Wikipedia categories', 'Disambiguation pages'];
@@ -145,7 +161,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
         return;
     }
 
-    console.log(counter)
+    // console.log(counter)
 
     visitedArray.push(category)
 
@@ -157,7 +173,6 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
     // console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
 
-    // TODO we write to DB a lot of requests parallel with the same data.
     let categoryObject = await storage.getCategory(category)
     let upperCategories = categoryObject.categories;
 
@@ -204,7 +219,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
             // console.log('TOP CATEGORY: ' + category + ' / ' + userGraphCategories[category].count)
             // TODO finish here
-            console.log(counter)
+            // console.log(counter)
             counter--;
             return;
 
@@ -218,9 +233,10 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
         } else {
 
             // TODO start here
-            getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then();;
+            // getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then();;
+            promiseArray.push(new Promise(function(resolve, reject) {
+                getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then(() => resolve());;
+            }));
         }
-
-
     }
-}
+};
