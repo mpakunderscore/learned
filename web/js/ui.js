@@ -128,7 +128,7 @@ let zoom = () => {
 
 function initServiceInfo(card = () => {}) {
 
-    setText('Last update: 1.04.2020');
+    setText('Last update: 2.04.2020');
     setText('Version: 0.3.9.8');
     setText('Parallel graph builder', 'info');
     setText('New wiki loop checker');
