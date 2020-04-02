@@ -107,6 +107,7 @@ let getLinkTokens = (link, linksWords) => {
 }
 
 // Graph based on tokens []
+let counter = 0;
 
 exports.getTokensGraph = async (words) => {
 
@@ -121,9 +122,14 @@ exports.getTokensGraph = async (words) => {
         // console.log(word.categories)
 
         for (let n in word.categories) {
+            // TODO if only [].slice(0, 1)
+            counter++;
+            console.log(counter)
             getParentCategories(word.categories[n], categoriesGraph, 0).then();
         }
     }
+
+    // wait here until last thread
 
     return categoriesGraph;
 };
@@ -135,8 +141,11 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
     if (visitedArray.includes(category)) {
         console.error('LOOP version 2: ' + category);
         console.log(visitedArray)
+        counter--;
         return;
     }
+
+    console.log(counter)
 
     visitedArray.push(category)
 
@@ -169,10 +178,13 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
         let upperCategory = upperCategories[id];
 
-        console.log(upperCategory)
+        // console.log(upperCategory)
 
-        if (!upperCategory)
-            return;
+        if (!upperCategory) {
+            counter--;
+            continue;
+        }
+
 
         if (userGraphCategories[upperCategory]) {
 
@@ -183,14 +195,17 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
         } else {
             userGraphCategories[upperCategory] = {subcategories: [category], count: 1, depth: depth + 1};
-            console.log(category)
+            // console.log(category)
         }
 
-        console.log(upperCategory + ': ' + userGraphCategories[upperCategory].depth)
+        // console.log(upperCategory + ': ' + userGraphCategories[upperCategory].depth)
 
         if (topCategory) {
 
             // console.log('TOP CATEGORY: ' + category + ' / ' + userGraphCategories[category].count)
+            // TODO finish here
+            console.log(counter)
+            counter--;
             return;
 
         // } else if (userGraphCategories[upperCategory].depth < userGraphCategories[category].depth) {
@@ -199,8 +214,13 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
         //     console.error('LOOP: ' + category + ' ' + userGraphCategories[category].depth + ' > ' + upperCategory + ' ' + userGraphCategories[upperCategory].depth);
         //     return;
 
-        } else
+
+        } else {
+
+            // TODO start here
             getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then();;
+        }
+
 
     }
 }
