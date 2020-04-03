@@ -143,8 +143,8 @@ let topCategories = ['Main topic classifications', 'Wikipedia categories', 'Disa
 let getParentCategories = async function (category, userGraphCategories, depth, visitedArray = [], wordCount) {
 
     if (visitedArray.includes(category)) {
-        console.error('LOOP version 2: ' + category);
-        console.log(visitedArray)
+        // console.error('LOOP version 2: ' + category);
+        // console.log(visitedArray)
         counter--;
         return;
     }
@@ -175,7 +175,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
     // console.log(upperCategories[0])
 
     // TODO SOMETHING WRONG HERE
-    upperCategories = upperCategories.slice(0, 1);
+    upperCategories = upperCategories.slice(0, 2);
 
     for (let id in upperCategories) {
 
@@ -185,6 +185,10 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
         if (!upperCategory) {
             counter--;
+            continue;
+        }
+
+        if (visitedArray.includes(upperCategory)) {
             continue;
         }
 
