@@ -41,3 +41,11 @@ if (window.location.href.endsWith('/mine/')) {
     // menu.mine.active = true;
     selectMine(menu.mine).then(() => {initGraph()});
 }
+
+if (window.location.href.endsWith('/blog/')) {
+    clearContent();
+    setPath('/blog');
+    clearGraph();
+    renderText(blog[0].text);
+    renderText(blog[0].id + ' mpak_');
+}

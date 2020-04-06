@@ -23,6 +23,8 @@ app.use('/coronavirus', express.static(__dirname + '/web'));
 
 app.use('/mine', express.static(__dirname + '/web'));
 
+app.use('/blog', express.static(__dirname + '/web'));
+
 // TODO also we need routing for menu here. And menu array
 
 let server = require('http').Server(app);
