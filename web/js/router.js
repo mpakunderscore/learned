@@ -30,9 +30,9 @@ if (window.location.href.endsWith('/coronavirus/')) {
     setPath('/coronavirus');
     renderText('Wash your hands!');
     get('/coronavirus/graph').then(response => {
-        let coronavirus = {id: 'Coronavirus'};
-        clearGraph(coronavirus);
-        renderCustomGraph(response.graph, coronavirus, '2019–20 coronavirus pandemic');
+        let coronavirusNode = {id: 'Coronavirus'};
+        clearGraph(coronavirusNode);
+        renderCustomGraph(response.graph, coronavirusNode, '2019–20 coronavirus pandemic');
         initGraph();
     });
 }
@@ -45,7 +45,10 @@ if (window.location.href.endsWith('/mine/')) {
 if (window.location.href.endsWith('/blog/')) {
     clearContent();
     setPath('/blog');
-    clearGraph();
-    renderText(blog[0].text);
-    renderText(blog[0].id + ' mpak_');
+    let blogNode = {id: 'Blog'};
+    clearGraph(blogNode);
+    initGraph();
+    setText(blog[0].title);
+    setText(blog[0].text);
+    setText('<span>' + blog[0].author + '</span><span>' + blog[0].date + '</span>', 'footer');
 }

@@ -54,3 +54,8 @@
 #content .recommended a {
     color: var(--color-green-dark)
 }
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+}

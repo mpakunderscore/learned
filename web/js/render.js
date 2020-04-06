@@ -142,11 +142,12 @@ function clearContent() {
     contentList.innerHTML = '';
 }
 
-function setText(text, status) {
+function setText(text, className) {
     let message = document.createElement('div');
+    message.classList.add('message')
     contentList.append(message)
-    if (status)
-        message.classList.add(status)
+    if (className)
+        message.classList.add(className)
     message.innerHTML = text;
 }
 
