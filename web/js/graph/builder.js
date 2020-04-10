@@ -1,6 +1,6 @@
 function renderCustomGraph(graph, parentNode, categoryName, iteration = 0) {
 
-    if (iteration > 2)
+    if (iteration > 1)
         return;
 
     // console.log(categoryName)

@@ -2,7 +2,7 @@ const wiki = require('../crawler/wiki');
 
 const {Sequelize, Op} = require('sequelize');
 
-let logging = false;
+let logging = true;
 
 module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: logging});
 

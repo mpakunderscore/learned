@@ -114,6 +114,8 @@ exports.getTokensGraph = async (words) => {
 
     let categoriesGraph = {};
 
+    let categories = {};
+
     for (let id in words) {
 
         let word = words[id];
@@ -125,11 +127,28 @@ exports.getTokensGraph = async (words) => {
 
             // TODO word.count
 
-            promiseArray.push(new Promise(function(resolve, reject) {
-                getParentCategories(word.categories[n], categoriesGraph, 0, [], word.count).then(() => resolve());
-            }));
+            // promiseArray.push(new Promise(function(resolve, reject) {
+            //     getParentCategories(word.categories[n], categoriesGraph, 0, [], word.count).then(() => resolve());
+            // }));
+
+            if (categories[word.categories[n]]) {
+                categories[word.categories[n]] += word.count;
+            } else {
+                categories[word.categories[n]] = word.count;
+            }
         }
     }
+
+    for (let category in categories) {
+
+        console.log(category + ' ' + categories[category])
+
+        promiseArray.push(new Promise(function(resolve, reject) {
+            getParentCategories(category, categoriesGraph, 0, [], categories[category]).then(() => resolve());
+        }));
+    }
+
+    // console.log(categories)
 
     // wait here until last thread
 
@@ -140,10 +159,10 @@ exports.getTokensGraph = async (words) => {
 
 let topCategories = ['Main topic classifications', 'Wikipedia categories', 'Disambiguation pages'];
 
-let getParentCategories = async function (category, userGraphCategories, depth, visitedArray = [], wordCount) {
+let getParentCategories = async function (category, userGraphCategories, depth, visitedArray = [], weight) {
 
     if (visitedArray.includes(category)) {
-        // console.error('LOOP version 2: ' + category);
+        console.error('LOOP version 2: ' + category);
         // console.log(visitedArray)
         counter--;
         return;
@@ -156,7 +175,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
     if (userGraphCategories[category]) {
         userGraphCategories[category].count += 1;
     } else {
-        userGraphCategories[category] = {count: wordCount, subcategories: [], depth: depth}
+        userGraphCategories[category] = {count: weight, subcategories: [], depth: depth}
     }
 
     // console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
@@ -176,6 +195,12 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
     // TODO SOMETHING WRONG HERE
     upperCategories = upperCategories.slice(0, 2);
+
+    // TODO
+    if (upperCategories.length < 1) {
+        counter--;
+        return;
+    }
 
     for (let id in upperCategories) {
 
@@ -201,7 +226,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
             userGraphCategories[upperCategory].count += 1;
 
         } else {
-            userGraphCategories[upperCategory] = {subcategories: [category], count: wordCount, depth: depth + 1};
+            userGraphCategories[upperCategory] = {subcategories: [category], count: weight, depth: depth + 1};
             // console.log(category)
         }
 
@@ -227,7 +252,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
             // TODO start here
             // getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then();;
             promiseArray.push(new Promise(function(resolve, reject) {
-                getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray], wordCount).then(() => resolve());;
+                getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray], weight).then(() => resolve());;
             }));
         }
     }
