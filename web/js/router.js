@@ -48,7 +48,9 @@ if (window.location.href.endsWith('/blog/')) {
     let blogNode = {id: 'Blog'};
     clearGraph(blogNode);
     initGraph();
-    setText(blog[0].title);
-    setText(blog[0].text);
-    setText('<span>' + blog[0].author + '</span><span>' + blog[0].date + '</span>', 'footer');
+    for (let i = blog.length - 1; i > -1; i--) {
+        setText(blog[i].title);
+        setText(blog[i].text);
+        setText('<span>' + blog[i].author + '</span><span>' + blog[i].date + '</span>', 'footer');
+    }
 }

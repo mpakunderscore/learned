@@ -252,7 +252,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
             // TODO start here
             // getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then();;
             promiseArray.push(new Promise(function(resolve, reject) {
-                getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray], weight).then(() => resolve());;
+                getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray], weight).then(() => resolve());
             }));
         }
     }
