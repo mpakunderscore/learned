@@ -172,16 +172,23 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
 
     visitedArray.push(category)
 
+    //TODO
     if (userGraphCategories[category]) {
-        userGraphCategories[category].count += 1;
+
+        // if (weight > userGraphCategories[category].count)
+            userGraphCategories[category].count += weight;
+
+        // return;
+
     } else {
         userGraphCategories[category] = {count: weight, subcategories: [], depth: depth}
     }
 
-    // console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
+    console.log(category + ': ' + userGraphCategories[category].count + ' : ' + depth)
 
     let categoryObject = await storage.getCategory(category)
     let upperCategories = categoryObject.categories;
+    // console.log(categoryObject)
 
     let topCategory = false;
     upperCategories.forEach(c => {
@@ -194,11 +201,11 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
     // console.log(upperCategories[0])
 
     // TODO SOMETHING WRONG HERE
-    upperCategories = upperCategories.slice(0, 2);
+    // upperCategories = upperCategories.slice(0, 2);
 
     // TODO
     if (upperCategories.length < 1) {
-        counter--;
+        // counter--;
         return;
     }
 
@@ -209,7 +216,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
         // console.log(upperCategory)
 
         if (!upperCategory) {
-            counter--;
+            // counter--;
             continue;
         }
 
@@ -223,7 +230,10 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
             if (!userGraphCategories[upperCategory].subcategories.includes(category))
                 userGraphCategories[upperCategory].subcategories.push(category);
 
-            userGraphCategories[upperCategory].count += 1;
+            // if (weight > userGraphCategories[upperCategory].count)
+                userGraphCategories[upperCategory].count += weight;
+
+            return;
 
         } else {
             userGraphCategories[upperCategory] = {subcategories: [category], count: weight, depth: depth + 1};
@@ -237,7 +247,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
             // console.log('TOP CATEGORY: ' + category + ' / ' + userGraphCategories[category].count)
             // TODO finish here
             // console.log(counter)
-            counter--;
+            // counter--;
             return;
 
         // } else if (userGraphCategories[upperCategory].depth < userGraphCategories[category].depth) {
@@ -250,6 +260,7 @@ let getParentCategories = async function (category, userGraphCategories, depth, 
         } else {
 
             // TODO start here
+            // await getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray], weight)
             // getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray]).then();;
             promiseArray.push(new Promise(function(resolve, reject) {
                 getParentCategories(upperCategory, userGraphCategories, depth + 1, [...visitedArray], weight).then(() => resolve());

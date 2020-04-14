@@ -57,13 +57,15 @@ const deleteLink = async (element) => {
     await renderMine()
 };
 
+let topCategories = ['Main topic classifications', 'Wikipedia categories', 'Disambiguation pages'];
+
 const crawlMineLink = async (element) => {
     clearGraph(menu.mine)
     get('/crawl/graph?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true').then(response => {
 
         console.log(response)
 
-        if (response.graph && response.graph['Main topic classifications']) {
+        if (response.graph && response.graph[topCategories[0]]) {
             renderCustomGraph(response.graph, menu.mine, 'Main topic classifications');
             initGraph();
         }

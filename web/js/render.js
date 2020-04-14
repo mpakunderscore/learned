@@ -122,11 +122,13 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
                 links[i].title +
                 '</a>' +
                 '<span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
-                '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
+
                 '<span>' + links[i].textLength + '</span>' +
                 '<span>/</span>' +
                 '<span>' + links[i].wordsLength + '</span>' +
+                '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
                 '</div>';
+
         }
 
     contentList.innerHTML = html;
