@@ -22,11 +22,11 @@
     display: none;
 }
 
-#modal div:not(.button) {
+#modal div:not(.modal-button) {
     padding: 20px 20px 0;
 }
 
-.button {
+.modal-button {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -38,7 +38,7 @@
     /*line-height: ;*/
 }
 
-.button:hover {
+.modal-button:hover {
     color: var(--color-blue-dark);
     cursor: pointer;
 }
