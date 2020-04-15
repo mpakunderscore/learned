@@ -4,12 +4,41 @@
     width: 300px;
     height: 100%;
 
-    background-color: white;
+    /*font-weight: 600;*/
+
+    background-color: var(--color-blue);
+    color: var(--color-white);
     z-index: 2;
 
+    box-sizing: border-box;
+    /*padding: 20px;*/
+
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+    position: relative;
 }
 
 #modal:active {
     display: none;
+}
+
+#modal div:not(.button) {
+    padding: 20px 20px 0;
+}
+
+.button {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px;
+
+    text-align: right;
+    /*background-color: red;*/
+    /*line-height: var(--font-size-small);*/
+    /*line-height: ;*/
+}
+
+.button:hover {
+    color: var(--color-blue-dark);
+    cursor: pointer;
 }

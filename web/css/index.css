@@ -1,6 +1,8 @@
 html, body {
     margin: 0;
 
+    --line-height: 16px;
+
     --font-size-main: 12px;
     --font-size-small: 12px;
 
@@ -57,6 +59,10 @@ a:visited {
     color: var(--color-gray)
 }
 
+div {
+    line-height: var(--line-height);
+}
+
 /*TODO move*/
 #top-menu {
     display: flex;
@@ -89,9 +95,16 @@ span.button:hover {
 
 /*TODO temp*/
 #user-menu {
+    display: flex;
+    flex-direction: row;
+
     position: absolute;
     left: 10px;
     bottom: 10px;
+}
+
+#user-menu div {
+    padding-right: 10px;
 }
 
 /*TODO temp*/
@@ -110,6 +123,10 @@ span.button:hover {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
+}
+
+.hide {
+    /*display: none;*/
 }
 
 /*#design {*/

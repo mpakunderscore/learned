@@ -1,4 +1,4 @@
-main #border {
+#border {
 
     width: .5%;
     height: 100%;
@@ -17,16 +17,16 @@ main #border {
     /*border-right: 1px solid var(--color-blue);*/
 }
 
-main #border:hover {
+#border:hover {
     border-right: 0;
     background-color: var(--color-blue);
     width: 1%;
 }
 
-main #border.active {
+#border.active {
     background-color: var(--color-blue-dark);
 }
 
-main #border:hover > input {
+#border:hover > input {
     /*background-color: var(--color-blue);*/
 }
