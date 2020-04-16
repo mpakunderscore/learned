@@ -156,8 +156,8 @@ function setText(text, className) {
 function renderText(text, next) {
 
     console.log(text)
-    // const timeout = 30;
-    const timeout = 0;
+    const timeout = 30;
+    // const timeout = 0;
 
     // return;
 

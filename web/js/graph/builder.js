@@ -21,3 +21,16 @@ function renderCustomGraph(graph, parentNode, categoryName, iteration = 0) {
 
     // console.log(graph[id].subcategories)
 }
+
+function renderSimpleCustomGraph(graph, parentNode, categoryName, iteration = 0) {
+
+    let graphNode = graph[categoryName];
+
+    let renderNode = {id: categoryName, active: graphNode.active}; //, debug: graphNode.count
+    nodes_data.push(renderNode);
+    links_data.push({source: renderNode, target: parentNode, value: defaultEdge})
+
+    for (let id in graphNode.subcategories) {
+        renderCustomGraph(graph, renderNode, graphNode.subcategories[id], iteration + 1)
+    }
+}

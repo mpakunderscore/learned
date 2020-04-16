@@ -14,7 +14,7 @@ if (window.location.href.endsWith('/demo/')) {
         let demo = {id: 'Demo'}
         clearGraph(demo);
         if (response.graph['Y Combinator (company)']) {
-            renderCustomGraph(response.graph, demo, 'Y Combinator (company)');
+            renderSimpleCustomGraph(response.graph, demo, 'Y Combinator (company)');
             initGraph();
         }
     });
@@ -32,7 +32,7 @@ if (window.location.href.endsWith('/coronavirus/')) {
     get('/coronavirus/graph').then(response => {
         let coronavirusNode = {id: 'Coronavirus'};
         clearGraph(coronavirusNode);
-        renderCustomGraph(response.graph, coronavirusNode, '2019–20 coronavirus pandemic');
+        renderSimpleCustomGraph(response.graph, coronavirusNode, '2019–20 coronavirus pandemic');
         initGraph();
     });
 }
