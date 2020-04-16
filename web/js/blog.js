@@ -21,7 +21,7 @@ let blog = [
         author: 'mpak_',
         title: '<b>Thanks JetBrains!</b>',
         date: '16.04.2020',
-        text: 'For free 90-day access to products. Proud of you guys. Also currently working on chrome extension, almost done.'
+        text: 'Thank you. For free 90-day access to products. Proud of you guys. Hope this will made impact on developers and they will try new instruments, languages and frameworks. Also, currently working on chrome extension, almost done.'
     }
 
 ]
