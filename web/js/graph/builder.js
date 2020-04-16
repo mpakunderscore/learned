@@ -1,7 +1,8 @@
 function renderCustomGraph(graph, parentNode, categoryName, iteration = 0) {
 
-    // if (iteration > 2)
-    //     return
+    if (iteration > 2)
+        return;
+
     // console.log(categoryName)
     // console.log(graphNode)
     // console.log(categoryName)

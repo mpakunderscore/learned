@@ -1,7 +1,7 @@
 #modal {
-    /*position: absolute;*/
-    /*right: 0;*/
-    width: 300px;
+    position: absolute;
+    right: 0;
+    width: 33%;
     height: 100%;
 
     /*font-weight: 600;*/
@@ -15,30 +15,37 @@
 
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 
-    position: relative;
+    /*position: relative;*/
 }
 
-#modal:active {
-    display: none;
-}
-
-#modal div:not(.modal-button) {
+#modal div:not(#modal-buttons) {
     padding: 20px 20px 0;
 }
 
-.modal-button {
+#modal-buttons {
     position: absolute;
     bottom: 0;
-    right: 0;
+    /*right: 0;*/
+    /*left: 0*/
+    width: 100%;
     padding: 10px;
+    box-sizing: border-box;
 
     text-align: right;
+    display: flex;
+    justify-content: space-between;
     /*background-color: red;*/
     /*line-height: var(--font-size-small);*/
     /*line-height: ;*/
+
+    cursor: pointer;
 }
 
-.modal-button:hover {
+#modal-buttons span:hover {
     color: var(--color-blue-dark);
     cursor: pointer;
+}
+
+.hide {
+    display: none;
 }

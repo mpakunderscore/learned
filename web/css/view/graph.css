@@ -1,4 +1,4 @@
-main #graph {
+#graph {
     background-color: #e6e6ed;
     /*background-color: rgba(91, 237, 114, 0.5);*/
     width: 100%;
@@ -14,7 +14,7 @@ main #graph {
 /*    to {background-color: #e6e6ed;}*/
 /*}*/
 
-main #graph-svg {
+#graph-svg {
     /*background-color: rgba(135, 206, 250, 0.45);*/
 }
 

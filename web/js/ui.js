@@ -136,3 +136,8 @@ function initServiceInfo(card = () => {}) {
 
     card()
 }
+
+function closeModal() {
+    let modal = document.getElementById('modal');
+    modal.classList.add('hide')
+}
