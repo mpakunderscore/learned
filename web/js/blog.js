@@ -16,6 +16,12 @@ let blog = [
             'This is a weird time and we are lucky ones. We hung out in a huge house with a pool on the Caribbean Sea and provided ourselves everything we needed. We are trying (3 software engineers) to keep the mode and work as usual. The others are just resting and waiting.\n' +
             '<br/><br/>' +
             'Perhaps it would be worth switching to another task, but I will not have such bucket of motivation to get the minimum result. The best i can get is brainstorm with analysts, but mine far from here :)'
+    },
+    {
+        author: 'mpak_',
+        title: '<b>Thanks JetBrains!</b>',
+        date: '16.04.2020',
+        text: 'For free 90-day access to products. Proud of you guys. Also currently working on chrome extension, almost done.'
     }
 
 ]

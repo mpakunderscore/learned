@@ -1,7 +1,41 @@
+document.addEventListener('DOMContentLoaded', async () => {
+    try {
+        const key = "user"
+
+        // Get the current tab
+        const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+        const tab = tabs[0];
+
+        // Execute script in the current tab
+        const fromPageLocalStore = await chrome.tabs.executeScript(tab.id, { code: `localStorage['${key}']` });
+
+        console.log(fromPageLocalStore)
+
+        // Store the result
+        // await chrome.storage.local.set({[key]:fromPageLocalStore[0]});
+    }
+    catch(err) {
+        // Log exceptions
+    }
+});
+
+chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
+
+    if (request.method == "getStatus")
+        sendResponse({status: localStorage['user']});
+    else
+        sendResponse({}); // snub them.
+});
+
 let auth = false;
 let userId = '';
 
 chrome.browserAction.onClicked.addListener(async function (tab) {
+
+    chrome.runtime.sendMessage({method: "getStatus"}, function(response) {
+        console.log(response);
+    });
+
 
     // chrome.browserAction.setIcon({path: {
     //         '19': 'icons/red.png',
@@ -30,8 +64,8 @@ chrome.browserAction.onClicked.addListener(async function (tab) {
 
     if (!auth) {
 
-        // let newURL = 'https://learned.space';
-        // chrome.tabs.create({url: newURL});
+        let newURL = 'https://learned.space';
+        chrome.tabs.create({url: newURL});
 
         userId = 'b7970460-5aa6-11ea-891b-6bbc86b992f4';
         auth = true;
