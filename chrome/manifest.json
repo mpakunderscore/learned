@@ -15,7 +15,8 @@
         "128": "icons/icon.png"
     },
     "browser_action": {
-        "default_icon": "icons/icon.png",
+        "default_icon": "icons/red.png",
+        "main_icon": "icons/icon.png",
         "default_title": "Save page"
     },
     "permissions": [
