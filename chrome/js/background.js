@@ -3,14 +3,14 @@ let userId = '';
 
 function receiveText(resultsArray) {
     userId = JSON.parse(resultsArray).id;
-    auth  = true;
-    chrome.browserAction.setIcon('');
+    auth = true;
+    chrome.runtime.sendMessage({'newIconPath': 'icons/icon.png'});
 }
 
 chrome.browserAction.onClicked.addListener(async function (tab) {
 
     if (!auth) {
-        chrome.tabs.create({url: 'https://learned.space'}, function(tab) {
+        chrome.tabs.create({url: 'https://learned.space'}, function (tab) {
             chrome.tabs.executeScript(tab.id, {
                 code: 'localStorage.getItem("user")'
             }, receiveText);
@@ -18,7 +18,8 @@ chrome.browserAction.onClicked.addListener(async function (tab) {
     } else {
         try {
             await addUrl(tab, userId);
-        } catch (e) {}
+        } catch (e) {
+        }
     }
 
     // notification('', 'Login', userId); //TODO
