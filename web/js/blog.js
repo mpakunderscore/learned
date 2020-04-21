@@ -27,7 +27,7 @@ let blog = [
         author: 'mpak_',
         title: '<b>What a day..</b>',
         date: '20.04.2020',
-        text: 'Also now there is possibility to switch between categories and pages lists inside node content. Over 50 categories in one node is not usable thing, and i reduce this count to 7 in future. But for now there at last one way to comfortable look at all list.'
+        text: 'Also now there is possibility to switch between categories and pages lists inside node content. Over 50 categories in one node is not usable thing, and i will reduce this count to 7 in a future. But for now there at last one way to comfortable look at all list.'
     }
 
 ]

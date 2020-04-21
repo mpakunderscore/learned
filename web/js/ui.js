@@ -129,7 +129,7 @@ let zoom = () => {
 function initServiceInfo(card = () => {}) {
 
     setText('Last update: 14.04.2020');
-    setText('Version: 0.4.1');
+    setText('Version: 0.4.2');
     setText('Full graph builder, test, bad ui', 'info');
     setText('Where is ideas');
     setText('There is <a href="/blog">/blog</a> if you want');
