@@ -43,7 +43,7 @@ async function selectNode(circleElement, category, random) {
 
         const responseJson = await getCategory(title);
 
-        let categoriesLength = responseJson.subcategories.length;
+        // let categoriesLength = responseJson.subcategories.length;
 
         // console.log(nodes_data)
 
@@ -75,7 +75,7 @@ async function selectNode(circleElement, category, random) {
             }
         });
 
-        setContent(responseJson.pages, responseJson.mainPage, categoriesLength, title)
+        setContent(true, title, responseJson.mainPage, responseJson.pages, responseJson.subcategories)
     }
 
     initGraph();

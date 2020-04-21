@@ -24,7 +24,4 @@ function clickHome() {
     renderText('You are back now')
 }
 
-function clearContent() {
-    contentList.innerHTML = '';
-}
 
