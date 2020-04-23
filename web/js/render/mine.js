@@ -9,20 +9,22 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
 
     let html = '';
 
-    html += '<div id="main-text">Sort:' +
+    // html += '<div><span class="button simple" onclick="selectMain()">Back to main page</span></div>';
+
+    html += '<div><span class="text">Sort:</span>' +
         '<span class="button" onclick="renderMine(true, this.filter, \'title\')">title</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">time</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">complexity</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'url\')">source</span></div>';
 
-    html += '<div id="main-text">Filter:' +
+    html += '<div id=""><span class="text">Filter:</span>' +
         '<span class="button" onclick="renderMine(true, true)">big</span>/' +
         '<span class="button" onclick="renderMine(true, false)">all</span></div>';
 
     for (let i = 0; i < 1; i++) {
         html += '' +
             '<div class="link recommended">' +
-            '<a href="">Recommended link</a>' +
+            '<a href="">Recommended link on edge</a>' +
             '</div>';
     }
 

@@ -88,6 +88,14 @@ span.button {
     margin: 0 5px;
 }
 
+span.button.simple {
+    margin: 0;
+}
+
+span.text {
+    color: #adadad;
+}
+
 span.button:hover {
     cursor: pointer;
     opacity: .5;

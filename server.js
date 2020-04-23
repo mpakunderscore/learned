@@ -25,6 +25,8 @@ app.use('/mine', express.static(__dirname + '/web'));
 
 app.use('/blog', express.static(__dirname + '/web'));
 
+app.use('/chrome/learned.space.zip', express.static(__dirname + '/learned.space.zip'));
+
 // TODO also we need routing for menu here. And menu array
 
 let server = require('http').Server(app);

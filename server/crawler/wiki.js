@@ -13,8 +13,11 @@ exports.getCategory = async function (title, lang = 'en', update = false) {
 
     try {
 
-        if (title === 'Graph')
+        let isMainCategory = false;
+        if (title === 'Graph') {
             title = mainTitle[lang];
+            isMainCategory = true;
+        }
 
         let databaseCategory = await database.getCategory(title).then();
         if (databaseCategory && !update)
@@ -52,7 +55,7 @@ exports.getCategory = async function (title, lang = 'en', update = false) {
             subcategories: subcategories,
             categories: categories,
             pages: pages,
-            mainPage: isMainPage ? await exports.getPage(title, lang) : {},
+            mainPage: isMainCategory ? {text: 'text'} : isMainPage ? await exports.getPage(title, lang) : {},
             language: lang,
         };
 

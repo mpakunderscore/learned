@@ -34,6 +34,14 @@ let blog = [
         title: '<b>Time to stop?</b>',
         date: '21.04.2020',
         text: 'If you think it\'s not, please let me know.'
+    },
+    {
+        author: 'mpak_',
+        title: '<b>List of links</b>',
+        date: '23.04.2020',
+        text: 'This system firstly have to manage incoming links, not steering through existing "treasures". We have to create working links flows from users, even if there is no value to store links outside of bookmarks. Useful navigation not a big deal, you need something way bigger to enchant the learning process. Developing the habit of reading more, discovering a new words on wikipedia, or just doing it regularly.' +
+            '<br/><br/>' +
+            'I do freeze development of UI and categories graph structure to concentrate on UX and the way to get first small amount of users tied to system somehow.'
     }
 
 ]
