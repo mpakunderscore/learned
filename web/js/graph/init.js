@@ -21,10 +21,13 @@ let menu = {};
 // TODO MENU DATA
 let initMenu = () => {
 
-    menu.settings = menuItem({id: 'Settings', lang: true});
-    menuItem({id: 'Graph'});
+
+
+
     menu.mine = menuItem({id: 'Mine'});
-    menuItem({id: 'Random'});
+    menuItem({id: 'Graph'});
+    menu.settings = menuItem({id: 'Settings', lang: true});
+    // menuItem({id: 'Random'});
 };
 
 initMenu();

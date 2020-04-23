@@ -128,13 +128,20 @@ let zoom = () => {
 
 function initServiceInfo(card = () => {}) {
 
-    setText('Last update: 14.04.2020');
-    setText('Version: 0.4.2');
-    setText('Full graph builder, test, bad ui', 'info');
-    setText('Where is ideas');
-    setText('There is <a href="/blog">/blog</a> if you want');
+    setText('This is a link management system. Like pocket, evernote, history or bookmarks in chrome, notepad or even paper. But, little bit different.')
+    setText('And, maybe list of links is not a big value? Even if you did collect something special and build graph navigation on top of it for easy use. Most of links you will read only once, and there is something more. Something you may read.. not becouse you did save similar article. But becouse you will get a new words for your head. New meanings, ideas, thoughts or even friends with similar interests.')
+    setText('We need two things for this. First - the edge of data in your knowaladge. It\'s a personal information and things like this does not belonge to enyone, exept you. So, there is only randome UUID for you and if you want to add email to this account, we will be store it encripted.')
+    // setText('')
+    // setText('')
+    // setText('')
+    // setText('')
+    // setText('')
+    // setText('')
+    // setText('')
+    setText('v0.4.3 / 23.04.2020', 'info');
+    setText('<a href="/blog">/blog</a>');
 
-    card()
+    // card()
 }
 
 function closeModal() {
