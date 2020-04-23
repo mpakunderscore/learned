@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "learned.space",
     "description": "",
-    "version": "0.4",
+    "version": "0.4.2",
     "background": {
         "scripts": [
             "js/api.js",

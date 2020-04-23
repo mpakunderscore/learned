@@ -4,7 +4,11 @@ let userId = '';
 function receiveText(resultsArray) {
     userId = JSON.parse(resultsArray).id;
     auth = true;
-    setIcon()
+    setIcon();
+
+    chrome.tabs.getCurrent(function (tab) {
+        chrome.tabs.remove(tab.id, function () {});
+    });
     // chrome.runtime.sendMessage({'newIconPath': 'icons/icon.png'});
 }
 
