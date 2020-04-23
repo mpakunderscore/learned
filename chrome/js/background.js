@@ -4,23 +4,35 @@ let userId = '';
 function receiveText(resultsArray) {
     userId = JSON.parse(resultsArray).id;
     auth = true;
-    chrome.runtime.sendMessage({'newIconPath': 'icons/icon.png'});
+    setIcon()
+    // chrome.runtime.sendMessage({'newIconPath': 'icons/icon.png'});
 }
 
 chrome.browserAction.onClicked.addListener(async function (tab) {
 
     if (!auth) {
-        chrome.tabs.create({url: 'https://learned.space'}, function (tab) {
-            chrome.tabs.executeScript(tab.id, {
-                code: 'localStorage.getItem("user")'
-            }, receiveText);
-        });
-    } else {
+
+        if (tab.url.startsWith('https://learned.space')) {
+            getLocalStorageUser(tab)
+
+        } else
+            chrome.tabs.create({url: 'https://learned.space'}, function (tab) {
+                getLocalStorageUser(tab)
+            });
+
+    } else
         try {
             await addUrl(tab, userId);
         } catch (e) {
         }
-    }
-
-    // notification('', 'Login', userId); //TODO
 });
+
+function getLocalStorageUser(tab) {
+    chrome.tabs.executeScript(tab.id, {code: 'localStorage.getItem("user")'}, receiveText);
+}
+
+function setIcon() {
+    chrome.browserAction.setIcon({
+        path: './icons/icon.png',
+    });
+}

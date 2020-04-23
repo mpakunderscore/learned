@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "learned.space",
     "description": "",
-    "version": "0.3",
+    "version": "0.4",
     "background": {
         "scripts": [
             "js/api.js",
@@ -15,8 +15,7 @@
         "128": "icons/icon.png"
     },
     "browser_action": {
-        "default_icon": "icons/red.png",
-        "main_icon": "icons/icon.png",
+        "default_icon": "icons/gray.png",
         "default_title": "Save page"
     },
     "permissions": [
