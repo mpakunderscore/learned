@@ -24,7 +24,12 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
     for (let i = 0; i < 1; i++) {
         html += '' +
             '<div class="link recommended">' +
-            '<a href="">Recommended link on edge</a>' +
+                '<a href="/recommended" target="_blank" title="Recommended">Recommended link on edge</a>' +
+                '<div><span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
+                '<span>' + 0 + '</span>' +
+                '<span>/</span>' +
+                '<span>' + 0 + '</span>' +
+                '<span title="Delete link" onclick="deleteLink(this)">✕</span></div>' +
             '</div>';
     }
 
@@ -43,15 +48,12 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
             let url = links[i].url;
             html += '' +
                 '<div class="link">' +
-                '<a href="' + url + '" target="_blank" title="' + url + '">' +
-                links[i].title +
-                '</a>' +
-                '<span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
-
-                '<span>' + links[i].textLength + '</span>' +
-                '<span>/</span>' +
-                '<span>' + links[i].wordsLength + '</span>' +
-                '<span title="Delete link" onclick="deleteLink(this)">✕</span>' +
+                    '<a href="' + url + '" target="_blank" title="' + url + '">' + links[i].title + '</a>' +
+                    '<div><span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
+                    '<span>' + links[i].textLength + '</span>' +
+                    '<span>/</span>' +
+                    '<span>' + links[i].wordsLength + '</span>' +
+                    '<span title="Delete link" onclick="deleteLink(this)">✕</span></div>' +
                 '</div>';
 
         }

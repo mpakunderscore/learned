@@ -60,3 +60,28 @@
     display: flex;
     justify-content: space-between;
 }
+
+.link {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    /*flex-direction: row;*/
+    /*background-color: rgba(255, 0, 0, 0.24);*/
+    /*box-sizing: border-box;*/
+    /*overflow: scroll;*/
+
+    box-sizing: border-box;
+}
+
+.link a {
+
+    white-space: nowrap;
+    overflow: hidden;
+    position: relative;
+    width: 70%;
+    /*overflow: hidden;*/
+
+    /*box-sizing: border-box;*/
+}
