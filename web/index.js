@@ -53,7 +53,7 @@ const linkClick = async (url) => {
 
 const deleteLink = async (element) => {
     // element.parentNode.classList.add('remove')
-    await get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.firstChild.getAttribute('href'));
+    await get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.parentNode.firstChild.getAttribute('href'));
     await renderMine()
 };
 
@@ -61,7 +61,7 @@ let topCategories = ['Main topic classifications', 'Wikipedia categories', 'Disa
 
 const crawlMineLink = async (element) => {
     clearGraph(menu.mine)
-    get('/crawl/graph?url=' + element.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true').then(response => {
+    get('/crawl/graph?url=' + element.parentNode.parentNode.firstChild.getAttribute('href') + '&graph=true&short=true').then(response => {
 
         console.log(response)
 
