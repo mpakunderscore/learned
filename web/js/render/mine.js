@@ -13,8 +13,8 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
 
     html += '<div><span class="text">sort:</span>' +
         '<span class="button" onclick="renderMine(true, this.filter, \'title\')">title</span>/' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">time</span>/' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">complexity</span>/' +
+        '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">length</span>/' +
+        '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">words</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'url\')">source</span></div>';
 
     html += '<div id=""><span class="text">filter:</span>' +
@@ -25,11 +25,10 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
         html += '' +
             '<div class="link recommended">' +
                 '<a href="/recommended" target="_blank" title="Recommended">Recommended link on edge</a>' +
-                '<div><span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
-                '<span>' + 0 + '</span>' +
-                '<span>/</span>' +
-                '<span>' + 0 + '</span>' +
-                '<span title="Delete link" onclick="deleteLink(this)">✕</span></div>' +
+                '<div><span title="Link graph" onclick="crawlMineLink(this)" class="button">G</span>' +
+                '<span class="button">' + 0 + '</span>' +
+                '<span class="button">' + 0 + '</span>' +
+                '<span title="Delete link" onclick="deleteLink(this)" class="button">✕</span></div>' +
             '</div>';
     }
 
@@ -49,11 +48,10 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
             html += '' +
                 '<div class="link">' +
                     '<a href="' + url + '" target="_blank" title="' + url + '">' + (links[i].title ? links[i].title : links[i].url) + '</a>' +
-                    '<div><span title="Link graph" onclick="crawlMineLink(this)">G</span>' +
-                    '<span>' + links[i].textLength + '</span>' +
-                    '<span>/</span>' +
-                    '<span>' + links[i].wordsLength + '</span>' +
-                    '<span title="Delete link" onclick="deleteLink(this)">✕</span></div>' +
+                    '<div><span title="Link graph" onclick="crawlMineLink(this)" class="button">G</span>' +
+                    '<span class="button">' + Math.round(links[i].textLength/1000) + '</span>' +
+                    '<span class="button">' + Math.round(links[i].wordsLength/1000) + '</span>' +
+                    '<span title="Delete link" onclick="deleteLink(this)"class="button">✕</span></div>' +
                 '</div>';
 
         }

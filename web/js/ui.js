@@ -132,11 +132,11 @@ function initServiceInfo(card = () => {}) {
     setText('This is a links management system. Like pocket, evernote, history or bookmarks in chrome, notepad or even paper. But, little bit different. Development in progress and there is a <a href="/blog">/blog</a> about it. Either you may message me via input below.')
     setText('And, maybe list of links is not a big value? Even if you did collect something special and build graph navigation on top of it for easy use. Most of links you will read only once, and there is something more. Something you may read.. not because you did save similar article. But because you will get a new words for your head. New meanings, ideas, thoughts or even friends with similar interests.')
     setText('We need two things for this.')
-    setText('First - the edge of a data in your knowledge. It\'s a personal information and things like this does not belong to anyone, except you. So, there is only random UUID for you and if you want to add email to this account, it will be stored encrypted.')
-    setText('There is several sources of data to predict edge:')
-    setText('1. <a href="/chrome/learned.space.zip" target="_blank">Chrome Extension</a> - save links that change you')
+    setText('First - the edge of your knowledge. It\'s a personal information and things like this does not belong to anyone, except you. So, there is only random UUID for you and if you want to <span class="button simple" onclick="addEmail()">add email</span> to this account, it will be stored encrypted.')
+    setText('There is several methods to build the edge:')
+    setText('1. <a href="/chrome/learned.space.zip" target="_blank">Chrome extension</a> - save links that educate you')
     setText('2. Import your <a href="/chrome/bookmarks">Bookmarks</a> or <a href="/chrome/history">History</a> - there is will be no bindings to your identity')
-    setText('3. Talk to me. I will build abstract model of you to handle process..')
+    setText('3. Talk to me')
     renderText('And second. You need to surf the edge and keep things going. Hey?');
     // renderText('');
     // setText('')
