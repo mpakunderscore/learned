@@ -29,7 +29,7 @@ if (window.location.href.endsWith('/coronavirus/')) {
 
 
     setPath('/coronavirus');
-    renderText('Wash your hands!');
+    setText('Wash your hands!');
     get('/coronavirus/graph').then(response => {
         let coronavirusNode = {id: 'Coronavirus'};
         clearGraph(coronavirusNode);

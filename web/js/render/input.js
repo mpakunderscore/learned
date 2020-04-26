@@ -24,6 +24,24 @@ function initInput() {
                 linkClick(value).then(() => {
                     renderMine(false).then()
                 })
+            else
+                sendMessage(value).then(() => {
+                    // renderMine(false).then()
+                })
         }
     });
+
+    input.addEventListener('focusin', function (event) {
+        clearContent()
+        showChat();
+    })
+
+    input.addEventListener('focusout', function (event) {
+        clearContent()
+        initServiceInfo();
+    })
+}
+
+function showChat() {
+    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
 }

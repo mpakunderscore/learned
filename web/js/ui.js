@@ -39,7 +39,7 @@ border.ontouchstart = () => {
 };
 
 if (isMobile) {
-    renderText('NO MOBILE, WILL BE 0.5')
+    setText('NO MOBILE, WILL BE 0.5')
 }
 
 document.onload = () => {
@@ -137,7 +137,7 @@ function initServiceInfo(card = () => {}) {
     setText('1. <a href="/chrome/learned.space.zip" target="_blank">Chrome extension</a> - save links that educate you')
     setText('2. Import your <a href="/chrome/bookmarks">Bookmarks</a> or <a href="/chrome/history">History</a> - there is will be no bindings to your identity')
     setText('3. Talk to me')
-    renderText('And second. You need to surf the edge and keep things going. Hey?');
+    setText('And second. You need to surf the edge and keep things going. Hey?');
     // renderText('');
     // setText('')
     // setText('')

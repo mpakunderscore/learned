@@ -21,7 +21,7 @@ let sorter;
 function clickHome() {
     clearContent();
     initServiceInfo();
-    renderText('You are back now')
+    // renderText('You are back now')
 }
 
 
