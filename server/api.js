@@ -92,6 +92,16 @@ exports.init = (app) => {
         response.json(links);
     });
 
+    // send message by user
+    app.get(prefix + '/user/message/send', async function (request, response) {
+        // let links = await worker.getTokensGraph(await worker.getUserTokens(request.query.userid));
+        // response.json(links);
+        console.log(request.query.userid)
+        console.log(request.query.text)
+    });
+
+
+
 
 
 

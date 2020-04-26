@@ -18,6 +18,9 @@ class Word extends Model {
 class Category extends Model {
 }
 
+class Message extends Model {
+}
+
 module.exports = {
     User,
     Link,
@@ -120,3 +123,14 @@ Category.init({
     },
 
 }, {sequelize, modelName: 'category', timestamps: false});
+
+Message.init({
+    userid: {
+        type: DataTypes.STRING,
+    },
+    text: {
+        type: DataTypes.STRING,
+        allowNull: false
+    }
+
+}, {sequelize, modelName: 'message', timestamps: true});
