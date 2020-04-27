@@ -5,7 +5,7 @@ function setText(text, className) {
 
     if (className)
         message.classList.add(className)
-    
+
     message.innerHTML = text;
 }
 
@@ -62,4 +62,11 @@ function addLink (url, title) {
 
 
     // link.innerText = title;
+}
+
+function showChat() {
+    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
+    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
+    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
+    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
 }

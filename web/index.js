@@ -51,11 +51,6 @@ const linkClick = async (url) => {
     console.log(response);
 };
 
-const sendMessage = async (text) => {
-    const response = await get('/user/message/send?userid=' + user.id + '&text=' + text);
-    console.log(response);
-}
-
 const deleteLink = async (element) => {
     // element.parentNode.classList.add('remove')
     await get('/user/link/delete?userid=' + user.id + '&url=' + element.parentNode.parentNode.firstChild.getAttribute('href'));
@@ -77,6 +72,21 @@ const crawlMineLink = async (element) => {
 
     });
 };
+
+const sendMessage = async (text) => {
+    const response = await get('/user/message/send?userid=' + user.id + '&text=' + text);
+    console.log(response);
+}
+
+const getMessages = async (text) => {
+    const response = await get('/user/messages?userid=' + user.id + '&text=' + text);
+    console.log(response);
+}
+
+
+
+
+
 
 // Only chrome mobile
 const share = () => {

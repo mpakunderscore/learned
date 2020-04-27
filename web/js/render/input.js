@@ -41,10 +41,3 @@ function initInput() {
         initServiceInfo();
     })
 }
-
-function showChat() {
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
-}
