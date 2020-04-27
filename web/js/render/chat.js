@@ -2,8 +2,10 @@ function setText(text, className) {
     let message = document.createElement('div');
     message.classList.add('message')
     contentList.append(message)
+
     if (className)
         message.classList.add(className)
+    
     message.innerHTML = text;
 }
 
