@@ -26,7 +26,8 @@ module.exports = {
     Link,
     UserLink,
     Word,
-    Category
+    Category,
+    Message
 }
 
 User.init({

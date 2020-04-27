@@ -243,7 +243,19 @@ exports.getCategories = async () => {
     return categories;
 };
 
-// Get user
+// List of messages
+
+exports.getMessages = async (userid) => {
+    let messages = await models.Message.findAll();
+    return messages;
+}
+
+// Create message
+
+exports.sendMessage = async (userid, text) => {
+    let message = await models.Message.create({userid: userid, text: text});
+    return message;
+}
 
 exports.getStatistics = async () => {
     let statistics = {};
