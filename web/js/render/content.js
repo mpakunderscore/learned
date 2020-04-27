@@ -5,6 +5,8 @@ let title = '';
 
 function setContent(renderPages = true, title = this.title, mainPage = this.mainPage, pages = this.pages, categories = this.categories) {
 
+    headerActive(false)
+
     this.title = title;
     this.mainPage = mainPage;
     this.pages = pages;
@@ -81,6 +83,15 @@ function addLink (url, title) {
 function goBack() {
     clickHome();
     setPath('/');
-    document.getElementById('content-head').classList.add('active');
+    headerActive(true)
+}
 
+function headerActive(active) {
+
+    if (active)
+        document.getElementById('content-head').classList.add('active');
+    else
+        document.getElementById('content-head').classList.remove('active');
+
+    console.log(active)
 }

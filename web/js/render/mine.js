@@ -1,5 +1,6 @@
-
 async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
+
+    headerActive(false)
 
     this.filter = filter;
     this.sorter = sorter;
