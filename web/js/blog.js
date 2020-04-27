@@ -42,6 +42,11 @@ let blog = [
         text: 'This system firstly have to manage incoming links, not steering through existing "treasures". We have to create working links flows from users, even if there is no value to store links outside of bookmarks. Useful navigation not a big deal, you need something way bigger to enchant the learning process. Developing the habit of reading more, discovering a new words on wikipedia, or just doing it regularly.' +
             '<br/><br/>' +
             'I do freeze development of UI and categories graph structure to concentrate on UX and the way to get first small amount of users tied to system somehow.'
+    },
+    {
+        author: 'mpak_',
+        title: '<b>GPT-2</b>',
+        date: '27.04.2020',
+        text: 'Boring part is over. Time to play some ML.'
     }
-
 ]
