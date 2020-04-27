@@ -3,8 +3,14 @@ if (window.location.href.includes('localhost')) {
     document.title = ''
 }
 
+let path = ''
+
 let setPath = (path) => {
+    this.path = path;
+    console.log(this.path)
     history.pushState({}, null, path);
+    // if (path !== '/chat')
+
 };
 
 if (window.location.href.endsWith('/demo/')) {

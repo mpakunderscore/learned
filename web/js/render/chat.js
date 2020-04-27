@@ -1,6 +1,16 @@
 let messages = [];
 
 async function showChat() {
+
+    // console.log('showChat')
+    // console.log(this.path)
+    if (this.path === '/chat') {
+        updateChat().then()
+        return;
+    }
+
+    document.getElementById('content-head').style.background = 'rgba(22, 185, 231, 0.1)'
+
     input.focus()
     clearContent()
     setPath('/chat');
@@ -12,10 +22,14 @@ async function showChat() {
             // console.log(messages[i].text)
             setChatRow(messages[i])
         }
+        // setText('<div class="row"><span>v0.4.3</span><span>23.04.2020</span></div>', 'info');
     });
 }
 
 async function updateChat() {
+
+    console.log('updateChat')
+
     getMessages().then(messages => {
         this.messages = messages;
         for (let i = 0; i < messages.length; i++) {

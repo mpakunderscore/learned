@@ -1,7 +1,11 @@
 #content {
+    /*position: relative;*/
+    /*overflow: scroll;*/
     background-color: white;
     display: flex;
     flex-direction: column;
+
+    min-width: 150px;
 
     z-index: 2;
 
@@ -85,3 +89,15 @@
 
     /*box-sizing: border-box;*/
 }
+
+#content-head {
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: 100%;*/
+    padding: 10px;
+    /*background: rgba(22, 185, 231, 0.1);*/
+    background: var(--color-blue);
+    cursor: pointer;
+}
+
+#content-head

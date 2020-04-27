@@ -1,13 +1,13 @@
-let input = document.getElementById('main-input');
+let input = document.getElementById('content-input');
 
 function initInput() {
 
-    input.id = 'main-input';
+    input.id = 'content-input';
     input.type = 'text';
     input.autocomplete = 'off';
-    input.placeholder = 'Link input, search or message';
-    // content.innerHTML = '<input id="main-input" autocomplete="off" placeholder="Link, message or search"/>';
-    // let input = document.getElementById('main-input');
+    input.placeholder = 'Link, search or message';
+    // content.innerHTML = '<input id="content-input" autocomplete="off" placeholder="Link, message or search"/>';
+    // let input = document.getElementById('content-input');
 
     // console.log(input)
     // input.value = 'test';
@@ -38,11 +38,11 @@ function initInput() {
 
     input.addEventListener('focusout', function (event) {
 
-        console.log(event)
-
-        setPath('/');
-        clearContent();
-        initServiceInfo();
+        // console.log(event)
+        //
+        // setPath('/');
+        // clearContent();
+        // initServiceInfo();
     })
 
     // graph.addEventListener('onclick', function (event) {

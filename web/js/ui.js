@@ -128,7 +128,7 @@ let zoom = () => {
 
 function initServiceInfo(card = () => {}) {
 
-    setText('<div class="row"><span>v0.4.3</span><span>23.04.2020</span></div>', 'info');
+    // setText('<div class="row"><span>v0.4.3</span><span>23.04.2020</span></div>', 'info');
     setText('This is a links management system. Like pocket, evernote, history or bookmarks in chrome, notepad or even paper. But, little bit different. Development in progress and there is a <a href="/blog">/blog</a> about it. Either you may message me via input below.')
     setText('And, maybe list of links is not a big value? Even if you did collect something special and build graph navigation on top of it for easy use. Most of links you will read only once, and there is something more. Something you may read.. not because you did save similar article. But because you will get a new words for your head. New meanings, ideas, thoughts or even friends with similar interests.')
     setText('We need two things for this.')
