@@ -1,6 +1,7 @@
+let input = document.getElementById('main-input');
+
 function initInput() {
 
-    let input = document.getElementById('main-input');
     input.id = 'main-input';
     input.type = 'text';
     input.autocomplete = 'off';
@@ -36,8 +37,17 @@ function initInput() {
     })
 
     input.addEventListener('focusout', function (event) {
+
+        console.log(event)
+
         setPath('/');
         clearContent();
         initServiceInfo();
     })
+
+    // graph.addEventListener('onclick', function (event) {
+    //     setPath('/');
+    //     clearContent();
+    //     initServiceInfo();
+    // })
 }

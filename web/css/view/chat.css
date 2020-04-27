@@ -1,3 +1,17 @@
+.message {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .message:nth-child(2n) {
     /*background-color: ghostwhite;*/
+}
+
+.delete-message {
+    opacity: 0;
+}
+
+.delete-message:hover {
+    opacity: 1;
 }

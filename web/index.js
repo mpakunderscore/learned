@@ -15,7 +15,7 @@ const getUser = async () => {
 const getUserLinks = async () => {
     const userLinks = await get('/user/links?userid=' + user.id);
     user.links = userLinks;
-    console.log(userLinks);
+    // console.log(userLinks);
     document.getElementById('links-count').innerHTML = user.links.length;
 };
 
@@ -75,12 +75,12 @@ const crawlMineLink = async (element) => {
 
 const sendMessage = async (text) => {
     const response = await get('/user/message/send?userid=' + user.id + '&text=' + text);
-    console.log(response);
+    // console.log(response);
 }
 
-const getMessages = async (text) => {
-    const response = await get('/user/messages?userid=' + user.id + '&text=' + text);
-    console.log(response);
+const getMessages = async () => {
+    const messages = await get('/user/messages?userid=' + user.id);
+    return messages;
 }
 
 

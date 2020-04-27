@@ -1,7 +1,5 @@
-// let express = require('express');
-// let router = express.Router();
+let express = require('express');
 
-// const utils = require('./utils');
 const crawler = require('./crawler/crawler');
 const wiki = require('./crawler/wiki');
 const database = require('./database/postgres');
@@ -15,7 +13,12 @@ const prefix = '/api';
 
 exports.status = 'off';
 
+function initStatic(app) {
+}
+
 exports.init = (app) => {
+
+    initStatic(app)
 
     // get url
     app.get(prefix + '/crawl', async function (request, response) {

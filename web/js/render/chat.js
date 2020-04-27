@@ -1,11 +1,12 @@
 let messages = [];
 
 async function showChat() {
+    input.focus()
     clearContent()
     setPath('/chat');
     getMessages().then(messages => {
         this.messages = messages;
-        console.log(messages)
+        // console.log(messages)
         for (let i = 0; i < messages.length; i++) {
             // console.log(messages[i].userid)
             // console.log(messages[i].text)
@@ -20,7 +21,7 @@ async function updateChat() {
         for (let i = 0; i < messages.length; i++) {
             // console.log(messages[i].userid)
             if (!document.getElementById('chat-' + messages[i].id)) {
-                console.log('messages[i].id')
+                // console.log('messages[i].id')
                 setChatRow(messages[i])
             }
         }
@@ -28,10 +29,11 @@ async function updateChat() {
 }
 
 function setChatRow(message, className) {
-    console.log(message)
+    // console.log(message)
     let messageRow = document.createElement('div');
     messageRow.id = 'chat-' + message.id;
     messageRow.classList.add('message')
+    messageRow.classList.add('noselect')
     contentList.prepend(messageRow)
 
     if (className)
@@ -39,16 +41,24 @@ function setChatRow(message, className) {
 
     const date = new Date(message.createdAt);
 
+    const hours = date.getHours()
+    const minutes = date.getMinutes()
+
+        // .addEventListener('focusout', function (event) {
+
+        // })
+
     messageRow.innerHTML = '<div>' +
-        '<span class="username">' + message.userid.substring(0, 4) + ': </span>' +
+        '<span class="username button simple text">' + message.userid.substring(0, 4) + ': </span>' +
         '<span class="">' + message.text + '</span>' +
         '</div>' +
         '<div>' +
-        '<span onclick="deleteMessage()" class="button delete-message">✕</span>' +
-        '<span>' + date.getHours() + ':' + date.getMinutes() + '</span>' +
+        '<span onmousedown="deleteMessage()" class="button delete-message">✕</span>' +
+        '<span class="text">' + (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes + '</span>' +
         '</div>';
 }
 
 function deleteMessage() {
-
+    showChat().then();
+    // event.stopPropagation()
 }

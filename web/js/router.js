@@ -59,5 +59,5 @@ if (window.location.href.endsWith('/blog/')) {
 if (window.location.href.endsWith('/chat/')) {
     clearContent();
     setPath('/chat');
-    document.getElementById('main-input').focus()
+    input.focus()
 }
