@@ -26,18 +26,18 @@ function initInput() {
                 })
             else
                 sendMessage(value).then(() => {
-                    // renderMine(false).then()
+                    updateChat().then();
                 })
         }
     });
 
     input.addEventListener('focusin', function (event) {
-        clearContent()
-        showChat();
+        showChat().then();
     })
 
     input.addEventListener('focusout', function (event) {
-        clearContent()
+        setPath('/');
+        clearContent();
         initServiceInfo();
     })
 }

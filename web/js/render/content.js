@@ -37,9 +37,9 @@ function renderHelpRow(pagesLength, categoriesLength) {
     return '' +
         '<div class="help-row">' +
         '<div><span class="text">sort:</span>' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'title\')">title</span>/' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">time</span>/' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">complexity</span>/' +
+        '<span class="button" onclick="renderMine(true, this.filter, \'title\')">name</span>/' +
+        '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">length</span>/' +
+        '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">words</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'url\')">source</span></div>' +
         '<div><span onclick="showPages()" class="button">Pages: ' + pagesLength + '</span>/<span onclick="showCategories()" class="button">Categories: ' + categoriesLength + '</span></div>' +
         '</div>';
@@ -51,4 +51,29 @@ function showPages() {
 
 function showCategories() {
     setContent(false)
+}
+
+function setText(text, className) {
+    let contentTextRow = document.createElement('div');
+    // contentTextRow.classList.add('message')
+    contentList.append(contentTextRow)
+
+    if (className)
+        contentTextRow.classList.add(className)
+
+    contentTextRow.innerHTML = text;
+}
+
+function addLink (url, title) {
+    let link = document.createElement('div');
+    contentList.append(link)
+
+    let a = document.createElement('a');
+    a.href = url;
+    a.innerText = title;
+    a.target = '_blank';
+    link.append(a);
+
+
+    // link.innerText = title;
 }

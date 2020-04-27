@@ -55,3 +55,9 @@ if (window.location.href.endsWith('/blog/')) {
         setText('<span>' + blog[i].author + '</span><span>' + blog[i].date + '</span>', 'footer');
     }
 }
+
+if (window.location.href.endsWith('/chat/')) {
+    clearContent();
+    setPath('/chat');
+    document.getElementById('main-input').focus()
+}

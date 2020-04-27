@@ -1,72 +1,54 @@
-function setText(text, className) {
-    let message = document.createElement('div');
-    message.classList.add('message')
-    contentList.append(message)
+let messages = [];
+
+async function showChat() {
+    clearContent()
+    setPath('/chat');
+    getMessages().then(messages => {
+        this.messages = messages;
+        console.log(messages)
+        for (let i = 0; i < messages.length; i++) {
+            // console.log(messages[i].userid)
+            // console.log(messages[i].text)
+            setChatRow(messages[i])
+        }
+    });
+}
+
+async function updateChat() {
+    getMessages().then(messages => {
+        this.messages = messages;
+        for (let i = 0; i < messages.length; i++) {
+            // console.log(messages[i].userid)
+            if (!document.getElementById('chat-' + messages[i].id)) {
+                console.log('messages[i].id')
+                setChatRow(messages[i])
+            }
+        }
+    });
+}
+
+function setChatRow(message, className) {
+    console.log(message)
+    let messageRow = document.createElement('div');
+    messageRow.id = 'chat-' + message.id;
+    messageRow.classList.add('message')
+    contentList.prepend(messageRow)
 
     if (className)
         message.classList.add(className)
 
-    message.innerHTML = text;
+    const date = new Date(message.createdAt);
+
+    messageRow.innerHTML = '<div>' +
+        '<span class="username">' + message.userid.substring(0, 4) + ': </span>' +
+        '<span class="">' + message.text + '</span>' +
+        '</div>' +
+        '<div>' +
+        '<span onclick="deleteMessage()" class="button delete-message">✕</span>' +
+        '<span>' + date.getHours() + ':' + date.getMinutes() + '</span>' +
+        '</div>';
 }
 
-function renderText(text, next) {
+function deleteMessage() {
 
-    console.log(text)
-    const timeout = 30;
-    // const timeout = 0;
-
-    // return;
-
-    let message = document.createElement('div');
-    contentList.append(message)
-
-    // let iterator = 0;
-    // let dotCount = 1;
-    let i = 0;
-    // let text = text
-
-    let interval = setInterval(function () {
-
-        // message.innerText = '.'.repeat(dotCount++)
-
-        // if (dotCount >= 4)
-        //     dotCount = 1;
-
-        message.innerHTML = generatedWord(text, i);
-
-        i++;
-
-        if (i > text.length) {
-            clearInterval(interval)
-        }
-
-
-        // console.log(i)
-
-    }, timeout);
-}
-
-function generatedWord(text, i) {
-    return text.substring(0, i);
-}
-
-function addLink (url, title) {
-    let link = document.createElement('div');
-    contentList.append(link)
-
-    let a = document.createElement('a');
-    a.href = url;
-    a.innerText = title;
-    a.target = '_blank';
-    link.append(a);
-
-
-    // link.innerText = title;
-}
-
-function showChat() {
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
-    setText('@fox471: And second. You need to surf the edge and keep things going. Hey?')
 }

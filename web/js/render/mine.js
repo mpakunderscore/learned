@@ -12,7 +12,7 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
     // html += '<div><span class="button simple" onclick="selectMain()">Back to main page</span></div>';
 
     html += '<div><span class="text">sort:</span>' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'title\')">title</span>/' +
+        '<span class="button" onclick="renderMine(true, this.filter, \'title\')">name</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">length</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">words</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'url\')">source</span></div>';
