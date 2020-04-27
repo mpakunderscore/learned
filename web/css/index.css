@@ -88,6 +88,11 @@ span.button {
     margin: 0 5px;
 }
 
+label.button {
+    cursor: pointer;
+    color: var(--color-gray)
+}
+
 span.button.simple {
     margin: 0;
 }

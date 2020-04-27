@@ -79,7 +79,8 @@ function addLink (url, title) {
 }
 
 function goBack() {
+    clickHome();
+    setPath('/');
     document.getElementById('content-head').classList.add('active');
-    setContent()
 
 }
