@@ -34,6 +34,7 @@ function initInput() {
 
     input.addEventListener('focusin', function (event) {
         showChat().then();
+        document.getElementById('content-head').classList.remove('active');
     })
 
     input.addEventListener('focusout', function (event) {

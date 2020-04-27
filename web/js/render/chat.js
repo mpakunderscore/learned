@@ -9,8 +9,6 @@ async function showChat() {
         return;
     }
 
-    document.getElementById('content-head').style.background = 'rgba(22, 185, 231, 0.1)'
-
     input.focus()
     clearContent()
     setPath('/chat');

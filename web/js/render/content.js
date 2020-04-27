@@ -77,3 +77,9 @@ function addLink (url, title) {
 
     // link.innerText = title;
 }
+
+function goBack() {
+    document.getElementById('content-head').classList.add('active');
+    setContent()
+
+}

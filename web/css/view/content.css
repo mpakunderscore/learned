@@ -95,9 +95,11 @@
     /*top: 0;*/
     /*width: 100%;*/
     padding: 10px;
-    /*background: rgba(22, 185, 231, 0.1);*/
-    background: var(--color-blue);
+
+    background: rgba(22, 185, 231, 0.1);
     cursor: pointer;
 }
 
-#content-head
+#content-head.active {
+    background: var(--color-blue);
+}
