@@ -43,7 +43,7 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
     }
 
     if (links)
-        for (let i = 0; i < links.length; i++) {
+        for (let i = links.length - 1; i >= 0; i--) {
 
             let url = links[i].url;
             html += '' +
