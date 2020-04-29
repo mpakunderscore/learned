@@ -16,7 +16,7 @@ let setPath = (path) => {
 if (window.location.href.endsWith('/demo/')) {
     clearContent();
     setPath('/demo');
-    get('/demo/graph').then(response => {
+    get('/demo').then(response => {
         let demo = {id: 'Demo'}
         clearGraph(demo);
         if (response.graph['Y Combinator (company)']) {
@@ -36,7 +36,7 @@ if (window.location.href.endsWith('/coronavirus/')) {
 
     setPath('/coronavirus');
     setText('Wash your hands!');
-    get('/coronavirus/graph').then(response => {
+    get('/coronavirus').then(response => {
         let coronavirusNode = {id: 'Coronavirus'};
         clearGraph(coronavirusNode);
         renderSimpleCustomGraph(response.graph, coronavirusNode, '2019–20 coronavirus pandemic');

@@ -211,15 +211,15 @@ exports.init = (app) => {
     });
 
     // TODO demo
-    app.get(prefix + '/demo/graph', async function (request, response) {
-        let demoGraph = {'Y Combinator (company)': {count: 3, subcategories: ['Y Combinator companies', 'Y Combinator people'], active: false},
-                        'Y Combinator people': {count: 2, subcategories: []},
-                        'Y Combinator companies': {count: 2, subcategories: []}
+    app.get(prefix + '/demo', async function (request, response) {
+        let demoGraph = {'Chat': {count: 3, subcategories: ['Y Combinator companies', 'Y Combinator people'], active: false},
+                        'Incoming links': {count: 2, subcategories: []},
+                        'Reading process': {count: 2, subcategories: []}
                         };
         response.json({graph: demoGraph});
     });
 
-    app.get(prefix + '/coronavirus/graph', async function (request, response) {
+    app.get(prefix + '/coronavirus', async function (request, response) {
         let demoGraph = {'2019–20 coronavirus pandemic': {count: 3, subcategories: []}};
         response.json({graph: demoGraph});
     });
