@@ -104,6 +104,14 @@ exports.init = (app) => {
     });
 
     // send message by user
+    app.get(prefix + '/user/message/delete', async function (request, response) {
+        // let links = await worker.getTokensGraph(await worker.getUserTokens(request.query.userid));
+        response.json(await database.deleteMessage(request.query.userid, request.query.id));
+        // console.log(request.query.userid)
+        // console.log(request.query.text)
+    });
+
+    // send message by user
     app.get(prefix + '/user/messages', async function (request, response) {
         let messages = await database.getMessages(request.query.userid);
         response.json(messages);

@@ -14,16 +14,16 @@ let setPath = (path) => {
 };
 
 if (window.location.href.endsWith('/demo/')) {
-    clearContent();
+    // clearContent();
     setPath('/demo');
-    get('/demo').then(response => {
-        let demo = {id: 'Demo'}
-        clearGraph(demo);
-        if (response.graph['Y Combinator (company)']) {
-            renderSimpleCustomGraph(response.graph, demo, 'Y Combinator (company)');
-            initGraph();
-        }
-    });
+    // get('/demo').then(response => {
+    //     let demo = {id: 'Demo'}
+    //     clearGraph(demo);
+    //     if (response.graph['Y Combinator (company)']) {
+    //         renderSimpleCustomGraph(response.graph, demo, 'Y Combinator (company)');
+    //         initGraph();
+    //     }
+    // });
 }
 
 if (window.location.href.endsWith('/coronavirus/')) {

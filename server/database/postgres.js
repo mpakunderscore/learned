@@ -257,6 +257,13 @@ exports.sendMessage = async (userid, text) => {
     return message;
 }
 
+// Create message
+
+exports.deleteMessage = async (id) => {
+    await models.Message.destroy({where: {id: id}})
+    return true;
+}
+
 exports.getStatistics = async () => {
     let statistics = {};
     statistics.words = await models.Word.count()

@@ -162,3 +162,8 @@ span.button:hover {
 /*    background-color: var(--color-red-dark);*/
 /*    transform: rotate(15deg);*/
 /*}*/
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
