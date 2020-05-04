@@ -4,14 +4,17 @@ async function showChat() {
 
     // console.log('showChat')
     // console.log(this.path)
-    if (this.path === '/chat') {
+    if (this.path === '/chat' || this.path === '/demo') {
         updateChat().then()
         return;
     }
 
+    if (this.path !== '/demo') {
+        setPath('/chat');
+    }
+
     input.focus()
     clearContent()
-    setPath('/chat');
     getMessages().then(messages => {
         this.messages = messages;
         // console.log(messages)

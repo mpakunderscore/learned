@@ -4,5 +4,5 @@ main {
 
 #content.demo {
     /*background-color: rebeccapurple !important;*/
-    width: 420px;
+    width: 420px !important;
 }

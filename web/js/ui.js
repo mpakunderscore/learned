@@ -21,7 +21,7 @@ initInput();
 initServiceInfo(() => renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have NN for chatbot and one more for recommendations. But for now, we need to complete the normal UI and graph structure.'));
 
 const graph = document.getElementById('graph');
-const border = document.getElementById('border');
+const border = document.getElementById('border') || {};
 
 
 // const content = document.getElementById('content');

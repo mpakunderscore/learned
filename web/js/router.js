@@ -16,6 +16,7 @@ let setPath = (path) => {
 if (window.location.href.endsWith('/demo/')) {
     // clearContent();
     setPath('/demo');
+    showChat().then()
     // get('/demo').then(response => {
     //     let demo = {id: 'Demo'}
     //     clearGraph(demo);
