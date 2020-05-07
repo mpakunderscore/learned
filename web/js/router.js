@@ -68,3 +68,8 @@ if (window.location.href.endsWith('/chat/')) {
     setPath('/chat');
     input.focus()
 }
+
+if (window.location.href.endsWith('/tasks/')) {
+    clearContent();
+    setPath('/tasks');
+}
