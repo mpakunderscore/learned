@@ -117,7 +117,11 @@ exports.init = (app) => {
         response.json(messages);
     });
 
-
+    // login by user
+    app.get(prefix + '/user/login', async function (request, response) {
+        let user = await database.getUserByEmail(request.query.userid, request.query.email);
+        response.json(user);
+    });
 
 
 

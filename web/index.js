@@ -10,8 +10,25 @@ const getUser = async () => {
     user = await get('/user?' + (user.id ? 'id=' + user.id : ''));
     if (user)
         localStorage.setItem('user', JSON.stringify(user));
-    document.getElementById('userid').innerHTML = user.id;
+
+    document.getElementById('userid').innerHTML = user.email || user.id;
+
+    if (user.email)
+        email.innerText = user.email;
 };
+
+const login = async () => {
+    let email = document.getElementById('email').innerText
+    let userByEmail = await get('/user/login?' + (user.id ? 'userid=' + user.id : '') + '&email=' + email);
+    console.log(userByEmail)
+
+    if (userByEmail.id !== user.id) {
+        localStorage.setItem('user', JSON.stringify(userByEmail));
+        location.reload();
+    }
+
+    closeModal()
+}
 
 const getUserLinks = async () => {
     const userLinks = await get('/user/links?userid=' + user.id);

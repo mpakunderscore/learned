@@ -43,5 +43,5 @@
 .form > div.button:hover {
     box-shadow: var(--box-shadow);
     cursor: pointer;
-    border: 2px solid var(--color-green-dark);
+    /*border: 2px solid var(--color-green-dark);*/
 }

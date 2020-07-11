@@ -46,6 +46,20 @@ exports.getUser = async (id) => {
     return user.toJSON();
 };
 
+//Get user by email
+
+exports.getUserByEmail = async (userid, email) => {
+
+    let user = await models.User.findOne({where: {email: email}});
+
+    if (!user) {
+        user = await models.User.findOne({where: {id: userid}});
+        user.update({email: email});
+    }
+
+    return user.toJSON();
+}
+
 // Get list of users
 
 exports.getUsers = async () => {
@@ -261,7 +275,7 @@ exports.sendMessage = async (userid, text) => {
     return message;
 }
 
-// Create message
+// Delete message
 
 exports.deleteMessage = async (id) => {
     await models.Message.destroy({where: {id: id}})
