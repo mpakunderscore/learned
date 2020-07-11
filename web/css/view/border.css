@@ -10,7 +10,7 @@
 
     transition: width .2s, background-color .2s;
 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow)
 
     /*box-shadow: -5px 0px 7px 0px var(--color-blue-dark);*/
 

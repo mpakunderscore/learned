@@ -1,5 +1,5 @@
 input {
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-main);
     margin: 0;
     border: none;
     background: rgba(22, 185, 231, 0.1);

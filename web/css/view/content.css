@@ -1,7 +1,7 @@
 #content {
     /*position: relative;*/
     /*overflow: scroll;*/
-    background-color: white;
+    background-color: var(--color-white);
     display: flex;
     flex-direction: column;
 
@@ -9,7 +9,7 @@
 
     z-index: 2;
 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow);
 }
 
 #content #content-list {
@@ -19,6 +19,12 @@
 #content #content-list > div {
     padding: 10px;
     /*display: inline;*/
+}
+
+#content #content-list > div.big {
+    padding: 10px;
+    /*display: inline;*/
+    font-size: var(--font-size-big);
 }
 
 #content input {

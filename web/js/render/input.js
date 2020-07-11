@@ -1,11 +1,13 @@
 let input = document.getElementById('content-input');
+let email = document.getElementById('email');
+
 
 function initInput() {
 
     input.id = 'content-input';
     input.type = 'text';
     input.autocomplete = 'off';
-    input.placeholder = 'Link, search or message';
+    input.placeholder = 'Message';
     // content.innerHTML = '<input id="content-input" autocomplete="off" placeholder="Link, message or search"/>';
     // let input = document.getElementById('content-input');
 
@@ -51,4 +53,9 @@ function initInput() {
     //     clearContent();
     //     initServiceInfo();
     // })
+
+    email.addEventListener('focusin', function (event) {
+        email.textContent = ''
+        email.style.textAlign = 'left'
+    })
 }

@@ -1,16 +1,18 @@
 html, body {
     margin: 0;
 
-    --line-height: 16px;
+    /*--line-height: 16px;*/
 
+    /*--font-size-small: 12px;*/
     --font-size-main: 12px;
-    --font-size-small: 12px;
+    --font-size-big: 16px;
 
     /*color: red;*/
 
     --color-black: black;
 
     --color-blue: #16b9e7;
+    --color-bluep-transparent: rgba(22, 185, 231, 0.8);
     --color-blue-dark: #0e7d9c;
 
     --color-green: #00e200;
@@ -31,8 +33,12 @@ html, body {
     --color-white: white;
     --color-gray: #bfbfbf;
     --color-gray-dark: #777;
+    --color-gray-black: #4b4b4b;
 
     --time-delay-main: .2;
+
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    --box-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -116,6 +122,11 @@ span.button:hover {
     bottom: 10px;
 
     color: #adadad;
+    opacity: 0;
+}
+
+#user-menu:hover {
+    opacity: 1;
 }
 
 #user-menu div {
