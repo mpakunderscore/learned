@@ -1,8 +1,12 @@
 #modal {
     position: absolute;
+    top: 0;
     right: 0;
+    bottom: 0;
     width: 33%;
-    height: 100%;
+    overflow: scroll;
+
+    /*height: 100%;*/
 
     /*font-weight: 600;*/
 
@@ -30,7 +34,7 @@
 #modal div.modal-title {
     font-size: 26px;
     font-weight: bold;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 
     /*margin-bottom: 20px;*/
 
@@ -61,5 +65,5 @@
 }
 
 .hide {
-    display: none;
+    display: none !important;
 }
