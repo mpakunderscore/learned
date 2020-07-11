@@ -48,5 +48,11 @@ let blog = [
         title: '<b>GPT-2</b>',
         date: '27.04.2020',
         text: 'Boring part is over. Time to play some ML.'
+    },
+    {
+        author: 'mpak_',
+        title: '<b>Sources</b>',
+        date: '10.07.2020',
+        text: '<br/>'
     }
 ]

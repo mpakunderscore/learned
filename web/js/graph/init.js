@@ -26,6 +26,9 @@ let initMenu = () => {
 
     menu.mine = menuItem({id: 'Mine'});
     menuItem({id: 'Graph'});
+    menuItem({id: 'Sources'});
+
+    // menuItem({id: 'Demo'});
     // menu.settings = menuItem({id: 'Settings', lang: true});
     // menuItem({id: 'Random'});
 };

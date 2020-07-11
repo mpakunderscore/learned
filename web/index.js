@@ -6,6 +6,7 @@ const getUser = async () => {
     try {
         user = await JSON.parse(localStorage['user']);
     } catch (e) {}
+
     user = await get('/user?' + (user.id ? 'id=' + user.id : ''));
     if (user)
         localStorage.setItem('user', JSON.stringify(user));
@@ -20,8 +21,11 @@ const getUserLinks = async () => {
 };
 
 const initUser = async () => {
+    showAnimation()
     await getUser();
     await getUserLinks();
+
+
     // getUserGraph().then();
 };
 

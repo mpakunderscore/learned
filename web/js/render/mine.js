@@ -12,15 +12,16 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
 
     // html += '<div><span class="button simple" onclick="selectMain()">Back to main page</span></div>';
 
-    html += '<div><span class="text">sort:</span>' +
+    html += '<div><span class="text">Sort:</span>' +
         '<span class="button" onclick="renderMine(true, this.filter, \'title\')">name</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">length</span>/' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">words</span>/' +
+        // '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">words</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'url\')">source</span></div>';
 
-    html += '<div id=""><span class="text">filter:</span>' +
-        '<span class="button" onclick="renderMine(true, true)">big</span>/' +
-        '<span class="button" onclick="renderMine(true, false)">all</span></div>';
+    html += '<div id=""><span class="text">Difficulty:</span>' +
+        '<span class="button" onclick="renderMine(true, true)">hard</span>/' +
+        // '<span class="button" onclick="renderMine(true, true)">normal</span>/' +
+        '<span class="button" onclick="renderMine(true, false)">easy</span></div>';
 
     for (let i = 0; i < 1; i++) {
         html += '' +
