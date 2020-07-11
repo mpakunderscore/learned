@@ -29,7 +29,7 @@
 
     /*position: relative;*/
     color: var(--color-gray-black);
-    cursor: default;
+    /*cursor: default;*/
 }
 
 #modal div.modal-title {
@@ -60,6 +60,7 @@
     justify-content: space-between;
     /*background-color: red;*/
     /*line-height: var(--font-size-small);*/
+    color: var(--color-gray-black);
     /*line-height: ;*/
 
     cursor: pointer;

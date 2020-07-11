@@ -4,7 +4,7 @@ let screenWidth = window.innerWidth;
 const isMobile = screenWidth < 600;
 
 // console.log(localStorage.getItem('borderRatio'))
-let borderRatio = isMobile ? 0 : localStorage.getItem('borderRatio') || 0.2;
+let borderRatio = isMobile ? 0 : localStorage.getItem('borderRatio') || 0.33;
 let width = screenWidth * (isMobile ? 1 : borderRatio);
 let height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 
@@ -15,14 +15,17 @@ let svg = d3.select('#graph').append('svg')
 
 let content = document.getElementById('content');
 let contentList = document.getElementById('content-list');
-content.style.width = (99.5 - 100 * borderRatio) + '%';
-
-initInput();
-initServiceInfo(() => renderCard('This is still a test system', 'Do not expect much. Somewhere in the bins we have NN for chatbot and one more for recommendations. But for now, we need to complete the normal UI and graph structure.'));
+let centerImage = document.getElementById('center-image');
 
 const graph = document.getElementById('graph');
 const border = document.getElementById('border') || {};
+const modal = document.getElementById('modal');
 
+
+centerImage.style.width = (99.5 - 100 * borderRatio) + '%';
+content.style.width = (99.5 - 100 * borderRatio) + '%';
+
+initInput();
 
 // const content = document.getElementById('content');
 
@@ -70,6 +73,9 @@ function elementDrag(e) {
 
     borderRatio = e.clientX / screenWidth;
 
+    if (borderRatio > 0.67)
+        borderRatio = 0.67;
+
     if (borderRatio !== 0) {
         renderView()
     }
@@ -84,6 +90,7 @@ function renderView() {
     height = document.body.clientHeight * (isMobile ? borderRatio : 1);
 
     content.style.width = (99.5 - 100 * borderRatio) + '%';
+    centerImage.style.width = (99.5 - 100 * borderRatio) + '%';
     graph.style.width = 100 * borderRatio + '%';
     graphSvg.setAttribute('width', width * (!graphZoomed ? 1 : ratio));
     initSimulation();
@@ -153,6 +160,6 @@ function initServiceInfo(card = () => {}) {
 
 function closeModal() {
     console.log('close modal')
-    let modal = document.getElementById('modal');
     modal.classList.add('hide')
+    centerImage.classList.add('hide')
 }

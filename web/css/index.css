@@ -15,9 +15,10 @@ html, body {
     --color-blue: #16b9e7;
     --color-blue-dark: #0e7d9c;
     --color-blue-transparent: rgba(22, 185, 231, 0.8);
+    --color-blue-transparent-full: rgba(22, 185, 231, 0.2);
 
-    --color-green: #00e200;
-    --color-green-dark: #007200;
+    --color-green: #16ee16;
+    --color-green-dark: #13a113;
 
     /*--color-purple: #e21fd8;*/
     /*--color-purple-dark: rgba(154, 32, 166, 0.78);*/
@@ -35,12 +36,12 @@ html, body {
     --color-white-gray: #e8e8e8;
     --color-gray: #bfbfbf;
     --color-gray-dark: #777;
-    --color-gray-black: #4b4b4b;
+    --color-gray-black: #343434;
 
     --time-delay-main: .2;
 
-    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    --box-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --box-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 body {
@@ -87,7 +88,7 @@ div {
 }
 
 #top-menu div:hover {
-    cursor: pointer;
+    /*cursor: pointer;*/
     opacity: .5;
 }
 
@@ -181,4 +182,25 @@ span.button:hover {
 .row {
     display: flex;
     justify-content: space-between;
+}
+
+#center-image {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 0;
+    right: 0;
+    background-color: ghostwhite;
+    overflow: hidden;
+}
+
+#center-image-circle {
+    width: 2000px;
+    height: 2000px;
+    margin-left: 300px;
+    margin-top: -200px;
+
+    border-radius: 1000px;
+    background-color: var(--color-blue);
+
 }

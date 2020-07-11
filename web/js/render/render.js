@@ -20,7 +20,7 @@ let sorter;
 
 function clickHome() {
     clearContent();
-    initServiceInfo();
+    // initServiceInfo();
     // renderText('You are back now')
 }
 
