@@ -21,7 +21,7 @@ const getUserLinks = async () => {
 };
 
 const initUser = async () => {
-    showAnimation()
+    // showAnimation()
     await getUser();
     await getUserLinks();
 
