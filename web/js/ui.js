@@ -177,14 +177,14 @@ for (let i = 0; i < circlesAmount; i++) {
     for (let j = 0; j < Math.floor(Math.random() * 2); j++) {
 
     }
-    let x = Math.floor(Math.random() * i * 7);
+    let x = Math.floor(Math.random() * i * 7) - 2;
     centerImage.append(createCircle(i, x, y));
 
 }
 
 function createCircle(i, x, y) {
 
-    let size = 10 + i * 20;
+    let size = i * 20 * 1.5^i;
 
     let circle = document.createElement('div');
     circle.classList.add('center-image-small-circle')

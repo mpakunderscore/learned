@@ -228,3 +228,8 @@ span.button:hover {
     box-shadow: var(--box-shadow);
     background-color: var(--color-gray);
 }
+
+#center-image-lines {
+    width: 100%;
+    height: 100%;
+}
