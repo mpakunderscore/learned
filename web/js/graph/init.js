@@ -24,9 +24,9 @@ let initMenu = () => {
 
 
 
-    menu.mine = menuItem({id: 'Mine'});
-    menuItem({id: 'Global'});
-    menuItem({id: 'Links sources'});
+    menu.mine = menuItem({id: 'Mine', title: 'My links and graph'});
+    menuItem({id: 'Graph', title: 'Global graph'});
+    menuItem({id: 'Sources ', title: 'Links sources'});
 
     // menuItem({id: 'Demo'});
     // menu.settings = menuItem({id: 'Settings', lang: true});

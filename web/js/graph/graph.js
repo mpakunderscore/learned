@@ -54,7 +54,7 @@ function initView() {
             // TODO click node name
         })
         .text(function (d) {
-            return d.id + (d.main ? mainCircleText : '') + (d.debug ? ' ' + d.debug : ''); // + (d.info ? ' ' + d.info : '');
+            return  (d.main ? mainCircleText : d.title || d.id) + (d.debug ? ' ' + d.debug : ''); // + (d.info ? ' ' + d.info : '');
         })
         .select(function () {
             return this.parentNode;

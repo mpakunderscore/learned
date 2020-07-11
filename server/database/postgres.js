@@ -1,8 +1,11 @@
+const storage = require('../storage');
 const wiki = require('../crawler/wiki');
 
 const {Sequelize, Op} = require('sequelize');
 
 let logging = true;
+
+// console.log(process.env.DATABASE_URL)
 
 module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: logging});
 
@@ -16,6 +19,7 @@ exports.status = 'off';
 module.exports.sequelize.sync().then(() => {
     exports.status = 'on';
     console.log('database: on')
+    storage.init().then();
 });
 
 // Create or get user
