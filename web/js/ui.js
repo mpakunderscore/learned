@@ -163,3 +163,37 @@ function closeModal() {
     modal.classList.add('hide')
     centerImage.classList.add('hide')
 }
+
+let circlesAmount = 10 + Math.floor(Math.random() * 3);
+
+for (let i = 0; i < circlesAmount; i++) {
+
+    // let count = Math.floor(Math.random() * circlesAmount/i);
+    let count = 5;
+
+    let y = 100 / circlesAmount * i;
+
+    // console.log(count)
+    for (let j = 0; j < Math.floor(Math.random() * 2); j++) {
+
+    }
+    let x = Math.floor(Math.random() * i * 7);
+    centerImage.append(createCircle(i, x, y));
+
+}
+
+function createCircle(i, x, y) {
+
+    let size = 10 + i * 20;
+
+    let circle = document.createElement('div');
+    circle.classList.add('center-image-small-circle')
+    circle.style.width = size + 'px'
+    circle.style.height = size + 'px'
+    // circle.style.border = i + 'px solid lightgray'
+    // circle.style.borderRadius = size/2 + 'px'
+
+    circle.style.top = y + '%';
+    circle.style.left = x + '%';
+    return circle;
+}

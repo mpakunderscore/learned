@@ -42,6 +42,7 @@ html, body {
 
     --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     --box-shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+    --box-shadow-small: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -69,7 +70,7 @@ a:visited {
 }
 
 div {
-    line-height: var(--line-height);
+    /*line-height: var(--line-height);*/
 }
 
 /*TODO move*/
@@ -192,15 +193,38 @@ span.button:hover {
     right: 0;
     background-color: ghostwhite;
     overflow: hidden;
+
+    /*background-image: url('/images/center.png');*/
 }
 
 #center-image-circle {
+    position: absolute;
     width: 2000px;
     height: 2000px;
     margin-left: 300px;
     margin-top: -200px;
 
-    border-radius: 1000px;
+    border-radius: 50%;
     background-color: var(--color-blue);
+    box-shadow: var(--box-shadow);
 
+    z-index: 2;
+}
+
+.center-image-small-circle {
+    position: absolute;
+
+    background-color: var(--color-white-gray);
+    /*border: 2px solid var(--color-gray);*/
+    box-shadow: var(--box-shadow-small);
+
+    border-radius: 50%;
+
+    cursor: pointer;
+    transition: box-shadow 1s;
+}
+
+.center-image-small-circle:hover {
+    box-shadow: var(--box-shadow);
+    background-color: var(--color-gray);
 }
