@@ -11,9 +11,10 @@ html, body {
 
     --color-black: black;
 
+    /*--color-blue-light: rgb(110, 202, 227);*/
     --color-blue: #16b9e7;
-    --color-bluep-transparent: rgba(22, 185, 231, 0.8);
     --color-blue-dark: #0e7d9c;
+    --color-blue-transparent: rgba(22, 185, 231, 0.8);
 
     --color-green: #00e200;
     --color-green-dark: #007200;
@@ -31,6 +32,7 @@ html, body {
     --color-red-dark: #c00715;
 
     --color-white: white;
+    --color-white-gray: #e8e8e8;
     --color-gray: #bfbfbf;
     --color-gray-dark: #777;
     --color-gray-black: #4b4b4b;

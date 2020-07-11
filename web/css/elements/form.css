@@ -12,18 +12,17 @@
 
 .form div {
     padding: 10px;
-    box-shadow: var(--box-shadow-inset);
     border-radius: 6px;
 
     text-align: center;
 
     color: var(--color-gray-dark);
-    background-color: white;
+    background-color: var(--color-white-gray);
 
     margin-bottom: 20px;
 
-    cursor: pointer;
-    transition: box-shadow 1s;
+    /*cursor: pointer;*/
+    /*transition: box-shadow 1s;*/
 }
 
 .form div:hover {
@@ -32,8 +31,16 @@
 
 .form div:last-child {
     margin-bottom: 0;
-    box-shadow: var(--box-shadow);
-    background-color: var(--color-blue-dark);
-    color: black;
+}
 
+.form div.input {
+    box-shadow: var(--box-shadow-inset);
+    cursor: text;
+}
+
+.form div.button {
+    box-shadow: var(--box-shadow);
+    /*background-color: var(--color-blue-dark);*/
+    /*color: black;*/
+    cursor: pointer;
 }

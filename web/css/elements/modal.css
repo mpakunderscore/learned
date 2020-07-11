@@ -12,7 +12,7 @@
 
     font-size: var(--font-size-big);
 
-    background-color: var(--color-bluep-transparent);
+    background-color: var(--color-blue);
 
     z-index: 2;
 
@@ -28,7 +28,8 @@
     justify-content: space-between;
 
     /*position: relative;*/
-    color: var(--color-gray-dark);
+    color: var(--color-gray-black);
+    cursor: default;
 }
 
 #modal div.modal-title {
@@ -38,7 +39,7 @@
 
     /*margin-bottom: 20px;*/
 
-    color: var(--color-gray-black);
+    color: var(--color-white-gray);
 }
 
 #modal div.modal-text {
