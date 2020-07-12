@@ -26,7 +26,7 @@ async function renderMine(lazy, filter = this.filter, sorter = this.sorter) {
     for (let i = 0; i < 1; i++) {
         html += '' +
             '<div class="link recommended">' +
-                '<a href="/recommended" target="_blank" title="Recommended">Recommended link on edge</a>' +
+                '<a href="/recommended" target="_blank" title="Recommended">Recommended link</a>' +
                 '<div><span title="Link graph" onclick="crawlMineLink(this)" class="button">G</span>' +
                 '<span class="button">' + 0 + '</span>' +
                 '<span class="button">' + 0 + '</span>' +
