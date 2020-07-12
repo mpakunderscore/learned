@@ -1,45 +1,25 @@
 .card {
-    background-color: white;
+    /*background-color: white;*/
     /*border: 1px solid var(--color-blue-dark);*/
 
-    border-radius: 12px;
+    /*border-radius: 12px;*/
     padding: 10px;
-    margin: 10px;
+    /*margin: 10px;*/
     /*margin-bottom: 0;*/
 
-    font-size: var(--font-size-big);
+    font-size: var(--font-size-main);
 
     cursor: pointer;
 
-    box-shadow: var(--box-shadow);
+    /*box-shadow: var(--box-shadow);*/
 
-    transition: background-color .2s, color .2s
-}
-
-.card:hover {
-    /*border: 1px solid var(--color-black);*/
-    /*background-color: var(--color-blue-dark) !important;*/
-    /*color: white;*/
-
-    /*transition: 1s background-color;*/
-}
-
-.card:hover .circle {
-    /*border: solid 2px var(--color-red-dark);*/
-    /*background-color: var(--color-red);*/
+    /*transition: background-color .2s, color .2s*/
 }
 
 .card .title {
     display: flex;
     flex-direction: row;
     font-weight: 600;
-}
-
-.card .circle {
-    width: 10px;
-    height: 10px;
-    border-radius: 12px;
-    margin: auto 0;
 }
 
 .card .circle.green {
