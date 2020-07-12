@@ -13,8 +13,11 @@ const getUser = async () => {
 
     document.getElementById('userid').innerHTML = user.email || user.id;
 
-    if (user.email)
+    if (user.email) {
         email.innerText = user.email;
+        document.getElementById('login').innerText = 'Login'
+    } else
+        document.getElementById('login').innerText = 'Sign up'
 };
 
 const login = async () => {
