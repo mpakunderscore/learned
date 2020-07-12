@@ -191,9 +191,10 @@ function createCircle(i, x, y) {
     circle.classList.add('center-image-small-circle')
     if (i  === 5) {
         circle.classList.add('active')
-        // let animal = document.createElement('div')
-        // animal.id = 'space-invader'
-        // circle.append(animal)
+        let animal = document.createElement('img')
+        animal.src = 'images/animal.png'
+        animal.id = 'animal'
+        circle.append(animal)
     }
 
     circle.style.width = size + 'px'
