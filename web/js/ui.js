@@ -177,6 +177,7 @@ for (let i = 0; i < circlesAmount; i++) {
     for (let j = 0; j < Math.floor(Math.random() * 2); j++) {
 
     }
+
     let x = Math.floor(Math.random() * i * 7) - 2;
     centerImage.append(createCircle(i, x, y));
 
@@ -188,6 +189,13 @@ function createCircle(i, x, y) {
 
     let circle = document.createElement('div');
     circle.classList.add('center-image-small-circle')
+    if (i  === 5) {
+        circle.classList.add('active')
+        // let animal = document.createElement('div')
+        // animal.id = 'space-invader'
+        // circle.append(animal)
+    }
+
     circle.style.width = size + 'px'
     circle.style.height = size + 'px'
     // circle.style.border = i + 'px solid lightgray'
