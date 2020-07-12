@@ -4,6 +4,8 @@ const axios = require('axios');
 const database = require("../database/postgres");
 const storage = require("../storage");
 
+let graphText = 'Graph paper, coordinate paper, grid paper, or squared paper is writing paper that is printed with fine lines making up a regular grid. The lines are often used as guides for plotting graphs of functions or experimental data and drawing curves. It is commonly found in mathematics and engineering education settings and in laboratory notebooks. Graph paper is available either as loose leaf paper or bound in notebooks.';
+
 exports.getCategory = async function (title, lang = 'en', update = false) {
 
     // console.log(title)
@@ -55,7 +57,7 @@ exports.getCategory = async function (title, lang = 'en', update = false) {
             subcategories: subcategories,
             categories: categories,
             pages: pages,
-            mainPage: isMainCategory ? {text: 'text'} : isMainPage ? await exports.getPage(title, lang) : {},
+            mainPage: isMainCategory ? {text: graphText} : isMainPage ? await exports.getPage(title, lang) : {},
             language: lang,
         };
 

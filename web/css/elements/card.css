@@ -18,8 +18,8 @@
 
 .card:hover {
     /*border: 1px solid var(--color-black);*/
-    background-color: var(--color-blue-dark) !important;
-    color: white;
+    /*background-color: var(--color-blue-dark) !important;*/
+    /*color: white;*/
 
     /*transition: 1s background-color;*/
 }
@@ -53,7 +53,6 @@
 }
 
 .card div.title-text {
-    padding-left: 6px;
 }
 
 .card div.text {

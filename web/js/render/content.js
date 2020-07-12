@@ -38,10 +38,10 @@ function clearContent() {
 function renderHelpRow(pagesLength, categoriesLength) {
     return '' +
         '<div class="help-row">' +
-        '<div><span class="text">sort:</span>' +
+        '<div><span class="text">Sort:</span>' +
         '<span class="button" onclick="renderMine(true, this.filter, \'title\')">name</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'textLength\')">length</span>/' +
-        '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">words</span>/' +
+        // '<span class="button" onclick="renderMine(true, this.filter, \'wordsLength\')">words</span>/' +
         '<span class="button" onclick="renderMine(true, this.filter, \'url\')">source</span></div>' +
         '<div><span onclick="showPages()" class="button">Pages: ' + pagesLength + '</span>/<span onclick="showCategories()" class="button">Categories: ' + categoriesLength + '</span></div>' +
         '</div>';
