@@ -13,12 +13,7 @@ const prefix = '/api';
 
 exports.status = 'off';
 
-function initStatic(app) {
-}
-
 exports.init = (app) => {
-
-    initStatic(app)
 
     // get url
     app.get(prefix + '/crawl', async function (request, response) {
@@ -154,7 +149,10 @@ exports.init = (app) => {
         response.json(await database.getLinksShort());
     });
 
-
+    // get list of links
+    app.get(prefix + '/sources', async function (request, response) {
+        response.json(await database.getSources());
+    });
 
 
 
@@ -219,7 +217,7 @@ exports.init = (app) => {
     });
 
     app.get(prefix + '/status', async function (request, response) {
-        response.json({api: api.status, database: database.status, storage: storage.status});
+        response.json({api: api.status, database: database.status, storage: storage.status, scheduler: scheduler.status});
     });
 
     // TODO demo

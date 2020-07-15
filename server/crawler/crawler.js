@@ -13,10 +13,11 @@ exports.getURL = async function (url) {
 
     // if (storage.links[url])
     //     return storage.links[url]
+
     let databaseLink = await database.getLink(url);
 
-    if (databaseLink)
-        return databaseLink.toJSON();
+    // if (databaseLink)
+    //     return databaseLink.toJSON();
 
     let link = await exports.getURLData(url)
 
@@ -29,6 +30,22 @@ exports.getURL = async function (url) {
     storage.links[url] = savedLink;
 
     return savedLink;
+}
+
+function checkSource(url, $, title) {
+
+    let pattern = '.storylink'
+    let links = $(pattern).toArray();
+
+    if (links.length > 0)
+        database.saveSource(url, title, '').then()
+
+    for (let i in links) {
+        console.log(links[i].attribs.href)
+    }
+
+
+    console.log(links)
 }
 
 exports.getURLData = async function (url) {
@@ -45,6 +62,8 @@ exports.getURLData = async function (url) {
         const $ = cheerio.load(data);
 
         const title = $('title').text();
+
+        checkSource(url, $, title)
 
         const links = getURLLinks($, baseUrl);
 

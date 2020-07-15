@@ -282,6 +282,20 @@ exports.deleteMessage = async (id) => {
     return true;
 }
 
+// Get sources
+
+exports.getSources = async () => {
+    let sources = await models.Source.findAll(); //{order: [['count', 'DESC']]}
+    return sources;
+}
+
+// Save source
+
+exports.saveSource = async (url, title, icon) => {
+    let source = await models.Source.create({url: url, title: title, icon: icon});
+    return source;
+}
+
 exports.getStatistics = async () => {
     let statistics = {};
     statistics.words = await models.Word.count()
