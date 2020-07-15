@@ -206,3 +206,24 @@ function createCircle(i, x, y) {
     circle.style.left = x + '%';
     return circle;
 }
+
+
+
+// if (i  === 5) {
+//
+//
+//     if (i  === 3) {
+//         size *= 10;
+//     } else {
+//         let animal = document.createElement('img')
+//         animal.src = 'images/animal.png'
+//         animal.id = 'animal'
+//         circle.append(animal)
+//         circle.classList.add('active')
+//     }
+//
+//     circle.style.width = size + 'px'
+//     circle.style.height = size + 'px'
+//
+//
+// }

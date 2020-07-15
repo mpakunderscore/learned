@@ -34,6 +34,14 @@
     margin-bottom: 0;
 }
 
+.form > div.input {
+    box-shadow: var(--box-shadow-inset-small);
+}
+
+.form > div.button {
+    box-shadow: var(--box-shadow-small);
+}
+
 .form > div.input:hover {
     box-shadow: var(--box-shadow-inset);
     cursor: text;
