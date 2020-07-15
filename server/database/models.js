@@ -9,6 +9,9 @@ class User extends Model {
 class Link extends Model {
 }
 
+class Source extends Model {
+}
+
 class UserLink extends Model {
 }
 
@@ -27,7 +30,8 @@ module.exports = {
     UserLink,
     Word,
     Category,
-    Message
+    Message,
+    Source
 }
 
 User.init({
@@ -62,6 +66,19 @@ Link.init({
 
 
 }, {sequelize, modelName: 'link', timestamps: false});
+
+Source.init({
+    url: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+
+    title: DataTypes.STRING,
+    pattern: DataTypes.STRING, // CSS class or other route to link in links array
+    icon: DataTypes.STRING,
+
+}, {sequelize, modelName: 'source', timestamps: false});
 
 UserLink.init({
     userid: {
