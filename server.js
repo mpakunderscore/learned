@@ -1,7 +1,8 @@
 require('dotenv').config();
 
 const api = require('./server/api');
-const storage = require("./server/storage");
+const storage = require('./server/storage');
+const scheduler = require('./server/scheduler');
 
 let express = require('express');
 let app = express();
@@ -21,5 +22,6 @@ app.use('/coronavirus', express.static(__dirname + '/web'));
 app.use('/chrome/learned.space.zip', express.static(__dirname + '/learned.space.zip'));
 
 api.init(app);
+//scheduler.init()
 
 
