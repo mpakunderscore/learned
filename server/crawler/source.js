@@ -51,7 +51,7 @@ exports.findLinksToSources = async function (matchesLength) {
         })
 
         if (matches.length > matchesLength) {
-            storage.sources.push({url: link.url, matches: matches.length})
+            storage.sources.push({url: link.url, matches: matches})
             // await database.saveSource(link.url, currentLink.title, '')
         }
     }
