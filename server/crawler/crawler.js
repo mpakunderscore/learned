@@ -1,6 +1,6 @@
-const database = require('../database/postgres');
 const storage = require('../storage');
 const engine = require('./engine');
+const source = require('../crawler/source');
 
 const cheerio = require('cheerio');
 const axios = require('axios');
@@ -11,10 +11,12 @@ exports.getURL = async function (url) {
 
     console.log('getURL: ' + url);
 
+
     // if (storage.links[url])
     //     return storage.links[url]
 
     let databaseLink = await database.getLink(url);
+
 
     // if (databaseLink)
     //     return databaseLink.toJSON();
@@ -32,22 +34,6 @@ exports.getURL = async function (url) {
     return savedLink;
 }
 
-function checkSource(url, $, title) {
-
-    let pattern = '.storylink'
-    let links = $(pattern).toArray();
-
-    if (links.length > 0)
-        database.saveSource(url, title, '').then()
-
-    for (let i in links) {
-        console.log(links[i].attribs.href)
-    }
-
-
-    console.log(links)
-}
-
 exports.getURLData = async function (url) {
 
     // TODO hmm
@@ -63,7 +49,8 @@ exports.getURLData = async function (url) {
 
         const title = $('title').text();
 
-        checkSource(url, $, title)
+        // Attempt to catch more sources here.. TODO
+        source.checkSourceLink(url, $, title).then()
 
         const links = getURLLinks($, baseUrl);
 

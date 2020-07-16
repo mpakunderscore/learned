@@ -73,3 +73,15 @@ if (window.location.href.endsWith('/tasks/')) {
     clearContent();
     setPath('/tasks');
 }
+
+if (window.location.href.endsWith('/sources/')) {
+    clearContent();
+    setPath('/sources');
+    get('/sources').then(response => {
+        // let coronavirusNode = {id: 'Coronavirus'};
+        // clearGraph();
+        // renderSimpleCustomGraph(response.graph, coronavirusNode, '2019–20 coronavirus pandemic');
+        // initGraph();
+
+    });
+}

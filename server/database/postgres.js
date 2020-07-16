@@ -282,6 +282,15 @@ exports.deleteMessage = async (id) => {
     return true;
 }
 
+
+// Get source
+
+exports.getSource = async (url) => {
+    models.Source.findOne({where: {url: url}}).then(function (source) {
+        return source;
+    });
+}
+
 // Get sources
 
 exports.getSources = async () => {
