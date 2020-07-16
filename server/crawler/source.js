@@ -53,27 +53,21 @@ exports.findLinksToSources = async function (matchesLength) {
             return link.externalLinks.indexOf(item) === -1 // && !item.includes(link.url.split('/')[0])
         })
 
+        matches = [...new Set(matches)]
 
-
-        // HERE is don't get it now. We have to find sources by links updates
-
-
+        // http://localhost:8080/api/crawl?url=https://www.reddit.com/r/all/new/
 
         if (matches.length > matchesLength) {
 
             let count = 0;
-            let matchesInterval = 0;
-
+            let difference = 0;
             if (storage.sources[link.url]) {
-
-                let matchesOld = currentLink.externalLinks.filter(function (item) {
-                    return storage.sources[link.url].old.externalLinks.indexOf(item) === -1 && !item.includes(link.url.split('/')[0])
-                })
-
-                matchesInterval = matchesOld.length
+                matches = matches.concat(storage.sources[link.url].matches);
+                count = storage.sources[link.url].count + 1;
+                difference = matches.length - storage.sources[link.url].matches.length
             }
 
-            storage.sources[link.url] = {old: currentLink, ...new Set(matches), externalLinks: currentLink.externalLinks.length, count, matchesInterval}
+            storage.sources[link.url] = {matches: [...new Set(matches)], count, difference: difference}
         }
     }
 }

@@ -156,12 +156,17 @@ exports.init = (app) => {
         response.json(await database.getLinksShort());
     });
 
-    // get list of links
+    // get list of sources
     app.get(prefix + '/sources', async function (request, response) {
-        response.json(storage.sources);
+        response.json(storage.sources.filter(source => source.difference > 0));
     });
 
-    // get list of links
+    // //
+    // app.get(prefix + '/sources/', async function (request, response) {
+    //     response.json(storage.sources);
+    // });
+
+    // check link to sources
     app.get(prefix + '/sources/find', async function (request, response) {
         response.json(source.findLinksToSources(request.query.matches));
     });
