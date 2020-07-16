@@ -1,5 +1,6 @@
 const database = require('../database/postgres');
 const crawler = require('../crawler/crawler');
+const storage = require('../storage');
 
 const cheerio = require('cheerio');
 const axios = require('axios');
@@ -30,7 +31,9 @@ const axios = require('axios');
 
 exports.findLinksToSources = async function (matchesLength) {
 
-    let sources = [];
+    storage.sources = []
+    // let sources = [];
+
     let databaseLinks = await database.getLinks();
 
     for (let i in databaseLinks) {
@@ -48,12 +51,12 @@ exports.findLinksToSources = async function (matchesLength) {
         })
 
         if (matches.length > matchesLength) {
-            sources.push({url: link.url, matches: matches.length})
+            storage.sources.push({url: link.url, matches: matches.length})
             // await database.saveSource(link.url, currentLink.title, '')
         }
     }
 
-    return sources;
+    // return sources;
 }
 
 exports.inspectSources = async function () {

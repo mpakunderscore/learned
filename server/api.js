@@ -158,7 +158,7 @@ exports.init = (app) => {
 
     // get list of links
     app.get(prefix + '/sources', async function (request, response) {
-        response.json(await database.getSources());
+        response.json(storage.sources);
     });
 
     // get list of links
