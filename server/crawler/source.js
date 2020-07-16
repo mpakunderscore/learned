@@ -50,25 +50,30 @@ exports.findLinksToSources = async function (matchesLength) {
             continue;
 
         let matches = currentLink.externalLinks.filter(function (item) {
-            return link.externalLinks.indexOf(item) === -1 && !item.includes(link.url.split('/')[0])
+            return link.externalLinks.indexOf(item) === -1 // && !item.includes(link.url.split('/')[0])
         })
+
+
+
+        // HERE is don't get it now. We have to find sources by links updates
+
+
 
         if (matches.length > matchesLength) {
 
+            let count = 0;
+            let matchesInterval = 0;
+
             if (storage.sources[link.url]) {
 
-                let matchesStorage = currentLink.externalLinks.filter(function (item) {
-                    return storage.sources[link.url].externalLinks.indexOf(item) === -1 && !item.includes(link.url.split('/')[0])
+                let matchesOld = currentLink.externalLinks.filter(function (item) {
+                    return storage.sources[link.url].old.externalLinks.indexOf(item) === -1 && !item.includes(link.url.split('/')[0])
                 })
 
-                if (matchesStorage.length > matchesLength) {
-                    storage.sources[link.url] = {matches: matchesStorage, externalLinks: currentLink.externalLinks, count: storage.sources[link.url].count + 1}
-                }
-
-            } else {
-                storage.sources[link.url] = {matches, externalLinks: currentLink.externalLinks, count: 0}
-                // await database.saveSource(link.url, currentLink.title, '')
+                matchesInterval = matchesOld.length
             }
+
+            storage.sources[link.url] = {old: currentLink, ...new Set(matches), externalLinks: currentLink.externalLinks.length, count, matchesInterval}
         }
     }
 }

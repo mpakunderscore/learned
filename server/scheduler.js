@@ -15,8 +15,8 @@ async function worker() {
     if (exports.task !== 'no')
         return;
 
-    await inspectSources().then()
-    await inspect().then()
+    await inspectSources()
+    await inspect()
 }
 
 function inspectSources() {

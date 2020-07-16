@@ -9,7 +9,7 @@ exports.exclude = [
 ];
 
 // TODO is this different?
-exports.separator = /(?:\n|\t|\||_|–|—|-|−|\.|\/)/g;
+exports.separator = /(?:\n|\t|\||_|–|—|-|•|−|\.|\/)/g;
 
 // TODO uh
 exports.garbage = /(?:,|\.|:|’|‘|”|'|"|\(|\)|\[|\]|\?|;|!|\^|(\d+)|\$|=|\+|&|>|<|·|{|})/g;
