@@ -114,7 +114,7 @@ function getURLLinks($, baseUrl) {
 
         let linkUrl = $(link).attr('href');
 
-        let urlObject = url.parse(linkUrl)
+        // let urlObject = url.parse(linkUrl)
 
         if (linkUrl) {
             if (linkUrl.includes('http')) // && !linkUrl.includes(baseUrl)
