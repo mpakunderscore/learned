@@ -163,7 +163,7 @@ exports.init = (app) => {
 
     // get list of links
     app.get(prefix + '/sources/find', async function (request, response) {
-        response.json(await source.findLinksToSources(request.query.matches));
+        response.json(source.findLinksToSources(request.query.matches));
     });
 
 

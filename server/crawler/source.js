@@ -32,7 +32,7 @@ const url = require('url');
 
 exports.findLinksToSources = async function (matchesLength) {
 
-    storage.sources = []
+    storage.sources = {}
     // let sources = [];
 
     let databaseLinks = await database.getLinks();
@@ -53,12 +53,22 @@ exports.findLinksToSources = async function (matchesLength) {
 
         if (matches.length > matchesLength) {
 
-            storage.sources.push({url: link.url, matches})
-            // await database.saveSource(link.url, currentLink.title, '')
+            if (storage.sources[link.url]) {
+
+                let matchesStorage = currentLink.externalLinks.filter(function (item) {
+                    return storage.sources[link.url].externalLinks.indexOf(item) === -1 && !item.includes(link.url.split('/')[0])
+                })
+
+                if (matchesStorage.length > matchesLength) {
+                    storage.sources[link.url] = {matches: matchesStorage, externalLinks: currentLink.externalLinks, count: storage.sources[link.url].count + 1}
+                }
+
+            } else {
+                storage.sources[link.url] = {matches, externalLinks: currentLink.externalLinks, count: 0}
+                // await database.saveSource(link.url, currentLink.title, '')
+            }
         }
     }
-
-    // return sources;
 }
 
 exports.inspectSources = async function () {

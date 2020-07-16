@@ -1,4 +1,5 @@
 const database = require('./database/postgres');
+const source = require('./crawler/source');
 
 exports.status = 'off';
 exports.launchTime = 0;
@@ -33,7 +34,7 @@ function inspectSources() {
 }
 
 function inspect() {
-
+    source.findLinksToSources().then()
 }
 
 exports.init = () => {
