@@ -11,7 +11,7 @@ let intervalObject;
 
 async function worker() {
 
-    if (task !== 'no')
+    if (exports.task !== 'no')
         return;
 
     await inspectSources().then()

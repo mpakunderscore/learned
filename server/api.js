@@ -2,6 +2,7 @@ let express = require('express');
 
 const crawler = require('./crawler/crawler');
 const wiki = require('./crawler/wiki');
+const source = require('./crawler/source');
 const database = require('./database/postgres');
 const update = require('./database/update');
 const worker = require('./worker');
@@ -20,6 +21,11 @@ exports.init = (app) => {
     app.get(prefix + '/crawl', async function (request, response) {
         response.json(await crawler.getURL(request.query.url));
     });
+
+    // compare url
+    // app.get(prefix + '/compare', async function (request, response) {
+    //     response.json(await crawler.compareURL(request.query.url));
+    // });
 
     app.get(prefix + '/crawl/graph', async function (request, response) {
 
@@ -153,6 +159,11 @@ exports.init = (app) => {
     // get list of links
     app.get(prefix + '/sources', async function (request, response) {
         response.json(await database.getSources());
+    });
+
+    // get list of links
+    app.get(prefix + '/sources/find', async function (request, response) {
+        response.json(await source.findLinksToSources(request.query.matches));
     });
 
 

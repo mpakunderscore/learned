@@ -1,9 +1,27 @@
 const storage = require('../storage');
 const engine = require('./engine');
+const database = require('../database/postgres');
 const source = require('../crawler/source');
 
 const cheerio = require('cheerio');
 const axios = require('axios');
+
+// let findSource = true;
+
+exports.compareURL = async function (url) {
+
+    let link = await exports.getURL(url)
+    let currentLink = await exports.getURLData(url)
+
+    let matches = link.externalLinks.filter(function(item){
+        return currentLink.externalLinks.indexOf(item) === -1
+    })
+
+    console.log(link.externalLinks.length)
+    console.log(matches.length)
+
+    return matches;
+}
 
 // First wiki result in google is a good way to find token word.
 
@@ -11,15 +29,13 @@ exports.getURL = async function (url) {
 
     console.log('getURL: ' + url);
 
-
-    // if (storage.links[url])
-    //     return storage.links[url]
+    if (storage.links[url])
+        return storage.links[url]
 
     let databaseLink = await database.getLink(url);
 
-
-    // if (databaseLink)
-    //     return databaseLink.toJSON();
+    if (databaseLink)
+        return databaseLink.toJSON();
 
     let link = await exports.getURLData(url)
 
@@ -50,7 +66,7 @@ exports.getURLData = async function (url) {
         const title = $('title').text();
 
         // Attempt to catch more sources here.. TODO
-        source.checkSourceLink(url, $, title).then()
+        // source.checkSourceURL(url).then()
 
         const links = getURLLinks($, baseUrl);
 
