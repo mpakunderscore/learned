@@ -32,7 +32,7 @@ const url = require('url');
 
 exports.findLinksToSources = async function (matchesLength) {
 
-    storage.sources = {}
+    // storage.sources = {}
     // let sources = [];
 
     let databaseLinks = await database.getLinks();
