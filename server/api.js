@@ -218,7 +218,7 @@ exports.init = (app) => {
     });
 
     app.get(prefix + '/scheduler', async function (request, response) {
-        response.json({status: scheduler.status, time: new Date(scheduler.time).toString(), task: scheduler.task});
+        response.json({status: scheduler.status, launch: new Date(scheduler.launchTime).toString(), task: scheduler.task, time: new Date(scheduler.taskTime).toString()});
     });
 
     app.get(prefix + '/status', async function (request, response) {
