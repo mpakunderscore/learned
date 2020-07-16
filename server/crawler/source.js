@@ -63,11 +63,12 @@ exports.findLinksToSources = async function (matchesLength) {
             let difference = 0;
             if (storage.sources[link.url]) {
                 matches = matches.concat(storage.sources[link.url].matches);
+                matches = [...new Set(matches)]
                 count = storage.sources[link.url].count + 1;
                 difference = matches.length - storage.sources[link.url].matches.length
             }
 
-            storage.sources[link.url] = {matches: [...new Set(matches)], count, difference: difference}
+            storage.sources[link.url] = {container: link.externalLinks.length, matches: matches, count, difference: difference}
         }
     }
 }

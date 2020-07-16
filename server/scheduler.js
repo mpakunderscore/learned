@@ -6,8 +6,15 @@ exports.launchTime = 0;
 exports.task = 'no';
 exports.taskTime = 0;
 
+exports.getStatus = () => {
+    return exports;
+}
+
 // let timeout = 5 * 60 * 1000; // 5 min
 let timeout = 60 * 1000; // 1 min
+// exports.timeout = 5 * 1000; // 5 sec
+// let timeout = 1 * 1000; // 1 sec
+
 let intervalObject;
 
 async function worker() {
@@ -34,11 +41,14 @@ function inspectSources() {
 }
 
 function inspect() {
-    source.findLinksToSources(0).then()
+    exports.task = 'links to sources';
+    source.findLinksToSources(0).then(() => {
+        exports.task = 'no';
+    })
 }
 
 exports.init = () => {
-    intervalObject = setInterval(worker, timeout);
+    intervalObject = setInterval(worker, exports.timeout);
     exports.status = 'on';
     exports.launchTime = new Date().getTime()
 }

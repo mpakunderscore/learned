@@ -158,7 +158,22 @@ exports.init = (app) => {
 
     // get list of sources
     app.get(prefix + '/sources', async function (request, response) {
-        response.json(storage.sources.filter(source => source.difference > 0));
+
+        let sourcesStatistics = {};
+
+        for (let key in storage.sources) {
+
+            let source = storage.sources[key];
+
+            sourcesStatistics[key] = {
+                container: source.container,
+                matches: source.matches.slice(0, source.container || 13),
+                count: source.count,
+                difference: source.difference
+            }
+        }
+
+        response.json(sourcesStatistics); // .filter(source => source.difference > 0)
     });
 
     // //
@@ -234,7 +249,7 @@ exports.init = (app) => {
     });
 
     app.get(prefix + '/scheduler', async function (request, response) {
-        response.json({status: scheduler.status, launch: new Date(scheduler.launchTime).toString(), task: scheduler.task, time: new Date(scheduler.taskTime).toString()});
+        response.json(scheduler.getStatus());
     });
 
     app.get(prefix + '/status', async function (request, response) {
