@@ -34,7 +34,7 @@ function inspectSources() {
 }
 
 function inspect() {
-    source.findLinksToSources().then()
+    source.findLinksToSources(0).then()
 }
 
 exports.init = () => {
