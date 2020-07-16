@@ -46,7 +46,6 @@ User.init({
     },
 }, {sequelize, modelName: 'user'});
 
-// TODO refactoring (date of creation page or news)
 Link.init({
     url: {
         type: DataTypes.STRING,

@@ -3,6 +3,8 @@ const engine = require('./engine');
 const database = require('../database/postgres');
 const source = require('../crawler/source');
 
+const url = require('url');
+
 const cheerio = require('cheerio');
 const axios = require('axios');
 
@@ -112,8 +114,10 @@ function getURLLinks($, baseUrl) {
 
         let linkUrl = $(link).attr('href');
 
+        let urlObject = url.parse(linkUrl)
+
         if (linkUrl) {
-            if (linkUrl.includes('http'))
+            if (linkUrl.includes('http')) // && !linkUrl.includes(baseUrl)
                 links.external.push(linkUrl);
             else {
                 links.internal.push(baseUrl + '/' + linkUrl);

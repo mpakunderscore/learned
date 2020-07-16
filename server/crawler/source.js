@@ -4,6 +4,7 @@ const storage = require('../storage');
 
 const cheerio = require('cheerio');
 const axios = require('axios');
+const url = require('url');
 
 // exports.checkSourceURL = async function (url) {
 //
@@ -44,10 +45,12 @@ exports.findLinksToSources = async function (matchesLength) {
         // if (databaseSource)
         //     continue;
 
+        let hostname = url.parse(link.url).hostname
+
         let currentLink = await crawler.getURLData(link.url)
 
         let matches = link.externalLinks.filter(function(item){
-            return currentLink.externalLinks.indexOf(item) === -1
+            return currentLink.externalLinks.indexOf(item) === -1 && !item.includes(hostname)
         })
 
         if (matches.length > matchesLength) {
