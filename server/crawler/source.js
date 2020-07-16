@@ -45,16 +45,15 @@ exports.findLinksToSources = async function (matchesLength) {
         // if (databaseSource)
         //     continue;
 
-        let hostname = url.parse(link.url).hostname
-
         let currentLink = await crawler.getURLData(link.url)
 
         let matches = currentLink.externalLinks.filter(function (item) {
-            return link.externalLinks.indexOf(item) === -1 && !item.includes(hostname)
+            return link.externalLinks.indexOf(item) === -1 && !item.includes(link.url.split('/')[0])
         })
 
         if (matches.length > matchesLength) {
-            storage.sources.push({url: link.url, matches: matches})
+
+            storage.sources.push({url: link.url, matches})
             // await database.saveSource(link.url, currentLink.title, '')
         }
     }
