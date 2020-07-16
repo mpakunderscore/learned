@@ -49,8 +49,8 @@ exports.findLinksToSources = async function (matchesLength) {
 
         let currentLink = await crawler.getURLData(link.url)
 
-        let matches = link.externalLinks.filter(function(item){
-            return currentLink.externalLinks.indexOf(item) === -1 && !item.includes(hostname)
+        let matches = currentLink.externalLinks.filter(function (item) {
+            return link.externalLinks.indexOf(item) === -1 && !item.includes(hostname)
         })
 
         if (matches.length > matchesLength) {
