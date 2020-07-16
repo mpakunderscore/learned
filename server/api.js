@@ -6,6 +6,7 @@ const database = require('./database/postgres');
 const update = require('./database/update');
 const worker = require('./worker');
 const storage = require('./storage');
+const scheduler = require('./scheduler');
 const api = require('./api');
 
 // TODO move api on prefix url
@@ -214,6 +215,10 @@ exports.init = (app) => {
 
     app.get(prefix + '/statistics', async function (request, response) {
         response.json(await database.getStatistics());
+    });
+
+    app.get(prefix + '/scheduler', async function (request, response) {
+        response.json({status: scheduler.status, time: new Date(scheduler.time).toString(), task: scheduler.task});
     });
 
     app.get(prefix + '/status', async function (request, response) {

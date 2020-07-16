@@ -1,30 +1,28 @@
 const database = require('./database/postgres');
 
 exports.status = 'off';
+exports.time = 0;
+exports.task = 'no';
 
-let timeout = 60 * 1000; // 60 sec
+let timeout = 5 * 60 * 1000; // 5 min
 let intervalObject;
 
-async function worker() {
-    // console.log('')
-    const links = await database.getSources()
-    for (let i in links) {
-        console.log(links[i].toJSON().url)
+function worker() {
 
-        await checkSource(links[i].toJSON().url)
-    }
-}
+    exports.time = new Date().getTime()
+    exports.task = 'worker start';
 
-async function checkSource(url) {
+    database.getSources().then(sources => {
 
-    const response = await axios.get(encodeURI(url));
-    const data = response.data;
-    const $ = cheerio.load(data);
+        for (let i in sources) {
 
-    let pattern = '.storylink'
-    let links = $(pattern).toArray();
+        }
+
+        exports.task = 'no';
+    })
 }
 
 exports.init = () => {
     intervalObject = setInterval(worker, timeout);
+    exports.status = 'on';
 }
