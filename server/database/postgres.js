@@ -5,8 +5,6 @@ const {Sequelize, Op} = require('sequelize');
 
 let logging = true;
 
-// console.log(process.env.DATABASE_URL)
-
 module.exports.sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite::memory:', {logging: logging});
 
 const crawler = require('../crawler/crawler');
