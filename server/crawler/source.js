@@ -56,19 +56,32 @@ exports.findLinksToSources = async function (matchesLength) {
         matches = [...new Set(matches)]
 
         // http://localhost:8080/api/crawl?url=https://www.reddit.com/r/all/new/
+        // http://localhost:8080/api/crawl?url=https://news.ycombinator.com/newest
 
         if (matches.length > matchesLength) {
 
             let count = 0;
+            let lastDifference = 0;
             let difference = 0;
-            if (storage.sources[link.url]) {
-                matches = matches.concat(storage.sources[link.url].matches);
+
+            let storageSource = storage.sources[link.url];
+
+            if (storageSource) {
+
+                matches = matches.concat(storageSource.matches);
                 matches = [...new Set(matches)]
-                count = storage.sources[link.url].count + 1;
-                difference = matches.length - storage.sources[link.url].matches.length
+
+                count = storageSource.count + 1;
+                lastDifference = matches.length - storageSource.matches.length;
+                difference = storageSource.difference + lastDifference
             }
 
-            storage.sources[link.url] = {container: link.externalLinks.length, matches: matches, count, difference: difference}
+            storage.sources[link.url] = {
+                container: link.externalLinks.length,
+                matches: matches,
+                count,
+                lastDifference,
+                difference: difference}
         }
     }
 }
