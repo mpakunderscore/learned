@@ -66,7 +66,7 @@ function setText(text, className) {
     contentTextRow.innerHTML = text;
 }
 
-function addLink (url, title) {
+function addLink(url, title) {
     let link = document.createElement('div');
     contentList.append(link)
 

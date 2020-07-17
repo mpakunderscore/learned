@@ -50,6 +50,11 @@ if (window.location.href.endsWith('/mine/')) {
     selectMine(menu.mine).then(() => {initGraph()});
 }
 
+if (window.location.href.endsWith('/sources/')) {
+    // menu.mine.active = true;
+    selectMine(menu.sources).then(() => {initGraph()});
+}
+
 if (window.location.href.endsWith('/blog/')) {
     clearContent();
     setPath('/blog');

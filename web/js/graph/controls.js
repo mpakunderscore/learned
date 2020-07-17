@@ -33,6 +33,10 @@ async function selectNode(circleElement, category, random) {
 
         // renderView();
 
+    } else if (title === 'Sources') { // Sources
+
+        await selectSources(selectedNode);
+
     } else { // Graph and categories
 
         setPath('/');
@@ -117,6 +121,19 @@ async function selectMine(selectedNode) {
     //     renderCustomGraph(selectedNode, 'Main_topic_classifications');
 
     setPath('/mine');
+}
+
+async function selectSources(selectedNode) {
+
+    clearGraph(selectedNode);
+
+    await renderSources();
+
+    // getTokensGraph();
+    // if (user.graph['Main_topic_classifications'])
+    //     renderCustomGraph(selectedNode, 'Main_topic_classifications');
+
+    setPath('/sources');
 }
 
 function deleteUpperNodes(d, nodesForDeletion) {

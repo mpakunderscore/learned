@@ -55,8 +55,10 @@ exports.findLinksToSources = async function (matchesLength) {
 
         matches = [...new Set(matches)]
 
+
         // http://localhost:8080/api/crawl?url=https://www.reddit.com/r/all/new/
         // http://localhost:8080/api/crawl?url=https://news.ycombinator.com/newest
+        // http://localhost:8080/api/crawl?url=https://www.google.com/search?q=learning
 
         if (matches.length > matchesLength) {
 
