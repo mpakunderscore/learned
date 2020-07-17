@@ -165,15 +165,15 @@ exports.init = (app) => {
 
             let source = storage.sources[key];
 
-            if (source.difference > 0)
-                sourcesStatistics[key] = {
-                    container: source.container,
-                    // matches: source.matches.slice(0, source.container || 13),
-                    count: source.count,
-                    difference: source.difference,
-                    lastDifference: source.lastDifference,
-                    renewability: source.difference/source.count
-                }
+            sourcesStatistics[key] = {
+                container: source.container,
+                // matches: source.matches.slice(0, source.container || 13),
+                matches: source.matches.length,
+                count: source.count,
+                difference: source.difference,
+                lastDifference: source.lastDifference,
+                renewability: source.difference/source.count
+            }
         }
 
         response.json(sourcesStatistics); // .filter(source => source.difference > 0)
