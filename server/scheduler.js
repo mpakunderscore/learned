@@ -10,8 +10,8 @@ exports.getStatus = () => {
     return exports;
 }
 
-// exports.timeout = 5 * 60 * 1000; // 5 min
-exports.timeout = 60 * 1000; // 1 min
+exports.timeout = 5 * 60 * 1000; // 5 min
+// exports.timeout = 60 * 1000; // 1 min
 // exports.timeout = 5 * 1000; // 5 sec
 // exports.timeout = 1 * 1000; // 1 sec
 

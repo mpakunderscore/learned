@@ -165,6 +165,9 @@ exports.init = (app) => {
 
             let source = storage.sources[key];
 
+            if (source.difference === 0)
+                continue;
+
             sourcesStatistics[key] = {
                 container: source.container,
                 // matches: source.matches.slice(0, source.container || 13),
