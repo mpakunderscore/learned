@@ -47,7 +47,7 @@ exports.findLinksToSources = async function (index = 0) {
 
         let count = 0;
         let lastDifference = 0;
-        let difference = 0;
+        let sumDifference = 0;
         let timeoutRatio = 1;
 
         let storageSource = storage.sources[link.url];
@@ -78,7 +78,7 @@ exports.findLinksToSources = async function (index = 0) {
 
                 count = storageSource.count + 1;
                 lastDifference = matches.length - storageSource.matches.length;
-                difference = storageSource.difference + lastDifference
+                sumDifference = storageSource.sumDifference + lastDifference
                 timeoutRatio = lastDifference > 0 ? storageSource.timeoutRatio : storageSource.timeoutRatio * 2
             }
 
@@ -87,7 +87,7 @@ exports.findLinksToSources = async function (index = 0) {
                 matches,
                 count,
                 lastDifference,
-                difference,
+                sumDifference,
                 timeoutRatio
             }
         }

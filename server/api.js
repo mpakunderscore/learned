@@ -166,17 +166,17 @@ exports.init = (app) => {
 
             let source = storage.sources[key];
 
-            // if (source.difference === 0)
-            //     continue;
+            if (source.sumDifference === 0)
+                continue;
 
             sourcesStatistics[key] = {
                 container: source.container,
                 // matchesArray: source.matches.slice(0, 10),
                 matches: source.matches.length,
                 count: source.count,
-                difference: source.difference,
+                sumDifference: source.sumDifference,
+                renewability: source.sumDifference/source.count,
                 lastDifference: source.lastDifference,
-                renewability: source.difference/source.count,
                 timeoutRatio: source.timeoutRatio
             }
         }
