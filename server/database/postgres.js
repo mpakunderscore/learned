@@ -1,4 +1,5 @@
 const storage = require('../storage');
+const launcher = require('../launcher');
 const wiki = require('../crawler/wiki');
 
 const {Sequelize, Op} = require('sequelize');
@@ -17,7 +18,10 @@ exports.status = 'off';
 module.exports.sequelize.sync().then(() => {
     exports.status = 'on';
     console.log('database: on')
-    storage.init().then();
+    storage.init().then(() => {
+        if (!process.env.DATABASE_URL)
+            launcher.init().then()
+    });
 });
 
 // Create or get user
