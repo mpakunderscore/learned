@@ -30,7 +30,7 @@ const url = require('url');
 //     console.log(links)
 // }
 
-exports.findLinksToSources = async function (matchesLength) {
+exports.findLinksToSources = async function (index = 0) {
 
     // storage.sources = {}
     // let sources = [];
@@ -45,6 +45,20 @@ exports.findLinksToSources = async function (matchesLength) {
         // if (databaseSource)
         //     continue;
 
+        let count = 0;
+        let lastDifference = 0;
+        let difference = 0;
+        let timeoutRatio = 1;
+
+        let storageSource = storage.sources[link.url];
+
+        if (storageSource && storageSource.count < storageSource.timeoutRatio) {
+
+            storageSource.count = storageSource.count + 1;
+            storage.sources[link.url] = storageSource;
+            continue;
+        }
+
         let currentLink = await crawler.getURLData(link.url)
         if (!currentLink)
             continue;
@@ -55,18 +69,7 @@ exports.findLinksToSources = async function (matchesLength) {
 
         matches = [...new Set(matches)]
 
-
-        // http://localhost:8080/api/crawl?url=https://www.reddit.com/r/all/new/
-        // http://localhost:8080/api/crawl?url=https://news.ycombinator.com/newest
-        // http://localhost:8080/api/crawl?url=https://www.google.com/search?q=learning
-
-        if (matches.length > matchesLength) {
-
-            let count = 0;
-            let lastDifference = 0;
-            let difference = 0;
-
-            let storageSource = storage.sources[link.url];
+        if (matches.length > 0) {
 
             if (storageSource) {
 
@@ -76,14 +79,17 @@ exports.findLinksToSources = async function (matchesLength) {
                 count = storageSource.count + 1;
                 lastDifference = matches.length - storageSource.matches.length;
                 difference = storageSource.difference + lastDifference
+                timeoutRatio = lastDifference > 0 ? storageSource.timeoutRatio : storageSource.timeoutRatio * 2
             }
 
             storage.sources[link.url] = {
                 container: link.externalLinks.length,
-                matches: matches,
+                matches,
                 count,
                 lastDifference,
-                difference: difference}
+                difference,
+                timeoutRatio
+            }
         }
     }
 }

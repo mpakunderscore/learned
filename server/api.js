@@ -8,6 +8,7 @@ const update = require('./database/update');
 const worker = require('./worker');
 const storage = require('./storage');
 const scheduler = require('./scheduler');
+const launcher = require('./launcher');
 const api = require('./api');
 
 // TODO move api on prefix url
@@ -165,17 +166,18 @@ exports.init = (app) => {
 
             let source = storage.sources[key];
 
-            if (source.difference === 0)
-                continue;
+            // if (source.difference === 0)
+            //     continue;
 
             sourcesStatistics[key] = {
                 container: source.container,
-                // matches: source.matches.slice(0, source.container || 13),
+                // matchesArray: source.matches.slice(0, 10),
                 matches: source.matches.length,
                 count: source.count,
                 difference: source.difference,
                 lastDifference: source.lastDifference,
-                renewability: source.difference/source.count
+                renewability: source.difference/source.count,
+                timeoutRatio: source.timeoutRatio
             }
         }
 
@@ -189,7 +191,7 @@ exports.init = (app) => {
 
     // check link to sources
     app.get(prefix + '/sources/find', async function (request, response) {
-        response.json(source.findLinksToSources(request.query.matches));
+        response.json(source.findLinksToSources());
     });
 
 
@@ -258,10 +260,6 @@ exports.init = (app) => {
         response.json(scheduler.getStatus());
     });
 
-    app.get(prefix + '/status', async function (request, response) {
-        response.json({api: api.status, database: database.status, storage: storage.status, scheduler: scheduler.status});
-    });
-
     // TODO demo
     app.get(prefix + '/demo', async function (request, response) {
         let demoGraph = {'Chat': {count: 3, subcategories: ['Y Combinator companies', 'Y Combinator people'], active: false},
@@ -276,7 +274,15 @@ exports.init = (app) => {
         response.json({graph: demoGraph});
     });
 
-
+    app.get(prefix + '/status', async function (request, response) {
+        response.json({
+            api: api.status,
+            database: database.status,
+            storage: storage.status,
+            scheduler: scheduler.status,
+            launcher: launcher.status
+        });
+    });
 
     let routes = [];
     app._router.stack.forEach(function (r) {
