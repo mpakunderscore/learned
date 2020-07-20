@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "learned.space",
     "description": "",
-    "version": "0.4.2",
+    "version": "0.5.0",
     "background": {
         "scripts": [
             "js/api.js",
@@ -19,12 +19,9 @@
         "default_title": "Save page"
     },
     "permissions": [
-        "bookmarks",
-        "http://*/*",
-        "https://*/*",
+        "https://learned.space",
         "notifications",
         "activeTab",
-        "http://localhost:8080/*",
         "storage"
     ]
 }
