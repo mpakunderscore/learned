@@ -1,5 +1,5 @@
 ### Problem
-Loss of formation rate over time.
+Loss of сontinuing education process rate over time.
 
 ### Idea
 We read a lot of links today. Perhaps this is the only thing we do for the sake of education today. This process is very chaotic, tied to other people and redundant in the form of noise information. Sometimes we come across very good links and they teach us something new. Sometimes we even bury ourselves in new knowledge and find the motivation to study this further.
