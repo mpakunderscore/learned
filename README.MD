@@ -14,6 +14,42 @@ Links recommendation system with motivation grip. Focused on big texts and conti
 
 So, we need to build a knowledge graph for users, based on incoming links. And recommend a link (not that easy, especially to recommend interesting and needed links). To maintain the process of education we have to add artificial agents to interact with. Different style chatbots.
 
+### State
+
+#### Client
+- [x] API
+- [x] Simple login
+- [x] Adaptive
+- [x] Pages render
+- [x] Graph navigation
+- [x] Chrome extension
+- [ ] Refactoring
+- [ ] React
+- [ ] Web mobile
+
+#### Server
+- [x] API
+- [x] Database
+- [x] Crawler
+- [x] Text analysis
+- [x] Login
+- [x] Graph (have to be polished)
+- [ ] Sources (currently here, to get more links)
+- [ ] 1m links
+- [ ] Simple recommendations from top of the user graph
+- [ ] 1k sources
+- [ ] YouTube subtitles
+
+#### Chat
+- [x] REST
+- [ ] Socket
+- [ ] External API
+- [ ] User state model
+- [ ] User behaviour model
+- [ ] Bots chat group interaction
+- [ ] Telegram bot
+
+
 &nbsp; | &nbsp;
 --- | ---
 ![Login](./.screenshots/login.png)|![Mine](./.screenshots/mine.png)
