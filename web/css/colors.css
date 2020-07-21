@@ -1,0 +1,30 @@
+html {
+    --color-black: black;
+
+    /*--color-blue-light: rgb(110, 202, 227);*/
+    --color-blue: #16b9e7;
+    --color-blue-dark: #0e7d9c;
+    --color-blue-transparent: rgba(22, 185, 231, 0.8);
+    --color-blue-transparent-full: rgba(22, 185, 231, 0.2);
+
+    --color-green: #16ee16;
+    --color-green-dark: #13a113;
+
+    /*--color-purple: #e21fd8;*/
+    /*--color-purple-dark: rgba(154, 32, 166, 0.78);*/
+
+    --color-yellow: #e2e12c;
+    --color-yellow-dark: #717212;
+
+    --color-orange: #e2b152;
+    --color-orange-dark: #725936;
+
+    --color-red: rgba(231, 33, 4, 0.51);
+    --color-red-dark: #c00715;
+
+    --color-white: white;
+    --color-white-gray: #e8e8e8;
+    --color-gray: #bfbfbf;
+    --color-gray-dark: #777;
+    --color-gray-black: #404040;
+}
