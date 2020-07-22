@@ -58,3 +58,5 @@ So, we need to build a knowledge graph for users, based on incoming links. And r
 
 ### API (JSON) [learned.space/api](https://learned.space/api)
 ![Login](./.screenshots/api.png)
+
+Slack group
