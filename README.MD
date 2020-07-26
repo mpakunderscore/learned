@@ -52,11 +52,11 @@ So, we need to build a knowledge graph for users, based on incoming links. And r
 
 &nbsp; | &nbsp;
 --- | ---
-![Login](./.screenshots/login.png)|![Mine](./.screenshots/mine.png)
+![Login](./files/screenshots/login.png)|![Mine](./files/screenshots/mine.png)
 &nbsp; | &nbsp;
-![Chat](./.screenshots/chat.png)|![Graph](./.screenshots/graph.png)
+![Chat](./files/screenshots/chat.png)|![Graph](./files/screenshots/graph.png)
 
 ### API (JSON) [learned.space/api](https://learned.space/api)
-![API](./.screenshots/api.png)
+![API](./files/screenshots/api.png)
 
 [Slack group](https://join.slack.com/t/learned-space/shared_invite/zt-fzh0h5jm-dIZfO2e4kVZzA7UrnDJj6A)
