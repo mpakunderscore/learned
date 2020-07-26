@@ -2,14 +2,14 @@ let auth = false;
 let userId = '';
 
 function receiveText(resultsArray) {
+
     userId = JSON.parse(resultsArray).id;
     auth = true;
     setIcon();
 
-    chrome.tabs.getCurrent(function (tab) {
-        chrome.tabs.remove(tab.id, function () {});
-    });
-    // chrome.runtime.sendMessage({'newIconPath': 'icons/icon.png'});
+    // chrome.tabs.getCurrent(function (tab) {
+    //     chrome.tabs.remove(tab.id, function () {});
+    // });
 }
 
 chrome.browserAction.onClicked.addListener(async function (tab) {

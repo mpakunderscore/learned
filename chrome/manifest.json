@@ -19,7 +19,7 @@
         "default_title": "Save page"
     },
     "permissions": [
-        "https://learned.space",
+        "https://learned.space/*",
         "notifications",
         "activeTab",
         "storage"
