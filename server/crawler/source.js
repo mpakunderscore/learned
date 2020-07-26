@@ -78,8 +78,7 @@ exports.findLinksToSources = async function (index = 0) {
 
                 count = storageSource.count + 1;
                 lastDifference = matches.length - storageSource.matches.length;
-                sumDifference = storageSource.sumDifference + lastDifference
-                timeoutRatio = lastDifference > 0 ? storageSource.timeoutRatio : storageSource.timeoutRatio * 2
+                sumDifference = storageSource.sumDifference + lastDifference;
             }
 
             storage.sources[link.url] = {
@@ -103,7 +102,7 @@ exports.inspectSources = async function () {
         let currentLink = await crawler.getURLData(databaseSources[i].url)
 
         for (let j in currentLink.externalLinks) {
-            await crawler.getURL(currentLink.externalLinks[j])
+            await crawler.getURL(currentLink.externalLinks[j].url)
         }
     }
 }

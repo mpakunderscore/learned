@@ -189,9 +189,14 @@ exports.init = (app) => {
     //     response.json(storage.sources);
     // });
 
-    // check link to sources
+    // check links to sources
     app.get(prefix + '/sources/find', async function (request, response) {
         response.json(source.findLinksToSources());
+    });
+
+    // add source
+    app.get(prefix + '/sources/add', async function (request, response) {
+        // response.json();
     });
 
 
