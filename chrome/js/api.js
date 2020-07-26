@@ -9,8 +9,7 @@ async function addUrl(tab, userId) {
 
     let url = host + '/user/link/add?url=' + encodeURIComponent(tab.url) + '&userid=' + userId;
 
-    // notification(tab.favIconUrl, tab.title, ''); //TODO
-    notification('', tab.title, ''); //TODO
+    notification(tab.favIconUrl, tab.title, ''); //TODO
 
     let request = await get(url);
 
@@ -24,8 +23,7 @@ async function addUrl(tab, userId) {
 
     console.log(tab)
 
-    // notification(tab.favIconUrl, tab.title, text); //TODO
-    notification('', tab.title, text); //TODO
+    notification(tab.favIconUrl, tab.title, text); //TODO
 }
 
 function notification(iconUrl, title, text) {
@@ -37,7 +35,8 @@ function notification(iconUrl, title, text) {
         expandedMessage: 'Longer part of the message',
     };
 
-    options.iconUrl = iconUrl;
+    // options.iconUrl = iconUrl;
+    options.iconUrl = './icons/icon.png';
 
     // options.priority = 0;
 

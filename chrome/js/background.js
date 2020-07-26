@@ -7,6 +7,8 @@ function receiveText(resultsArray) {
     auth = true;
     setIcon();
 
+    notification('', 'Login successful', ''); //TODO
+
     // chrome.tabs.getCurrent(function (tab) {
     //     chrome.tabs.remove(tab.id, function () {});
     // });
