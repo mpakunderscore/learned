@@ -33,7 +33,7 @@
 }
 
 #modal div.modal-title {
-    font-size: 26px;
+    font-size: var(--font-size-giant);
     font-weight: bold;
     padding-bottom: 10px;
 

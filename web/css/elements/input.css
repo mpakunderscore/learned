@@ -8,7 +8,7 @@ input {
 
     transition: color .2s, background-color .2s;
 
-    line-height: var(--line-height);
+    /*line-height: var(--line-height);*/
 }
 
 input::placeholder {

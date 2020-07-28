@@ -15,9 +15,10 @@
         display: none !important;
     }
 
-    #center-image {
-        user-select: none;
+    #mobile-text {
+        display: block;
     }
+
 }
 
 @media (prefers-color-scheme: dark) {

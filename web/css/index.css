@@ -4,6 +4,7 @@ html, body {
     --font-size-main: 12px;
     --font-size-medium: 14px;
     --font-size-big: 16px;
+    --font-size-giant: 26px;
 
     --time-delay-main: .2;
 
@@ -151,4 +152,20 @@ span.button:hover {
 .row {
     display: flex;
     justify-content: space-between;
+}
+
+#mobile-text {
+    width: 100%;
+    /*background-color: red;*/
+    color: var(--color-gray-dark);
+    text-align: right;
+    font-size: var(--font-size-giant);
+    padding: 20px;
+    box-sizing: border-box;
+    display: none;
+}
+
+#mobile-text div:last-child {
+    padding-top: 20px;
+    font-size: var(--font-size-big);
 }
