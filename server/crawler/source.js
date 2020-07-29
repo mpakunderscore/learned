@@ -86,8 +86,7 @@ exports.findLinksToSources = async function (index = 0) {
                 matches,
                 count,
                 lastDifference,
-                sumDifference,
-                timeoutRatio
+                sumDifference
             }
         }
     }
@@ -102,7 +101,15 @@ exports.inspectSources = async function () {
         let currentLink = await crawler.getURLData(databaseSources[i].url)
 
         for (let j in currentLink.externalLinks) {
-            await crawler.getURL(currentLink.externalLinks[j].url)
+
+            let url = currentLink.externalLinks[j]
+            await crawler.getURL(url)
         }
     }
+}
+
+// TODO simple but it's hard right now to reinvent RSS, i have to move faster now
+exports.addSource = async function (url) {
+    let source = await crawler.getURL(url)
+    await database.saveSource(source.url, source.title, '')
 }
