@@ -34,7 +34,11 @@ a {
     color: var(--color-blue-dark)
 }
 
-a:visited {
+a.special {
+    color: var(--color-white)
+}
+
+a:visited:not(.special) {
     color: var(--color-gray)
 }
 

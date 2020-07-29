@@ -177,7 +177,7 @@ exports.init = (app) => {
                 sumDifference: source.sumDifference,
                 renewability: source.sumDifference/source.count,
                 lastDifference: source.lastDifference,
-                timeoutRatio: source.timeoutRatio
+                // timeoutRatio: source.timeoutRatio
             }
         }
 
@@ -194,9 +194,18 @@ exports.init = (app) => {
         response.json(source.findLinksToSources());
     });
 
+    app.get(prefix + '/sources/inspect', async function (request, response) {
+        response.json(source.inspectSources());
+    });
+
     // add source
     app.get(prefix + '/sources/add', async function (request, response) {
-        // response.json();
+        response.json(source.addSource(request.query.url));
+    });
+
+    // add source
+    app.get(prefix + '/sources/list', async function (request, response) {
+        response.json(await database.getSources());
     });
 
 
