@@ -22,29 +22,9 @@ async function worker() {
     if (exports.task !== 'no')
         return;
 
-    await inspectSources()
-    await inspect()
-}
-
-function inspectSources() {
-
-    exports.task = 'inspect sources';
-    exports.taskTime = new Date().getTime()
-    database.getSources().then(sources => {
-
-        for (let i in sources) {
-            console.log(sources[i].toJSON())
-        }
-
-        exports.task = 'no';
-    })
-}
-
-function inspect() {
-    exports.task = 'links to sources';
-    source.findLinksToSources(0).then(() => {
-        exports.task = 'no';
-    })
+    exports.task = 'source.inspectSources()';
+    await source.inspectSources()
+    exports.task = 'no';
 }
 
 exports.init = () => {
