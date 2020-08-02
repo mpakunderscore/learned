@@ -231,7 +231,8 @@ exports.getUserLinks = async (userid) => {
     return models.UserLink.findAll({
         where: {
             userid: userid
-        }
+        },
+        order: [['createdAt', 'DESC']]
     });
 };
 

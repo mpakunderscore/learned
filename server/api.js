@@ -177,7 +177,6 @@ exports.init = (app) => {
                 sumDifference: source.sumDifference,
                 renewability: source.sumDifference/source.count,
                 lastDifference: source.lastDifference,
-                // timeoutRatio: source.timeoutRatio
             }
         }
 

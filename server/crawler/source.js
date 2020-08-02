@@ -103,7 +103,13 @@ exports.inspectSources = async function () {
         for (let j in currentLink.externalLinks) {
 
             let url = currentLink.externalLinks[j]
-            await crawler.getURL(url)
+
+            try {
+                await crawler.getURL(url)
+            } catch (e) {
+                console.error('Source error: ' + url)
+            }
+
         }
     }
 }
