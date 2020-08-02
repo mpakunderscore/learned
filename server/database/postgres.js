@@ -220,6 +220,7 @@ exports.getLinksSimpleList = async () => {
 
     for (let n in links) {
         let linkJson = links[n].toJSON();
+        if (linkJson.wordsLength > 1000)
         linksJson.push({
             url: linkJson.url,
             title: linkJson.title,
