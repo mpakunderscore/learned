@@ -64,7 +64,7 @@ Link.init({
     externalLinks: DataTypes.JSONB,
 
 
-}, {sequelize, modelName: 'link', timestamps: false});
+}, {sequelize, modelName: 'link', timestamps: true});
 
 Source.init({
     url: {
