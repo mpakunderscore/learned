@@ -223,6 +223,7 @@ exports.getLinksSimpleList = async () => {
         linksJson.push({
             url: linkJson.url,
             title: linkJson.title,
+            wordsLength: linkJson.wordsLength,
         })
     }
 
