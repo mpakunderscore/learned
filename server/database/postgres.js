@@ -211,6 +211,24 @@ exports.getLinksShort = async () => {
     return linksJson;
 };
 
+// Get links statistics
+
+exports.getLinksSimpleList = async () => {
+
+    let links = await models.Link.findAll()
+    let linksJson = [];
+
+    for (let n in links) {
+        let linkJson = links[n].toJSON();
+        linksJson.push({
+            url: linkJson.url,
+            title: linkJson.title,
+        })
+    }
+
+    return linksJson;
+};
+
 // Save url for user.id and create link object
 
 exports.saveUserLink = async (userid, url) => {
@@ -232,7 +250,7 @@ exports.getUserLinks = async (userid) => {
         where: {
             userid: userid
         },
-        order: [['createdAt', 'DESC']]
+        // order: [['createdAt', 'DESC']]
     });
 };
 
