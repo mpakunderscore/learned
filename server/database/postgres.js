@@ -215,7 +215,7 @@ exports.getLinksShort = async () => {
 
 exports.getLinksSimpleList = async () => {
 
-    let links = await models.Link.findAll()
+    let links = await models.Link.findAll({order: [['count', 'DESC']]})
     let linksJson = [];
 
     for (let n in links) {
@@ -225,6 +225,7 @@ exports.getLinksSimpleList = async () => {
             url: linkJson.url,
             title: linkJson.title,
             wordsLength: linkJson.wordsLength,
+            createdAt: linkJson.createdAt,
         })
     }
 
