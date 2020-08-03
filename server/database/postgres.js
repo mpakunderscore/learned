@@ -126,7 +126,7 @@ exports.saveWord = (name) => {
 
 //TODO here limit 30k
 exports.getAllWords = async () => {
-    return models.Word.findAll({limit: 1000, order: [['count', 'DESC']]});
+    return models.Word.findAll({limit: 1000});
 };
 
 // Words filter
