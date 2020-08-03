@@ -239,9 +239,9 @@ exports.init = (app) => {
 
 
     // get all words
-    app.get(prefix + '/words', async function (request, response) {
-        response.json(await database.getWords());
-    });
+    // app.get(prefix + '/words', async function (request, response) {
+    //     response.json(await database.getWords());
+    // });
 
     // get all words
     app.get(prefix + '/words/all', async function (request, response) {

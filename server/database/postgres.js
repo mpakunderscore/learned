@@ -117,16 +117,16 @@ exports.saveWord = (name) => {
 
 // Get list of tokens (meaningful) based on words
 
-exports.getWords = async () => {
-    let words = await models.Word.findAll({order: [['count', 'DESC']]});
-    return words.filter(word => word.categories.length > 0 && !word.categories.includes('Disambiguation pages'))
-};
+// exports.getWords = async () => {
+    // let words = await models.Word.findAll({order: [['count', 'DESC']]});
+    // return words.filter(word => word.categories.length > 0 && !word.categories.includes('Disambiguation pages'))
+// };
 
 // Get list of words
 
 //TODO here limit 30k
 exports.getAllWords = async () => {
-    return models.Word.findAll({order: [['count', 'DESC']], limit: 10000});
+    return models.Word.findAll({limit: 1000, order: [['count', 'DESC']]});
 };
 
 // Words filter
