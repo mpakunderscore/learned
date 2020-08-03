@@ -126,7 +126,7 @@ exports.saveWord = (name) => {
 
 //TODO here limit 30k
 exports.getAllWords = async () => {
-    return models.Word.findAll({limit: 1000});
+    return models.Word.findAll({limit: 10000, order: [['count', 'DESC']]});
 };
 
 // Words filter
@@ -149,7 +149,7 @@ function tokenFilter(word) {
 
 exports.getTokenWords = async () => {
 
-    let words = await models.Word.findAll({order: [['count', 'DESC']]});
+    let words = await models.Word.findAll({limit: 10000, order: [['count', 'DESC']]});
     return words.filter(word => word.categories.length > 0 && tokenFilter(word))
 
     // !word.categories.includes('Disambiguation pages'))
@@ -159,7 +159,7 @@ exports.getTokenWords = async () => {
 
 exports.getGarbageWords = async () => {
 
-    let words = await models.Word.findAll({order: [['count', 'DESC']]});
+    let words = await models.Word.findAll({limit: 10000, order: [['count', 'DESC']]});
     return words.filter(word => word.categories.length > 0 && !tokenFilter(word))
 };
 
@@ -168,7 +168,7 @@ exports.getGarbageWords = async () => {
 
 exports.getEmptyWords = async () => {
 
-    let words = await models.Word.findAll({order: [['count', 'DESC']]});
+    let words = await models.Word.findAll({limit: 10000, order: [['count', 'DESC']]});
     return words.filter(word => word.categories.length === 0)
 };
 
