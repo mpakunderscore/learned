@@ -126,7 +126,7 @@ exports.getWords = async () => {
 
 //TODO here limit 30k
 exports.getAllWords = async () => {
-    return models.Word.findAll({order: [['count', 'DESC']], limit: 30000});
+    return models.Word.findAll({order: [['count', 'DESC']], limit: 10000});
 };
 
 // Words filter
