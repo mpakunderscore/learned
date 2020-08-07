@@ -282,7 +282,7 @@ exports.getCategory = async (id) => {
 // List of categories graph
 
 exports.getCategories = async () => {
-    let categories = await models.Category.findAll();
+    let categories = await models.Category.findAll({limit: 3000});
     return categories;
 };
 
