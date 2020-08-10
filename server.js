@@ -21,6 +21,6 @@ app.use('/coronavirus', express.static(__dirname + '/web'));
 // app.use('/chrome/learned.space.zip', express.static(__dirname + '/learned.space.zip'));
 
 api.init(app);
-scheduler.init()
+// scheduler.init()
 
 
