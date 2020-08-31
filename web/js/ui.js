@@ -27,6 +27,8 @@ content.style.width = (99.5 - 100 * borderRatio) + '%';
 
 initInput();
 
+setText(mainMessage)
+
 // const content = document.getElementById('content');
 
 border.onmousedown = dragMouseDown;
